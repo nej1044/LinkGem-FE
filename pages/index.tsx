@@ -2,7 +2,14 @@ import React from 'react';
 import TestRecoilComponent from 'components/TestRecoilComponent';
 
 function Home() {
-  const res = (awdawd: string) => {};
+  const res = (awdawd: string) => {
+    console.log(233);
+  };
+
+  awdawd();
+  awdawd();
+  awdawd();
+  awdawd();
 
   return (
     <>
