@@ -1,5 +1,6 @@
 import React from 'react';
 import TestRecoilComponent from 'components/TestRecoilComponent';
+import TestStyledComponents from 'components/TestStyledComponents';
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
         awdawd
       </div>
       <TestRecoilComponent />
+      <TestStyledComponents />
     </>
   );
 }

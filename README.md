@@ -1,34 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## LinkGem
 
-## Getting Started
+## 브랜치 명명 규칙
 
-First, run the development server:
+- jira 티켓을 feature 뒤에 작성합니다. `feature/LR-9`
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 머지 규칙
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `develop` 브랜치에 머지할 때는 상대방에게 `pr` 올리도록 합니다.
+- `master` 브랜치로 머지할때는 꼭 `sqush merge` 합니다.
+- 아래 커밋 컨벤션은 master 브랜치에 sqush merge로 넣을때만 지켜주시면 됩니다.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 커밋컨벤션
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 기능
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+`feature: 로그인 추가`
 
-## Learn More
+### 버그 수정
 
-To learn more about Next.js, take a look at the following resources:
+`fix: 회원가입 로직 수정`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 디펜던시 추가 및 수정
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`chore: 스타일드컴포넌트 버전 수정`
 
-## Deploy on Vercel
+### 테스트
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`test: 단위테스트 추가`, `test: 네이버 로그인 기능 테스트`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 컴포넌트 작성규칙
+
+- 로직과 더미 컴포넌트는 훅스로 꼭 분리합니다. 아무리 간단한 컴포넌트여도 꼭 분리합니다. (간단한 컴포넌트는 귀찮다고 분리 안하면 이후 난장판이 되는 경우가 있습니다)
+- 더미컴포넌트와 스타일 컴포넌트는 아무리 간단한 컴포넌트여도 꼭 분리합니다. 스타일 컴포넌트는 더미컴포넌트의 컴포넌트 명을 딴 이후 style을 붙여서 명명하고 확장자명은 ts입니다. `Example.style.ts`
+- interface 또는 type은 해당 interface가 다른 컴포넌트에서도 사용할 가능성이 있다면 `Example.type.ts`와 같이 파일로 분리합니다.
