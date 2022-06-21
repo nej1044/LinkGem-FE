@@ -1,17 +1,17 @@
 import React from 'react';
-import TestRecoilComponent from 'components/TestRecoilComponent';
-import TestStyledComponents from 'components/TestStyledComponents';
+import styled from 'styled-components';
 
 function Home() {
   return (
-    <>
-      <div className="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
-        awdawd
-      </div>
-      <TestRecoilComponent />
-      <TestStyledComponents />
-    </>
+    <HomeBlock>
+      <span>WELCOME TO</span>
+      <span>LINK GEM</span>
+    </HomeBlock>
   );
 }
+
+const HomeBlock = styled.div`
+  font-family: Rammetto One;
+`;
 
 export default Home;
