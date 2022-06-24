@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 
 export default function LoginNaver() {
-  const loginFormWithNaver = () => {
+  const loginFormWithNaver = async () => {
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
-      callbackUrl: 'http://localhost:3000/join',
+      callbackUrl: 'http://localhost:3000/oauth/naver/callback',
       isPopup: false,
-      loginButton: { color: 'white', type: 1, height: '30' },
+      loginButton: { color: 'dark mode', type: 3, height: 56 },
     });
     naverLogin.init();
   };

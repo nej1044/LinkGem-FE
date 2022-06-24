@@ -11,6 +11,21 @@ const stringAtomState = atom({
   default: 'default',
 });
 
+const loginState = atom({
+  key: 'loginState',
+  default: false,
+});
+
+const joinState = atom({
+  key: 'joinState',
+  default: {
+    accessToken: undefined,
+    job: '하고 있는 일 선택',
+    year: '선택',
+    nickname: '예) 링크잼 크루',
+  },
+});
+
 const counterSelectorState = selector<number | boolean>({
   key: 'counterSelectorState',
   get: ({ get }) => {
@@ -51,4 +66,6 @@ export {
   stringAtomState,
   counterSelectorState,
   testAsyncSelector,
+  loginState,
+  joinState,
 };

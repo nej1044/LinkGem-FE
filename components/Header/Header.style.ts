@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export const HeaderContainer = styled.header`
   background-color: #0f0223;
   width: 100%;
   height: 84px;
@@ -15,6 +15,7 @@ export const LogoContainer = styled.div`
   @media screen and (max-width: 500px) {
     margin-left: 80px;
   }
+
   span {
     &:first-child {
       font-size: 24px;
@@ -24,6 +25,18 @@ export const LogoContainer = styled.div`
     &:last-child {
       font-size: 12px;
       color: #41fb6a;
+    }
+
+    @media screen and (max-width: 500px) {
+      &:first-child {
+        font-size: 20px;
+        color: white;
+        margin-right: 4px;
+      }
+      &:last-child {
+        font-size: 8px;
+        color: #41fb6a;
+      }
     }
   }
 `;
