@@ -1,4 +1,6 @@
-import React, { useState, memo, MouseEvent, useEffect } from 'react';
+import React, { useState, MouseEvent, useEffect } from 'react';
+import { joinState } from 'store/recoilTestState';
+import { useSetRecoilState } from 'recoil';
 import {
   DropDownContainer,
   DropDownHeader,
@@ -11,12 +13,17 @@ import {
 
 type JoinDropdownProps = {
   dropDownList: any;
-  dropDownHeader: string;
+  type: string;
 };
 
-function JoinDropdown({ dropDownList, dropDownHeader }: JoinDropdownProps) {
+function JoinDropdown({ dropDownList, type }: JoinDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(dropDownHeader);
+  const [selectedOption, setSelectedOption] = useState(
+    type === 'job' ? '하고 있는일 선택' : '선택'
+  );
+  const setJoinInfo = useSetRecoilState(joinState);
+
+  console.log('JoinDropdown type', type);
 
   const toggling = (e: MouseEvent) => {
     e.preventDefault();
@@ -26,6 +33,11 @@ function JoinDropdown({ dropDownList, dropDownHeader }: JoinDropdownProps) {
   const onOptionClicked = (value: string) => () => {
     setSelectedOption(value);
     setIsOpen(false);
+    if (type === 'job') {
+      setJoinInfo((prev) => ({ ...prev, job: value }));
+    } else if (type === 'year') {
+      setJoinInfo((prev) => ({ ...prev, year: value }));
+    }
   };
 
   useEffect(() => {
@@ -48,7 +60,7 @@ function JoinDropdown({ dropDownList, dropDownHeader }: JoinDropdownProps) {
       {isOpen && (
         <DropDownListContainer>
           <DropDownList>
-            {dropDownList.map((job) => (
+            {dropDownList.map((job: string) => (
               <ListItem onClick={onOptionClicked(job)} key={Math.random()}>
                 {job}
               </ListItem>
@@ -61,4 +73,4 @@ function JoinDropdown({ dropDownList, dropDownHeader }: JoinDropdownProps) {
   );
 }
 
-export default memo(JoinDropdown);
+export default JoinDropdown;

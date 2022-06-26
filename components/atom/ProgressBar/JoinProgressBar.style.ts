@@ -53,6 +53,11 @@ export const DotContainer = styled.div<DotContainerProps>`
     }
     &:nth-child(2) {
       background-color: ${(props) => (props.stage === '1' ? 'grey' : 'white')};
+      transition: background-color 1s;
+    }
+    &:nth-child(3) {
+      background-color: ${(props) => (props.stage === '3' ? 'white' : 'grey')};
+      transition: background-color 1.5s ease-in;
     }
   }
 

@@ -19,10 +19,10 @@ const loginState = atom({
 const joinState = atom({
   key: 'joinState',
   default: {
-    accessToken: undefined,
-    job: '하고 있는 일 선택',
-    year: '선택',
-    nickname: '예) 링크잼 크루',
+    accessToken: '',
+    job: '',
+    year: '',
+    nickname: '',
   },
 });
 
