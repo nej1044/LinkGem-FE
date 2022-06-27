@@ -1,3 +1,4 @@
+// import NaverButton from 'components/atom/Button/NaverButton';
 import React, { useEffect } from 'react';
 
 export default function LoginNaver() {
@@ -15,5 +16,10 @@ export default function LoginNaver() {
     loginFormWithNaver();
   }, []);
 
-  return <div id="naverIdLogin" />;
+  return (
+    <>
+      <div id="naverIdLogin" />
+      {/* <NaverButton /> */}
+    </>
+  );
 }

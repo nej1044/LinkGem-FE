@@ -16,6 +16,7 @@ function JobInfo() {
     defaultCategory: [],
   });
   const [type, setType] = useState('');
+  const [isButtonValueValid, setIsButtonValueValid] = useState(true);
 
   const changeType = () => {
     console.log('changeType 함수');
@@ -25,6 +26,11 @@ function JobInfo() {
       setType('nickname');
     }
   };
+
+  const buttonColorChange = () => {
+    setIsButtonValueValid(false);
+  };
+
   useEffect(() => {
     if (type === '') {
       setType('job');
@@ -34,10 +40,11 @@ function JobInfo() {
     } else if (type === 'nickname') {
       setContext({ ...nickNameInfo });
     }
+    setIsButtonValueValid(true);
   }, [type]);
 
   console.log(`type${type}🐲🐲🐲🐲🐲🐲🐲🐲🐲🐲🐲`);
-  console.log(`type${context}`);
+  console.log(`${isButtonValueValid}`);
 
   return (
     <JobInfoContainer>
@@ -45,13 +52,39 @@ function JobInfo() {
       <JobText>{context.titleText}</JobText>
 
       {(type === 'job' || type === 'year') && (
-        <JoinDropDown dropDownList={context.defaultCategory} type={type} />
+        <JoinDropDown
+          dropDownList={context.defaultCategory}
+          type={type}
+          buttonColorChange={buttonColorChange}
+        />
       )}
-      {type === 'nickname' && <JoinTextInput />}
+      {type === 'nickname' && (
+        <JoinTextInput buttonColorChange={buttonColorChange} />
+      )}
       <JoinButton
-        text={type === 'nickname' ? '링크젬 시작' : '다음'}
-        color="#3C3C3F"
         onClick={changeType}
+        // backgroundColor="#3C3C3F"
+        // backgroundColor={isButtonValueValid ? (type==='nickname' ? ('#41FB6A'): '#1A1B1D') : '#3C3C3F'}
+        backgroundColor={
+          // eslint-disable-next-line no-nested-ternary
+          isButtonValueValid
+            ? '#3C3C3F'
+            : type === 'nickname'
+            ? '#41FB6A'
+            : '#1A1B1D'
+        }
+        color={
+          // eslint-disable-next-line no-nested-ternary
+          isButtonValueValid
+            ? '#CECECE'
+            : type === 'nickname'
+            ? '#1A1B1D'
+            : '#FFFFFF'
+        }
+        width={type === 'nickname' ? '234px' : '156px'}
+        height="62px"
+        text={type === 'nickname' ? '링크젬시작' : '다음'}
+        fontSize="24px"
       />
     </JobInfoContainer>
   );

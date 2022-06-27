@@ -43,7 +43,16 @@ export default function Header({ isLoggedIn }: HeaderProps) {
       <ButtonContainer>
         <LoginButton>로그인</LoginButton>
         {/* <JoinButton onClick={handleOpenModal}>회원가입</JoinButton> */}
-        <JoinButton text="회원가입" onClick={handleOpenModal} color="#41FB6A" />
+        <JoinButton
+          onClick={handleOpenModal}
+          backgroundColor="#41FB6A"
+          color="#1A1B1D
+"
+          width="120px"
+          height="48px"
+          text="회원가입"
+          fontSize="18px"
+        />
       </ButtonContainer>
 
       <Modal visible={isOpenModal} handleCloseModal={handleCloseModal}>

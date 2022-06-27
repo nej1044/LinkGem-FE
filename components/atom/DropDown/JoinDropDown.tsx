@@ -14,9 +14,14 @@ import {
 type JoinDropdownProps = {
   dropDownList: any;
   type: string;
+  buttonColorChange: () => void;
 };
 
-function JoinDropdown({ dropDownList, type }: JoinDropdownProps) {
+function JoinDropdown({
+  dropDownList,
+  type,
+  buttonColorChange,
+}: JoinDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(
     type === 'job' ? '하고 있는일 선택' : '선택'
@@ -38,11 +43,14 @@ function JoinDropdown({ dropDownList, type }: JoinDropdownProps) {
     } else if (type === 'year') {
       setJoinInfo((prev) => ({ ...prev, year: value }));
     }
+    buttonColorChange();
   };
 
   useEffect(() => {
+    console.log('JoinDropDown useEffect!!!!!!!');
+    setSelectedOption(type === 'job' ? '하고 있는일 선택' : '선택');
     setIsOpen(false);
-  }, []);
+  }, [type]);
 
   console.log('selectedOption');
   console.log(selectedOption);
