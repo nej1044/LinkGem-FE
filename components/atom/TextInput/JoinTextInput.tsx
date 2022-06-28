@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { joinState } from 'store/recoilTestState';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { joinState } from 'store/store';
+import { useSetRecoilState } from 'recoil';
 
 import {
   JoinTextInputContainer,
@@ -10,44 +10,48 @@ import {
 } from './JoinTextInput.style';
 
 type JoinTextInputProps = {
-  buttonColorChange: () => void;
+  changeButtonColor: () => void;
+  changeButtonColorGreenToGrey: () => void;
 };
 
-function JoinTextInput({ buttonColorChange }: JoinTextInputProps) {
+function JoinTextInput({
+  changeButtonColor,
+  changeButtonColorGreenToGrey,
+}: JoinTextInputProps) {
   const [nickName, setNickName] = useState('');
-  const [isErrorNickName, setIsErrorNickName] = useState(false);
+  const [isErrorNickname, setIsErrorNickname] = useState(false);
   const setJoinInfo = useSetRecoilState(joinState);
-  const re = useRecoilValue(joinState);
 
   const nickNameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    console.log('value', value);
     if (!nickNameRegex.test(value)) {
-      setIsErrorNickName(true);
+      setIsErrorNickname(true);
     } else {
-      setIsErrorNickName(false);
+      setIsErrorNickname(false);
     }
     setNickName(value);
-    buttonColorChange();
+    changeButtonColor();
   };
   useEffect(() => {
     setJoinInfo((prev) => ({ ...prev, nickname: nickName }));
+    if (nickName.length === 0) changeButtonColorGreenToGrey();
   }, [nickName]);
-  console.log('최종 회원가입 폽');
-  console.log(re);
   return (
     <JoinTextInputContainer>
       <JoinTextInputTextContainer>
         <JoinTextInputText
           placeholder="예) 링크젬 크루"
-          onChange={onChange}
+          onChange={changeNickname}
           value={nickName}
         />
       </JoinTextInputTextContainer>
-      <NickNameErrorMessage isErrorNickName={isErrorNickName}>
-        * 한글, 영문, 숫자로만 가능합니다. 특수문자 및 이모지는 사용이 안됩니다.
-      </NickNameErrorMessage>
+      {nickName.length > 0 && (
+        <NickNameErrorMessage isErrorNickName={isErrorNickname}>
+          * 한글, 영문, 숫자로만 가능합니다. 특수문자 및 이모지는 사용이
+          안됩니다.
+        </NickNameErrorMessage>
+      )}
     </JoinTextInputContainer>
   );
 }

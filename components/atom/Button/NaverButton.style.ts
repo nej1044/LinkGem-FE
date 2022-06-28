@@ -1,20 +1,31 @@
 import styled from 'styled-components';
 
 export const NaverLoginButton = styled.button`
-  padding: 0.6em 1em;
-  border-radius: 0.25em;
-  font-size: 0.8rem;
-  margin-top: 0.7em;
+  width: 240px;
+  height: 56px;
+  margin: 0 auto;
+  border-radius: 8px;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-weight: 400;
-  box-shadow: var(--shadow-1);
-  background-color: #03c75a;
+  background-color: #48484b;
   color: white;
+  border: 0px;
+  p {
+    margin-left: 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #a5a5a7;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #03c75a;
+    p {
+      color: #ffffff;
+    }
+  }
 `;
 
-export const NaverLoginImg = styled.img`
-  height: 0.9rem;
-  margin-right: 0.7em;
-  margin-left: 0.2em;
-`;
+export const NaverLoginImg = styled.img``;

@@ -31,6 +31,10 @@ export const Info = styled.div`
   font-weight: 500;
   line-height: 18px;
 
+  a {
+    color: white;
+  }
+
   a:visited {
     color: white;
   }

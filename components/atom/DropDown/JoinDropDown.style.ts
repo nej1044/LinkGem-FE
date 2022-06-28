@@ -19,6 +19,7 @@ export const DropDownHeader = styled.div`
   border-radius: 8px;
   &:hover {
     transition: 0.5s;
+    cursor: pointer;
   }
 `;
 
@@ -66,6 +67,21 @@ export const ListItem = styled.li`
   }
 `;
 
+export const InputText = styled.input`
+  width: 100%;
+  height: 100%;
+  padding: 0 0 0 0;
+  border: none;
+  font-weight: 400;
+  font-size: 20px;
+  text-indent: 20px;
+  border-radius: 8px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const ImageButton = styled.img`
   width: 15px;
   height: 7.5px;
@@ -75,7 +91,13 @@ export const ImageButton = styled.img`
   }
 `;
 export const DropDownHeaderText = styled.div`
+  width: 100%;
+  height: 100%;
   font-size: 20px;
   font-weight: 400;
   text-indent: 20px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 `;

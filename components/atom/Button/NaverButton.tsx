@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NaverLoginButton, NaverLoginImg } from './NaverButton.style';
 
-function NaverButton() {
+type naverButtonProps = {
+  onClickNaverButton: () => void;
+};
+function NaverButton({ onClickNaverButton }: naverButtonProps) {
+  const [isHover, setIsHover] = useState(false);
+  const onMouseOver = () => {
+    setIsHover(true);
+  };
+  const onMouseOut = () => {
+    setIsHover(false);
+  };
   return (
-    <NaverLoginButton>
-      <NaverLoginImg src="/static/image/Naver-Logo.png" alt="naver" />
-      Login with Naver
+    <NaverLoginButton
+      onClick={onClickNaverButton}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
+    >
+      <NaverLoginImg
+        src={
+          isHover
+            ? '/static/image/Naver-Logo-White.svg'
+            : '/static/image/Naver-Logo-Green.svg'
+        }
+        alt="naver"
+      />
+      <p>네이버로 시작하기</p>
     </NaverLoginButton>
   );
 }

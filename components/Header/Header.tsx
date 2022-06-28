@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilValue } from 'recoil';
-import { joinState } from 'store/recoilTestState';
+import { joinState } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import {
   HeaderContainer,
   LogoContainer,
   ButtonContainer,
   LoginButton,
+  LogoImage,
+  StarImage,
+  ImageContainer,
 } from './Header.style';
 
 interface HeaderProps {
@@ -29,7 +32,6 @@ export default function Header({ isLoggedIn }: HeaderProps) {
   };
 
   useEffect(() => {
-    console.log('Header useEffect');
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
     }
@@ -37,7 +39,11 @@ export default function Header({ isLoggedIn }: HeaderProps) {
   return (
     <HeaderContainer>
       <LogoContainer>
-        <span>LINK GEM </span>
+        <ImageContainer>
+          <LogoImage alt="linkgem-logo" src="static/image/Linkgem-Logo.svg" />
+          <StarImage alt="linkgem-logo-start" src="icons/star-100.svg" />
+        </ImageContainer>
+
         <span>Beta</span>
       </LogoContainer>
       <ButtonContainer>
@@ -46,12 +52,13 @@ export default function Header({ isLoggedIn }: HeaderProps) {
         <JoinButton
           onClick={handleOpenModal}
           backgroundColor="#41FB6A"
-          color="#1A1B1D
-"
+          color="#1A1B1D"
           width="120px"
           height="48px"
           text="회원가입"
           fontSize="18px"
+          type=""
+          hoverColor=""
         />
       </ButtonContainer>
 

@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent, useEffect } from 'react';
-import { joinState } from 'store/recoilTestState';
+import { joinState } from 'store/store';
 import { useSetRecoilState } from 'recoil';
 import {
   DropDownContainer,
@@ -9,30 +9,31 @@ import {
   ListItem,
   ImageButton,
   DropDownHeaderText,
+  InputText,
 } from './JoinDropDown.style';
 
-type JoinDropdownProps = {
+type joinDropdownProps = {
   dropDownList: any;
   type: string;
-  buttonColorChange: () => void;
+  changeButtonColor: () => void;
 };
 
 function JoinDropdown({
   dropDownList,
   type,
-  buttonColorChange,
-}: JoinDropdownProps) {
+  changeButtonColor,
+}: joinDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(
     type === 'job' ? '하고 있는일 선택' : '선택'
   );
+  const [inputText, setInputText] = useState('');
   const setJoinInfo = useSetRecoilState(joinState);
-
-  console.log('JoinDropdown type', type);
 
   const toggling = (e: MouseEvent) => {
     e.preventDefault();
     setIsOpen(!isOpen);
+    setInputText('');
   };
 
   const onOptionClicked = (value: string) => () => {
@@ -43,21 +44,33 @@ function JoinDropdown({
     } else if (type === 'year') {
       setJoinInfo((prev) => ({ ...prev, year: value }));
     }
-    buttonColorChange();
+    changeButtonColor();
+  };
+
+  const changeJobInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(e.target.value);
+    setJoinInfo((prev) => ({ ...prev, job: e.target.value }));
+    setIsOpen(false);
   };
 
   useEffect(() => {
-    console.log('JoinDropDown useEffect!!!!!!!');
     setSelectedOption(type === 'job' ? '하고 있는일 선택' : '선택');
     setIsOpen(false);
   }, [type]);
 
-  console.log('selectedOption');
-  console.log(selectedOption);
   return (
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>
-        <DropDownHeaderText>{selectedOption}</DropDownHeaderText>
+        <DropDownHeaderText>
+          {(selectedOption.includes('하시는') && (
+            <InputText
+              value={inputText}
+              onChange={changeJobInputText}
+              placeholder="하시는 일을 입력해 주세요"
+            />
+          )) ||
+            selectedOption}
+        </DropDownHeaderText>
 
         {!isOpen ? (
           <ImageButton src="/static/image/Arrow-Bottom.svg" alt="close" />
@@ -73,7 +86,7 @@ function JoinDropdown({
                 {job}
               </ListItem>
             ))}
-            <input type="text" placeholder="직접 입력" />
+            {/* {type === 'job' && <ListItem>하시는 일을 입력해 주세요</ListItem>} */}
           </DropDownList>
         </DropDownListContainer>
       )}

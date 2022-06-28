@@ -6,7 +6,6 @@ import JoinTextInput from 'components/atom/TextInput/JoinTextInput';
 import { JobInfoContainer, JobText } from './JobInfo.style';
 
 function JobInfo() {
-  console.log('Jobinfo 컴포넌트');
   const [context, setContext] = useState<joinType>({
     titleText: '',
     width: '',
@@ -19,7 +18,6 @@ function JobInfo() {
   const [isButtonValueValid, setIsButtonValueValid] = useState(true);
 
   const changeType = () => {
-    console.log('changeType 함수');
     if (type === 'job') {
       setType('year');
     } else if (type === 'year') {
@@ -27,8 +25,12 @@ function JobInfo() {
     }
   };
 
-  const buttonColorChange = () => {
+  const changeButtonColor = () => {
     setIsButtonValueValid(false);
+  };
+
+  const changeButtonColorGreenToGrey = () => {
+    setIsButtonValueValid(true);
   };
 
   useEffect(() => {
@@ -43,9 +45,6 @@ function JobInfo() {
     setIsButtonValueValid(true);
   }, [type]);
 
-  console.log(`type${type}🐲🐲🐲🐲🐲🐲🐲🐲🐲🐲🐲`);
-  console.log(`${isButtonValueValid}`);
-
   return (
     <JobInfoContainer>
       <JoinProgressBar width={context.width} stage={context.stage} />
@@ -55,13 +54,17 @@ function JobInfo() {
         <JoinDropDown
           dropDownList={context.defaultCategory}
           type={type}
-          buttonColorChange={buttonColorChange}
+          changeButtonColor={changeButtonColor}
         />
       )}
       {type === 'nickname' && (
-        <JoinTextInput buttonColorChange={buttonColorChange} />
+        <JoinTextInput
+          changeButtonColor={changeButtonColor}
+          changeButtonColorGreenToGrey={changeButtonColorGreenToGrey}
+        />
       )}
       <JoinButton
+        type={type}
         onClick={changeType}
         // backgroundColor="#3C3C3F"
         // backgroundColor={isButtonValueValid ? (type==='nickname' ? ('#41FB6A'): '#1A1B1D') : '#3C3C3F'}
@@ -81,6 +84,7 @@ function JobInfo() {
             ? '#1A1B1D'
             : '#FFFFFF'
         }
+        hoverColor={type === 'nickname' ? '#1CE047' : ''}
         width={type === 'nickname' ? '234px' : '156px'}
         height="62px"
         text={type === 'nickname' ? '링크젬시작' : '다음'}

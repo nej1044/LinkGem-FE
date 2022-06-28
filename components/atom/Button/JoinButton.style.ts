@@ -6,6 +6,7 @@ interface JoinButtonContainerProps {
   backgroundColor: string;
   color: string;
   fontSize: string;
+  hoverColor: string;
 }
 // eslint-disable-next-line import/prefer-default-export
 export const JoinButtonContainer = styled.button<JoinButtonContainerProps>`
@@ -17,5 +18,9 @@ export const JoinButtonContainer = styled.button<JoinButtonContainerProps>`
   font-size: ${(props) => props.fontSize};
   color: ${(props) => props.color};
   cursor: pointer;
-  transition: background-color 0.5s ease-in;
+  transition: background-color 0.2s ease-in;
+  &:hover {
+    background-color: ${(props) => props.hoverColor};
+    transition: background-color 0.1s ease-in;
+  }
 `;

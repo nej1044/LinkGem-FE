@@ -1,7 +1,8 @@
-// import NaverButton from 'components/atom/Button/NaverButton';
-import React, { useEffect } from 'react';
+import NaverButton from 'components/atom/Button/NaverButton';
+import React, { useEffect, useRef } from 'react';
 
 export default function LoginNaver() {
+  const naverRef = useRef<HTMLInputElement>(null);
   const loginFormWithNaver = async () => {
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
@@ -12,14 +13,20 @@ export default function LoginNaver() {
     naverLogin.init();
   };
 
+  const onClickNaverButton = () => {
+    if (naverRef.current !== null && naverRef.current.children[0]) {
+      naverRef.current.children[0].click();
+    }
+  };
+
   useEffect(() => {
     loginFormWithNaver();
   }, []);
 
   return (
     <>
-      <div id="naverIdLogin" />
-      {/* <NaverButton /> */}
+      <div id="naverIdLogin" style={{ display: 'none' }} ref={naverRef} />
+      <NaverButton onClickNaverButton={onClickNaverButton} />
     </>
   );
 }

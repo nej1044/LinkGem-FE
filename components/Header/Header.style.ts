@@ -10,6 +10,9 @@ export const HeaderContainer = styled.header`
 `;
 
 export const LogoContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: flex-end;
   color: white;
   margin-left: 240px;
   @media screen and (max-width: 500px) {
@@ -17,26 +20,12 @@ export const LogoContainer = styled.div`
   }
 
   span {
-    &:first-child {
-      font-size: 24px;
-      color: white;
-      margin-right: 4px;
-    }
-    &:last-child {
-      font-size: 12px;
-      color: #41fb6a;
-    }
+    font-size: 12px;
+    color: #41fb6a;
 
     @media screen and (max-width: 500px) {
-      &:first-child {
-        font-size: 20px;
-        color: white;
-        margin-right: 4px;
-      }
-      &:last-child {
-        font-size: 8px;
-        color: #41fb6a;
-      }
+      font-size: 8px;
+      color: #41fb6a;
     }
   }
 `;
@@ -70,4 +59,15 @@ export const JoinButton = styled.button`
   font-size: 18px;
   color: black;
   cursor: pointer;
+`;
+
+export const LogoImage = styled.img``;
+
+export const StarImage = styled.img`
+  position: absolute;
+  left: 23%;
+`;
+
+export const ImageContainer = styled.div`
+  margin-right: 8px;
 `;
