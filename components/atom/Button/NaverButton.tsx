@@ -25,7 +25,6 @@ function NaverButton({ onClickNaverButton }: naverButtonProps) {
             : '/static/image/Naver-Logo-Green.svg'
         }
         alt="naver"
-        priority
       />
       <p>네이버로 시작하기</p>
     </NaverLoginButton>
