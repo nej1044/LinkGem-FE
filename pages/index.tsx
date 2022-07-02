@@ -1,17 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import LinkSave from 'components/LinkSave';
+import RecentSaveLink from 'components/RecentSaveLink';
 
 function Home() {
   return (
-    <HomeBlock>
-      <span>WELCOME TO</span>
-      <span>LINK GEM</span>
-    </HomeBlock>
+    <>
+      <LinkSave />
+      <RecentSaveLink />
+    </>
   );
 }
-
-const HomeBlock = styled.div`
-  font-family: Rammetto One;
-`;
 
 export default Home;
