@@ -63,11 +63,13 @@ export const JoinButton = styled.button`
 
 export const LogoImage = styled.img``;
 
-export const StarImage = styled.img`
+export const StarImage = styled.div`
   position: absolute;
-  left: 23%;
+  left: 30%;
 `;
 
 export const ImageContainer = styled.div`
+  position: relative;
+  display: flex;
   margin-right: 8px;
 `;

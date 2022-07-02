@@ -15,7 +15,9 @@ export default function LoginNaver() {
 
   const onClickNaverButton = () => {
     if (naverRef.current !== null && naverRef.current.children[0]) {
-      naverRef.current.children[0].click();
+      if (naverRef.current.children[0] instanceof HTMLAnchorElement) {
+        naverRef.current.children[0].click();
+      }
     }
   };
 
