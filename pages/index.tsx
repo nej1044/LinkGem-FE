@@ -1,27 +1,19 @@
-import React from 'react';
+import Main from '../components/landing/main/main.container';
 import styled from 'styled-components';
-import VerticleText from 'components/landing/VerticleText';
-// import MainGuide from 'components/landing/content/MainGuide';
-// import Footer from 'components/landing/Footer';
-import LinkCopyGuide from 'components/landing/content/LinkCopyGuide';
-import Twinkle from 'components/landing/content/Twinkle';
 
 function Home() {
   return (
     <HomeBlock>
-      <div style={{ paddingBottom: '120px' }}>
-        {/* background: 'rgb(15,2,35)' */}
-        {/* <span>WELCOME TO</span>
-        <span>LINK GEM</span> */}
-        <Twinkle />
+      <Main />
 
-        {/* <MainGuide /> */}
+      {/* <Twinkle /> */}
 
+      {/* <MainGuide /> */}
+      {/* 
         <VerticleText />
 
         <LinkCopyGuide />
-        <LinkCopyGuide />
-      </div>
+        <LinkCopyGuide /> */}
 
       {/* <Footer /> */}
     </HomeBlock>
@@ -29,7 +21,9 @@ function Home() {
 }
 
 const HomeBlock = styled.div`
+  width: 100%;
   font-family: Rammetto One;
+  background-color: #0f0223;
 `;
 
 export default Home;

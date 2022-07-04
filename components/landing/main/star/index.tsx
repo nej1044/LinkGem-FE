@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { IconLocation } from '../Twinkle.styled';
+import { IconLocation } from './star.styles';
 
 const figmaWidth = 1920;
 const figmaHeight = 1018;
@@ -35,6 +35,8 @@ export default function Index({
         return import(`public/icons/star-171.svg`);
       case 'star-84':
         return import(`public/icons/star-84.svg`);
+      case 'star-159':
+        return import(`public/icons/star-159.svg`);
       default:
         return import(`public/icons/star-171.svg`);
     }
@@ -50,13 +52,6 @@ export default function Index({
 
   return (
     <IconLocation left={iconState.left} top={iconState.top}>
-      {/* <Star171
-        className="star171"
-        width={iconState.size}
-        height={iconState.size}
-        fill="#DEFF81"
-      /> */}
-
       <StarComponent
         className={className}
         width={iconState.size}
