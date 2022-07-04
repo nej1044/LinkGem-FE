@@ -111,7 +111,7 @@ export default styled.div`
 `;
 
 export const IconLocation = styled.div<{ left: number; top: number }>`
-  .star171 {
+  .star {
     list-style: none;
     position: absolute;
     left: ${(props) => `${props.left}%`};
