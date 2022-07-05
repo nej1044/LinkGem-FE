@@ -9,6 +9,10 @@ export const LinkContainer = styled.section`
 
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
   border-radius: 16px;
+  transition: transform 0.45s;
+  &:hover {
+    transform: translateY(-10px);
+  }
 `;
 
 export const ImageContainer = styled.div`

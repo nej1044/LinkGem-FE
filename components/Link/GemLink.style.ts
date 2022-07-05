@@ -10,9 +10,9 @@ export const LinkContainer = styled.section`
 
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
   border-radius: 16px;
-
+  transition: transform 0.35s;
   &:hover {
-    animation: boxFade 2s 1s infinite linear alternate;
+    transform: translateY(-10px);
   }
 `;
 
@@ -100,15 +100,3 @@ export const EtcButton = styled.button`
   padding: 0px;
   letter-spacing: 3px;
 `;
-
-// const boxFade = keyframes`
-//   0% {
-//     opacity: 1;
-//   }
-//   50% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// `;
