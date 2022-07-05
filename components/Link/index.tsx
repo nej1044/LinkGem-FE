@@ -1,3 +1,3 @@
-import Link from './Link';
+import GemLink from './GemLink';
 
-export default Link;
+export default GemLink;

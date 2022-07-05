@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { memo } from 'react';
+import Link from 'next/link';
 import {
   LinkContainer,
   ImageContainer,
@@ -10,13 +11,17 @@ import {
   LinkDetailSettingDate,
   LinkDetailSettingOption,
   EtcButton,
-} from './Link.style';
+} from './GemLink.style';
 
-function Link() {
+function GemLink() {
   return (
     <LinkContainer>
       <ImageContainer>
-        <Image alt="link-image" src="/test.jpeg" width={342} height={180} />
+        <Link href="https://www.naver.com">
+          <a target="_blank">
+            <Image alt="link-image" src="/test.jpeg" width={342} height={180} />
+          </a>
+        </Link>
       </ImageContainer>
       <LinkDetailContainer>
         <LinkDetailTitle>
@@ -52,4 +57,4 @@ function Link() {
   );
 }
 
-export default memo(Link);
+export default memo(GemLink);

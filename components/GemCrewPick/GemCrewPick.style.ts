@@ -1,21 +1,14 @@
 import styled from 'styled-components';
 
-export const RecentSaveLinkContainer = styled.section`
+export const GemCrewPickContainer = styled.section`
   position: absolute;
   width: 162px;
   height: 34px;
   left: 240px;
-  top: 300px;
+  top: 816px;
 `;
 
-export const RecentSaveLinkTitleOption = styled.div`
-  display: flex;
-  width: 1200px;
-  justify-content: space-between;
-  margin-bottom: 24px;
-`;
-
-export const RecentSaveLinkTitle = styled.div`
+export const GemCrewPickTitle = styled.div`
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 700;
@@ -29,27 +22,25 @@ export const RecentSaveLinkTitle = styled.div`
 
   color: #1a1b1d;
 `;
-
-export const RecentSaveLinkWholeSeries = styled.p`
+export const GemCrewPickDescription = styled.p`
+  width: 281px;
+  margin-top: 8px;
+  margin-bottom: 24px;
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   line-height: 140%;
   /* or 22px */
 
   letter-spacing: -0.02em;
 
-  /* main/purple */
+  /* text/placeholder */
 
-  color: #29115b;
-
-  &:hover {
-    cursor: pointer;
-  }
+  color: #8e8e8e;
 `;
 
-export const RecentSaveLinkOption = styled.div`
+export const GemCrewPickOption = styled.div`
   display: flex;
   justify-content: flex-start;
 `;

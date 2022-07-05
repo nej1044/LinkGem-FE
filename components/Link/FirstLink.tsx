@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { memo } from 'react';
 import {
   LinkContainer,
@@ -19,12 +20,16 @@ function FirstLink() {
     <>
       <LinkContainer>
         <ImageContainer>
-          <Image
-            alt="link-image"
-            src="/images/link-welcome.svg"
-            width={342}
-            height={180}
-          />
+          <Link href="https://www.notion.so/WELCOME-TO-LINK-GEM-9390ebe25a854abc8b053ca4ee970330">
+            <a target="_blank">
+              <Image
+                alt="link-image"
+                src="/images/link-welcome.svg"
+                width={342}
+                height={180}
+              />
+            </a>
+          </Link>
         </ImageContainer>
         <LinkDetailContainer>
           <LinkDetailTitle>반가워요 다이아 키퍼님</LinkDetailTitle>

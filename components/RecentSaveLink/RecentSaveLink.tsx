@@ -1,18 +1,21 @@
 import FirstLink from 'components/Link/FirstLink';
-import Link from 'components/Link';
 import React, { memo } from 'react';
 import {
   RecentSaveLinkContainer,
   RecentSaveLinkTitle,
   RecentSaveLinkOption,
+  RecentSaveLinkTitleOption,
+  RecentSaveLinkWholeSeries,
 } from './RecentSaveLink.style';
 
 function RecentSaveLink() {
   return (
     <RecentSaveLinkContainer>
-      <RecentSaveLinkTitle>최근 저장한 링크</RecentSaveLinkTitle>
+      <RecentSaveLinkTitleOption>
+        <RecentSaveLinkTitle>최근 저장한 링크</RecentSaveLinkTitle>
+        <RecentSaveLinkWholeSeries>전체보기</RecentSaveLinkWholeSeries>
+      </RecentSaveLinkTitleOption>
       <RecentSaveLinkOption>
-        <Link />
         <FirstLink />
       </RecentSaveLinkOption>
     </RecentSaveLinkContainer>
