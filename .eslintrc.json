@@ -32,7 +32,10 @@
     "no-empty-pattern": 2,
     "no-case-declarations": 2,
     "@typescript-eslint/no-empty-interface": 2,
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off"
   },
   "settings":{
     "import/resolver":{
