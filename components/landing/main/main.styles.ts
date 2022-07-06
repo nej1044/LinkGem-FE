@@ -7,8 +7,8 @@ export const Wrapper = styled.main`
   align-items: center;
   width: 100%;
   height: 93vh;
-  background-color: #0f0223;
   color: white;
+  background-color: #0f0223;
 `;
 
 export const Title = styled.h1`
