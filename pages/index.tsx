@@ -14,12 +14,12 @@ function Home() {
       <GuideSection
         sectionNumber={2}
         title="언제나 찾기 쉽도록 잼박스로 관리"
-        text="나만의 잼박스를 만들어 뒤죽박죽 링크들을 깔끔하게 정리"
+        text={`나만의 잼박스를 만들어\n뒤죽박죽 링크들을 깔끔하게 정리`}
       />
       <GuideSection
         sectionNumber={3}
         title="알람, 메모 기능으로 꼼꼼스킬 LEVEL UP!"
-        text="링크에 간단한 메모를 남기거나 알람을 설정하여 꼼꼼하게 관리"
+        text={`링크에 간단한 메모를 남기거나\n알람을 설정하여 꼼꼼하게 관리`}
       />
     </HomeBlock>
   );
