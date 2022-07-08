@@ -35,9 +35,19 @@ const GuideSection = (props) => {
             <S.SolidLine>
               <S.DottedLine />
             </S.SolidLine>
+            <S.Star />
+            <S.BlackGem />
+            <S.GreenGem />
+            <S.YellowGem />
+            <S.PinkGem />
           </S.ArticleContent>
         )}
-        {props.sectionNumber === 3 && <></>}
+        {props.sectionNumber === 3 && (
+          <S.ArticleContent>
+            <S.Clock />
+            <S.Memo />
+          </S.ArticleContent>
+        )}
       </S.Article>
     </S.Wrapper>
   );

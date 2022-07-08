@@ -2,6 +2,13 @@ import styled from 'styled-components';
 import Clip161 from '../../../public/icons/clip-161.svg';
 import Clip162 from '../../../public/icons/clip-162.svg';
 import Clip163 from '../../../public/icons/clip-163.svg';
+import Star169 from '../../../public/icons/star-169.svg';
+import Gem1 from '../../../public/icons/gem-1.svg';
+import Gem2 from '../../../public/icons/gem-2.svg';
+import Gem3 from '../../../public/icons/gem-3.svg';
+import Gem4 from '../../../public/icons/gem-4.svg';
+import MemoSVG from '../../../public/icons/memo.svg';
+import ClockSVG from '../../../public/icons/clock.svg';
 
 export const Wrapper = styled.section`
   display: flex;
@@ -10,6 +17,7 @@ export const Wrapper = styled.section`
   width: 100%;
   height: 800px;
   color: white;
+  overflow: hidden;
   background-color: #0f0223;
 `;
 
@@ -17,13 +25,13 @@ export const Article = styled.article`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 70vw;
+  width: 70%;
   height: 50%;
 `;
 
 export const TextWrapper = styled.div`
   width: 406px;
-  height: 45px; ;
+  height: 150px; ;
 `;
 
 export const sectionTitle = styled.h2`
@@ -54,6 +62,7 @@ export const ArticleContent = styled.div`
   position: relative;
   width: 600px;
   height: 450px;
+  overflow: visible;
 `;
 
 export const PinkBall = styled.div`
@@ -79,13 +88,13 @@ export const GreyBall = styled(PinkBall)`
 `;
 
 export const BlueBall = styled(PinkBall)`
+  position: relative;
   top: 240px;
   left: 210px;
   width: 410px;
   height: 205px;
   background-color: #5200ff;
   transform: rotate(-46.45deg);
-  outline-style: none;
   border-radius: 0px 0px 205px 205px;
 `;
 
@@ -127,4 +136,42 @@ export const SolidLine = styled.div`
 
 export const DottedLine = styled(SolidLine)`
   border: 1px dashed #ffffff;
+`;
+
+export const Star = styled(Star169)`
+  width: 41px;
+  height: 41px;
+  transform: translate(490px, -490px);
+`;
+
+export const BlackGem = styled(Gem1)`
+  position: relative;
+  top: -370px;
+  left: 100px;
+  z-index: 1;
+`;
+
+export const GreenGem = styled(Gem2)`
+  transform: translate(70px, -370px);
+`;
+
+export const YellowGem = styled(Gem3)`
+  position: absolute;
+  top: 190px;
+  left: 80px;
+`;
+
+export const PinkGem = styled(Gem4)`
+  position: absolute;
+  top: 190px;
+  left: 280px;
+`;
+
+export const Memo = styled(MemoSVG)`
+  transform: translate(190px, -300px);
+`;
+
+export const Clock = styled(ClockSVG)`
+  position: relative;
+  z-index: 1;
 `;
