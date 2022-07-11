@@ -24,9 +24,9 @@ const GuideSection = (props) => {
             <S.BlueBall>
               <S.DoughnutBall></S.DoughnutBall>
               <S.SaveLinkText>SAVE LINK</S.SaveLinkText>
-              <S.GreenClip />
-              <S.PinkClip />
-              <S.GreyClip />
+              <S.GreenClip src="./icons/clip-161.png" />
+              <S.PinkClip src="./icons/clip-162.png" />
+              <S.GreyClip src="./icons/clip-163.png" />
             </S.BlueBall>
           </S.ArticleContent>
         )}
@@ -35,9 +35,19 @@ const GuideSection = (props) => {
             <S.SolidLine>
               <S.DottedLine />
             </S.SolidLine>
+            <S.Star />
+            <S.BlackGem />
+            <S.GreenGem />
+            <S.YellowGem />
+            <S.PinkGem />
           </S.ArticleContent>
         )}
-        {props.sectionNumber === 3 && <></>}
+        {props.sectionNumber === 3 && (
+          <S.ArticleContent>
+            <S.Clock />
+            <S.Memo />
+          </S.ArticleContent>
+        )}
       </S.Article>
     </S.Wrapper>
   );
