@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 import Star169 from '../../../public/icons/star-169.svg';
-import Gem1 from '../../../public/icons/gem-1.svg';
-import Gem2 from '../../../public/icons/gem-2.svg';
-import Gem3 from '../../../public/icons/gem-3.svg';
-import Gem4 from '../../../public/icons/gem-4.svg';
-import MemoSVG from '../../../public/icons/memo.svg';
-import ClockSVG from '../../../public/icons/clock.svg';
 
 export const Wrapper = styled.section`
   display: flex;
@@ -38,7 +32,6 @@ export const sectionTitle = styled.h2`
   word-break: keep-all;
   font-family: 'Poppins', sans-serif;
   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-  }
 `;
 
 export const sectionText = styled.span`
@@ -76,12 +69,28 @@ export const PinkBall = styled.div`
   font-weight: 900;
   font-size: 1.65vw;
   letter-spacing: -0.02em;
+  /* animation: bouncing 0.5s 2s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: 4; */
+  @keyframes bouncing {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 50px, 0);
+    }
+  }
 `;
 
 export const GreyBall = styled(PinkBall)`
   top: 25%;
   left: 20%;
   background-color: #262626;
+  /* animation: bouncing 0.5s 3s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: 4; */
 `;
 
 export const BlueBall = styled(PinkBall)`
@@ -95,6 +104,7 @@ export const BlueBall = styled(PinkBall)`
   background-color: #5200ff;
   transform: rotate(-46.45deg);
   border-radius: 0px 0px 205px 205px;
+  animation: none;
 `;
 
 export const DoughnutBall = styled(PinkBall)`
@@ -105,6 +115,7 @@ export const DoughnutBall = styled(PinkBall)`
   background-color: #0f0223;
   margin: 0 auto;
   border-radius: 0px 0px 102.5px 102.5px;
+  animation: none;
 `;
 
 export const SaveLinkText = styled.div`
@@ -146,40 +157,40 @@ export const Star = styled(Star169)`
   height: 14%;
 `;
 
-export const BlackGem = styled(Gem1)`
+export const BlackGem = styled.img`
   position: absolute;
-  top: -15%;
+  top: 10%;
   left: 25%;
   z-index: 1;
   width: 25%;
 `;
 
-export const GreenGem = styled(Gem2)`
+export const GreenGem = styled.img`
   position: absolute;
-  top: -20%;
+  top: 5%;
   right: 25%;
   width: 30%;
 `;
 
-export const YellowGem = styled(Gem3)`
+export const YellowGem = styled.img`
   position: absolute;
-  top: 20%;
+  top: 40%;
   left: 15%;
   width: 30%;
 `;
 
-export const PinkGem = styled(Gem4)`
+export const PinkGem = styled.img`
   position: absolute;
-  top: 18%;
+  top: 45%;
   right: 30%;
   width: 25%;
 `;
 
-export const Memo = styled(MemoSVG)`
+export const Memo = styled.img`
   width: 50%;
 `;
 
-export const Clock = styled(ClockSVG)`
+export const Clock = styled.img`
   position: relative;
   left: 8%;
   z-index: 1;
