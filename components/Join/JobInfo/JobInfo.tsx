@@ -1,8 +1,10 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState, memo, useCallback } from 'react';
 import JoinDropDown from 'components/atom/DropDown/JoinDropDown';
 import JoinButton from 'components/atom/Button/JoinButton';
 import JoinProgressBar from 'components/atom/ProgressBar/JoinProgressBar';
 import JoinTextInput from 'components/atom/TextInput/JoinTextInput';
+import { useRecoilValue } from 'recoil';
+import { joinState } from 'store/store';
 import { JobInfoContainer, JobText } from './JobInfo.style';
 
 function JobInfo() {
@@ -16,6 +18,7 @@ function JobInfo() {
   });
   const [type, setType] = useState('');
   const [isButtonValueValid, setIsButtonValueValid] = useState(true);
+  const userState = useRecoilValue(joinState);
 
   const changeType = () => {
     if (type === 'job') {
@@ -32,6 +35,39 @@ function JobInfo() {
   const changeButtonColorGreenToGrey = () => {
     setIsButtonValueValid(true);
   };
+
+  const getUserInfo = useCallback(async () => {
+    localStorage.removeItem('auth');
+    try {
+      const response = await axios.get('/api/v1/oauth/login/naver', {
+        params: {
+          code: userState.accessToken,
+        },
+      });
+
+      const result = await response.data;
+      const userInfo = result?.result;
+      localStorage.setItem('auth', JSON.stringify(userInfo));
+    } catch (error) {
+      console.log('에러가 발생했습니다', error);
+    }
+
+    // await axios
+    //   .get('/api/v1/oauth/login/naver', {
+    //     params: {
+    //       code: joinUserInfo.accessToken,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     if (response?.result as any) {
+    //       localStorage.setItem('auth', response.result);
+    //     }
+    //   })
+    //   .catch((e) => console.log('error2', e));
+  }, [userState]);
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   useEffect(() => {
     if (type === '') {

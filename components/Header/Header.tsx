@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil';
 import { joinState, loginState } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
-import axios from 'axios';
 import {
   HeaderContainer,
   LogoContainer,
@@ -46,36 +45,6 @@ function Header() {
     setIsLoginModal(false);
   };
 
-  const test = async () => {
-    localStorage.removeItem('auth');
-    try {
-      const response = await axios.get('/api/v1/oauth/login/naver', {
-        params: {
-          code: joinUserInfo.accessToken,
-        },
-      });
-
-      const result = await response.data;
-      const userInfo = result?.result;
-      localStorage.setItem('auth', JSON.stringify(userInfo));
-    } catch (error) {
-      console.log('에러입니다');
-      console.log('error1', error);
-    }
-
-    // await axios
-    //   .get('/api/v1/oauth/login/naver', {
-    //     params: {
-    //       code: joinUserInfo.accessToken,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     if (response?.result as any) {
-    //       localStorage.setItem('auth', response.result);
-    //     }
-    //   })
-    //   .catch((e) => console.log('error2', e));
-  };
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
@@ -86,7 +55,6 @@ function Header() {
       <LogoContainer>
         <ImageContainer>
           <Image
-            onClick={test}
             src="/static/image/Linkgem-Logo.svg"
             alt="linkgem-logo"
             width={165}

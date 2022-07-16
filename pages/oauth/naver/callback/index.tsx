@@ -5,21 +5,21 @@ import { joinState } from 'store/store';
 import { useSetRecoilState } from 'recoil';
 
 function Index() {
-  console.log('네이버');
+  console.log('네이버 콜백');
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
-  const setAccessToken = useSetRecoilState(joinState);
+  const setUserState = useSetRecoilState(joinState);
 
   const initializeNaverLogin = async () => {
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
-      callbackUrl: 'http://localhost:3000',
+      callbackUrl: 'http://localhost:3000/',
       isPopup: false,
     });
 
     const location = window.location.href.split('=')[1];
     const token = location.split('&')[0];
-    setAccessToken((prev) => ({ ...prev, accessToken: token }));
+    setUserState((prev) => ({ ...prev, accessToken: token }));
     naverLogin.init();
 
     naverLogin.getLoginStatus(async (status: boolean) => {
