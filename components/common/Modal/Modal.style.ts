@@ -47,9 +47,9 @@ export const ModalContainer = styled.div<{ visible: boolean }>`
   border-radius: 24px;
   padding: 30px;
   ${(props) => modalSettings(props.visible)}
-  -webkit-transition: opacity 0.3s 0, visibility 0 0.3s;
-  -moz-transition: opacity 0.3s 0, visibility 0 0.3s;
-  transition: opacity 0.3s 0, visibility 0 0.3s;
+  -webkit-transition: opacity 0.1s 0, visibility 0 0.1s;
+  -moz-transition: opacity 0.1s 0, visibility 0 0.1s;
+  transition: opacity 0.1s 0, visibility 0 0.1s;
 `;
 
 export const Title = styled.div`

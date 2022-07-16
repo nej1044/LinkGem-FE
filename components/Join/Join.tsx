@@ -10,7 +10,7 @@ export default function Join() {
   console.log(joinUserInfo);
   return (
     <>
-      {!joinUserInfo.accessToken && <SocialJoin />}
+      {!joinUserInfo.accessToken && <SocialJoin type="join" />}
       {joinUserInfo.accessToken && <JoinInfo />}
     </>
   );

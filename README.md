@@ -8,7 +8,7 @@
 
 - `develop` 브랜치에 머지할 때는 상대방에게 `pr` 올리도록 합니다.
 - `master` 브랜치로 머지할때는 꼭 `sqush merge` 합니다.
-- 아래 커밋 컨벤션은 master 브랜치에 sqush merge로 넣을때만 지켜주시면 됩니다.
+- 아래 커밋 컨벤션은 main 브랜치에 sqush merge로 넣을때만 지켜주시면 됩니다.
 
 ## 커밋컨벤션
 

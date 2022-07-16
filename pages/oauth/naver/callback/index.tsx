@@ -5,28 +5,25 @@ import { joinState } from 'store/store';
 import { useSetRecoilState } from 'recoil';
 
 function Index() {
+  console.log('네이버');
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const setAccessToken = useSetRecoilState(joinState);
 
   const initializeNaverLogin = async () => {
-    setLoading(true);
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
-      callbackUrl: 'http://localhost:3000/join',
+      callbackUrl: 'http://localhost:3000',
       isPopup: false,
     });
 
     const location = window.location.href.split('=')[1];
     const token = location.split('&')[0];
     setAccessToken((prev) => ({ ...prev, accessToken: token }));
-
     naverLogin.init();
-    console.dir(naverLogin);
 
     naverLogin.getLoginStatus(async (status: boolean) => {
       if (!status) {
-        setLoading(false);
         return router.push('/');
       }
       if (naverLogin.user.id) {
@@ -41,7 +38,6 @@ function Index() {
           return naverLogin.reprompt();
         }
       }
-      setLoading(true);
       router.push('/');
       return null;
     });
@@ -49,6 +45,7 @@ function Index() {
 
   useEffect(() => {
     initializeNaverLogin();
+    setLoading(false);
   }, []);
 
   return <div>{loading && <Loadingx />}</div>;
