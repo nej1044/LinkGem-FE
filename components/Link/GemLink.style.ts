@@ -26,7 +26,7 @@ export const LinkDetailContainer = styled.div`
 `;
 
 export const LinkDetailTitle = styled.div`
-  width: 294px;
+  width: 272px;
   height: 24px;
 
   overflow: hidden;
@@ -47,7 +47,7 @@ export const LinkDetailTitle = styled.div`
   color: #1a1b1d;
 `;
 export const LinkDetailDescription = styled.div`
-  width: 294px;
+  width: 272px;
   height: 60px;
   margin-top: 12px;
   margin-bottom: 26px;
@@ -93,10 +93,18 @@ export const LinkDetailSettingOption = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & > span:hover {
+    cursor: pointer;
+  }
 `;
 export const EtcButton = styled.button`
   background: white;
   border: none;
   padding: 0px;
   letter-spacing: 3px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

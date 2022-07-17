@@ -1,5 +1,7 @@
+import axios from 'axios';
 import Image from 'next/image';
 import React, { memo, useState } from 'react';
+import useAuth from 'hooks/useAuth';
 import {
   LinkSaveContainer,
   LinkTextContainer,
@@ -14,8 +16,24 @@ import {
 function Link() {
   const [isVisibleMessage, setIsVisibleMessage] = useState(true);
   // const [opacity, setOpacity] = useState(100);
-
-  const onClickLinkSaveButton = () => {
+  const auth = useAuth();
+  const onClickLinkSaveButton = async () => {
+    console.log('auth');
+    console.log(auth);
+    try {
+      const response = await axios.post('/api/v1/links', {
+        headers: {
+          Authorization:
+            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+        },
+        memo: '',
+        url: 'https://www.surfit.io/',
+      });
+      console.log('response');
+      console.log(response);
+    } catch (error) {
+      console.log('정보가 없습니다');
+    }
     setIsVisibleMessage(true);
     setTimeout(() => {
       setIsVisibleMessage(false);
@@ -45,7 +63,7 @@ function Link() {
       <div>
         <LinkTextContainer>
           <Image
-            src="/icons/plus-icon.svg"
+            src="/images/icons/plus-icon.svg"
             alt="plus-icon"
             width={15}
             height={16}
@@ -64,7 +82,7 @@ function Link() {
           </FailMessage>
           <XIconImage onClick={onCloseMessage}>
             <Image
-              src="/icons/link-x.svg"
+              src="/images/icons/link-x.svg"
               alt="plus-icon"
               width={12}
               height={11}

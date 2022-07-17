@@ -15,7 +15,10 @@ import {
   FirstLinkImage,
 } from './FirstLink.style';
 
-function FirstLink() {
+interface IFirstLink {
+  name: string;
+}
+function FirstLink({ name }: IFirstLink) {
   return (
     <>
       <LinkContainer>
@@ -25,7 +28,7 @@ function FirstLink() {
               <Image
                 alt="link-image"
                 src="/images/link-welcome.svg"
-                width={342}
+                width={320}
                 height={180}
               />
             </a>
@@ -43,13 +46,13 @@ function FirstLink() {
             <LinkDetailSettingOption>
               <Image
                 alt="link-image"
-                src="/icons/link-star.svg"
+                src="/images/icons/link-star.svg"
                 width={17}
                 height={16}
               />
               <Image
                 alt="link-image"
-                src="/icons/link-sharing.svg"
+                src="/images/icons/link-sharing.svg"
                 width={15.79}
                 height={15.82}
               />
@@ -60,15 +63,15 @@ function FirstLink() {
       </LinkContainer>
       <LinkContainer>
         <FirstLinkTitle>
-          다이아 키퍼님의
+          {name} 키퍼님의
           <br />첫 링크를 저장해 주세요
         </FirstLinkTitle>
         <FirstLinkImage>
           <Image
             alt="link-image"
             src="/images/link-plus.svg"
-            width={70}
-            height={70}
+            width={100}
+            height={100}
           />
         </FirstLinkImage>
       </LinkContainer>
