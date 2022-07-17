@@ -5,6 +5,7 @@ import JoinProgressBar from 'components/atom/ProgressBar/JoinProgressBar';
 import JoinTextInput from 'components/atom/TextInput/JoinTextInput';
 import { useRecoilValue } from 'recoil';
 import { joinState } from 'store/store';
+import axios from 'axios';
 import { JobInfoContainer, JobText } from './JobInfo.style';
 
 function JobInfo() {
