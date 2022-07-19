@@ -4,7 +4,7 @@ export const VerticalTextBlock = styled.div`;
   overflow: hidden;
   width: 100%;
   height: 200%;
-  padding: 17px 0;
+  padding: 1vw 0;
   background: #1a1b1d;
   }
 `;
@@ -28,7 +28,7 @@ export const TextWrap = styled.div`
 `;
 
 export const Text = styled.span`
-  margin-right: 24px;
+  margin-right: 1.5vw;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.3vw;
 `;

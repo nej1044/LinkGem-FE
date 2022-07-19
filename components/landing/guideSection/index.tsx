@@ -1,7 +1,13 @@
 import * as S from './guideSection.styles';
 import { useScrollFadeIn } from 'commons/scrollEvent';
 
-const GuideSection = (props) => {
+interface IGuideSectionProps {
+  sectionNumber: number;
+  text: string;
+  title: string;
+}
+
+const GuideSection = (props: IGuideSectionProps) => {
   return (
     <S.Wrapper>
       <S.Article>

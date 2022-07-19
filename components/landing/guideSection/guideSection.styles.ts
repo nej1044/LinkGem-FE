@@ -69,16 +69,17 @@ export const PinkBall = styled.div`
   font-weight: 900;
   font-size: 1.65vw;
   letter-spacing: -0.02em;
-  /* animation: bouncing 0.5s 2s;
-  animation-direction: alternate;
-  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
-  animation-iteration-count: 4; */
-  @keyframes bouncing {
-    from {
-      transform: translate3d(0, 0, 0);
+  animation: bounce 2s infinite;
+  animation-delay: 2s;
+  @keyframes bounce {
+    0% {
+      transform: translate3d(0px, 0px, 0);
     }
-    to {
-      transform: translate3d(0, 50px, 0);
+    50% {
+      transform: translate3d(0px, -4px, 0);
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0);
     }
   }
 `;
@@ -87,10 +88,8 @@ export const GreyBall = styled(PinkBall)`
   top: 25%;
   left: 20%;
   background-color: #262626;
-  /* animation: bouncing 0.5s 3s;
-  animation-direction: alternate;
-  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
-  animation-iteration-count: 4; */
+  animation: bounce 2s infinite;
+  animation-delay: 2.5s;
 `;
 
 export const BlueBall = styled(PinkBall)`
@@ -125,16 +124,55 @@ export const SaveLinkText = styled.div`
 export const GreenClip = styled.img`
   width: 35%;
   transform: translate(50%, -40%) rotate(50deg);
+  animation: green-bounce 2s infinite;
+  animation-delay: 2s;
+  @keyframes green-bounce {
+    0% {
+      transform: translate(50%, -40%) rotate(50deg);
+    }
+    50% {
+      transform: translate(50%, -45%) rotate(50deg);
+    }
+    100% {
+      transform: translate(50%, -40%) rotate(50deg);
+    }
+  }
 `;
 
 export const PinkClip = styled.img`
   width: 35%;
   transform: translate(0%, -20%) rotate(40deg);
+  animation: pink-bounce 2s infinite;
+  animation-delay: 2.5s;
+  @keyframes pink-bounce {
+    0% {
+      transform: translate(0%, -20%) rotate(40deg);
+    }
+    50% {
+      transform: translate(0%, -25%) rotate(40deg);
+    }
+    100% {
+      transform: translate(0%, -20%) rotate(40deg);
+    }
+  }
 `;
 
 export const GreyClip = styled.img`
   width: 25%;
   transform: translate(-80%, -30%) rotate(30deg);
+  animation: grey-bounce 2s infinite;
+  animation-delay: 1s;
+  @keyframes grey-bounce {
+    0% {
+      transform: translate(-80%, -30%) rotate(30deg);
+    }
+    50% {
+      transform: translate(-80%, -35%) rotate(30deg);
+    }
+    100% {
+      transform: translate(-80%, -30%) rotate(30deg);
+    }
+  }
 `;
 
 export const SolidLine = styled.div`
@@ -163,6 +201,22 @@ export const BlackGem = styled.img`
   left: 25%;
   z-index: 1;
   width: 25%;
+  animation: black-gem-bounce 2s infinite;
+  animation-delay: 1s;
+  @keyframes black-gem-bounce {
+    0% {
+      top: 10%;
+      left: 25%;
+    }
+    50% {
+      top: 15%;
+      left: 25%;
+    }
+    100% {
+      top: 10%;
+      left: 25%;
+    }
+  }
 `;
 
 export const GreenGem = styled.img`
@@ -170,6 +224,22 @@ export const GreenGem = styled.img`
   top: 5%;
   right: 25%;
   width: 30%;
+  animation: green-gem-bounce 2s infinite;
+  animation-delay: 2s;
+  @keyframes green-gem-bounce {
+    0% {
+      top: 5%;
+      right: 25%;
+    }
+    50% {
+      top: 10%;
+      right: 25%;
+    }
+    100% {
+      top: 5%;
+      right: 25%;
+    }
+  }
 `;
 
 export const YellowGem = styled.img`
@@ -177,6 +247,22 @@ export const YellowGem = styled.img`
   top: 40%;
   left: 15%;
   width: 30%;
+  animation: yellow-gem-bounce 2s infinite;
+  animation-delay: 1.6s;
+  @keyframes yellow-gem-bounce {
+    0% {
+      top: 40%;
+      left: 15%;
+    }
+    50% {
+      top: 45%;
+      left: 15%;
+    }
+    100% {
+      top: 40%;
+      left: 15%;
+    }
+  }
 `;
 
 export const PinkGem = styled.img`
@@ -184,10 +270,43 @@ export const PinkGem = styled.img`
   top: 45%;
   right: 30%;
   width: 25%;
+  animation: pink-gem-bounce 2s infinite;
+  animation-delay: 1.3s;
+  @keyframes pink-gem-bounce {
+    0% {
+      top: 45%;
+      right: 30%;
+    }
+    50% {
+      top: 50%;
+      right: 30%;
+    }
+    100% {
+      top: 45%;
+      right: 30%;
+    }
+  }
 `;
 
 export const Memo = styled.img`
+  position: relative;
   width: 50%;
+  animation: aaa-bounce 2s infinite;
+  animation-delay: 1.5s;
+  @keyframes aaa-bounce {
+    0% {
+      top: 0%;
+      right: 0%;
+    }
+    50% {
+      top: 5%;
+      right: 0%;
+    }
+    100% {
+      top: 0%;
+      right: 0%;
+    }
+  }
 `;
 
 export const Clock = styled.img`
@@ -195,4 +314,20 @@ export const Clock = styled.img`
   left: 8%;
   z-index: 1;
   width: 40%;
+  animation: clock-bounce 2s infinite;
+  animation-delay: 1s;
+  @keyframes clock-bounce {
+    0% {
+      top: 0%;
+      right: 0%;
+    }
+    50% {
+      top: 5%;
+      right: 0%;
+    }
+    100% {
+      top: 0%;
+      right: 0%;
+    }
+  }
 `;

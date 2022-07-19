@@ -82,18 +82,6 @@ export default styled.div`
     }
   }
 
-  @keyframes bounce {
-    0% {
-      transform: translate3d(0px, 0px, 0);
-    }
-    50% {
-      transform: translate3d(0px, -4px, 0);
-    }
-    100% {
-      transform: translate3d(0px, 0px, 0);
-    }
-  }
-
   @keyframes twinkle {
     0% {
       transform: scale(1);
@@ -112,11 +100,23 @@ export default styled.div`
 
 export const IconLocation = styled.div<{ left: number; top: number }>`
   .star {
+    position: relative;
+    z-index: 3;
     list-style: none;
     position: absolute;
     left: ${(props) => `${props.left}%`};
     top: ${(props) => `${props.top}%`};
-    animation: twinkle 1s infinite;
+    animation: twinkle 1s;
+    animation-iteration-count: 1;
+  }
+
+  .not-star {
+    position: relative;
+    z-index: 3;
+    list-style: none;
+    position: absolute;
+    left: ${(props) => `${props.left}%`};
+    top: ${(props) => `${props.top}%`};
   }
 
   @keyframes twinkle {

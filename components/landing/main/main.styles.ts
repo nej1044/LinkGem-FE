@@ -14,27 +14,27 @@ export const Wrapper = styled.main`
 export const Title = styled.h1`
   text-align: center;
   color: #41fb6a;
-  font-size: 100px;
+  font-size: 6.5vw;
   letter-spacing: -2%;
 `;
 
 export const TitleRemark = styled.span`
   padding: 24px 0;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.5vw;
   letter-spacing: -2%;
   line-height: 150%;
 `;
 
 export const MainButton = styled.button`
-  width: 260px;
-  height: 80px;
-  border-radius: 100px;
+  width: 20vw;
+  height: 10vh;
+  border-radius: 3vw;
   background-color: #5200ff;
   outline: none;
   border: none;
   color: white;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.5vw;
   letter-spacing: -2%;
 `;
