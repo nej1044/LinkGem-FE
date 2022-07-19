@@ -1,17 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import Landing from '../components/landing/landing';
 
 function Home() {
-  return (
-    <HomeBlock>
-      <span>WELCOME TO</span>
-      <span>LINK GEM</span>
-    </HomeBlock>
-  );
+  return <Landing />;
 }
-
-const HomeBlock = styled.div`
-  font-family: Rammetto One;
-`;
 
 export default Home;
