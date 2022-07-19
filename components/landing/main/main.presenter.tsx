@@ -1,14 +1,16 @@
 import VerticalText from './verticalText/index';
 import * as S from './main.styles';
 import Twinkle from '../main/twinkle';
+import ScrollTop from '../../commons/scrollTop';
 
 const MainUI = () => {
   return (
     <>
       <S.Wrapper>
+        <ScrollTop />
         <>
           <S.Title>
-            <span style={{ color: 'white', fontSize: '48px' }}>WELCOME TO</span>
+            <span style={{ color: 'white', fontSize: '3vw' }}>WELCOME TO</span>
             <br />
             LINK GEM
           </S.Title>

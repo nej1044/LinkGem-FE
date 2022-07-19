@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 import Star169 from '../../../public/icons/star-169.svg';
-import Gem1 from '../../../public/icons/gem-1.svg';
-import Gem2 from '../../../public/icons/gem-2.svg';
-import Gem3 from '../../../public/icons/gem-3.svg';
-import Gem4 from '../../../public/icons/gem-4.svg';
-import MemoSVG from '../../../public/icons/memo.svg';
-import ClockSVG from '../../../public/icons/clock.svg';
 
 export const Wrapper = styled.section`
   display: flex;
@@ -38,7 +32,6 @@ export const sectionTitle = styled.h2`
   word-break: keep-all;
   font-family: 'Poppins', sans-serif;
   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-  }
 `;
 
 export const sectionText = styled.span`
@@ -76,12 +69,27 @@ export const PinkBall = styled.div`
   font-weight: 900;
   font-size: 1.65vw;
   letter-spacing: -0.02em;
+  animation: bounce 2s infinite;
+  animation-delay: 2s;
+  @keyframes bounce {
+    0% {
+      transform: translate3d(0px, 0px, 0);
+    }
+    50% {
+      transform: translate3d(0px, -4px, 0);
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0);
+    }
+  }
 `;
 
 export const GreyBall = styled(PinkBall)`
   top: 25%;
   left: 20%;
   background-color: #262626;
+  animation: bounce 2s infinite;
+  animation-delay: 2.5s;
 `;
 
 export const BlueBall = styled(PinkBall)`
@@ -95,6 +103,7 @@ export const BlueBall = styled(PinkBall)`
   background-color: #5200ff;
   transform: rotate(-46.45deg);
   border-radius: 0px 0px 205px 205px;
+  animation: none;
 `;
 
 export const DoughnutBall = styled(PinkBall)`
@@ -105,6 +114,7 @@ export const DoughnutBall = styled(PinkBall)`
   background-color: #0f0223;
   margin: 0 auto;
   border-radius: 0px 0px 102.5px 102.5px;
+  animation: none;
 `;
 
 export const SaveLinkText = styled.div`
@@ -114,16 +124,55 @@ export const SaveLinkText = styled.div`
 export const GreenClip = styled.img`
   width: 35%;
   transform: translate(50%, -40%) rotate(50deg);
+  animation: green-bounce 2s infinite;
+  animation-delay: 2s;
+  @keyframes green-bounce {
+    0% {
+      transform: translate(50%, -40%) rotate(50deg);
+    }
+    50% {
+      transform: translate(50%, -45%) rotate(50deg);
+    }
+    100% {
+      transform: translate(50%, -40%) rotate(50deg);
+    }
+  }
 `;
 
 export const PinkClip = styled.img`
   width: 35%;
   transform: translate(0%, -20%) rotate(40deg);
+  animation: pink-bounce 2s infinite;
+  animation-delay: 2.5s;
+  @keyframes pink-bounce {
+    0% {
+      transform: translate(0%, -20%) rotate(40deg);
+    }
+    50% {
+      transform: translate(0%, -25%) rotate(40deg);
+    }
+    100% {
+      transform: translate(0%, -20%) rotate(40deg);
+    }
+  }
 `;
 
 export const GreyClip = styled.img`
   width: 25%;
   transform: translate(-80%, -30%) rotate(30deg);
+  animation: grey-bounce 2s infinite;
+  animation-delay: 1s;
+  @keyframes grey-bounce {
+    0% {
+      transform: translate(-80%, -30%) rotate(30deg);
+    }
+    50% {
+      transform: translate(-80%, -35%) rotate(30deg);
+    }
+    100% {
+      transform: translate(-80%, -30%) rotate(30deg);
+    }
+  }
 `;
 
 export const SolidLine = styled.div`
@@ -146,42 +195,139 @@ export const Star = styled(Star169)`
   height: 14%;
 `;
 
-export const BlackGem = styled(Gem1)`
+export const BlackGem = styled.img`
   position: absolute;
-  top: -15%;
+  top: 10%;
   left: 25%;
   z-index: 1;
   width: 25%;
+  animation: black-gem-bounce 2s infinite;
+  animation-delay: 1s;
+  @keyframes black-gem-bounce {
+    0% {
+      top: 10%;
+      left: 25%;
+    }
+    50% {
+      top: 15%;
+      left: 25%;
+    }
+    100% {
+      top: 10%;
+      left: 25%;
+    }
+  }
 `;
 
-export const GreenGem = styled(Gem2)`
+export const GreenGem = styled.img`
   position: absolute;
-  top: -20%;
+  top: 5%;
   right: 25%;
   width: 30%;
+  animation: green-gem-bounce 2s infinite;
+  animation-delay: 2s;
+  @keyframes green-gem-bounce {
+    0% {
+      top: 5%;
+      right: 25%;
+    }
+    50% {
+      top: 10%;
+      right: 25%;
+    }
+    100% {
+      top: 5%;
+      right: 25%;
+    }
+  }
 `;
 
-export const YellowGem = styled(Gem3)`
+export const YellowGem = styled.img`
   position: absolute;
-  top: 20%;
+  top: 40%;
   left: 15%;
   width: 30%;
+  animation: yellow-gem-bounce 2s infinite;
+  animation-delay: 1.6s;
+  @keyframes yellow-gem-bounce {
+    0% {
+      top: 40%;
+      left: 15%;
+    }
+    50% {
+      top: 45%;
+      left: 15%;
+    }
+    100% {
+      top: 40%;
+      left: 15%;
+    }
+  }
 `;
 
-export const PinkGem = styled(Gem4)`
+export const PinkGem = styled.img`
   position: absolute;
-  top: 18%;
+  top: 45%;
   right: 30%;
   width: 25%;
+  animation: pink-gem-bounce 2s infinite;
+  animation-delay: 1.3s;
+  @keyframes pink-gem-bounce {
+    0% {
+      top: 45%;
+      right: 30%;
+    }
+    50% {
+      top: 50%;
+      right: 30%;
+    }
+    100% {
+      top: 45%;
+      right: 30%;
+    }
+  }
 `;
 
-export const Memo = styled(MemoSVG)`
+export const Memo = styled.img`
+  position: relative;
   width: 50%;
+  animation: aaa-bounce 2s infinite;
+  animation-delay: 1.5s;
+  @keyframes aaa-bounce {
+    0% {
+      top: 0%;
+      right: 0%;
+    }
+    50% {
+      top: 5%;
+      right: 0%;
+    }
+    100% {
+      top: 0%;
+      right: 0%;
+    }
+  }
 `;
 
-export const Clock = styled(ClockSVG)`
+export const Clock = styled.img`
   position: relative;
   left: 8%;
   z-index: 1;
   width: 40%;
+  animation: clock-bounce 2s infinite;
+  animation-delay: 1s;
+  @keyframes clock-bounce {
+    0% {
+      top: 0%;
+      right: 0%;
+    }
+    50% {
+      top: 5%;
+      right: 0%;
+    }
+    100% {
+      top: 0%;
+      right: 0%;
+    }
+  }
 `;
