@@ -102,7 +102,7 @@ export const BlueBall = styled(PinkBall)`
   text-align: center;
   background-color: #5200ff;
   transform: rotate(-46.45deg);
-  border-radius: 0px 0px 205px 205px;
+  border-radius: 0px 0px 50% 50%;
   animation: none;
 `;
 
