@@ -14,4 +14,5 @@ const joinState = atom({
     nickname: '',
   },
 });
+
 export { loginState, joinState };

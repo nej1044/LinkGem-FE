@@ -1,6 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
 import Join from 'components/Join';
-import Login from 'components/Login';
 import Modal from 'components/common/Modal';
 import { useRecoilValue } from 'recoil';
 import { joinState, loginState } from 'store/store';
@@ -10,7 +9,6 @@ import {
   HeaderContainer,
   LogoContainer,
   ButtonContainer,
-  LoginButton,
   ImageContainer,
   LinkSaveButton,
   AlarmImage,
@@ -22,27 +20,12 @@ function Header() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const joinUserInfo = useRecoilValue(joinState);
   const isLogin = useRecoilValue(loginState);
-  const [isLoginModal, setIsLoginModal] = useState(false);
-
-  console.log('isLoginModal');
-  console.log(isLoginModal);
-
   const handleOpenModal = () => {
     setIsOpenModal(true);
   };
 
   const handleCloseJoinModal = () => {
     setIsOpenModal(false);
-  };
-
-  const handleOpenLoginModal = () => {
-    setIsOpenModal(true);
-    setIsLoginModal(true);
-  };
-
-  const handleCloseLoginModal = () => {
-    setIsOpenModal(false);
-    setIsLoginModal(false);
   };
 
   useEffect(() => {
@@ -81,29 +64,21 @@ function Header() {
             <Initial>수녕</Initial>
           </>
         ) : (
-          <>
-            <LoginButton onClick={handleOpenLoginModal}>로그인</LoginButton>
-            <JoinButton
-              onClick={handleOpenModal}
-              backgroundColor="#41FB6A"
-              color="#1A1B1D"
-              width="120px"
-              height="48px"
-              text="회원가입"
-              fontSize="18px"
-              type=""
-              hoverColor=""
-            />
-          </>
+          <JoinButton
+            onClick={handleOpenModal}
+            backgroundColor="#41FB6A"
+            color="#1A1B1D"
+            width="120px"
+            height="48px"
+            text="로그인"
+            fontSize="18px"
+            type=""
+            hoverColor=""
+          />
         )}
       </ButtonContainer>
-      <Modal
-        visible={isOpenModal}
-        handleCloseModal={
-          isLoginModal ? handleCloseLoginModal : handleCloseJoinModal
-        }
-      >
-        {isLoginModal ? <Login /> : <Join />}
+      <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
+        <Join />
       </Modal>
     </HeaderContainer>
   );

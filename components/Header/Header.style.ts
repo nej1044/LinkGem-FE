@@ -40,6 +40,7 @@ export const LogoContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   display: flex;
+  align-items: center;
   color: white;
   margin-right: 240px;
   @media screen and (max-width: 500px) {
@@ -126,6 +127,11 @@ export const LinkSaveButton = styled.button`
 `;
 
 export const AlarmImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
   margin-left: 26px;
   margin-right: 26px;
   display: flex;

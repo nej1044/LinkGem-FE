@@ -23,4 +23,13 @@ export const JoinButtonContainer = styled.button<JoinButtonContainerProps>`
     background-color: ${(props) => props.hoverColor};
     transition: background-color 0.1s ease-in;
   }
+
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  /* identical to box height */
+
+  letter-spacing: -0.02em;
 `;

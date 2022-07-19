@@ -5,7 +5,6 @@ import { joinState } from 'store/store';
 import { useSetRecoilState } from 'recoil';
 
 function Index() {
-  console.log('네이버 콜백');
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
   const setUserState = useSetRecoilState(joinState);
@@ -19,6 +18,7 @@ function Index() {
 
     const location = window.location.href.split('=')[1];
     const token = location.split('&')[0];
+    if (token === 'access_denied') router.push('/');
     setUserState((prev) => ({ ...prev, accessToken: token }));
     naverLogin.init();
 

@@ -7,23 +7,15 @@ import {
   Info,
 } from './SocialJoin.style';
 
-interface SocialJoinProps {
-  type: string;
-}
-
-export default function SocialJoin({ type }: SocialJoinProps) {
+export default function SocialJoin() {
   return (
     <SocialJoinContainer>
       <Title>
         <h1>반가워요, 키퍼님✨</h1>
-        <p>
-          {type === 'login'
-            ? '지금까지 모아뒀던 링크잼들이 기다리고 있어요'
-            : '이제부터 여기저기 흩어져있는 링크들을 나만의 잼박스에 보관하세요'}
-        </p>
+        <p>이제부터 여기저기 흩어져있는 링크들을 나만의 잼박스에 보관하세요</p>
       </Title>
       <SocialContainer>
-        <LoginNaver type={type} />
+        <LoginNaver />
       </SocialContainer>
       <Info>
         <p>

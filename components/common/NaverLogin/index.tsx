@@ -2,16 +2,11 @@ import NaverButton from 'components/atom/Button/NaverButton';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef } from 'react';
 
-interface LoginNaverProps {
-  type: string;
-}
-
-export default function LoginNaver({ type }: LoginNaverProps) {
+export default function LoginNaver() {
   const naverRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   const naverLogin = () => {
-    console.log('asdf');
     router.push(
       'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=http://localhost:3000/oauth/naver/callback'
     );
@@ -52,7 +47,7 @@ export default function LoginNaver({ type }: LoginNaverProps) {
         rel="noreferrer"
         style={{ textDecoration: 'none' }}
       >
-        <NaverButton type={type} onClickNaverButton={() => naverLogin()} />
+        <NaverButton onClickNaverButton={() => naverLogin()} />
       </a>
     </>
   );

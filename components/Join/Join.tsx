@@ -6,12 +6,12 @@ import { joinState } from 'store/store';
 
 export default function Join() {
   const joinUserInfo = useRecoilValue(joinState);
-  console.log('join 컴포넌트');
-  console.log(joinUserInfo);
   return (
     <>
-      {!joinUserInfo.accessToken && <SocialJoin type="join" />}
-      {joinUserInfo.accessToken && <JoinInfo />}
+      {(!joinUserInfo.accessToken ||
+        joinUserInfo.accessToken === 'access_denied') && <SocialJoin />}
+      {joinUserInfo.accessToken &&
+        joinUserInfo.accessToken !== 'access_denied' && <JoinInfo />}
     </>
   );
 }

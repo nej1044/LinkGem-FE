@@ -3,9 +3,8 @@ import { NaverLoginButton, NaverLoginImg } from './NaverButton.style';
 
 type naverButtonProps = {
   onClickNaverButton: () => void;
-  type: string;
 };
-function NaverButton({ onClickNaverButton, type }: naverButtonProps) {
+function NaverButton({ onClickNaverButton }: naverButtonProps) {
   const [isHover, setIsHover] = useState(false);
   const onMouseOver = () => {
     setIsHover(true);
@@ -27,7 +26,7 @@ function NaverButton({ onClickNaverButton, type }: naverButtonProps) {
         }
         alt="naver"
       />
-      <p>{type === 'login' ? '네이버로 로그인' : '네이버로 시작하기'}</p>
+      <p>네이버로 시작하기</p>
     </NaverLoginButton>
   );
 }
