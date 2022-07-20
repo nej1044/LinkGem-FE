@@ -1,6 +1,6 @@
-import Main from '../components/landing/main/main.container';
+import Main from '../landing/main/main.container';
 import styled from 'styled-components';
-import GuideSection from '../components/landing/guideSection';
+import GuideSection from '../landing/guideSection/index';
 
 const Landing = () => {
   return (

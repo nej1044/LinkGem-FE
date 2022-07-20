@@ -1,5 +1,5 @@
 import * as S from './guideSection.styles';
-import { useScrollFadeIn } from 'commons/scrollEvent';
+import { useScrollFadeIn } from 'utils/scrollEvent';
 
 interface IGuideSectionProps {
   sectionNumber: number;

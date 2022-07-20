@@ -13,6 +13,7 @@ const ScrollTopIcon = styled.div`
   height: 7vh;
   border-radius: 50%;
   background-color: #3c3c3f;
+  cursor: pointer;
 `;
 
 const ScrollTop = () => {
