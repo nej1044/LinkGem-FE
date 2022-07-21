@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { NaverLoginButton, NaverLoginImg } from './NaverButton.style';
 
-type naverButtonProps = {
-  onClickNaverButton: () => void;
-};
-function NaverButton({ onClickNaverButton }: naverButtonProps) {
+function NaverButton() {
   const [isHover, setIsHover] = useState(false);
   const onMouseOver = () => {
     setIsHover(true);
@@ -14,7 +11,7 @@ function NaverButton({ onClickNaverButton }: naverButtonProps) {
   };
   return (
     <NaverLoginButton
-      onClick={onClickNaverButton}
+      // onClick={onClickNaverButton}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
     >
