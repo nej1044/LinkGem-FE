@@ -9,6 +9,7 @@ import axios from 'axios';
 import { JobInfoContainer, JobText } from './JobInfo.style';
 
 function JobInfo() {
+  // eslint-disable-next-line no-use-before-define
   const [context, setContext] = useState<joinType>({
     titleText: '',
     width: '',
