@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { IconLocation } from './star.styles';
-
-const figmaWidth = 1920;
-const figmaHeight = 1018;
 
 interface IStar {
   className: string;
@@ -29,8 +25,6 @@ export default function Index({
   fill: string;
   // starListRef: MutableRefObject<never[]>;
 }) {
-  const [iconState, setIconState] = useState({ size: 0, left: 0, top: 0 });
-
   const StarComponent = dynamic<IStar>(() => {
     switch (svgName) {
       case 'star-14':
@@ -70,20 +64,12 @@ export default function Index({
     }
   });
 
-  useEffect(() => {
-    setIconState({
-      size: window.innerWidth * (figmaSize / figmaWidth),
-      left: (figmaLeft / figmaWidth) * 100,
-      top: (figmaTop / figmaHeight) * 100,
-    });
-  }, []);
-
   return (
-    <IconLocation left={iconState.left} top={iconState.top}>
+    <IconLocation left={figmaLeft} top={figmaTop}>
       <StarComponent
         className={isTwinkle ? 'star' : 'not-star'}
-        width={iconState.size}
-        height={iconState.size}
+        width={figmaSize}
+        height={figmaSize}
         fill={fill}
       />
     </IconLocation>
