@@ -15,7 +15,6 @@
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-intersection-observer": "9.3.5",
     "recoil": "^0.7.3",
     "styled-components": "^5.3.5",
     "uuid": "8.3.2"
@@ -45,6 +44,14 @@
     "lint-staged": "^13.0.1",
     "prettier": "^2.6.2",
     "typescript": "4.7.4"
+  },
+  "resolutions": {
+    "@types/node": "17.0.2",
+    "@types/react" : "17.0.2"
+  },
+  "overrides": {
+    "@types/node": "17.0.2",
+    "@types/react": "17.0.2"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

@@ -1,4 +1,4 @@
-import Landing from '../components/landing/landing';
+import Landing from 'components/landing/landing';
 
 function Home() {
   return <Landing />;

@@ -8,6 +8,14 @@ const nextConfig = {
     });
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        destination: 'http://dev.linkgem.co.kr/api/:path*',
+        source: '/api/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
