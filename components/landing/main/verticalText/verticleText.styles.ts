@@ -1,6 +1,10 @@
 import styled from 'styled-components';
+import Marquee from 'react-fast-marquee';
 
-export const VerticalTextBlock = styled.div`;
+export const VerticalTextBlock = styled(Marquee)`;
+  display: flex;
+  flex: 0 0 auto;
+  white-space: nowrap;
   overflow: hidden;
   width: 100%;
   height: 200%;
@@ -9,25 +13,12 @@ export const VerticalTextBlock = styled.div`;
   }
 `;
 
-export const TextWrap = styled.div`
-  width: 7000px;
+export const Text = styled.span`
   color: #ffffff;
   text-transform: uppercase;
-  font-family: Poppins;
+  font-family: 'Poppins';
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
   display: inline-block;
-  animation: textLoop 100s linear infinite;
-  @keyframes textLoop {
-    from {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-    }
-`;
-
-export const Text = styled.span`
   margin-right: 1.5vw;
   font-weight: 500;
   font-size: 1.3vw;

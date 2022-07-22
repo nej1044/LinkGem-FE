@@ -6,7 +6,7 @@ export const Wrapper = styled.main`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 93vh;
+  height: 95vh;
   color: white;
   background-color: #0f0223;
 `;
@@ -14,27 +14,27 @@ export const Wrapper = styled.main`
 export const Title = styled.h1`
   text-align: center;
   color: #41fb6a;
-  font-size: 6.5vw;
+  font-size: 80px;
   letter-spacing: -2%;
 `;
 
 export const TitleRemark = styled.span`
   padding: 24px 0;
   text-align: center;
-  font-size: 1.5vw;
+  font-size: 22px;
   letter-spacing: -2%;
   line-height: 150%;
 `;
 
 export const MainButton = styled.button`
-  width: 20vw;
-  height: 10vh;
-  border-radius: 3vw;
+  width: 240px;
+  height: 70px;
+  border-radius: 90px;
   background-color: #5200ff;
   outline: none;
   border: none;
   color: white;
   font-weight: 500;
-  font-size: 1.5vw;
+  font-size: 20px;
   letter-spacing: -2%;
 `;
