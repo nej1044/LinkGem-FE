@@ -54,8 +54,9 @@ function JobInfo() {
             },
           }
         );
+        window.location.href = '/';
       } catch (error) {
-        console.log('에러가 발생했습니다');
+        console.log('에러가 발생했습니다', error);
       }
     }
   };

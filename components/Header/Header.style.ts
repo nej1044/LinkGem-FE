@@ -21,7 +21,6 @@ export const LogoContainer = styled.div`
 
   span {
     color: #41fb6a;
-
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -107,7 +106,6 @@ export const StarImage = styled.div`
 export const ImageContainer = styled.div`
   position: relative;
   display: flex;
-  margin-right: 8px;
 `;
 
 export const LinkSaveButton = styled.button`
