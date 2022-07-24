@@ -12,6 +12,7 @@ const joinState = atom({
     job: '',
     year: '',
     nickname: '',
+    userPhase: '',
   },
 });
 
