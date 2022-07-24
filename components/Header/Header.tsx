@@ -1,10 +1,11 @@
 import React, { useState, useEffect, memo } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { joinState, loginState } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
+import useLogin from 'utils/useLogin';
 import {
   HeaderContainer,
   LogoContainer,
@@ -19,7 +20,8 @@ import {
 function Header() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const joinUserInfo = useRecoilValue(joinState);
-  const isLogin = useRecoilValue(loginState);
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
+
   const handleOpenModal = () => {
     setIsOpenModal(true);
   };
@@ -28,11 +30,22 @@ function Header() {
     setIsOpenModal(false);
   };
 
+  const loginStep = async () => {
+    const loginStatus = await useLogin();
+    setIsLogin(loginStatus);
+    console.log('loginStatus');
+    console.log(loginStatus);
+  };
+
   useEffect(() => {
+    loginStep();
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
     }
   }, [joinUserInfo.accessToken]);
+
+  console.log('isLogin');
+  console.log(isLogin);
   return (
     <HeaderContainer>
       <LogoContainer>
@@ -77,9 +90,11 @@ function Header() {
           />
         )}
       </ButtonContainer>
-      <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
-        <Join />
-      </Modal>
+      {!isLogin && (
+        <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
+          <Join />
+        </Modal>
+      )}
     </HeaderContainer>
   );
 }

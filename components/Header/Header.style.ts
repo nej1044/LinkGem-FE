@@ -15,8 +15,8 @@ export const LogoContainer = styled.div`
   align-items: flex-end;
   color: white;
   margin-left: 240px;
-  @media screen and (max-width: 500px) {
-    margin-left: 80px;
+  @media screen and (max-width: 916px) {
+    margin-left: 100px;
   }
 
   span {
@@ -43,7 +43,7 @@ export const ButtonContainer = styled.div`
   align-items: center;
   color: white;
   margin-right: 240px;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 916px) {
     margin-right: 80px;
   }
 `;
@@ -67,6 +67,11 @@ export const LoginButton = styled.button`
   /* identical to box height */
 
   letter-spacing: -0.02em;
+
+  @media screen and (max-width: 916px) {
+    width: 50px;
+    height: 28px;
+  }
 `;
 
 export const JoinButton = styled.button`
@@ -85,6 +90,11 @@ export const JoinButton = styled.button`
   /* identical to box height */
 
   letter-spacing: -0.02em;
+
+  @media screen and (max-width: 916px) {
+    width: 50px;
+    height: 28px;
+  }
 `;
 
 export const LogoImage = styled.img``;
