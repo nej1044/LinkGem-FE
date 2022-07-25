@@ -17,7 +17,7 @@ const MainUI = () => {
         <ScrollTop />
         <>
           <S.Title>
-            <span style={{ color: 'white', fontSize: '3vw' }}>WELCOME TO</span>
+            <span style={{ color: 'white', fontSize: '48px' }}>WELCOME TO</span>
             <br />
             LINK GEM
           </S.Title>

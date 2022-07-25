@@ -1,6 +1,6 @@
-import Main from 'components/landing/main/main.container';
+import Main from '../landing/main/main.container';
 import styled from 'styled-components';
-import GuideSection from 'components/landing/guideSection';
+import GuideSection from '../landing/guideSection/index';
 
 const Landing = () => {
   return (
@@ -9,7 +9,7 @@ const Landing = () => {
       <GuideSection
         sectionNumber={1}
         title="복사 붙여넣기 하나로 링크 저장 끝!"
-        text="공유 받은 링크, 내가 직접 찾은 링크 등 내게 필요한 링크를 복.붙만 하면 저장 완료"
+        text={`공유 받은 링크, 내가 직접 찾은 링크 등\n내게 필요한 링크를 복.붙만 하면 저장 완료`}
       />
       <GuideSection
         sectionNumber={2}
