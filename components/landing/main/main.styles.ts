@@ -37,4 +37,8 @@ export const MainButton = styled.button`
   font-weight: 500;
   font-size: 1.5vw;
   letter-spacing: -2%;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
