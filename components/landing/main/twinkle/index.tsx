@@ -144,7 +144,7 @@ const Twinkle = () => {
   useEffect(() => {
     setInterval(() => {
       getNum();
-    }, 800);
+    }, 500);
   }, []);
 
   return (
