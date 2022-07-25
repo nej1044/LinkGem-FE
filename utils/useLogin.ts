@@ -1,4 +1,4 @@
-export default function useLogin() {
+export default function useLogin(): boolean {
   if (typeof window !== 'undefined') {
     const auth =
       localStorage.getItem('auth') &&
@@ -18,4 +18,5 @@ export default function useLogin() {
     }
     return false;
   }
+  return false;
 }
