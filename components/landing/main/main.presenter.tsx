@@ -1,7 +1,7 @@
 import VerticalText from './verticalText/index';
 import * as S from './main.styles';
 import Twinkle from '../main/twinkle';
-import ScrollTop from 'components/commons/scrollTop';
+import ScrollTop from 'components/common/scrollTop';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'store/store';
 
