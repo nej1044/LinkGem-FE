@@ -2,9 +2,10 @@ import React, { useState, useEffect, memo } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilValue } from 'recoil';
-import { joinState, loginState } from 'store/store';
+import { joinState } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
+import useLogin from 'utils/useLogin';
 import {
   HeaderContainer,
   LogoContainer,
@@ -19,7 +20,7 @@ import {
 function Header() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const joinUserInfo = useRecoilValue(joinState);
-  const isLogin = useRecoilValue(loginState);
+
   const handleOpenModal = () => {
     setIsOpenModal(true);
   };
@@ -33,6 +34,7 @@ function Header() {
       setIsOpenModal(true);
     }
   }, [joinUserInfo.accessToken]);
+
   return (
     <HeaderContainer>
       <LogoContainer>
@@ -50,7 +52,7 @@ function Header() {
         <span>Beta</span>
       </LogoContainer>
       <ButtonContainer>
-        {isLogin ? (
+        {useLogin() ? (
           <>
             <LinkSaveButton>+ 링크저장</LinkSaveButton>
             <AlarmImage>
@@ -73,13 +75,15 @@ function Header() {
             text="로그인"
             fontSize="18px"
             type=""
-            hoverColor=""
+            hoverColor="#1CE047"
           />
         )}
       </ButtonContainer>
-      <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
-        <Join />
-      </Modal>
+      {!useLogin() && (
+        <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
+          <Join />
+        </Modal>
+      )}
     </HeaderContainer>
   );
 }
