@@ -9,10 +9,11 @@ const ScrollTopIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.5vw;
-  height: 7vh;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #3c3c3f;
+  cursor: pointer;
 `;
 
 const ScrollTop = () => {
@@ -21,7 +22,7 @@ const ScrollTop = () => {
   };
   return (
     <ScrollTopIcon onClick={goUp}>
-      <TopIcon width="1.2vw" height="2.7vh" />
+      <TopIcon width="15px" height="15px" />
     </ScrollTopIcon>
   );
 };

@@ -6,9 +6,8 @@ export const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   color: white;
-  font-size: calc(0.35vw + 8.74px)
   overflow: hidden;
   background-color: #0f0223;
 `;
@@ -18,24 +17,27 @@ export const Article = styled.article`
   justify-content: space-between;
   align-items: center;
   width: 80%;
-  height: 50vh;
+  height: 80vh;
 `;
 
 export const TextWrapper = styled.div`
-  width: 30vw;
+  width: 420px;
 `;
 
 export const sectionTitle = styled.h2`
+  margin-bottom: 8px;
   font-weight: 800;
-  font-size: 3vw;
+  line-height: 72px;
+  font-size: 48px;
   letter-spacing: -2%;
   word-break: keep-all;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 `;
 
 export const sectionText = styled.span`
-  font-size: 1.65vw;
+  font-size: 24px;
+  line-height: 36px;
   letter-spacing: -2%;
   word-break: keep-all;
   font-family: SpoqaHanSansNeo;
@@ -50,43 +52,45 @@ export const sectionText = styled.span`
 
 export const ArticleContent = styled.div`
   position: relative;
-  width: 50%;
-  height: 100%;
   overflow: visible;
+  width: 450px;
+  height: 300px;
 `;
 
 export const PinkBall = styled.div`
+  position: absolute;
+  left: -30px;
+  top: -50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  width: 30%;
-  height: 50%;
+  width: 181px;
+  height: 181px;
   background-color: #ff04c8;
   border-radius: 100%;
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
-  font-size: 1.65vw;
+  font-size: 32px;
   letter-spacing: -0.02em;
   animation: bounce 2s infinite;
   animation-delay: 2s;
   @keyframes bounce {
     0% {
-      transform: translate3d(0px, 0px, 0);
+      transform: translate3d(-30px, -50px, 0);
     }
     50% {
-      transform: translate3d(0px, -4px, 0);
+      transform: translate3d(-30px, -54px, 0);
     }
     100% {
-      transform: translate3d(0px, 0px, 0);
+      transform: translate3d(-30px, -50px, 0);
     }
   }
 `;
 
 export const GreyBall = styled(PinkBall)`
-  top: 25%;
-  left: 20%;
+  top: 40px;
+  left: 90px;
   background-color: #262626;
   animation: bounce 2s infinite;
   animation-delay: 2.5s;
@@ -95,22 +99,22 @@ export const GreyBall = styled(PinkBall)`
 export const BlueBall = styled(PinkBall)`
   display: block;
   position: relative;
-  top: 50%;
-  left: 50%;
-  width: 50%;
-  height: 45%;
+  top: 120px;
+  left: 150px;
+  width: 410px;
+  height: 205px;
   text-align: center;
   background-color: #5200ff;
   transform: rotate(-46.45deg);
-  border-radius: 0px 0px 200px 200px;
+  border-radius: 0px 0px 205px 205px;
   animation: none;
 `;
 
 export const DoughnutBall = styled(PinkBall)`
   top: -1px;
-  left: 25%;
-  width: 50%;
-  height: 50%;
+  left: 100px;
+  width: 205px;
+  height: 102.5px;
   background-color: #0f0223;
   margin: 0 auto;
   border-radius: 0px 0px 102.5px 102.5px;
@@ -176,121 +180,128 @@ export const GreyClip = styled.img`
 `;
 
 export const SolidLine = styled.div`
-  width: 95%;
-  height: 100%;
+  position: absolute;
+  top: -40px;
+  left: -50px;
+  width: 545px;
+  height: 405px;
   border-radius: 50%;
   border: 1px solid #ffffff;
-  transform: rotate(-18deg);
+  transform: rotate(-15deg);
 `;
 
 export const DottedLine = styled(SolidLine)`
+  position: absolute;
+  top: 0px;
+  left: 0px;
   border: 1px dashed #ffffff;
 `;
 
 export const Star = styled(Star169)`
   position: absolute;
-  top: -2%;
-  right: 12%;
-  width: 14%;
-  height: 14%;
+  top: -20px;
+  left: 410px;
+  width: 41px;
+  height: 41px;
 `;
 
 export const BlackGem = styled.img`
   position: absolute;
-  top: 10%;
-  left: 25%;
+  top: 20px;
+  left: 90px;
   z-index: 1;
-  width: 25%;
+  width: 150px;
   animation: black-gem-bounce 2s infinite;
   animation-delay: 1s;
   @keyframes black-gem-bounce {
     0% {
-      top: 10%;
-      left: 25%;
+      top: 20px;
+      left: 90px;
     }
     50% {
-      top: 15%;
-      left: 25%;
+      top: 0px;
+      left: 90px;
     }
     100% {
-      top: 10%;
-      left: 25%;
+      top: 20px;
+      left: 90px;
     }
   }
 `;
 
 export const GreenGem = styled.img`
   position: absolute;
-  top: 5%;
-  right: 25%;
-  width: 30%;
+  top: 0px;
+  left: 210px;
+  width: 182px;
   animation: green-gem-bounce 2s infinite;
   animation-delay: 2s;
   @keyframes green-gem-bounce {
     0% {
-      top: 5%;
-      right: 25%;
+      top: 0px;
+      left: 210px;
     }
     50% {
-      top: 10%;
-      right: 25%;
+      top: -20px;
+      left: 210px;
     }
     100% {
-      top: 5%;
-      right: 25%;
+      top: 0px;
+      left: 210px;
     }
   }
 `;
 
 export const YellowGem = styled.img`
   position: absolute;
-  top: 40%;
-  left: 15%;
-  width: 30%;
+  top: 140px;
+  left: 50px;
+  width: 182px;
   animation: yellow-gem-bounce 2s infinite;
   animation-delay: 1.6s;
   @keyframes yellow-gem-bounce {
     0% {
-      top: 40%;
-      left: 15%;
+      top: 140px;
+      left: 50px;
     }
     50% {
-      top: 45%;
-      left: 15%;
+      top: 120px;
+      left: 50px;
     }
     100% {
-      top: 40%;
-      left: 15%;
+      top: 140px;
+      left: 50px;
     }
   }
 `;
 
 export const PinkGem = styled.img`
   position: absolute;
-  top: 45%;
-  right: 30%;
-  width: 25%;
+  top: 150px;
+  left: 240px;
+  width: 161px;
   animation: pink-gem-bounce 2s infinite;
   animation-delay: 1.3s;
   @keyframes pink-gem-bounce {
     0% {
-      top: 45%;
-      right: 30%;
+      top: 150px;
+      left: 240px;
     }
     50% {
-      top: 50%;
-      right: 30%;
+      top: 130px;
+      left: 240px;
     }
     100% {
-      top: 45%;
-      right: 30%;
+      top: 150px;
+      left: 240px;
     }
   }
 `;
 
 export const Memo = styled.img`
-  position: relative;
-  width: 50%;
+  position: absolute;
+  width: 320px;
+  left: 180px;
   animation: aaa-bounce 2s infinite;
   animation-delay: 1.5s;
   @keyframes aaa-bounce {
@@ -310,10 +321,10 @@ export const Memo = styled.img`
 `;
 
 export const Clock = styled.img`
-  position: relative;
-  left: 8%;
+  position: absolute;
+  left: -50px;
   z-index: 1;
-  width: 40%;
+  width: 281px;
   animation: clock-bounce 2s infinite;
   animation-delay: 1s;
   @keyframes clock-bounce {
