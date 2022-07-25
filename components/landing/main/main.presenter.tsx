@@ -1,9 +1,16 @@
 import VerticalText from './verticalText/index';
 import * as S from './main.styles';
 import Twinkle from '../main/twinkle';
-import ScrollTop from '../../common/scrollTop';
+import ScrollTop from '../../commons/scrollTop';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'store/store';
 
 const MainUI = () => {
+  const setIsOpenModal = useSetRecoilState(modalState);
+
+  const openModal = () => {
+    setIsOpenModal(true);
+  };
   return (
     <>
       <S.Wrapper>
@@ -19,7 +26,7 @@ const MainUI = () => {
             <br />
             이제 링크잼으로 관리하세요
           </S.TitleRemark>
-          <S.MainButton>지금 바로 시작하기</S.MainButton>
+          <S.MainButton onClick={openModal}>지금 바로 시작하기</S.MainButton>
         </>
         <Twinkle />
       </S.Wrapper>

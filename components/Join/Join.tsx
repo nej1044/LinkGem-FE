@@ -13,7 +13,7 @@ export default function Join() {
       {(!joinUserInfo.accessToken ||
         joinUserInfo.accessToken === 'access_denied') && <SocialJoin />}
       {joinUserInfo.accessToken &&
-        joinUserInfo.userPhase === 'REGISTERED' &&
+        joinUserInfo.userPhase === 'READY' &&
         joinUserInfo.accessToken !== 'access_denied' && <JoinInfo />}
     </>
   );

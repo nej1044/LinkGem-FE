@@ -5,6 +5,11 @@ const loginState = atom({
   default: false,
 });
 
+const modalState = atom({
+  key: 'modalState',
+  default: false,
+});
+
 const joinState = atom({
   key: 'joinState',
   default: {
@@ -16,4 +21,4 @@ const joinState = atom({
   },
 });
 
-export { loginState, joinState };
+export { loginState, joinState, modalState };

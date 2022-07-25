@@ -1,8 +1,8 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
-import { useRecoilValue } from 'recoil';
-import { joinState } from 'store/store';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { joinState, modalState } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -16,9 +16,8 @@ import {
   Initial,
 } from './Header.style';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Header() {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
 
   const handleOpenModal = () => {
