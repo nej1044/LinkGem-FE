@@ -7,8 +7,7 @@ export const VerticalTextBlock = styled(Marquee)`;
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  height: 200%;
-  padding: 1vw 0;
+  padding: 0.8vw 0;
   background: #1a1b1d;
   }
 `;

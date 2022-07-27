@@ -13,7 +13,7 @@ export const Stroke1 = styled(Stroke7)`
   width: 310px;
   height: 250px;
   left: 81px;
-  top: 195px;
+  top: 165px;
 `;
 
 export const Stroke2 = styled(Stroke8)`
@@ -21,7 +21,7 @@ export const Stroke2 = styled(Stroke8)`
   width: 274px;
   height: 163px;
   right: 100px;
-  top: 130px;
+  top: 100px;
 `;
 
 export const Stroke3 = styled(Stroke9)`
@@ -29,5 +29,5 @@ export const Stroke3 = styled(Stroke9)`
   width: 129px;
   height: 169px;
   right: 170px;
-  bottom: 60px;
+  bottom: 90px;
 `;

@@ -6,8 +6,8 @@ export const IconLocation = styled.div<{ left: number; top: number }>`
     z-index: 3;
     left: ${(props) => `${props.left}px`};
     top: ${(props) => `${props.top}px`};
-    animation: twinkle 1s;
-    animation-iteration-count: 1;
+    animation: twinkle 0.8s;
+    animation-iteration-count: 2;
   }
 
   .not-star {
