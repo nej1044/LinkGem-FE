@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-export const IconLocation = styled.div<{ left: number; top: number }>`
+export const IconLocation = styled.div<{
+  left: number;
+  top: number;
+  isStar: boolean;
+}>`
   .star {
     position: absolute;
     z-index: 3;
     left: ${(props) => `${props.left}px`};
     top: ${(props) => `${props.top}px`};
-    animation: twinkle 0.8s;
-    animation-iteration-count: 2;
+    animation: twinkle 1s infinite;
+    animation-delay: ${(props) => (props.isStar ? '0.5s' : '0s')};
   }
 
   .not-star {

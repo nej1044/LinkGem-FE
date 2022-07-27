@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import * as S from './twinkle.styles';
 
-const starList = [
+const nonStarList = [
   {
     svg: 'star-101',
     figmaSize: 24,
@@ -67,6 +67,9 @@ const starList = [
     figmaTop: 502,
     color: '#FF04C8',
   },
+];
+
+const starList = [
   {
     svg: 'star-159',
     figmaSize: 31,
@@ -134,14 +137,21 @@ const starList = [
 
 const Twinkle = () => {
   const [num, setNum] = useState(0);
+  const [num2, setNum2] = useState(0);
   const getNum = () => {
-    setNum(Math.ceil(Math.random() * 18));
+    setNum(Math.ceil(Math.random() * 9));
+  };
+  const getNum2 = () => {
+    setNum2(Math.ceil(Math.random() * 9));
   };
 
   useEffect(() => {
     setInterval(() => {
       getNum();
-    }, 500);
+    }, 1500);
+    setInterval(() => {
+      getNum2();
+    }, 1000);
   }, []);
 
   return (
@@ -149,7 +159,20 @@ const Twinkle = () => {
       {starList.map((item, i) => (
         <Star
           key={uuidv4()}
-          isTwinkle={i === num}
+          isStar={true}
+          isTwinkle={i === num || i === num2}
+          svgName={item.svg}
+          figmaSize={item.figmaSize}
+          figmaLeft={item.figmaLeft}
+          figmaTop={item.figmaTop}
+          fill={item.color}
+        />
+      ))}
+      {nonStarList.map((item, i) => (
+        <Star
+          key={uuidv4()}
+          isStar={false}
+          isTwinkle={i === num || i === num2}
           svgName={item.svg}
           figmaSize={item.figmaSize}
           figmaLeft={item.figmaLeft}
