@@ -16,6 +16,7 @@ export default function Index({
   figmaTop,
   fill,
   isTwinkle,
+  isStar,
 }: {
   svgName: string;
   isTwinkle: boolean;
@@ -23,6 +24,7 @@ export default function Index({
   figmaLeft: number;
   figmaTop: number;
   fill: string;
+  isStar: boolean;
   // starListRef: MutableRefObject<never[]>;
 }) {
   const StarComponent = dynamic<IStar>(() => {
@@ -65,7 +67,7 @@ export default function Index({
   });
 
   return (
-    <IconLocation left={figmaLeft} top={figmaTop}>
+    <IconLocation isStar={isStar} left={figmaLeft} top={figmaTop}>
       <StarComponent
         className={isTwinkle ? 'star' : 'not-star'}
         width={figmaSize}
