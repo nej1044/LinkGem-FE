@@ -102,10 +102,7 @@ function JobInfo() {
       <JoinButton
         type={type}
         onClick={changeType}
-        // backgroundColor="#3C3C3F"
-        // backgroundColor={isButtonValueValid ? (type==='nickname' ? ('#41FB6A'): '#1A1B1D') : '#3C3C3F'}
         backgroundColor={
-          // eslint-disable-next-line no-nested-ternary
           isButtonValueValid
             ? '#3C3C3F'
             : type === 'nickname'
@@ -113,14 +110,15 @@ function JobInfo() {
             : '#1A1B1D'
         }
         color={
-          // eslint-disable-next-line no-nested-ternary
           isButtonValueValid
             ? '#CECECE'
             : type === 'nickname'
             ? '#1A1B1D'
             : '#FFFFFF'
         }
-        hoverColor={type === 'nickname' ? '#1CE047' : ''}
+        hoverColor={
+          type === 'nickname' ? (joinUserInfo.nickname ? '#1CE047' : '') : ''
+        }
         width={type === 'nickname' ? '234px' : '156px'}
         height="62px"
         text={type === 'nickname' ? '링크젬시작' : '다음'}
@@ -164,7 +162,7 @@ const jobInfo: joinType = {
     '회계',
     '경영',
     '인사',
-    '하시는 일을 입력해 주세요',
+    '직접 입력',
   ],
 };
 

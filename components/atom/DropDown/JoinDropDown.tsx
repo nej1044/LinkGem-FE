@@ -62,7 +62,7 @@ function JoinDropdown({
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>
         <DropDownHeaderText>
-          {(selectedOption.includes('하시는') && (
+          {(selectedOption.includes('직접') && (
             <InputText
               value={inputText}
               onChange={changeJobInputText}
