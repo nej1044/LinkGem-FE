@@ -13,6 +13,7 @@ export const LogoContainer = styled.div`
   position: relative;
   display: flex;
   align-items: flex-end;
+  justify-content: flex-end;
   color: white;
   margin-left: 240px;
   @media screen and (max-width: 916px) {
@@ -25,7 +26,7 @@ export const LogoContainer = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 18px;
+
     /* identical to box height */
 
     letter-spacing: -0.02em;
@@ -96,7 +97,10 @@ export const JoinButton = styled.button`
   }
 `;
 
-export const LogoImage = styled.img``;
+export const LogoImage = styled.img`
+  width: 165px;
+  height: 27px;
+`;
 
 export const StarImage = styled.div`
   position: absolute;
