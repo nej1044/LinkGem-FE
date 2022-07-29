@@ -39,7 +39,7 @@ function Header() {
     <HeaderContainer>
       <LogoContainer>
         <ImageContainer>
-          <LogoImage src="./static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
+          <LogoImage src="/static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
         </ImageContainer>
 
         <span>Beta</span>
