@@ -14,6 +14,7 @@ import {
   LinkSaveButton,
   AlarmImage,
   Initial,
+  LogoImage,
 } from './Header.style';
 
 function Header() {
@@ -38,14 +39,7 @@ function Header() {
     <HeaderContainer>
       <LogoContainer>
         <ImageContainer>
-          <Image
-            src="/static/image/Linkgem-Logo.svg"
-            alt="linkgem-logo"
-            width={165}
-            height={27}
-          />
-          {/* <LogoImage alt="linkgem-logo" src="static/image/Linkgem-Logo.svg" /> */}
-          {/* <StarImage alt="linkgem-logo-start" src="icons/star-100.svg" /> */}
+          <LogoImage src="/static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
         </ImageContainer>
 
         <span>Beta</span>
@@ -56,6 +50,7 @@ function Header() {
             <LinkSaveButton>+ 링크저장</LinkSaveButton>
             <AlarmImage>
               <Image
+                priority
                 src="/static/image/icons/alarm-icon.svg"
                 alt="linkgem-logo"
                 width={26}
