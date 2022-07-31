@@ -6,6 +6,7 @@ export const FooterContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 35px 240px 41px 240px;
+  margin-top: 160px;
 
   /* text/black */
 

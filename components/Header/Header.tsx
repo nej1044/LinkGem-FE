@@ -2,7 +2,7 @@ import React, { useEffect, memo } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { joinState, modalState } from 'store/store';
+import { joinState, modalState, userInfo } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -20,6 +20,7 @@ import {
 function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
+  const [user, setUser] = useRecoilState(userInfo);
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -29,11 +30,35 @@ function Header() {
     setIsOpenModal(false);
   };
 
+  const getUser = () => {
+    if (typeof window !== 'undefined') {
+      const auth =
+        localStorage.getItem('auth') &&
+        JSON.parse(localStorage.getItem('auth') as string);
+
+      console.log('로컬 스토리지 auth');
+      console.log(auth);
+      if (
+        auth?.accessToken &&
+        auth?.userPhase === 'REGISTERED' &&
+        auth?.loginEmail
+      ) {
+        console.log('로그인 정보가 있습니다');
+        setUser(auth);
+        return true;
+      }
+    }
+  };
+
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
     }
+    getUser();
   }, [joinUserInfo.accessToken]);
+  console.log('joinUserInfo');
+  console.log(user.nickname);
+  console.log(user.nickname.slice(0, 2));
 
   return (
     <HeaderContainer>
@@ -57,7 +82,7 @@ function Header() {
                 height={28}
               />
             </AlarmImage>
-            <Initial>수녕</Initial>
+            <Initial>{user.nickname.slice(0, 2)}</Initial>
           </>
         ) : (
           <JoinButton

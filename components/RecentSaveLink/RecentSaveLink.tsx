@@ -2,8 +2,6 @@ import React, { memo, useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'components/Link';
 import FirstLink from 'components/Link/FirstLink';
-import useAuth from 'hooks/useAuth';
-import IAuthInfo from 'types/IAuthInfo.type';
 import { useRouter } from 'next/router';
 import {
   RecentSaveLinkContainer,
@@ -12,6 +10,8 @@ import {
   RecentSaveLinkTitleOption,
   RecentSaveLinkWholeSeries,
 } from './RecentSaveLink.style';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from 'store/store';
 
 interface IUserInfo {
   id: number;
@@ -25,35 +25,40 @@ interface IUserInfo {
 
 function RecentSaveLink() {
   const [recentLink, setRecentLink] = useState([]);
-  const [userInfo, setUserInfo] = useState<IAuthInfo>({
-    accessToken: '',
-    id: '',
-    nickname: '',
-    refreshToken: '',
-  });
   const router = useRouter();
-  const auth = useAuth();
+  const user = useRecoilValue(userInfo);
+  console.log('-------------------');
+  console.log(user);
+  console.log(user.accessToken);
 
   const getLink = async () => {
-    if (auth) {
-      setUserInfo(auth);
-    }
-
     try {
       const response = await axios.get('/api/v1/links', {
         headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+          Authorization: localStorage.getItem('accessToken') as string,
         },
         params: {
           page: 0,
-          size: 1,
+          size: 8,
         },
       });
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
-    } catch (error) {
-      console.log('정보가 없습니다');
+    } catch (error: any) {
+      if (error.response.data.code === 'ACCESS_TOKEN_EXPIRED') {
+        const response = await axios.post(
+          '/api/v1/oauth/reissue',
+          {},
+          {
+            headers: {
+              'ACCESS-TOKEN': user.accessToken,
+              'REFRESH-TOKEN': user.refreshToken,
+            },
+          }
+        );
+        const accessToken = await response?.data?.result?.accessToken;
+        localStorage.setItem('accessToken', accessToken);
+      }
       router.push('/error');
     }
   };
@@ -61,6 +66,9 @@ function RecentSaveLink() {
   useEffect(() => {
     getLink();
   }, []);
+
+  console.log('recentLink');
+  console.log(recentLink);
   return (
     <RecentSaveLinkContainer>
       <RecentSaveLinkTitleOption>
@@ -69,18 +77,20 @@ function RecentSaveLink() {
       </RecentSaveLinkTitleOption>
       <RecentSaveLinkOption>
         {recentLink &&
-          recentLink.map((link: IUserInfo) => (
-            <Link
-              key={link?.id}
-              title={link?.title}
-              description={link?.description}
-              memos={link?.memo}
-              url={link?.url}
-              imageUrl={link?.imageUrl}
-              createDate={link?.createDate.split('T')[0]}
-            />
-          ))}
-        <FirstLink name={userInfo?.nickname} />
+          recentLink
+            .slice(0, 4)
+            .map((link: IUserInfo) => (
+              <Link
+                key={link?.id}
+                title={link?.title}
+                description={link?.description}
+                memos={link?.memo}
+                url={link?.url}
+                imageUrl={link?.imageUrl}
+                createDate={link?.createDate.split('T')[0]}
+              />
+            ))}
+        {recentLink.length < 1 && <FirstLink name={user?.nickname} />}
       </RecentSaveLinkOption>
     </RecentSaveLinkContainer>
   );

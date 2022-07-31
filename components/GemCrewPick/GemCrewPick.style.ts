@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 export const GemCrewPickContainer = styled.section`
-  position: absolute;
-  width: 162px;
-  height: 34px;
-  left: 240px;
-  top: 816px;
+  padding-left: 240px;
+  padding-right: 240px;
+  margin-top: 80px;
 `;
 
 export const GemCrewPickTitle = styled.div`

@@ -7,6 +7,7 @@ export const LinkCopyContainer = styled.div`
   align-items: center;
   padding: 16px 24px;
   gap: 24px;
+  z-index: 100;
 
   position: fixed;
   width: 200px;

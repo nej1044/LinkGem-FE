@@ -1,38 +1,43 @@
 import axios from 'axios';
 import Image from 'next/image';
-import React, { memo, useState } from 'react';
-import useAuth from 'hooks/useAuth';
+import React, { ChangeEvent, memo, useState } from 'react';
 import {
   LinkSaveContainer,
   LinkTextContainer,
   LinkText,
   LinkSaveButton,
   LinkSaveSuccessBar,
-  // SuccessMessage,
+  SuccessMessage,
   FailMessage,
   XIconImage,
 } from './LinkSave.style';
 
 function Link() {
-  const [isVisibleMessage, setIsVisibleMessage] = useState(true);
+  const [isVisibleMessage, setIsVisibleMessage] = useState(false);
+  const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
-  const auth = useAuth();
+  const [isSuccessLink, setIsSuccessLink] = useState(false);
   const onClickLinkSaveButton = async () => {
-    console.log('auth');
-    console.log(auth);
     try {
-      const response = await axios.post('/api/v1/links', {
-        headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+      const response = await axios.post(
+        '/api/v1/links',
+        {
+          memo: '',
+          url: urlText,
         },
-        memo: '',
-        url: 'https://www.surfit.io/',
-      });
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken') as string,
+          },
+        }
+      );
       console.log('response');
       console.log(response);
+      setIsSuccessLink(true);
+      setUrlText('');
     } catch (error) {
       console.log('정보가 없습니다');
+      setIsSuccessLink(false);
     }
     setIsVisibleMessage(true);
     setTimeout(() => {
@@ -42,6 +47,10 @@ function Link() {
 
   const onCloseMessage = () => {
     setIsVisibleMessage(false);
+  };
+
+  const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
+    setUrlText(e.target.value);
   };
 
   // const softRemover = useCallback(() => {
@@ -68,7 +77,11 @@ function Link() {
             width={15}
             height={16}
           />
-          <LinkText placeholder="링크를 넣어 저장하세요 Https://..." />
+          <LinkText
+            placeholder="링크를 넣어 저장하세요 Https://..."
+            onChange={handleInputUrl}
+            value={urlText}
+          />
         </LinkTextContainer>
         <LinkSaveButton onClick={onClickLinkSaveButton}>
           링크 저장
@@ -76,18 +89,23 @@ function Link() {
       </div>
       {isVisibleMessage && (
         <LinkSaveSuccessBar isVisibleMessage={isVisibleMessage}>
-          {/* <SuccessMessage>링크 저장 완료!</SuccessMessage> */}
-          <FailMessage>
-            링크 저장 실패. 링크를 다시 한번 확인해 주세요
-          </FailMessage>
-          <XIconImage onClick={onCloseMessage}>
-            <Image
-              src="/images/icons/link-x.svg"
-              alt="plus-icon"
-              width={12}
-              height={11}
-            />
-          </XIconImage>
+          {isSuccessLink ? (
+            <SuccessMessage>링크 저장 완료!</SuccessMessage>
+          ) : (
+            <>
+              <FailMessage>
+                링크 저장 실패. 링크를 다시 한번 확인해 주세요
+              </FailMessage>
+              <XIconImage onClick={onCloseMessage}>
+                <Image
+                  src="/images/icons/link-x.svg"
+                  alt="plus-icon"
+                  width={12}
+                  height={11}
+                />
+              </XIconImage>
+            </>
+          )}
         </LinkSaveSuccessBar>
       )}
     </LinkSaveContainer>
