@@ -3,14 +3,16 @@ import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-// import Fade from '@mui/material/Fade';
+import Fade from '@mui/material/Fade';
+import { IPropsGemBoxUI } from './gembox.types';
+
 import {
   EllipsisOutlined,
   StarOutlined,
   FileTextOutlined,
 } from '@ant-design/icons';
 
-const GemboxUI = (props) => {
+const GemboxUI = (props: IPropsGemBoxUI) => {
   return (
     <>
       <S.Wrapper>
@@ -74,18 +76,18 @@ const GemboxUI = (props) => {
           timeout: 500,
         }}
       >
-        {/* <Fade in={props.open}> */}
-        <Box sx={S.style}>
-          <S.ModalClose onClick={props.handleClose} />
-          <S.GembaxWrapper>
-            <S.ModalTitle>MY GEMBOX</S.ModalTitle>
-          </S.GembaxWrapper>
-          <S.ModalButton>
-            + 추가할 수 있는 잼박스
-            <span>{`${8 - 1}개`}</span>
-          </S.ModalButton>
-        </Box>
-        {/* </Fade> */}
+        <Fade in={props.open}>
+          <Box sx={S.style}>
+            <S.ModalClose onClick={props.handleClose} />
+            <S.GembaxWrapper>
+              <S.ModalTitle>MY GEMBOX</S.ModalTitle>
+            </S.GembaxWrapper>
+            <S.ModalButton>
+              + 추가할 수 있는 잼박스
+              <span>{`${8 - 1}개`}</span>
+            </S.ModalButton>
+          </Box>
+        </Fade>
       </Modal>
     </>
   );
