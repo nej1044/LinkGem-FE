@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'components/Link';
 import FirstLink from 'components/Link/FirstLink';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import {
   RecentSaveLinkContainer,
   RecentSaveLinkTitle,
@@ -25,7 +25,7 @@ interface IUserInfo {
 
 function RecentSaveLink() {
   const [recentLink, setRecentLink] = useState([]);
-  const router = useRouter();
+  // const router = useRouter();
   const user = useRecoilValue(userInfo);
   console.log('-------------------');
   console.log(user);
@@ -59,7 +59,6 @@ function RecentSaveLink() {
         const accessToken = await response?.data?.result?.accessToken;
         localStorage.setItem('accessToken', accessToken);
       }
-      router.push('/error');
     }
   };
 
