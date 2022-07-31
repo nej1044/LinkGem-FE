@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import Link from 'next/link';
 import {
   LinkContainer,
@@ -12,6 +12,7 @@ import {
   LinkDetailSettingOption,
   EtcButton,
 } from './GemLink.style';
+import LinkCopy from 'components/LinkCopy';
 
 interface GemLinkProps {
   title: string;
@@ -26,9 +27,10 @@ function GemLink({
   description,
   memos,
   url,
-  imageUrl,
+  imageUrl = '/images/test.jpeg',
   createDate,
 }: GemLinkProps) {
+  const [isCopy, setIsCopy] = useState(false);
   const copyToClipboard = (val: string) => {
     const element = document.createElement('textarea');
     element.value = val;
@@ -43,18 +45,18 @@ function GemLink({
     if (!returnValue) {
       console.log('복사하기가 실패했습니다');
     }
+    setIsCopy(true);
+
+    setTimeout(() => {
+      setIsCopy(false);
+    }, 3000);
   };
   return (
     <LinkContainer>
       <ImageContainer>
         <Link href={url || 'https://www.naver.com'}>
           <a target="_blank">
-            <Image
-              alt="link-image"
-              src="/images/test.jpeg"
-              width={342}
-              height={180}
-            />
+            <img alt="link-image" src={imageUrl} width={342} height={180} />
           </a>
         </Link>
       </ImageContainer>
@@ -64,7 +66,7 @@ function GemLink({
             '반가워요 다이아 키퍼님반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님'}
         </LinkDetailTitle>
         <LinkDetailDescription>
-          {description + memos + imageUrl ||
+          {description ||
             '설명설명설명설명설명설명설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명'}
         </LinkDetailDescription>
         <LinkDetailSetting>
@@ -90,6 +92,7 @@ function GemLink({
           </LinkDetailSettingOption>
         </LinkDetailSetting>
       </LinkDetailContainer>
+      {isCopy && <LinkCopy />}
     </LinkContainer>
   );
 }

@@ -1,11 +1,5 @@
 import { atom } from 'recoil';
 
-const copyState = atom({
-  key: 'copyState',
-  default: true,
-});
-
-export default copyState;
 const loginState = atom({
   key: 'loginState',
   default: false,
@@ -27,4 +21,18 @@ const joinState = atom({
   },
 });
 
-export { loginState, joinState, modalState };
+const userInfo = atom({
+  key: 'userInfo',
+  default: {
+    accessToken: '',
+    id: 0,
+    nickname: '',
+    refreshToken: '',
+    loginEmail: '',
+    mailEmail: '',
+    name: '',
+    userPhase: '',
+  },
+});
+
+export { loginState, joinState, modalState, userInfo };

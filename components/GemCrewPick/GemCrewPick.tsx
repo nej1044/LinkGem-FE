@@ -1,4 +1,4 @@
-// import Link from 'components/Link';
+import Link from 'components/Link';
 import React, { memo } from 'react';
 import {
   GemCrewPickContainer,
@@ -15,10 +15,10 @@ function GemCrewPick() {
         딱 24시간만 공유되는 젬크루들의 관심링크
       </GemCrewPickDescription>
       <GemCrewPickOption>
-        {/* <Link />
         <Link />
         <Link />
-        <Link /> */}
+        <Link />
+        <Link />
       </GemCrewPickOption>
     </GemCrewPickContainer>
   );

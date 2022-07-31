@@ -1,16 +1,13 @@
 import styled from 'styled-components';
 
 export const RecentSaveLinkContainer = styled.section`
-  position: absolute;
-  width: 162px;
-  height: 34px;
-  left: 240px;
-  top: 300px;
+  margin-top: 80px;
+  padding-left: 240px;
+  padding-right: 240px;
 `;
 
 export const RecentSaveLinkTitleOption = styled.div`
   display: flex;
-  width: 1200px;
   justify-content: space-between;
   margin-bottom: 24px;
 `;

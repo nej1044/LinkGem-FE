@@ -1,27 +1,16 @@
-import { useEffect, useState } from 'react';
-import IAuthInfo from 'types/IAuthInfo.type';
-
-export default () => {
-  const [localStorageAuth, setLocalStorageAuth] = useState('');
-  const [auth, setAuth] = useState<IAuthInfo>({
-    accessToken: '',
-    id: '',
-    nickname: '',
-    refreshToken: '',
-  });
-
-  const getAuth = () => {
-    if (typeof window !== 'undefined') {
-      setLocalStorageAuth(localStorage.getItem('auth') as string);
-    }
+export const localAuth: any = () => {
+  if (typeof window !== 'undefined') {
+    console.log('윈도우안');
+    const localStorageAuth = localStorage.getItem('auth') as string;
+    console.log('localStorageAuth');
+    console.log(localStorageAuth);
     if (localStorageAuth) {
-      setAuth(JSON.parse(localStorageAuth));
+      const auth = JSON.parse(localStorageAuth);
+      console.log('auth');
+      console.log(auth);
+      return auth;
     }
-  };
+  }
 
-  useEffect(() => {
-    getAuth();
-  }, []);
-
-  return auth;
+  return null;
 };
