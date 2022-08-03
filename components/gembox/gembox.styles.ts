@@ -103,6 +103,79 @@ export const GexboxSectionTitle = styled.h1`
   }
 `;
 
+export const LinkBoxWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  overflow: hidden;
+`;
+
+export const LinkBox = styled.article`
+  width: 13.6vw;
+  min-width: 280px;
+  height: 32.5vh;
+  min-height: 320px;
+  margin-right: 24px;
+  margin-top: 32px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
+`;
+
+export const LinkBoxImg = styled.img`
+  width: 100%;
+  height: 50%;
+`;
+
+export const LinBoxContents = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 50%;
+  padding: 24px 16px;
+`;
+
+export const LinkBoxTitle = styled.span`
+  display: block;
+  width: 100%;
+  height: 20px;
+  color: #1a1b1d;
+  font-size: 16px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+export const LinkBoxRemark = styled.span`
+  display: block;
+  width: 100%;
+  height: 40px;
+  color: #3c3c3f;
+  font-size: 14px;
+  line-height: 19.6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
+export const LinkSubInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 20px;
+`;
+
+export const LinkDate = styled.span`
+  color: #3c3c3f;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+`;
+
 export const style = {
   position: 'absolute',
   display: 'flex',
