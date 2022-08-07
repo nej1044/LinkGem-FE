@@ -41,7 +41,7 @@ function JoinTextInput({
     <JoinTextInputContainer>
       <JoinTextInputTextContainer>
         <JoinTextInputText
-          placeholder="예) 링크젬 크루"
+          placeholder="예) 링크잼 크루"
           onChange={changeNickname}
           value={nickName}
         />
