@@ -16,6 +16,7 @@ import Axios from 'utils/Axios';
 
 function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
 
+function Link({ setRecentLink, recentLink }) {
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
@@ -28,12 +29,25 @@ function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
         data: {
           url: urlText,
         },
-      });
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken') as string,
+          },
+        }
+      );
       const saveLink = await response?.data?.result;
       const _recentLink = recentLink.slice(0, 3);
+
+      console.log('response');
+      console.log(response);
+      console.log('saveLink');
+      console.log(saveLink);
       setRecentLink([{ ...saveLink }, ..._recentLink]);
       setIsSuccessLink(true);
       setUrlText('');
+
+      console.log('!!!!!!!!!!!!!!!!!!');
+      console.log(recentLink);
     } catch (error) {
       console.log('정보가 없습니다');
       setIsSuccessLink(false);

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import Link from 'components/Link';
 import FirstLink from 'components/Link/FirstLink';
 // import { useRouter } from 'next/router';
@@ -24,45 +24,8 @@ interface IUserInfo {
   isFavorites: boolean;
 }
 
-function RecentSaveLink() {
-  const [recentLink, setRecentLink] = useState([]);
-  // const router = useRouter();
+function RecentSaveLink({ recentLink }) {
   const user = useRecoilValue(userInfo);
-  const [size, setSize] = useState(4);
-
-  const getLink = async () => {
-    try {
-      const response = await axios.get('/api/v1/links', {
-        headers: {
-          Authorization: localStorage.getItem('accessToken') as string,
-        },
-        params: {
-          page: 0,
-          size: 8,
-        },
-      });
-      const contents = await response?.data?.result?.contents;
-      setRecentLink(contents);
-    } catch (error: any) {
-      if (error.response.data.code === 'ACCESS_TOKEN_EXPIRED') {
-        const response = await axios.post(
-          '/api/v1/oauth/reissue',
-          {},
-          {
-            headers: {
-              'ACCESS-TOKEN': user.accessToken,
-              'REFRESH-TOKEN': user.refreshToken,
-            },
-          }
-        );
-        const accessToken = await response?.data?.result?.accessToken;
-        localStorage.setItem('accessToken', accessToken);
-      }
-    }
-  }, [recentLink, size]);
-  console.log('size');
-  console.log(size);
-  useEffect(() => {}, [size]);
   return (
     <RecentSaveLinkContainer>
       <RecentSaveLinkTitleOption>
@@ -86,7 +49,6 @@ function RecentSaveLink() {
                 createDate={link?.createDate}
                 isFavorites={link?.isFavorites}
                 id={link?.id}
-                getLink={getLink}
               />
             ))}
         {recentLink.length < 1 && <FirstLink name={user?.nickname} />}
