@@ -1,6 +1,4 @@
 import React, { useState, MouseEvent, useEffect } from 'react';
-import { joinState } from 'store/store';
-import { useSetRecoilState } from 'recoil';
 import {
   DropDownContainer,
   DropDownHeader,
@@ -10,25 +8,16 @@ import {
   ImageButton,
   DropDownHeaderText,
   InputText,
-} from './JoinDropDown.style';
+} from './SettingDropDown.style';
 
-type joinDropdownProps = {
+type settingDropdownProps = {
   dropDownList: any;
-  type: string;
-  changeButtonColor: () => void;
 };
 
-function JoinDropdown({
-  dropDownList,
-  type,
-  changeButtonColor,
-}: joinDropdownProps) {
+function SettingDropdown({ dropDownList }: settingDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(
-    type === 'job' ? '하고 있는일 선택' : '선택'
-  );
+  const [selectedOption, setSelectedOption] = useState('');
   const [inputText, setInputText] = useState('');
-  const setJoinInfo = useSetRecoilState(joinState);
 
   const toggling = (e: MouseEvent) => {
     e.preventDefault();
@@ -39,24 +28,16 @@ function JoinDropdown({
   const onOptionClicked = (value: string) => () => {
     setSelectedOption(value);
     setIsOpen(false);
-    if (type === 'job') {
-      setJoinInfo((prev) => ({ ...prev, job: value }));
-    } else if (type === 'year') {
-      setJoinInfo((prev) => ({ ...prev, year: value }));
-    }
-    changeButtonColor();
   };
 
   const changeJobInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
-    setJoinInfo((prev) => ({ ...prev, job: e.target.value }));
     setIsOpen(false);
   };
 
   useEffect(() => {
-    setSelectedOption(type === 'job' ? '하고 있는일 선택' : '선택');
     setIsOpen(false);
-  }, [type]);
+  }, []);
 
   return (
     <DropDownContainer>
@@ -93,4 +74,4 @@ function JoinDropdown({
   );
 }
 
-export default JoinDropdown;
+export default SettingDropdown;

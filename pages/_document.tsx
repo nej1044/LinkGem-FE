@@ -19,14 +19,14 @@ export default class MyDocument extends Document {
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
-          <meta property="og:title" content="링크젬" />
+          <meta property="og:title" content="링크잼" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="http://localhost:3000/" />
           <meta
             property="og:image"
             content="/static/image/linkgem-ogimage.jpg"
           />
-          <meta property="og:article:author" content="링크젬" />
+          <meta property="og:article:author" content="링크잼" />
         </Head>
         <body>
           <div id="portal" />
