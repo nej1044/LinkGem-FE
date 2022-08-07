@@ -12,7 +12,7 @@ import {
   XIconImage,
 } from './LinkSave.style';
 
-function Link() {
+function Link({ setRecentLink, recentLink }) {
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
@@ -31,10 +31,19 @@ function Link() {
           },
         }
       );
+      const saveLink = await response?.data?.result;
+      const _recentLink = recentLink.slice(0, 3);
+
       console.log('response');
       console.log(response);
+      console.log('saveLink');
+      console.log(saveLink);
+      setRecentLink([{ ...saveLink }, ..._recentLink]);
       setIsSuccessLink(true);
       setUrlText('');
+
+      console.log('!!!!!!!!!!!!!!!!!!');
+      console.log(recentLink);
     } catch (error) {
       console.log('정보가 없습니다');
       setIsSuccessLink(false);
@@ -53,20 +62,6 @@ function Link() {
     setUrlText(e.target.value);
   };
 
-  // const softRemover = useCallback(() => {
-  //   if (opacity > 96) {
-  //     setTimeout(() => {
-  //       setOpacity(opacity - 1);
-  //     }, 100);
-  //   } else if (opacity > 5)
-  //     setTimeout(() => {
-  //       setOpacity(opacity - 8);
-  //     }, 50);
-  // }, [opacity]);
-
-  // useEffect(() => {
-  //   softRemover(); // 해당 컴포넌트가 나타나면 함수가 바로실행됨.
-  // }, [softRemover]);
   return (
     <LinkSaveContainer>
       <div>

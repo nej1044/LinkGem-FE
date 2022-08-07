@@ -1,5 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { memo } from 'react';
 import Link from 'components/Link';
 import FirstLink from 'components/Link/FirstLink';
 // import { useRouter } from 'next/router';
@@ -21,53 +20,12 @@ interface IUserInfo {
   url: string;
   imageUrl: string;
   createDate: string;
+  isFavorites: boolean;
 }
 
-function RecentSaveLink() {
-  const [recentLink, setRecentLink] = useState([]);
-  // const router = useRouter();
+function RecentSaveLink({ recentLink }) {
   const user = useRecoilValue(userInfo);
-  console.log('-------------------');
-  console.log(user);
-  console.log(user.accessToken);
 
-  const getLink = async () => {
-    try {
-      const response = await axios.get('/api/v1/links', {
-        headers: {
-          Authorization: localStorage.getItem('accessToken') as string,
-        },
-        params: {
-          page: 0,
-          size: 8,
-        },
-      });
-      const contents = await response?.data?.result?.contents;
-      setRecentLink(contents);
-    } catch (error: any) {
-      if (error.response.data.code === 'ACCESS_TOKEN_EXPIRED') {
-        const response = await axios.post(
-          '/api/v1/oauth/reissue',
-          {},
-          {
-            headers: {
-              'ACCESS-TOKEN': user.accessToken,
-              'REFRESH-TOKEN': user.refreshToken,
-            },
-          }
-        );
-        const accessToken = await response?.data?.result?.accessToken;
-        localStorage.setItem('accessToken', accessToken);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getLink();
-  }, []);
-
-  console.log('recentLink');
-  console.log(recentLink);
   return (
     <RecentSaveLinkContainer>
       <RecentSaveLinkTitleOption>
@@ -86,7 +44,9 @@ function RecentSaveLink() {
                 memos={link?.memo}
                 url={link?.url}
                 imageUrl={link?.imageUrl}
-                createDate={link?.createDate.split('T')[0]}
+                createDate={link?.createDate}
+                isFavorites={link?.isFavorites}
+                id={link?.id}
               />
             ))}
         {recentLink.length < 1 && <FirstLink name={user?.nickname} />}
