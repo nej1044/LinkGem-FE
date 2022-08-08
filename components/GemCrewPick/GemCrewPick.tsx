@@ -17,13 +17,15 @@ function GemCrewPick() {
       <GemCrewPickOption>
         {list.map((item, index) => (
           <Link
-            key={index}
+            key={item.id}
             title={item.title}
             description={item.description}
             memos={item.memos}
             url={item.url}
             imageUrl={item.imageUrl}
             createDate={item.createDate}
+            isFavorites={false}
+            id={item.id}
           />
         ))}
       </GemCrewPickOption>
@@ -35,6 +37,7 @@ export default memo(GemCrewPick);
 
 const list = [
   {
+    id: 1,
     title: 'Vite에 관한 내용',
     description:
       '이번 글은 Vite에 관한 내용입니다. 최근 Svelte와 관련한 사내 발표 내용 중 다들 재미있어 했던 Vite에 관한 이야기를 블로그 형식으로 각색하여 다시 정리해보았습니다.',
@@ -45,6 +48,7 @@ const list = [
     createDate: '22-08-10',
   },
   {
+    id: 2,
     title: 'Prettier ESLint 쓰는사람 주목!!',
     description:
       '여러분 ESLint와 Prettier 아시나요? 이는 강력한 도구로 코드의 일관성을 지켜주는 코드컨벤션입니다.',
@@ -55,6 +59,7 @@ const list = [
     createDate: '22-08-10',
   },
   {
+    id: 3,
     title: 'React + Ionic으로 iOS, 안드 앱을 만든 후기',
     description:
       '리액트로 만들어진 서비스를 앱으로 어떻게 만들지... 새로 만들긴 싫은데.. 이런 생각을 하다가 가능한 방법을 모색했습니다. 바로 떠오른 방법은 React Native였습니다. 저는 React Native에 대해서 많이 들어봤지만, 사용해 본적은 없었습니다. 지금 상황에서 React Native로 만들려면 React Native의 TextView, View로 감싸서 새롭게 개발을 해야 하며 관리 포인트가 꽤 늘어난다고 생각 하여 포기했습니다. 무엇보다 웹을 좋아하고 웹 베이스로 만들고 싶었고, 최적화 등도 웹 측면에서 해결해보고 싶었습니다.',
@@ -65,6 +70,7 @@ const list = [
     createDate: '22-08-10',
   },
   {
+    id: 4,
     title: '낡은 코드를 뜯어고쳐봅시다.',
     description:
       '동기화봇은 구글 캘린더와 노션을 동기화하는 서비스인 Calendar2notion에서 동기화를 진행해주는 핵심 프로그램의 이름입니다. 서비스 그 자체라는 중요도에 비해 아직도 자바스크립트로 작성되어 있을 정도로 굉장히 구식입니다.',
