@@ -1,7 +1,12 @@
 import { ILinkSaveProps } from 'types/Link.types';
 import Image from 'next/image';
-
-import React, { ChangeEvent, memo, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  memo,
+  SetStateAction,
+  useState,
+} from 'react';
 import {
   LinkSaveContainer,
   LinkTextContainer,
@@ -13,7 +18,7 @@ import {
   XIconImage,
 } from './LinkSave.style';
 interface ILink {
-  setRecentLink: () => void;
+  setRecentLink: Dispatch<SetStateAction<never[]>>;
   recentLink: [];
 }
 
