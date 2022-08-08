@@ -19,7 +19,7 @@ import {
 } from './LinkSave.style';
 interface ILink {
   setRecentLink: Dispatch<SetStateAction<never[]>>;
-  recentLink: [];
+  recentLink: never[];
 }
 
 function Link({ setRecentLink, recentLink }: ILink) {
