@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import LinkSave from 'components/LinkSave';
-import RecentSaveLink from 'components/RecentSaveLink';
-import GemCrewPick from 'components/GemCrewPick';
+import Home from 'components/Home';
 import Landing from 'components/landing/landing';
 import useLogin from 'utils/useLogin';
 
-function Home() {
+function Main() {
   const [isLogin, setIsLogin] = useState(false);
   console.log('isLogin', isLogin);
 
@@ -17,9 +15,7 @@ function Home() {
     <>
       {isLogin ? (
         <>
-          <LinkSave />
-          <RecentSaveLink />
-          <GemCrewPick />
+          <Home />
         </>
       ) : (
         <Landing />
@@ -28,4 +24,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Main;

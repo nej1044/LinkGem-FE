@@ -22,6 +22,8 @@ function Header() {
   const joinUserInfo = useRecoilValue(joinState);
   const [user, setUser] = useRecoilState(userInfo);
 
+  const isLogin = useLogin();
+
   const handleOpenModal = () => {
     setIsOpenModal(true);
   };
@@ -55,13 +57,13 @@ function Header() {
       setIsOpenModal(true);
     }
     getUser();
-  }, [joinUserInfo.accessToken]);
+  }, [joinUserInfo.accessToken, isLogin]);
   console.log('joinUserInfo');
   console.log(user.nickname);
   console.log(user.nickname.slice(0, 2));
 
   return (
-    <HeaderContainer>
+    <HeaderContainer isLogin={isLogin}>
       <LogoContainer>
         <ImageContainer>
           <LogoImage src="/static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
@@ -70,7 +72,7 @@ function Header() {
         <span>Beta</span>
       </LogoContainer>
       <ButtonContainer>
-        {useLogin() ? (
+        {isLogin ? (
           <>
             <LinkSaveButton>+ 링크저장</LinkSaveButton>
             <AlarmImage>
@@ -98,7 +100,7 @@ function Header() {
           />
         )}
       </ButtonContainer>
-      {!useLogin() && (
+      {!isLogin && (
         <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
           <Join />
         </Modal>
