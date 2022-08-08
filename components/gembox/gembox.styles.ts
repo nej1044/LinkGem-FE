@@ -210,6 +210,50 @@ export const ModalTitle = styled.div`
   color: #1a1b1d;
 `;
 
+export const GemWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  padding: 1vw 0;
+`;
+
+export const GemCard = styled.div`
+  width: 6.85vw;
+  min-width: 85px;
+  height: 16vh;
+  min-height: 105px;
+  margin-right: 10px;
+`;
+
+export const GemImg = styled.img`
+  width: 100%;
+  height: 11.5vh;
+  min-height: 65px;
+  border-radius: 8px;
+`;
+
+export const GemInfo = styled.div`
+  box-sizing: border-box;
+  padding: 0.5vh 0.5vw;
+`;
+
+export const GemName = styled.span`
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 700;
+  font-size: 0.78vw;
+  letter-spacing: -0.02em;
+`;
+
+export const GemText = styled.span`
+  margin-right: 5px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 400;
+  font-size: 0.58vw;
+  letter-spacing: -0.02em;
+  color: #3c3c3f;
+`;
+
 export const ModalButton = styled.button`
   width: 100%;
   height: 7vh;

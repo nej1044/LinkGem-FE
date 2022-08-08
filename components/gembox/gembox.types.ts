@@ -1,6 +1,14 @@
 export type IDataType = {
   id: number;
   name: string;
+  imageUrl: string;
+};
+
+export type ILinkDataType = {
+  imageUrl: string;
+  title: string;
+  description: string;
+  createDate: string;
 };
 
 export interface IPropsGemBoxUI {
@@ -8,5 +16,8 @@ export interface IPropsGemBoxUI {
   handleOpen: () => void;
   handleClose: () => void;
   data?: IDataType[] | any;
-  totalCount: number;
+  linkData?: ILinkDataType[] | any;
+  totalCount: number | undefined;
+  gemboxTitle: string;
+  setGembox: (el?: IDataType) => () => void;
 }

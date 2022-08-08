@@ -4,7 +4,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { IPropsGemBoxUI, IDataType } from './gembox.types';
+import { IPropsGemBoxUI, IDataType, ILinkDataType } from './gembox.types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   EllipsisOutlined,
@@ -14,7 +14,7 @@ import {
 } from '@ant-design/icons';
 import { getGemCount } from 'utils/getGemCount';
 import { getDate } from 'utils/getDate';
-import { onError } from 'utils/onError';
+import { onError, onErrorGembox } from 'utils/onError';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
   return (
@@ -72,7 +72,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
             <span>({props.linkData?.totalCount})</span>
           </S.GexboxSectionTitle>
           <S.LinkBoxWrapper>
-            {props.linkData?.contents?.map((el) => (
+            {props.linkData?.contents?.map((el: ILinkDataType) => (
               <S.LinkBox key={uuidv4()}>
                 <S.LinkBoxImg onError={onError} src={el?.imageUrl} />
                 <S.LinBoxContents>
@@ -128,6 +128,20 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
             <S.ModalClose onClick={props.handleClose} />
             <S.GembaxWrapper>
               <S.ModalTitle>MY GEMBOX</S.ModalTitle>
+              <S.GemWrapper>
+                {props.data?.map((el: IDataType) => (
+                  <S.GemCard key={uuidv4()}>
+                    <S.GemImg src={el?.imageUrl} onError={onErrorGembox} />
+                    <S.GemInfo>
+                      <S.GemName>{el?.name}</S.GemName>
+                      <div>
+                        <S.GemText>수정</S.GemText>
+                        <S.GemText>삭제</S.GemText>
+                      </div>
+                    </S.GemInfo>
+                  </S.GemCard>
+                ))}
+              </S.GemWrapper>
             </S.GembaxWrapper>
             <S.ModalButton>
               + 추가할 수 있는 잼박스
