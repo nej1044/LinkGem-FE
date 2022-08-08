@@ -12,11 +12,12 @@ import {
   FailMessage,
   XIconImage,
 } from './LinkSave.style';
-import Axios from 'utils/Axios';
+interface ILink {
+  setRecentLink: () => void;
+  recentLink: [];
+}
 
-function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
-
-function Link({ setRecentLink, recentLink }) {
+function Link({ setRecentLink, recentLink }: ILink) {
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
