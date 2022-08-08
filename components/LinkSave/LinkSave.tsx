@@ -1,6 +1,12 @@
 import axios from 'axios';
 import Image from 'next/image';
-import React, { ChangeEvent, memo, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  memo,
+  SetStateAction,
+  useState,
+} from 'react';
 import {
   LinkSaveContainer,
   LinkTextContainer,
@@ -11,8 +17,12 @@ import {
   FailMessage,
   XIconImage,
 } from './LinkSave.style';
+interface ILink {
+  setRecentLink: Dispatch<SetStateAction<never[]>>;
+  recentLink: never[];
+}
 
-function Link({ setRecentLink, recentLink }) {
+function Link({ setRecentLink, recentLink }: ILink) {
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
