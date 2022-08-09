@@ -28,11 +28,15 @@ export const GemCard = (props: IPropsGemCard) => {
   // };
 
   const onClickEdit = async () => {
+    if (name.length >= 8 || name.length <= 0) {
+      alert('잼박스 이름은 0자 이하, 8자 이상일 수 없습니다.');
+      return;
+    }
     try {
       await axios.patch(
-        `api/v1/gemboxes/${props.editId}`,
+        `api/v1/gemboxes/${props.selectedId}`,
         {
-          id: Number(props.editId),
+          id: props.selectedId,
           name,
         },
         {
@@ -43,8 +47,25 @@ export const GemCard = (props: IPropsGemCard) => {
         }
       );
       alert('잼박스 이름이 수정되었습니다.');
-      props.setOpen(false);
       props.setIsEdit(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onClickDelete = async () => {
+    try {
+      await axios.delete(`api/v1/gemboxes/${props.selectedId}`, {
+        headers: {
+          Authorization:
+            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+        },
+        params: {
+          id: props.selectedId,
+        },
+      });
+      alert('잼박스가 삭제되었습니다.');
+      props.setIsDelete(false);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +73,34 @@ export const GemCard = (props: IPropsGemCard) => {
 
   return (
     <>
-      {props.isEdit && props.el.id === props.editId && (
+      {props.isDelete && props.el.id === props.selectedId && (
+        <S.DeleteWrapper>
+          <S.DeleteTitle>정말 잼박스를 삭제할까요?</S.DeleteTitle>
+          <div>
+            <S.DeleteText>
+              잼박스를 삭제하면 안에 보관된 링크도 함께 사라집니다.
+            </S.DeleteText>
+            <S.DeleteText style={{ fontWeight: 500 }}>
+              삭제된 잼박스, 링크는 복구되지 않습니다.
+            </S.DeleteText>
+          </div>
+          <S.ButtonWrapper>
+            <S.GemBoxButton
+              onClick={() => props.setIsDelete(false)}
+              style={{ padding: '2vh 1.2vw', backgroundColor: '#0F0223' }}
+            >
+              다시 생각 할게요
+            </S.GemBoxButton>
+            <S.GemBoxButton
+              onClick={onClickDelete}
+              style={{ padding: '2vh 1.2vw' }}
+            >
+              네, 삭제할게요
+            </S.GemBoxButton>
+          </S.ButtonWrapper>
+        </S.DeleteWrapper>
+      )}
+      {props.isEdit && props.el.id === props.selectedId && (
         <S.WriteWrapper>
           <S.WriteList>
             <S.GemModalText>현재 잼박스</S.GemModalText>
@@ -70,17 +118,19 @@ export const GemCard = (props: IPropsGemCard) => {
               onChange={onChangeName}
             />
           </S.WriteList>
-          <button onClick={onClickEdit}>저장</button>
+          <S.GemBoxButton onClick={onClickEdit}>저장</S.GemBoxButton>
         </S.WriteWrapper>
       )}
-      {!props.isEdit && (
+      {!props.isEdit && !props.isDelete && (
         <S.GemCard>
           <S.GemImg src={props.el?.imageUrl} onError={onErrorGembox} />
           <S.GemInfo>
             <S.GemName>{props.el?.name}</S.GemName>
             <div>
               <S.GemText onClick={props.openEdit(props.el.id)}>수정</S.GemText>
-              <S.GemText>삭제</S.GemText>
+              <S.GemText onClick={props.openDelete(props.el.id)}>
+                삭제
+              </S.GemText>
             </div>
           </S.GemInfo>
         </S.GemCard>

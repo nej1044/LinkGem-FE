@@ -18,6 +18,8 @@ export interface IPropsGemBoxUI {
   setOpen: Dispatch<SetStateAction<boolean>>;
   isEdit: boolean;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
+  isDelete: boolean;
+  setIsDelete: Dispatch<SetStateAction<boolean>>;
   handleOpen: () => void;
   handleClose: () => void;
   data?: IDataType[] | any;
@@ -28,12 +30,15 @@ export interface IPropsGemBoxUI {
 }
 
 export interface IPropsGemCard {
-  editId: number;
+  selectedId: number;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
+  isDelete: boolean;
+  setIsDelete: Dispatch<SetStateAction<boolean>>;
   isEdit: boolean;
   el: IDataType;
   openEdit: (id: number) => () => void;
+  openDelete: (id: number) => () => void;
 }
 
 export interface IPropsGemboxModal {
@@ -43,5 +48,7 @@ export interface IPropsGemboxModal {
   setOpen: Dispatch<SetStateAction<boolean>>;
   handleClose: () => void;
   data: IDataType[] | any;
-  editId?: number;
+  selectedId?: number;
+  isDelete: boolean;
+  setIsDelete: Dispatch<SetStateAction<boolean>>;
 }

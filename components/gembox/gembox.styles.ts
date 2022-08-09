@@ -263,7 +263,7 @@ export const WriteWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 30px 60px;
+  padding: 4vh 4vw;
 `;
 
 export const WriteList = styled.div`
@@ -276,7 +276,7 @@ export const GemModalText = styled.span`
   margin-bottom: 8px;
   font-family: 'Spoqa Han Sans Neo';
   font-weight: 400;
-  font-size: 12px;
+  font-size: 0.78vw;
   letter-spacing: -0.02em;
   color: #3c3c3f;
 `;
@@ -284,11 +284,26 @@ export const GemModalText = styled.span`
 export const GemModalInput = styled.input`
   box-sizing: border-box;
   width: 100%;
-  height: 46px;
-  padding: 16px;
+  height: 6vh;
+  padding: 1vw;
   border-radius: 8px;
   outline: none;
   border: 1px solid #cecece;
+  font-size: 0.9vw;
+  letter-spacing: -0.02em;
+  color: #8e8e8e;
+`;
+
+export const GemBoxButton = styled.button`
+  padding: 2vh 2vw;
+  background-color: #5200ff;
+  border-radius: 50px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 1.2vw;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
 `;
 
 export const ModalButton = styled.button`
@@ -314,4 +329,36 @@ export const ModalClose = styled(CloseOutlined)`
   right: 1.8vw;
   color: #1a1b1d;
   font-size: 1.5vw;
+`;
+
+export const DeleteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7vh;
+`;
+
+export const DeleteTitle = styled.span`
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 700;
+  font-size: 2.1vw;
+  letter-spacing: -0.02em;
+  color: #1a1b1d;
+`;
+
+export const DeleteText = styled.span`
+  display: inline-block;
+  width: 100%;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 1.05vw;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #1a1b1d;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
 `;

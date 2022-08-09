@@ -117,6 +117,8 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
         data={props.data}
         setIsEdit={props.setIsEdit}
         isEdit={props.isEdit}
+        setIsDelete={props.setIsDelete}
+        isDelete={props.isDelete}
       />
     </>
   );
