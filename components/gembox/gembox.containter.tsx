@@ -6,6 +6,7 @@ import { IDataType } from './gembox.types';
 
 const Gembox = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const [data, setDate] = useState<IDataType[] | any>([]);
   const [linkData, setLinkData] = useState<object[]>([]);
   const [gemBoxId, setGemBoxId] = useState<string | number>('');
@@ -46,7 +47,7 @@ const Gembox = () => {
   useEffect(() => {
     fetchData();
     fetchLinkData();
-  }, [gemBoxId]);
+  }, [gemBoxId, isEdit]);
 
   const handleOpen = () => setOpen(true);
 
@@ -69,11 +70,14 @@ const Gembox = () => {
       data={data}
       linkData={linkData}
       open={open}
+      setOpen={setOpen}
       handleOpen={handleOpen}
       handleClose={handleClose}
       totalCount={totalCount}
       gemboxTitle={gemboxTitle}
       setGembox={setGembox}
+      setIsEdit={setIsEdit}
+      isEdit={isEdit}
     />
   );
 };

@@ -252,6 +252,43 @@ export const GemText = styled.span`
   font-size: 0.58vw;
   letter-spacing: -0.02em;
   color: #3c3c3f;
+  cursor: pointer;
+`;
+
+export const WriteWrapper = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 30px 60px;
+`;
+
+export const WriteList = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+export const GemModalText = styled.span`
+  margin-bottom: 8px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  color: #3c3c3f;
+`;
+
+export const GemModalInput = styled.input`
+  box-sizing: border-box;
+  width: 100%;
+  height: 46px;
+  padding: 16px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #cecece;
 `;
 
 export const ModalButton = styled.button`

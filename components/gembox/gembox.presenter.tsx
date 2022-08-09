@@ -1,9 +1,6 @@
 import * as S from './gembox.styles';
 import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
+
 import { IPropsGemBoxUI, IDataType, ILinkDataType } from './gembox.types';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -14,7 +11,8 @@ import {
 } from '@ant-design/icons';
 import { getGemCount } from 'utils/getGemCount';
 import { getDate } from 'utils/getDate';
-import { onError, onErrorGembox } from 'utils/onError';
+import { onError } from 'utils/onError';
+import GemboxModal from './modal';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
   return (
@@ -112,44 +110,14 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
           </S.LinkBoxWrapper>
         </S.GemboxSection>
       </S.Wrapper>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+      <GemboxModal
         open={props.open}
-        onClose={props.handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={props.open}>
-          <Box sx={S.style}>
-            <S.ModalClose onClick={props.handleClose} />
-            <S.GembaxWrapper>
-              <S.ModalTitle>MY GEMBOX</S.ModalTitle>
-              <S.GemWrapper>
-                {props.data?.map((el: IDataType) => (
-                  <S.GemCard key={uuidv4()}>
-                    <S.GemImg src={el?.imageUrl} onError={onErrorGembox} />
-                    <S.GemInfo>
-                      <S.GemName>{el?.name}</S.GemName>
-                      <div>
-                        <S.GemText>수정</S.GemText>
-                        <S.GemText>삭제</S.GemText>
-                      </div>
-                    </S.GemInfo>
-                  </S.GemCard>
-                ))}
-              </S.GemWrapper>
-            </S.GembaxWrapper>
-            <S.ModalButton>
-              + 추가할 수 있는 잼박스
-              <span>{`${8 - props.data?.length}개`}</span>
-            </S.ModalButton>
-          </Box>
-        </Fade>
-      </Modal>
+        setOpen={props.setOpen}
+        handleClose={props.handleClose}
+        data={props.data}
+        setIsEdit={props.setIsEdit}
+        isEdit={props.isEdit}
+      />
     </>
   );
 };
