@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { getTotalLinkCount } from 'utils/getTotalLinkCount';
+import { getTotalLinkData } from 'utils/getTotalLinkData';
 import GemboxUI from './gembox.presenter';
 import { IDataType } from './gembox.types';
 
 const Gembox = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [isDelete, setIsDelete] = useState<boolean>(false);
   const [data, setDate] = useState<IDataType[] | any>([]);
   const [linkData, setLinkData] = useState<object[]>([]);
   const [gemBoxId, setGemBoxId] = useState<string | number>('');
@@ -47,11 +50,15 @@ const Gembox = () => {
   useEffect(() => {
     fetchData();
     fetchLinkData();
-  }, [gemBoxId, isEdit]);
+  }, [gemBoxId, isEdit, isDelete, isCreate]);
 
   const handleOpen = () => setOpen(true);
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setIsEdit(false);
+    setIsDelete(false);
+  };
 
   const setGembox = (el?: IDataType) => () => {
     if (el) {
@@ -64,6 +71,13 @@ const Gembox = () => {
   };
 
   const totalCount = getTotalLinkCount();
+  const totalData = getTotalLinkData();
+  console.log(totalData);
+
+  const openCreate = () => {
+    setOpen(true);
+    setIsCreate(true);
+  };
 
   return (
     <GemboxUI
@@ -78,6 +92,12 @@ const Gembox = () => {
       setGembox={setGembox}
       setIsEdit={setIsEdit}
       isEdit={isEdit}
+      setIsDelete={setIsDelete}
+      isDelete={isDelete}
+      openCreate={openCreate}
+      isCreate={isCreate}
+      setIsCreate={setIsCreate}
+      totalData={totalData}
     />
   );
 };
