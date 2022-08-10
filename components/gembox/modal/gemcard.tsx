@@ -1,31 +1,60 @@
 import axios from 'axios';
-import { IPropsGemCard } from '../gembox.types';
+import { IDataType, IPropsGemCard } from '../gembox.types';
 import { ChangeEvent, useState } from 'react';
 import { onErrorGembox } from 'utils/onError';
 import * as S from '../gembox.styles';
-
+import { v4 as uuidv4 } from 'uuid';
 export const GemCard = (props: IPropsGemCard) => {
   const [name, setName] = useState<string>('');
+  const [linkIds, setLinkIds] = useState<number[]>([]);
+  const [error, setError] = useState<string>('');
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
 
-  // const onClickSubmit = async () => {
-  //   try {
-  //     const result = await axios.post('api/v1/gemboxes', {
-  //       headers: {
-  //         Authorization:
-  //           'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
-  //       },
-  //       linkIds: [0],
-  //       name,
-  //     });
-  //     console.log(result);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const onClickLink = (id: number) => () => {
+    if (linkIds.includes(id)) {
+      setLinkIds([...linkIds.filter((el) => el !== id)]);
+    } else {
+      setLinkIds([...linkIds, id]);
+    }
+  };
+  const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+
+  const onClickSubmit = async () => {
+    if (name.length <= 0) {
+      setError('잼박스 이름을 설정해주세요.');
+      return;
+    } else if (name.length >= 8) {
+      setError('잼박스 이름은 최대 8글자까지 만들 수 있습니다.');
+      return;
+    } else if (!regex.test(name)) {
+      setError('잼박스 이름은 한글, 숫자, 영문으로만 작성 가능합니다.');
+      return;
+    } else {
+      setError('');
+    }
+    try {
+      await axios.post(
+        'api/v1/gemboxes',
+        {
+          linkIds,
+          name,
+        },
+        {
+          headers: {
+            Authorization:
+              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+          },
+        }
+      );
+      alert('잼박스가 생성되었습니다.');
+      props.setIsCreate(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onClickEdit = async () => {
     if (name.length >= 8 || name.length <= 0) {
@@ -73,6 +102,34 @@ export const GemCard = (props: IPropsGemCard) => {
 
   return (
     <>
+      {props.isCreate && (
+        <S.CreateWrapper>
+          <S.WriteList>
+            <S.GemModalText>잼박스 이름</S.GemModalText>
+            <S.GemModalInput
+              type="text"
+              placeholder="링크를 찾기 쉽도록 관련 카테고리로 이름을 지어주세요"
+              onChange={onChangeName}
+              error={error}
+            />
+            <S.ErrorMessage>{error}</S.ErrorMessage>
+          </S.WriteList>
+          <S.WriteList>
+            <S.GemModalText>잼박스 추가</S.GemModalText>
+            <S.GemLinkWrapper>
+              {props.totalData?.map((el: IDataType) => (
+                <S.LinkItem key={uuidv4()} onClick={onClickLink(el.id)}>
+                  <S.CheckBox isChecked={linkIds.includes(el.id)}>
+                    <S.CheckIcon color="blue" />
+                  </S.CheckBox>
+                  <span>{el.title}</span>
+                </S.LinkItem>
+              ))}
+            </S.GemLinkWrapper>
+          </S.WriteList>
+          <S.GemBoxButton onClick={onClickSubmit}>저장</S.GemBoxButton>
+        </S.CreateWrapper>
+      )}
       {props.isDelete && props.el.id === props.selectedId && (
         <S.DeleteWrapper>
           <S.DeleteTitle>정말 잼박스를 삭제할까요?</S.DeleteTitle>
@@ -121,7 +178,7 @@ export const GemCard = (props: IPropsGemCard) => {
           <S.GemBoxButton onClick={onClickEdit}>저장</S.GemBoxButton>
         </S.WriteWrapper>
       )}
-      {!props.isEdit && !props.isDelete && (
+      {!props.isEdit && !props.isDelete && !props.isCreate && (
         <S.GemCard>
           <S.GemImg src={props.el?.imageUrl} onError={onErrorGembox} />
           <S.GemInfo>

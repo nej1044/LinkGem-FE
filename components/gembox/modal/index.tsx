@@ -39,7 +39,11 @@ const GemboxModal = (props: IPropsGemboxModal) => {
           <S.GembaxWrapper>
             <S.ModalTitle>
               {props.isEdit && '잼박스 수정'}
-              {!props.isEdit && !props.isDelete && 'MY GEMBOX'}
+              {props.isCreate && '잼박스 추가'}
+              {!props.isEdit &&
+                !props.isDelete &&
+                !props.isCreate &&
+                'MY GEMBOX'}
             </S.ModalTitle>
             <S.GemWrapper>
               {props.data?.map((el: IDataType) => (
@@ -54,11 +58,14 @@ const GemboxModal = (props: IPropsGemboxModal) => {
                   setOpen={props.setOpen}
                   isDelete={props.isDelete}
                   setIsDelete={props.setIsDelete}
+                  setIsCreate={props.setIsCreate}
+                  isCreate={props.isCreate}
+                  totalData={props.totalData}
                 />
               ))}
             </S.GemWrapper>
           </S.GembaxWrapper>
-          {!props.isEdit && !props.isDelete && (
+          {!props.isEdit && !props.isDelete && !props.isCreate && (
             <S.ModalButton>
               + 추가할 수 있는 잼박스
               <span>{`${8 - props.data?.length}개`}</span>

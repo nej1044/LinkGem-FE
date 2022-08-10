@@ -41,7 +41,9 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
                   <span>({getGemCount(el?.id)})</span>
                 </S.GemboxText>
               ))}
-              <S.GemboxButton>+ 잼박스 만들기</S.GemboxButton>
+              <S.GemboxButton onClick={props.openCreate}>
+                + 잼박스 만들기
+              </S.GemboxButton>
             </S.GemboxItem>
           </S.GemboxList>
           <S.FilterList>
@@ -119,6 +121,9 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
         isEdit={props.isEdit}
         setIsDelete={props.setIsDelete}
         isDelete={props.isDelete}
+        isCreate={props.isCreate}
+        setIsCreate={props.setIsCreate}
+        totalData={props.totalData}
       />
     </>
   );

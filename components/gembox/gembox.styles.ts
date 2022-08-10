@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { IPropsGemboxStyles } from './gembox.types';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -266,6 +267,10 @@ export const WriteWrapper = styled.div`
   padding: 4vh 4vw;
 `;
 
+export const CreateWrapper = styled(WriteWrapper)`
+  padding: 1.5vh 3vw;
+`;
+
 export const WriteList = styled.div`
   display: flex;
   flex-direction: column;
@@ -288,10 +293,23 @@ export const GemModalInput = styled.input`
   padding: 1vw;
   border-radius: 8px;
   outline: none;
-  border: 1px solid #cecece;
+  border: ${(props: IPropsGemboxStyles) =>
+    props.error ? '1px solid #FF0000' : '1px solid #cecece'};
   font-size: 0.9vw;
   letter-spacing: -0.02em;
   color: #8e8e8e;
+  :focus {
+    border: 1px solid #1a1b1d;
+    color: #1a1b1d;
+  }
+`;
+
+export const ErrorMessage = styled.div`
+  width: 100%;
+  padding: 5px 10px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 0.7vw;
+  color: #ff0000;
 `;
 
 export const GemBoxButton = styled.button`
@@ -361,4 +379,43 @@ export const ButtonWrapper = styled.div`
   width: 90%;
   display: flex;
   justify-content: space-around;
+`;
+
+export const GemLinkWrapper = styled.ul`
+  box-sizing: border-box;
+  width: 100%;
+  height: 13.5vh;
+  border: 1px solid #cecece;
+  border-radius: 8px;
+  overflow: auto;
+  padding: 1vh 0.6vw;
+`;
+
+export const LinkItem = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 2px 0;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 0.9vw;
+  letter-spacing: -0.02em;
+  color: #252730;
+  cursor: pointer;
+`;
+
+export const CheckBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.3vw;
+  height: 2.7vh;
+  margin-right: 5px;
+  background-color: ${(props: IPropsGemboxStyles) =>
+    props.isChecked ? '#5200ff' : '#cecece'};
+  border-radius: 5px;
+`;
+
+export const CheckIcon = styled(CheckOutlined)`
+  font-size: 0.8vw;
+  font-weight: 900;
+  color: white;
 `;
