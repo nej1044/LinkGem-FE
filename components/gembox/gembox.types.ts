@@ -52,3 +52,7 @@ export interface IPropsGemboxStyles {
   isChecked?: boolean;
   error?: string | boolean;
 }
+
+export interface IPropsLinkCard {
+  el: ILinkDataType;
+}

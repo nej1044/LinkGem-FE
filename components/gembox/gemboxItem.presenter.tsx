@@ -6,8 +6,9 @@ import {
   StarOutlined,
   LinkOutlined,
 } from '@ant-design/icons';
+import { IPropsLinkCard } from './gembox.types';
 
-const LinkCard = (props) => {
+const LinkCard = (props: IPropsLinkCard) => {
   return (
     <S.LinkBox>
       <S.LinkBoxImg onError={onError} src={props.el?.imageUrl} />
