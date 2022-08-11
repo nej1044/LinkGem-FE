@@ -1,5 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import {
+  createState,
+  deleteState,
+  editState,
+  modalTitleState,
+} from 'store/store';
 import { getTotalLinkCount } from 'utils/getTotalLinkCount';
 import { getTotalLinkData } from 'utils/getTotalLinkData';
 import GemboxUI from './gembox.presenter';
@@ -7,13 +14,19 @@ import { IDataType } from './gembox.types';
 
 const Gembox = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [isCreate, setIsCreate] = useState<boolean>(false);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [isDelete, setIsDelete] = useState<boolean>(false);
+  const [isCreate, setIsCreate] = useRecoilState(createState);
+  const [isEdit, setIsEdit] = useRecoilState(editState);
+  const [isDelete, setIsDelete] = useRecoilState(deleteState);
+  const [, setModalTitle] = useRecoilState(modalTitleState);
   const [data, setDate] = useState<IDataType[] | any>([]);
   const [linkData, setLinkData] = useState<object[]>([]);
   const [gemBoxId, setGemBoxId] = useState<string | number>('');
   const [gemboxTitle, setGemboxTitle] = useState<string>('전체');
+
+  useEffect(() => {
+    fetchData();
+    fetchLinkData();
+  }, [gemBoxId, isEdit, isDelete, isCreate]);
 
   const fetchData = async () => {
     try {
@@ -47,17 +60,14 @@ const Gembox = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-    fetchLinkData();
-  }, [gemBoxId, isEdit, isDelete, isCreate]);
-
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => {
-    setOpen(false);
-    setIsEdit(false);
-    setIsDelete(false);
+    if (open) setOpen(false);
+    if (isEdit) setIsEdit(false);
+    if (isDelete) setIsDelete(false);
+    if (isCreate) setIsCreate(false);
+    setModalTitle('MY GEMBOX');
   };
 
   const setGembox = (el?: IDataType) => () => {
@@ -72,10 +82,10 @@ const Gembox = () => {
 
   const totalCount = getTotalLinkCount();
   const totalData = getTotalLinkData();
-  console.log(totalData);
 
   const openCreate = () => {
     setOpen(true);
+    setModalTitle('잼박스 추가');
     setIsCreate(true);
   };
 
@@ -90,13 +100,7 @@ const Gembox = () => {
       totalCount={totalCount}
       gemboxTitle={gemboxTitle}
       setGembox={setGembox}
-      setIsEdit={setIsEdit}
-      isEdit={isEdit}
-      setIsDelete={setIsDelete}
-      isDelete={isDelete}
       openCreate={openCreate}
-      isCreate={isCreate}
-      setIsCreate={setIsCreate}
       totalData={totalData}
     />
   );

@@ -7,17 +7,30 @@ import GemCard from './gemcard';
 import { IDataType, IPropsGemboxModal } from '../gembox.types';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
+import {
+  createState,
+  deleteState,
+  editState,
+  modalTitleState,
+} from 'store/store';
+import { useRecoilState } from 'recoil';
 
 const GemboxModal = (props: IPropsGemboxModal) => {
+  const [isCreate] = useRecoilState(createState);
+  const [isEdit, setIsEdit] = useRecoilState(editState);
+  const [isDelete, setIsDelete] = useRecoilState(deleteState);
+  const [modalTitle, setModalTitle] = useRecoilState(modalTitleState);
   const [selectedId, setSelectedId] = useState<number>(0);
 
   const openEdit = (id: number) => () => {
-    props.setIsEdit(true);
+    setIsEdit(true);
+    setModalTitle('잼박스 수정');
     setSelectedId(id);
   };
 
   const openDelete = (id: number) => () => {
-    props.setIsDelete(true);
+    setIsDelete(true);
+    setModalTitle('');
     setSelectedId(id);
   };
 
@@ -37,36 +50,24 @@ const GemboxModal = (props: IPropsGemboxModal) => {
         <Box sx={S.style}>
           <S.ModalClose onClick={props.handleClose} />
           <S.GembaxWrapper>
-            <S.ModalTitle>
-              {props.isEdit && '잼박스 수정'}
-              {props.isCreate && '잼박스 추가'}
-              {!props.isEdit &&
-                !props.isDelete &&
-                !props.isCreate &&
-                'MY GEMBOX'}
-            </S.ModalTitle>
+            <S.ModalTitle>{modalTitle}</S.ModalTitle>
             <S.GemWrapper>
-              {props.data?.map((el: IDataType) => (
+              {props.data?.map((el: IDataType, i: number) => (
                 <GemCard
                   key={uuidv4()}
                   el={el}
-                  setIsEdit={props.setIsEdit}
-                  isEdit={props.isEdit}
+                  i={i}
                   openEdit={openEdit}
                   openDelete={openDelete}
                   selectedId={selectedId}
                   setOpen={props.setOpen}
-                  isDelete={props.isDelete}
-                  setIsDelete={props.setIsDelete}
-                  setIsCreate={props.setIsCreate}
-                  isCreate={props.isCreate}
                   totalData={props.totalData}
                 />
               ))}
             </S.GemWrapper>
           </S.GembaxWrapper>
-          {!props.isEdit && !props.isDelete && !props.isCreate && (
-            <S.ModalButton>
+          {!isEdit && !isDelete && !isCreate && (
+            <S.ModalButton onClick={props.openCreate}>
               + 추가할 수 있는 잼박스
               <span>{`${8 - props.data?.length}개`}</span>
             </S.ModalButton>
