@@ -17,10 +17,6 @@ export type ILinkDataType = {
 export interface IPropsGemBoxUI {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  isEdit: boolean;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
-  isDelete: boolean;
-  setIsDelete: Dispatch<SetStateAction<boolean>>;
   handleOpen: () => void;
   handleClose: () => void;
   data?: IDataType[] | any;
@@ -28,8 +24,6 @@ export interface IPropsGemBoxUI {
   totalCount: number | undefined;
   gemboxTitle: string;
   setGembox: (el?: IDataType) => () => void;
-  isCreate: boolean;
-  setIsCreate: Dispatch<SetStateAction<boolean>>;
   totalData: IDataType[] | any;
   openCreate: () => void;
 }
@@ -37,31 +31,21 @@ export interface IPropsGemBoxUI {
 export interface IPropsGemCard {
   selectedId: number;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
-  isDelete: boolean;
-  setIsDelete: Dispatch<SetStateAction<boolean>>;
-  isEdit: boolean;
   el: IDataType;
   openEdit: (id: number) => () => void;
   openDelete: (id: number) => () => void;
-  isCreate: boolean;
-  setIsCreate: Dispatch<SetStateAction<boolean>>;
   totalData: IDataType[] | any;
+  i: number;
 }
 
 export interface IPropsGemboxModal {
-  isEdit: boolean;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   handleClose: () => void;
   data: IDataType[] | any;
   selectedId?: number;
-  isDelete: boolean;
-  setIsDelete: Dispatch<SetStateAction<boolean>>;
-  isCreate: boolean;
-  setIsCreate: Dispatch<SetStateAction<boolean>>;
   totalData: IDataType[] | any;
+  openCreate: () => void;
 }
 
 export interface IPropsGemboxStyles {

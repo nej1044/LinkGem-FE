@@ -216,7 +216,7 @@ export const GemWrapper = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  padding: 1vw 0;
+  padding: 0.7vw 0;
 `;
 
 export const GemCard = styled.div`
@@ -224,7 +224,7 @@ export const GemCard = styled.div`
   min-width: 85px;
   height: 16vh;
   min-height: 105px;
-  margin-right: 10px;
+  margin-right: 0.8vw;
 `;
 
 export const GemImg = styled.img`

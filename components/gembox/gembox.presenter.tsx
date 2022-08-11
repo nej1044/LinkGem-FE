@@ -1,18 +1,15 @@
 import * as S from './gembox.styles';
 import * as React from 'react';
-
 import { IPropsGemBoxUI, IDataType, ILinkDataType } from './gembox.types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   EllipsisOutlined,
   StarOutlined,
   FileTextOutlined,
-  LinkOutlined,
 } from '@ant-design/icons';
-import { getGemCount } from 'utils/getGemCount';
-import { getDate } from 'utils/getDate';
-import { onError } from 'utils/onError';
+import GemCount from '../common/gemCount';
 import GemboxModal from './modal';
+import LinkCard from './gemboxItem.presenter';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
   return (
@@ -38,7 +35,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
               {props.data?.map((el: IDataType) => (
                 <S.GemboxText key={uuidv4()} onClick={props.setGembox(el)}>
                   {el?.name}
-                  <span>({getGemCount(el?.id)})</span>
+                  <GemCount id={el.id} />
                 </S.GemboxText>
               ))}
               <S.GemboxButton onClick={props.openCreate}>
@@ -73,41 +70,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
           </S.GexboxSectionTitle>
           <S.LinkBoxWrapper>
             {props.linkData?.contents?.map((el: ILinkDataType) => (
-              <S.LinkBox key={uuidv4()}>
-                <S.LinkBoxImg onError={onError} src={el?.imageUrl} />
-                <S.LinBoxContents>
-                  <S.LinkBoxTitle>{el?.title}</S.LinkBoxTitle>
-                  <S.LinkBoxRemark>{el?.description}</S.LinkBoxRemark>
-                  <S.LinkSubInfo>
-                    <S.LinkDate>{getDate(el?.createDate)}</S.LinkDate>
-                    <div>
-                      <StarOutlined
-                        style={{
-                          fontSize: '17px',
-                          marginRight: '12px',
-                          cursor: 'pointer',
-                        }}
-                        color="#0F0223"
-                      />
-                      <LinkOutlined
-                        style={{
-                          fontSize: '17px',
-                          marginRight: '12px',
-                          cursor: 'pointer',
-                        }}
-                        color="#0F0223"
-                      />
-                      <EllipsisOutlined
-                        style={{
-                          fontSize: '17px',
-                          color: '#0F0223',
-                          cursor: 'pointer',
-                        }}
-                      />
-                    </div>
-                  </S.LinkSubInfo>
-                </S.LinBoxContents>
-              </S.LinkBox>
+              <LinkCard key={uuidv4()} el={el} />
             ))}
           </S.LinkBoxWrapper>
         </S.GemboxSection>
@@ -117,13 +80,8 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
         setOpen={props.setOpen}
         handleClose={props.handleClose}
         data={props.data}
-        setIsEdit={props.setIsEdit}
-        isEdit={props.isEdit}
-        setIsDelete={props.setIsDelete}
-        isDelete={props.isDelete}
-        isCreate={props.isCreate}
-        setIsCreate={props.setIsCreate}
         totalData={props.totalData}
+        openCreate={props.openCreate}
       />
     </>
   );

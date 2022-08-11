@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { v1 } from 'uuid';
 
 const copyState = atom({
   key: 'copyState',
@@ -25,6 +26,26 @@ const joinState = atom({
     nickname: '',
     userPhase: '',
   },
+});
+
+export const createState = atom({
+  key: `createState/${v1()}`,
+  default: false,
+});
+
+export const editState = atom({
+  key: `createState/${v1()}`,
+  default: false,
+});
+
+export const deleteState = atom({
+  key: `deleteState/${v1()}`,
+  default: false,
+});
+
+export const modalTitleState = atom({
+  key: `modalTitle/${v1()}`,
+  default: 'MY GEMBOX',
 });
 
 export { loginState, joinState, modalState };
