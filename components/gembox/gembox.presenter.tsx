@@ -46,7 +46,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
           <S.FilterList>
             <S.FilterTitle>Filters</S.FilterTitle>
             <ul>
-              <S.GemboxText>
+              <S.GemboxText onClick={props.onClickFavor}>
                 <StarOutlined
                   style={{ fontSize: '1.1vw', marginRight: '0.3vw' }}
                   color="#0F0223"
@@ -70,7 +70,11 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
           </S.GexboxSectionTitle>
           <S.LinkBoxWrapper>
             {props.linkData?.contents?.map((el: ILinkDataType) => (
-              <LinkCard key={uuidv4()} el={el} />
+              <LinkCard
+                key={uuidv4()}
+                el={el}
+                onClickPick={props.onClickPick}
+              />
             ))}
           </S.LinkBoxWrapper>
         </S.GemboxSection>

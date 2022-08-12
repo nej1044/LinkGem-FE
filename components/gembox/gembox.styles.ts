@@ -109,7 +109,6 @@ export const LinkBoxWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 100%;
-  overflow: hidden;
 `;
 
 export const LinkBox = styled.article`
@@ -129,7 +128,7 @@ export const LinkBoxImg = styled.img`
   height: 50%;
 `;
 
-export const LinBoxContents = styled.div`
+export const LinkBoxContents = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
