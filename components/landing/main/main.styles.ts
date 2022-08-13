@@ -38,6 +38,7 @@ export const MainButton = styled.button`
   font-weight: 500;
   font-size: 24px;
   letter-spacing: -2%;
+  z-index: 10;
 
   &:hover {
     cursor: pointer;

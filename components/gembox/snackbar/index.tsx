@@ -1,4 +1,5 @@
 import { CloseOutlined } from '@ant-design/icons';
+import { Dispatch, SetStateAction } from 'react';
 import { useRecoilValue } from 'recoil';
 import copyState from 'store/store';
 import styled, { keyframes } from 'styled-components';
@@ -59,7 +60,7 @@ export const XIconImage = styled(CloseOutlined)`
   }
 `;
 
-const Snackbar = (props) => {
+const Snackbar = (props: { setIsCopy: Dispatch<SetStateAction<boolean>> }) => {
   const isLinkCopy = useRecoilValue(copyState);
 
   return (
