@@ -28,7 +28,7 @@ interface GemLinkProps {
   createDate: string;
   isFavorites: boolean;
   id: number;
-  getLink: () => void;
+  getLink?: () => void;
 }
 function GemLink({
   title,
