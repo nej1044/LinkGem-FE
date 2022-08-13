@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   LinkContainer,
@@ -11,7 +11,15 @@ import {
   LinkDetailSettingDate,
   LinkDetailSettingOption,
   EtcButton,
+  LinkEtcContainer,
+  LinkEtcButtonContainer,
+  LinkEtcButton,
+  LinkEtcXButton,
 } from './GemLink.style';
+import LinkCopy from 'components/LinkCopy';
+import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from 'store/store';
 
 interface GemLinkProps {
   title: string;
@@ -28,9 +36,15 @@ function GemLink({
   description,
   memos,
   url,
-  imageUrl,
+  imageUrl = '/images/test.jpeg',
   createDate,
+  isFavorites,
+  id,
 }: GemLinkProps) {
+  const [isCopy, setIsCopy] = useState(false);
+  const user = useRecoilValue(userInfo);
+  const [isBookMark, setIsBookMark] = useState(isFavorites);
+  const [isEtcCon, setIsEtcCon] = useState(false);
   const copyToClipboard = (val: string) => {
     const element = document.createElement('textarea');
     element.value = val;
@@ -45,29 +59,80 @@ function GemLink({
     if (!returnValue) {
       console.log('복사하기가 실패했습니다');
     }
+    setIsCopy(true);
+
+    setTimeout(() => {
+      setIsCopy(false);
+    }, 3000);
   };
+
+  const handleFavorite = async () => {
+    try {
+      await axios.patch(
+        `/api/v1/links/${id}`,
+        {
+          isFavorites: !isFavorites,
+        },
+        {
+          headers: {
+            Authorization: user.accessToken,
+          },
+        }
+      );
+      setIsBookMark(!isBookMark);
+    } catch (error: any) {
+      console.log('링크 좋아요 에러가 발생했습니다');
+      console.log(error);
+    }
+  };
+
+  const handleLinkDelete = async () => {
+    try {
+      await axios.delete(`/api/v1/links`, {
+        headers: {
+          Authorization: user.accessToken,
+        },
+        data: {
+          ids: [id],
+        },
+      });
+      setIsBookMark(!isBookMark);
+    } catch (error: any) {
+      console.log('링크 삭제 에러가 발생했습니다');
+      console.log(error);
+    }
+  };
+
+  const handleEtcButton = () => {
+    setIsEtcCon(!isEtcCon);
+  };
+
+  useEffect(() => {}, [isFavorites]);
   return (
     <LinkContainer>
       <ImageContainer>
         <Link href={url || 'https://www.naver.com'}>
           <a target="_blank">
-            <Image
-              alt="link-image"
-              src="/images/test.jpeg"
-              width={342}
-              height={180}
-            />
+            <img alt="link-image" src={imageUrl} width={342} height={180} />
           </a>
         </Link>
       </ImageContainer>
       <LinkDetailContainer>
         <LinkDetailTitle>
-          {title ||
-            '반가워요 다이아 키퍼님반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님'}
+          <Link href={url || 'https://www.naver.com'}>
+            <a target="_blank">
+              {title ||
+                '반가워요 다이아 키퍼님반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님'}
+            </a>
+          </Link>
         </LinkDetailTitle>
         <LinkDetailDescription>
-          {description + memos + imageUrl ||
-            '설명설명설명설명설명설명설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명'}
+          <Link href={url || 'https://www.naver.com'}>
+            <a target="_blank">
+              {description ||
+                '설명설명설명설명설명설명설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명'}
+            </a>
+          </Link>
         </LinkDetailDescription>
         <LinkDetailSetting>
           <LinkDetailSettingDate>
@@ -76,10 +141,15 @@ function GemLink({
           <LinkDetailSettingOption>
             <Image
               alt="link-image"
-              src="/images/icons/link-star.svg"
+              src={
+                isBookMark
+                  ? '/images/icons/link-star-black.svg'
+                  : '/images/icons/link-star.svg'
+              }
               width={17}
               height={16}
               defaultValue={url}
+              onClick={handleFavorite}
             />
             <Image
               alt="link-image"
@@ -88,10 +158,49 @@ function GemLink({
               height={15.82}
               onClick={() => copyToClipboard(url)}
             />
-            <EtcButton>•••</EtcButton>
+            <EtcButton onClick={handleEtcButton}>•••</EtcButton>
           </LinkDetailSettingOption>
         </LinkDetailSetting>
       </LinkDetailContainer>
+      {isEtcCon && (
+        <LinkEtcContainer>
+          <LinkEtcButtonContainer>
+            <LinkEtcButton
+              src="/images/icons/link-memo-icon.svg"
+              alt="memo-img"
+            />
+            <span>메모</span>
+          </LinkEtcButtonContainer>
+          <LinkEtcButtonContainer>
+            <LinkEtcButton
+              src="/images/icons/link-gemboxplus-icon.svg"
+              alt="memo-img"
+            />
+            <span>젬박스 추가</span>
+          </LinkEtcButtonContainer>
+          <LinkEtcButtonContainer>
+            <LinkEtcButton
+              src="/images/icons/link-gemboxchange-icon.svg"
+              alt="memo-img"
+            />
+            <span>젬박스 변경</span>
+          </LinkEtcButtonContainer>
+          <LinkEtcButtonContainer>
+            <LinkEtcButton
+              src="/images/icons/link-trash-icon.svg"
+              alt="memo-img"
+              onClick={handleLinkDelete}
+            />
+            <span>삭제</span>
+          </LinkEtcButtonContainer>
+          <LinkEtcXButton
+            src="/images/icons/link-x.svg"
+            alt="memo-img"
+            onClick={() => setIsEtcCon(false)}
+          />
+        </LinkEtcContainer>
+      )}
+      {isCopy && <LinkCopy />}
     </LinkContainer>
   );
 }
