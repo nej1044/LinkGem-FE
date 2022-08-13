@@ -19,7 +19,7 @@ function Home() {
         method: 'get',
         params: {
           page: 0,
-          size: 4,
+          size: 8,
         },
       });
       const contents = await response?.data?.result?.contents;

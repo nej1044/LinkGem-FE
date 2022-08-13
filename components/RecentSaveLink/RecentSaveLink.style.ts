@@ -7,7 +7,7 @@ export const RecentSaveLinkContainer = styled.section`
 
 export const RecentSaveLinkTitleOption = styled.div`
   display: flex;
-  width: 1200px;
+  width: 85%;
   justify-content: space-between;
   margin-bottom: 24px;
 `;
@@ -49,4 +49,8 @@ export const RecentSaveLinkWholeSeries = styled.p`
 export const RecentSaveLinkOption = styled.div`
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
+  section {
+    margin-bottom: 32px;
+  }
 `;

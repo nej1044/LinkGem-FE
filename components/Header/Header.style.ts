@@ -177,4 +177,8 @@ export const Initial = styled.div`
   /* main/purple */
 
   color: #29115b;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

@@ -16,11 +16,12 @@ import {
   Initial,
   LogoImage,
 } from './Header.style';
+import Link from 'next/link';
 
 function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
-  const isLogin = useLogin();
+  const [isLogin, setIsLogin] = useState(false);
   const [text, setText] = useState({ linksave: '+ 링크저장', name: '계정' });
 
   const handleOpenModal = () => {
@@ -40,7 +41,8 @@ function Header() {
       ...text,
       name: localStorage.getItem('name')?.slice(1, 3) as string,
     });
-  }, [joinUserInfo.accessToken, useLogin()]);
+    setIsLogin(useLogin());
+  }, [joinUserInfo.accessToken]);
 
   return (
     <HeaderContainer login={isLogin}>
@@ -64,7 +66,9 @@ function Header() {
                 height={28}
               />
             </AlarmImage>
-            <Initial>{text.name}</Initial>
+            <Link href="/setting">
+              <Initial>{text.name}</Initial>
+            </Link>
           </>
         ) : (
           <JoinButton

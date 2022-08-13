@@ -72,11 +72,11 @@ interface LinkSaveSuccessBarProps {
 
 export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
   display: ${(props) => (props.isVisibleMessage ? 'block' : 'none')};
-  margin-top: 16px;
+  margin-top: 75px;
   padding: 16px 24px;
   gap: 24px;
 
-  position: relative;
+  position: absolute;
 
   /* sub/purple */
 

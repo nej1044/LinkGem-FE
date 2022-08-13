@@ -72,7 +72,7 @@ Axios.interceptors.response.use(
       error.response.status === 400 &&
       error.response.data.code === 'ACCESS_TOKEN_NOT_VALID'
     ) {
-      // localStorage.clear();
+      localStorage.clear();
       console.log('로그아웃 후 재로그인 하세요');
       return Promise.reject(error);
     }
