@@ -14,10 +14,11 @@ export type ILinkDataType = {
   description: string;
   createDate: string;
   isFavorites: boolean;
+  url: string;
 };
 
 export type ILinkParams = {
-  gemBoxId: string | number;
+  gemBoxId?: string | number;
   size: number;
   isFavorites?: boolean;
 };
@@ -66,4 +67,5 @@ export interface IPropsGemboxStyles {
 export interface IPropsLinkCard {
   el: ILinkDataType;
   onClickPick: (el: ILinkDataType) => () => void;
+  onClickCopyLink: (url: string) => () => void;
 }

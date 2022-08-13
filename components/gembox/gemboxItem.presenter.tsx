@@ -12,10 +12,19 @@ import { IPropsLinkCard } from './gembox.types';
 const LinkCard = (props: IPropsLinkCard) => {
   return (
     <S.LinkBox>
-      <S.LinkBoxImg onError={onError} src={props.el?.imageUrl} />
+      <a target="_blank" href={props.el?.url} rel="noreferrer">
+        <S.LinkBoxImg onError={onError} src={props.el?.imageUrl} />
+      </a>
       <S.LinkBoxContents>
-        <S.LinkBoxTitle>{props.el?.title}</S.LinkBoxTitle>
-        <S.LinkBoxRemark>{props.el?.description}</S.LinkBoxRemark>
+        <a
+          target="_blank"
+          href={props.el?.url}
+          rel="noreferrer"
+          style={{ textDecoration: 'none' }}
+        >
+          <S.LinkBoxTitle>{props.el?.title}</S.LinkBoxTitle>
+          <S.LinkBoxRemark>{props.el?.description}</S.LinkBoxRemark>
+        </a>
         <S.LinkSubInfo>
           <S.LinkDate>{getDate(props.el?.createDate)}</S.LinkDate>
           <div>
@@ -48,6 +57,7 @@ const LinkCard = (props: IPropsLinkCard) => {
                 cursor: 'pointer',
               }}
               color="#0F0223"
+              onClick={props.onClickCopyLink(props.el?.url)}
             />
             <EllipsisOutlined
               style={{

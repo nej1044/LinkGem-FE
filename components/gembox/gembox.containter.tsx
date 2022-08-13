@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   createState,
@@ -40,15 +40,16 @@ const Gembox = () => {
   };
 
   const params: ILinkParams = {
-    gemBoxId,
     size: 24,
   };
 
   const onClickFavor = () => {
+    setGemBoxId('');
     setIsFavorMenu(true);
     setGemboxTitle('즐겨찾기');
   };
 
+  if (gemBoxId) params.gemBoxId = gemBoxId;
   if (isFavorMenu) params.isFavorites = true;
 
   const fetchLinkData = async () => {
@@ -94,6 +95,7 @@ const Gembox = () => {
   const totalData = getTotalLinkData();
 
   const openCreate = () => {
+    if (data.length === 8) return;
     setOpen(true);
     setModalTitle('잼박스 추가');
     setIsCreate(true);
@@ -148,4 +150,4 @@ const Gembox = () => {
   );
 };
 
-export default Gembox;
+export default memo(Gembox);

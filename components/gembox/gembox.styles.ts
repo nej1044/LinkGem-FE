@@ -253,6 +253,9 @@ export const GemText = styled.span`
   letter-spacing: -0.02em;
   color: #3c3c3f;
   cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const WriteWrapper = styled.div`

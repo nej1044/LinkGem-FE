@@ -10,10 +10,26 @@ import {
 import GemCount from '../common/gemCount';
 import GemboxModal from './modal';
 import LinkCard from './gemboxItem.presenter';
+import Snackbar from './snackbar';
+import { useState, memo } from 'react';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
+  const [isCopy, setIsCopy] = useState<boolean>(false);
+
+  const onClickCopyLink = (url: string) => async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setIsCopy(true);
+      setTimeout(() => {
+        setIsCopy(false);
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
+      {isCopy ? <Snackbar setIsCopy={setIsCopy} /> : <></>}
       <S.Wrapper>
         <S.Sidebar>
           <S.GemboxList>
@@ -74,6 +90,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
                 key={uuidv4()}
                 el={el}
                 onClickPick={props.onClickPick}
+                onClickCopyLink={onClickCopyLink}
               />
             ))}
           </S.LinkBoxWrapper>
@@ -91,4 +108,4 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
   );
 };
 
-export default GemboxUI;
+export default memo(GemboxUI);
