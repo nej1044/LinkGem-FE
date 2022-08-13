@@ -5,8 +5,9 @@ import RecentSaveLink from 'components/RecentSaveLink';
 import GemCrewPick from 'components/GemCrewPick';
 import { useRecoilState } from 'recoil';
 import { userInfo } from 'store/store';
+import { TLinkSave } from 'components/LinkSave/linksave.types';
 function Home() {
-  const [recentLink, setRecentLink] = useState([]);
+  const [recentLink, setRecentLink] = useState<TLinkSave[]>([]);
   // const router = useRouter();
   const [user, setUser] = useRecoilState(userInfo);
   console.log('-------------------');
