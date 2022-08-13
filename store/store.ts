@@ -28,6 +28,20 @@ const joinState = atom({
   },
 });
 
+const userInfo = atom({
+  key: 'userInfo',
+  default: {
+    accessToken: '',
+    id: 0,
+    nickname: '',
+    refreshToken: '',
+    loginEmail: '',
+    mailEmail: '',
+    name: '',
+    userPhase: '',
+  },
+});
+
 export const createState = atom({
   key: `createState/${v1()}`,
   default: false,
@@ -48,4 +62,4 @@ export const modalTitleState = atom({
   default: 'MY GEMBOX',
 });
 
-export { loginState, joinState, modalState };
+export { loginState, joinState, modalState, userInfo };
