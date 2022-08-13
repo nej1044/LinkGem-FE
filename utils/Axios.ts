@@ -16,7 +16,10 @@ Axios.interceptors.request.use(
         : localStorage.getItem('accessToken');
     console.log('토큰은', token);
     // config.headers['Authorization'] = `Bearer ${token}`
-    config.headers.Authorization = token;
+    config.headers = {
+      Authorization: token,
+    };
+
     return config;
   },
   function (error) {
