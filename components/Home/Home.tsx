@@ -6,6 +6,7 @@ import GemCrewPick from 'components/GemCrewPick';
 import { useRecoilState } from 'recoil';
 import { userInfo } from 'store/store';
 import { TLinkSave } from 'types/Link.types';
+import Axios from 'utils/Axios';
 function Home() {
   const [recentLink, setRecentLink] = useState<TLinkSave[]>([]);
   // const router = useRouter();
@@ -17,15 +18,22 @@ function Home() {
   console.log(recentLink);
   const getLink = async () => {
     try {
-      const response = await axios.get('/api/v1/links', {
-        headers: {
-          Authorization: localStorage.getItem('accessToken') as string,
-        },
+      // const response = await Axios.get('/api/v1/links', {
+      //   params: {
+      //     page: 0,
+      //     size: 4,
+      //   },
+      // });
+      const response = await Axios({
+        url: '/api/v1/links',
+        method: 'get',
         params: {
           page: 0,
           size: 4,
         },
       });
+      console.log('야호');
+      console.log(response);
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
     } catch (error: any) {
@@ -44,12 +52,15 @@ function Home() {
         localStorage.setItem('accessToken', accessToken);
         setUser({ ...user, accessToken });
       }
+      console.log('Home입니다');
+      console.log(error);
     }
   };
 
   console.log('recentLink');
   console.log(recentLink);
   useEffect(() => {
+    console.log('asdfasdf');
     getLink();
   }, []);
   return (
