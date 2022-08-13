@@ -20,6 +20,8 @@ interface GemLinkProps {
   url: string;
   imageUrl: string;
   createDate: string;
+  isFavorites: boolean;
+  id: number;
 }
 function GemLink({
   title,
