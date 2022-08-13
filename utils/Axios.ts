@@ -40,8 +40,13 @@ Axios.interceptors.response.use(
       error.response.status === 400 &&
       error.response.data.code === 'ACCESS_TOKEN_EXPIRED'
     ) {
-      const accessToken = localStorage.getItem('accessToken');
-      const refreshToken = localStorage.getItem('refreshToken');
+      let accessToken: string = '';
+      let refreshToken: string = '';
+      if (typeof window !== 'undefined') {
+        accessToken = localStorage.getItem('accessToken') as string;
+        refreshToken = localStorage.getItem('refreshToken') as string;
+      }
+
       console.log('액세스 토큰이 만료됐습니다');
       // originalRequest.headers['Authorization'] = {
       //   'ACCESS-TOKEN': accessToken,
