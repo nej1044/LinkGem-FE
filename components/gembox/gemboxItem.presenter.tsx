@@ -5,27 +5,51 @@ import {
   EllipsisOutlined,
   StarOutlined,
   LinkOutlined,
+  StarFilled,
 } from '@ant-design/icons';
 import { IPropsLinkCard } from './gembox.types';
 
 const LinkCard = (props: IPropsLinkCard) => {
   return (
     <S.LinkBox>
-      <S.LinkBoxImg onError={onError} src={props.el?.imageUrl} />
-      <S.LinBoxContents>
-        <S.LinkBoxTitle>{props.el?.title}</S.LinkBoxTitle>
-        <S.LinkBoxRemark>{props.el?.description}</S.LinkBoxRemark>
+      <a target="_blank" href={props.el?.url} rel="noreferrer">
+        <S.LinkBoxImg onError={onError} src={props.el?.imageUrl} />
+      </a>
+      <S.LinkBoxContents>
+        <a
+          target="_blank"
+          href={props.el?.url}
+          rel="noreferrer"
+          style={{ textDecoration: 'none' }}
+        >
+          <S.LinkBoxTitle>{props.el?.title}</S.LinkBoxTitle>
+          <S.LinkBoxRemark>{props.el?.description}</S.LinkBoxRemark>
+        </a>
         <S.LinkSubInfo>
           <S.LinkDate>{getDate(props.el?.createDate)}</S.LinkDate>
           <div>
-            <StarOutlined
-              style={{
-                fontSize: '17px',
-                marginRight: '12px',
-                cursor: 'pointer',
-              }}
-              color="#0F0223"
-            />
+            {props.el?.isFavorites ? (
+              <StarFilled
+                style={{
+                  fontSize: '17px',
+                  marginRight: '12px',
+                  cursor: 'pointer',
+                }}
+                color="#0F0223"
+                onClick={props.onClickPick(props.el)}
+              />
+            ) : (
+              <StarOutlined
+                style={{
+                  fontSize: '17px',
+                  marginRight: '12px',
+                  cursor: 'pointer',
+                }}
+                color="#0F0223"
+                onClick={props.onClickPick(props.el)}
+              />
+            )}
+
             <LinkOutlined
               style={{
                 fontSize: '17px',
@@ -33,6 +57,7 @@ const LinkCard = (props: IPropsLinkCard) => {
                 cursor: 'pointer',
               }}
               color="#0F0223"
+              onClick={props.onClickCopyLink(props.el?.url)}
             />
             <EllipsisOutlined
               style={{
@@ -43,7 +68,7 @@ const LinkCard = (props: IPropsLinkCard) => {
             />
           </div>
         </S.LinkSubInfo>
-      </S.LinBoxContents>
+      </S.LinkBoxContents>
     </S.LinkBox>
   );
 };

@@ -10,10 +10,26 @@ import {
 import GemCount from '../common/gemCount';
 import GemboxModal from './modal';
 import LinkCard from './gemboxItem.presenter';
+import Snackbar from './snackbar';
+import { useState, memo } from 'react';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
+  const [isCopy, setIsCopy] = useState<boolean>(false);
+
+  const onClickCopyLink = (url: string) => async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setIsCopy(true);
+      setTimeout(() => {
+        setIsCopy(false);
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
+      {isCopy ? <Snackbar setIsCopy={setIsCopy} /> : <></>}
       <S.Wrapper>
         <S.Sidebar>
           <S.GemboxList>
@@ -46,7 +62,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
           <S.FilterList>
             <S.FilterTitle>Filters</S.FilterTitle>
             <ul>
-              <S.GemboxText>
+              <S.GemboxText onClick={props.onClickFavor}>
                 <StarOutlined
                   style={{ fontSize: '1.1vw', marginRight: '0.3vw' }}
                   color="#0F0223"
@@ -70,7 +86,12 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
           </S.GexboxSectionTitle>
           <S.LinkBoxWrapper>
             {props.linkData?.contents?.map((el: ILinkDataType) => (
-              <LinkCard key={uuidv4()} el={el} />
+              <LinkCard
+                key={uuidv4()}
+                el={el}
+                onClickPick={props.onClickPick}
+                onClickCopyLink={onClickCopyLink}
+              />
             ))}
           </S.LinkBoxWrapper>
         </S.GemboxSection>
@@ -87,4 +108,4 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
   );
 };
 
-export default GemboxUI;
+export default memo(GemboxUI);
