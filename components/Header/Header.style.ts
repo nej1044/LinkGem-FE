@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export const HeaderContainer = styled.header`
-  background-color: #0f0223;
+interface IHeaderContainer {
+  login: boolean;
+}
+
+export const HeaderContainer = styled.header<IHeaderContainer>`
+  background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
   width: 100%;
   height: 84px;
   display: flex;

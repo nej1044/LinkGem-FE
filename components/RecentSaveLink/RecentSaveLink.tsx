@@ -24,7 +24,7 @@ interface IUserInfo {
   isFavorites: boolean;
 }
 
-function RecentSaveLink({ recentLink }: IRecentSaveProps) {
+function RecentSaveLink({ recentLink, getLink }: IRecentSaveProps) {
   const user = useRecoilValue(userInfo);
 
   return (
@@ -48,6 +48,7 @@ function RecentSaveLink({ recentLink }: IRecentSaveProps) {
                 createDate={link?.createDate}
                 isFavorites={link?.isFavorites}
                 id={link?.id}
+                getLink={getLink}
               />
             ))}
         {recentLink.length < 1 && <FirstLink name={user?.nickname} />}

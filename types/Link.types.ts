@@ -21,4 +21,5 @@ export interface ILinkSaveProps {
 
 export interface IRecentSaveProps {
   recentLink: TLinkSave[] | any;
+  getLink: () => void;
 }

@@ -14,12 +14,9 @@ Axios.interceptors.request.use(
       localStorage.getItem('accessToken') === null
         ? ''
         : localStorage.getItem('accessToken');
-    console.log('토큰은', token);
-    // config.headers['Authorization'] = `Bearer ${token}`
     config.headers = {
       Authorization: token,
     };
-
     return config;
   },
   function (error) {
@@ -29,33 +26,25 @@ Axios.interceptors.request.use(
 
 Axios.interceptors.response.use(
   (response) => {
-    console.log('response');
     return response;
   },
   async (error) => {
-    console.log('에러가 났습니다');
+    console.log('엑시오스 모듈 에러가 났습니다');
     console.log(error);
-    const originalRequest = error.config;
     if (
       error.response.status === 400 &&
       error.response.data.code === 'ACCESS_TOKEN_EXPIRED'
     ) {
+      const originalRequest = error.config;
       let accessToken: string = '';
       let refreshToken: string = '';
       if (typeof window !== 'undefined') {
         accessToken = localStorage.getItem('accessToken') as string;
         refreshToken = localStorage.getItem('refreshToken') as string;
       }
-
-      console.log('액세스 토큰이 만료됐습니다');
-      // originalRequest.headers['Authorization'] = {
-      //   'ACCESS-TOKEN': accessToken,
-      //   'REFRESH-TOKEN': refreshToken,
-      // };
-      console.log('originalRequest');
-      console.log(originalRequest);
       try {
-        const reissue = await axios.post(
+        console.log('재요청 리퀘스트 해야합니다');
+        const { data } = await axios.post(
           '/api/v1/oauth/reissue',
           {},
           {
@@ -65,14 +54,28 @@ Axios.interceptors.response.use(
             },
           }
         );
-        console.log(reissue);
-        const { data } = reissue.data;
-        console.log(data);
+        const { result } = data;
+        const reAccessToken = result;
+        console.log('reAccessToken');
+        console.log(reAccessToken);
+        localStorage.setItem('accessToken', reAccessToken);
+        originalRequest.headers = {
+          Authorization: reAccessToken,
+        };
+        console.log('재요청 리퀘스트액세스 토큰이 만료됐습니다');
+        console.log(originalRequest);
+        return axios(originalRequest);
       } catch (error: any) {
         console.log('리프레쉬 토큰 발급 에러', error);
       }
+    } else if (
+      error.response.status === 400 &&
+      error.response.data.code === 'ACCESS_TOKEN_NOT_VALID'
+    ) {
+      // localStorage.clear();
+      console.log('로그아웃 후 재로그인 하세요');
+      return Promise.reject(error);
     }
-
     return Promise.reject(error);
   }
 );

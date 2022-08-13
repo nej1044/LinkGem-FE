@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { ILinkSaveProps } from 'types/Link.types';
 import Image from 'next/image';
 import React, { ChangeEvent, memo, useState } from 'react';
@@ -12,6 +11,7 @@ import {
   FailMessage,
   XIconImage,
 } from './LinkSave.style';
+import Axios from 'utils/Axios';
 
 function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
@@ -20,31 +20,17 @@ function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
   const [isSuccessLink, setIsSuccessLink] = useState(false);
   const onClickLinkSaveButton = async () => {
     try {
-      const response = await axios.post(
-        '/api/v1/links',
-        {
-          memo: '',
+      const response = await Axios('/api/v1/links', {
+        method: 'post',
+        data: {
           url: urlText,
         },
-        {
-          headers: {
-            Authorization: localStorage.getItem('accessToken') as string,
-          },
-        }
-      );
+      });
       const saveLink = await response?.data?.result;
       const _recentLink = recentLink.slice(0, 3);
-
-      console.log('response');
-      console.log(response);
-      console.log('saveLink');
-      console.log(saveLink);
       setRecentLink([{ ...saveLink }, ..._recentLink]);
       setIsSuccessLink(true);
       setUrlText('');
-
-      console.log('!!!!!!!!!!!!!!!!!!');
-      console.log(recentLink);
     } catch (error) {
       console.log('정보가 없습니다');
       setIsSuccessLink(false);

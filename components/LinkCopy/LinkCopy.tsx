@@ -11,8 +11,6 @@ import {
 
 function LinkCopy() {
   const isLinkCopy = useRecoilValue(copyState);
-  console.log('isLinkCopy11');
-  console.log(isLinkCopy);
   return (
     <LinkCopyContainer>
       {isLinkCopy ? (

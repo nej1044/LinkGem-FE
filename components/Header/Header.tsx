@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useState } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -20,6 +20,8 @@ import {
 function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
+  const isLogin = useLogin();
+  const [text, setText] = useState({ linksave: '+ 링크저장', name: '계정' });
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -28,15 +30,20 @@ function Header() {
   const handleCloseJoinModal = () => {
     setIsOpenModal(false);
   };
-
+  console.log('userInfo');
+  console.log(joinUserInfo);
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
     }
-  }, [joinUserInfo.accessToken]);
+    setText({
+      ...text,
+      name: localStorage.getItem('name')?.slice(1, 3) as string,
+    });
+  }, [joinUserInfo.accessToken, useLogin()]);
 
   return (
-    <HeaderContainer>
+    <HeaderContainer login={isLogin}>
       <LogoContainer>
         <ImageContainer>
           <LogoImage src="/static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
@@ -45,9 +52,9 @@ function Header() {
         <span>Beta</span>
       </LogoContainer>
       <ButtonContainer>
-        {useLogin() ? (
+        {isLogin ? (
           <>
-            <LinkSaveButton>+ 링크저장</LinkSaveButton>
+            <LinkSaveButton>{text.linksave}</LinkSaveButton>
             <AlarmImage>
               <Image
                 priority
@@ -57,7 +64,7 @@ function Header() {
                 height={28}
               />
             </AlarmImage>
-            <Initial>수녕</Initial>
+            <Initial>{text.name}</Initial>
           </>
         ) : (
           <JoinButton
@@ -73,7 +80,7 @@ function Header() {
           />
         )}
       </ButtonContainer>
-      {!useLogin() && (
+      {!isLogin && (
         <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
           <Join />
         </Modal>

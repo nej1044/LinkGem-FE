@@ -42,11 +42,6 @@ function Index() {
     const location = window.location.href.split('=')[1];
     const token = location.split('&')[0];
     if (token === 'access_denied') router.push('/');
-
-    console.log('토큰 설정하기');
-    console.log('Toekn');
-    console.log(token);
-
     localStorage.removeItem('auth');
     try {
       const response = await axios.get('/api/v1/oauth/login/naver', {
@@ -57,9 +52,6 @@ function Index() {
 
       const result = await response.data;
       const userInfo = result?.result;
-
-      console.log(userInfo);
-      console.log('userInfo');
       localStorage.setItem('auth', JSON.stringify(userInfo));
       localStorage.setItem('accessToken', userInfo.accessToken);
       localStorage.setItem('refreshToken', userInfo.refreshToken);
