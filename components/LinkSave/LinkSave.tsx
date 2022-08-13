@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ILinkSave } from 'components/LinkSave/linksave.types';
+import { ILinkSaveProps } from 'types/Link.types';
 import Image from 'next/image';
 import React, { ChangeEvent, memo, useState } from 'react';
 import {
@@ -13,7 +13,7 @@ import {
   XIconImage,
 } from './LinkSave.style';
 
-function Link({ setRecentLink, recentLink }: ILinkSave) {
+function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);

@@ -14,7 +14,11 @@ export type TLinkSave = {
   userNickname: string;
 };
 
-export interface ILinkSave {
+export interface ILinkSaveProps {
   recentLink: TLinkSave[] | any;
   setRecentLink: Dispatch<SetStateAction<TLinkSave[]>>;
+}
+
+export interface IRecentSaveProps {
+  recentLink: TLinkSave[] | any;
 }
