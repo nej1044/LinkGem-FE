@@ -12,6 +12,7 @@ import GemboxModal from './modal';
 import LinkCard from './gemboxItem.presenter';
 import Snackbar from './snackbar';
 import { useState, memo } from 'react';
+import Pagination from '../common/pagination/pagination.container';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
   const [isCopy, setIsCopy] = useState<boolean>(false);
@@ -94,6 +95,13 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
               />
             ))}
           </S.LinkBoxWrapper>
+          <Pagination
+            count={props.totalCount}
+            startPage={props.startPage}
+            setStartPage={props.setStartPage}
+            setCurrent={props.setCurrent}
+            current={props.current}
+          />
         </S.GemboxSection>
       </S.Wrapper>
       <GemboxModal

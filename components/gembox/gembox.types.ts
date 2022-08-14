@@ -21,6 +21,7 @@ export type ILinkParams = {
   gemBoxId?: string | number;
   size: number;
   isFavorites?: boolean;
+  page: number;
 };
 
 export interface IPropsGemBoxUI {
@@ -30,13 +31,17 @@ export interface IPropsGemBoxUI {
   handleClose: () => void;
   data?: IDataType[] | any;
   linkData?: ILinkDataType[] | any;
-  totalCount: number | undefined;
+  totalCount: number | any;
   gemboxTitle: string;
   setGembox: (el?: IDataType) => () => void;
   totalData: IDataType[] | any;
   openCreate: () => void;
   onClickPick: (el: ILinkDataType) => () => void;
   onClickFavor: () => void;
+  startPage: number;
+  setStartPage: Dispatch<SetStateAction<number>>;
+  current: number;
+  setCurrent: Dispatch<SetStateAction<number>>;
 }
 
 export interface IPropsGemCard {

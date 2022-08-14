@@ -24,6 +24,8 @@ const Gembox = () => {
   const [gemboxTitle, setGemboxTitle] = useState<string>('전체');
   const [isFavorites, setIsFavorites] = useState<boolean>(false);
   const [isFavorMenu, setIsFavorMenu] = useState<boolean>(false);
+  const [startPage, setStartPage] = useState<number>(1);
+  const [current, setCurrent] = useState<number>(1);
 
   const fetchData = async () => {
     try {
@@ -41,6 +43,7 @@ const Gembox = () => {
 
   const params: ILinkParams = {
     size: 24,
+    page: current - 1,
   };
 
   const onClickFavor = () => {
@@ -124,7 +127,7 @@ const Gembox = () => {
 
   useEffect(() => {
     fetchLinkData();
-  }, [isFavorites, isFavorMenu]);
+  }, [isFavorites, isFavorMenu, current]);
 
   useEffect(() => {
     fetchData();
@@ -146,6 +149,10 @@ const Gembox = () => {
       totalData={totalData}
       onClickPick={onClickPick}
       onClickFavor={onClickFavor}
+      current={current}
+      setCurrent={setCurrent}
+      startPage={startPage}
+      setStartPage={setStartPage}
     />
   );
 };
