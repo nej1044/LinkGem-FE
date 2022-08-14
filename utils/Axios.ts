@@ -60,7 +60,7 @@ Axios.interceptors.response.use(
           }
         );
         const { result } = data;
-        const reAccessToken = result;
+        const reAccessToken = result.accessToken;
         console.log('reAccessToken');
         console.log(reAccessToken);
         localStorage.setItem('accessToken', reAccessToken);

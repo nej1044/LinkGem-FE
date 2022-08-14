@@ -33,6 +33,7 @@ export default function Setting() {
   const [file, setFile] = useState<File>();
   const [imgUrl, setImgUrl] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isModal, setIsModal] = useState(false);
 
   const changeInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -77,6 +78,11 @@ export default function Setting() {
     }
   };
 
+  const handleModal = () => {
+    console.log('야호');
+    setIsModal(!isModal);
+  };
+
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setForm({
@@ -91,8 +97,6 @@ export default function Setting() {
 
   console.log('form');
   console.log(form);
-  console.log('profileImage');
-  console.log(file);
   return (
     <SettingContainer>
       <SideMenu>
@@ -173,20 +177,26 @@ export default function Setting() {
           <p>키퍼님의 맞춤 정보</p>
           <SettingLineBox>
             <SettingCategory>직업</SettingCategory>
-            <SettingDropDown dropDownList={jobInfo.defaultCategory} />
+            <SettingDropDown
+              dropDownList={jobInfo.defaultCategory}
+              isModal={isModal}
+              handleModal={handleModal}
+              info={form.jobName}
+              type="jobName"
+              setForm={setForm}
+              form={form}
+            />
           </SettingLineBox>
           <SettingLineBox>
             <SettingCategory>총 경력</SettingCategory>
             <SettingDropDown
-              dropDownList={[
-                '1년 미만',
-                '1년',
-                '2년',
-                '3년',
-                '4년',
-                '5년',
-                '5년 이상',
-              ]}
+              dropDownList={['1년', '2년', '3년', '4년', '5년 이상']}
+              isModal={isModal}
+              handleModal={handleModal}
+              info={form.careerYear}
+              setForm={setForm}
+              type="careerYear"
+              form={form}
             />
           </SettingLineBox>
           <SettingLineBox>
