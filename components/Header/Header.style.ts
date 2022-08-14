@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const HeaderContainer = styled.header`
-  background-color: #0f0223;
+export const HeaderContainer = styled.header<{ isLogin: boolean }>`
+  background-color: ${(props) => (props.isLogin ? '#29115b' : '#0f0223')};
   width: 100%;
   height: 84px;
   display: flex;

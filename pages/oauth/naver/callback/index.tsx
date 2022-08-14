@@ -61,6 +61,7 @@ function Index() {
       console.log(userInfo);
       console.log('userInfo');
       localStorage.setItem('auth', JSON.stringify(userInfo));
+      localStorage.setItem('accessToken', userInfo.accessToken);
       setUserState(userInfo);
       router.push('/');
     } catch (error) {

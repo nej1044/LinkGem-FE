@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FooterContainer = styled.header`
+export const FooterContainer = styled.footer`
   height: 35px;
   display: flex;
   justify-content: space-between;

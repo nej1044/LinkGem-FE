@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import React, { memo } from 'react';
-import { useRecoilValue } from 'recoil';
-import copyState from 'store/store';
 import {
   LinkCopyContainer,
   LinkCopySuccess,
@@ -10,12 +8,12 @@ import {
 } from './LinkCopy.style';
 
 function LinkCopy() {
-  const isLinkCopy = useRecoilValue(copyState);
+  const isCopy = true;
   console.log('isLinkCopy11');
-  console.log(isLinkCopy);
+  console.log(isCopy);
   return (
     <LinkCopyContainer>
-      {isLinkCopy ? (
+      {isCopy ? (
         <LinkCopySuccess>링크가 복사되었습니다.</LinkCopySuccess>
       ) : (
         <LinkCopyFail>오류가 발생했습니다.</LinkCopyFail>
