@@ -71,20 +71,22 @@ export default function Setting() {
       console.log(response);
     } catch (e: any) {
       console.log('에러발생', e);
-      if (e.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
+      if (e?.response?.data?.code === 'USER_NICKNAME_ALREADY_EXIST') {
         console.log('이미 존재하는 닉네임입니다.');
       }
     }
   };
+
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setForm({
       name: auth?.name,
       nickName: auth?.nickname,
       email: auth?.loginEmail,
-      jobName: 'test',
-      careerYear: '3년',
+      jobName: auth?.jobName,
+      careerYear: auth?.careerYear,
     });
+    setImgUrl(auth.profileImageUrl);
   }, []);
 
   console.log('form');
@@ -205,7 +207,14 @@ export default function Setting() {
         </SettingButton>
       </SettingButtonContontainer>
       <EctContainer>
-        <span>회원탈퇴</span>
+        <a
+          href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
+          rel="noreferrer"
+          style={{ textDecoration: 'none' }}
+        >
+          <span>회원탈퇴</span>
+        </a>
+
         <span onClick={handleLogout}>로그아웃</span>
       </EctContainer>
     </SettingContainer>
