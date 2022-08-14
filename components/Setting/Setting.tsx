@@ -42,10 +42,9 @@ export default function Setting() {
   };
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e !== null) {
+    if (e.target.files) {
       const file = e.target.files[0];
       setFile(file);
-      URL.createObjectURL(file);
     }
   };
 
