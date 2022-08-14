@@ -1,3 +1,6 @@
+import SettingDropDown from 'components/atom/DropDown/SettingDropDown';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   EctContainer,
   InfoBox,
@@ -16,14 +19,66 @@ import {
   SideMenu,
   SideMenuButton,
 } from 'components/Setting/Setting.style';
-import SettingDropDown from 'components/atom/DropDown/SettingDropDown';
+import Axios from 'utils/Axios';
 
-import React, { useState } from 'react';
 export default function Setting() {
-  const [info, setInfo] = useState({ email: '', nickname: '' });
+  const router = useRouter();
+  const [form, setForm] = useState({
+    nickName: '',
+    jobName: '',
+    careerYear: '',
+    email: '',
+    name: '',
+  });
+  const [file, setFile] = useState<File>();
+
   const changeInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInfo({ ...info, [e.target.id]: e.target.value });
+    setForm({ ...form, [e.target.id]: e.target.value });
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    router.push('/');
+  };
+
+  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e !== null) {
+      const file = e.target.files[0];
+      setFile(file);
+      URL.createObjectURL(file);
+    }
+  };
+
+  const handleUserSetting = async () => {
+    const response = await Axios('/api/v1/user/settingUserInfo', {
+      method: 'post',
+      data: {
+        profileImage: file,
+        nickName: '닉네임테스트',
+        jobName: '직업',
+        careerYear: 3,
+      },
+      fileUpload: true,
+    });
+    console.log('response');
+    console.log(response);
+  };
+
+  useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem('auth') as string);
+    setForm({
+      name: auth.name,
+      nickName: auth.nickname,
+      email: auth.loginEmail,
+      jobName: 'test',
+      careerYear: '3년',
+    });
+  }, []);
+
+  console.log('form');
+  console.log(form);
+  console.log('profileImage');
+  console.log(file);
   return (
     <SettingContainer>
       <SideMenu>
@@ -44,6 +99,12 @@ export default function Setting() {
             <SettingCategory>프로필 사진</SettingCategory>
             <SettingImageBox>
               <SettingImage src="/static/image/Naver-Logo-Green.svg" />
+              <input
+                id="input-file"
+                type="file"
+                accept="image/png, image/jpg"
+                onChange={handleChangeFile}
+              />
             </SettingImageBox>
           </SettingLineBox>
           <SettingLineBox>
@@ -53,29 +114,29 @@ export default function Setting() {
                 src="/static/image/icons/setting-naver-logo.svg"
                 alt="naver-logo"
               />
-              <span>test@naver.com</span>
+              <span>{form.email}</span>
             </SettingDisabledInfo>
           </SettingLineBox>
           <SettingLineBox>
             <SettingCategory>이름</SettingCategory>
-            <SettingDisabledInfo type="none">김링크</SettingDisabledInfo>
+            <SettingDisabledInfo type="none">{form.name}</SettingDisabledInfo>
           </SettingLineBox>
           <SettingLineBox>
             <SettingCategory>닉네임</SettingCategory>
             <SettingInfo
               type="text"
-              value={info.nickname}
-              id="nickname"
+              value={form.nickName}
+              id="nickName"
               onChange={changeInfo}
             />
           </SettingLineBox>
           <SettingLineBox>
             <SettingCategory>이메일</SettingCategory>
             <SettingInfo
+              disabled={true}
               type="text"
-              value={info.email}
+              value={form.email}
               id="email"
-              onChange={changeInfo}
             />
           </SettingLineBox>
         </SettingBasicInfo>
@@ -112,11 +173,13 @@ export default function Setting() {
       </SettingInfoContainer>
       <SettingButtonContontainer>
         <SettingButton color="#0F0223">원래대로 돌아가기</SettingButton>
-        <SettingButton color="#5200FF">새롭게 저장하기</SettingButton>
+        <SettingButton color="#5200FF" onClick={handleUserSetting}>
+          새롭게 저장하기
+        </SettingButton>
       </SettingButtonContontainer>
       <EctContainer>
         <span>회원탈퇴</span>
-        <span>로그아웃</span>
+        <span onClick={handleLogout}>로그아웃</span>
       </EctContainer>
     </SettingContainer>
   );

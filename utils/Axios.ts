@@ -5,17 +5,22 @@ const Axios = axios.create({
 });
 declare module 'axios' {
   export interface AxiosRequestConfig {
-    handlerEnabled?: boolean;
+    fileUpload?: boolean;
   }
 }
 Axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
+    console.log('config');
+    console.log(config);
     const token: string | any =
       localStorage.getItem('accessToken') === null
         ? ''
         : localStorage.getItem('accessToken');
     config.headers = {
-      Authorization: token,
+      'Authorization': token,
+      'Content-type': config?.fileUpload
+        ? 'multipart/form-data'
+        : 'application/json; charset=utf-8',
     };
     return config;
   },

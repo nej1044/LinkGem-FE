@@ -14,6 +14,17 @@ export type TLinkSave = {
   userNickname: string;
 };
 
+export type TLocalStorageAuth = {
+  accessToken: string;
+  id: number;
+  loginEmail: string;
+  mailEmail: string;
+  name: string;
+  nickname: string;
+  refreshToken: string;
+  userPhase: string;
+};
+
 export interface ILinkSaveProps {
   recentLink: TLinkSave[] | any;
   setRecentLink: Dispatch<SetStateAction<TLinkSave[]>>;
