@@ -114,6 +114,9 @@ export const StarImage = styled.div`
 export const ImageContainer = styled.div`
   position: relative;
   display: flex;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const LinkSaveButton = styled.button`

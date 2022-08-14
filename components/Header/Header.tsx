@@ -53,10 +53,14 @@ function Header() {
   return (
     <HeaderContainer login={isLogin}>
       <LogoContainer>
-        <ImageContainer>
-          <LogoImage src="/static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
-        </ImageContainer>
-
+        <Link href="/">
+          <ImageContainer>
+            <LogoImage
+              src="/static/image/Linkgem-Logo.svg"
+              alt="linkgem-logo"
+            />
+          </ImageContainer>
+        </Link>
         <span>Beta</span>
       </LogoContainer>
       <ButtonContainer>

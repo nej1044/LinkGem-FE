@@ -65,7 +65,10 @@ export default function Setting() {
           profileImage: file,
           nickName: form.nickName,
           jobName: form.jobName,
-          careerYear: form.careerYear.split('년')[0],
+          careerYear:
+            typeof form.careerYear === 'string'
+              ? form.careerYear.split('년')[0]
+              : form.careerYear,
         },
         fileUpload: true,
       });
