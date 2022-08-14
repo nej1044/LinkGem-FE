@@ -1,5 +1,5 @@
 import SettingDropDown from 'components/atom/DropDown/SettingDropDown';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   EctContainer,
@@ -31,6 +31,8 @@ export default function Setting() {
     name: '',
   });
   const [file, setFile] = useState<File>();
+  const [imgUrl, setImgUrl] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const changeInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -45,30 +47,41 @@ export default function Setting() {
     if (e.target.files) {
       const file = e.target.files[0];
       setFile(file);
+      console.log(URL.createObjectURL(file));
+      setImgUrl(URL.createObjectURL(file));
     }
   };
 
-  const handleUserSetting = async () => {
-    const response = await Axios('/api/v1/user/settingUserInfo', {
-      method: 'post',
-      data: {
-        profileImage: file,
-        nickName: '닉네임테스트',
-        jobName: '직업',
-        careerYear: 3,
-      },
-      fileUpload: true,
-    });
-    console.log('response');
-    console.log(response);
+  const uploadImage = () => {
+    inputRef.current?.click();
   };
 
+  const handleUserSetting = async () => {
+    try {
+      const response = await Axios('/api/v1/user/settingUserInfo', {
+        method: 'post',
+        data: {
+          profileImage: file,
+          nickName: form.nickName,
+          jobName: form.jobName,
+          careerYear: form.careerYear.split('년')[0],
+        },
+        fileUpload: true,
+      });
+      console.log(response);
+    } catch (e: any) {
+      console.log('에러발생', e);
+      if (e.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
+        console.log('이미 존재하는 닉네임입니다.');
+      }
+    }
+  };
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setForm({
-      name: auth.name,
-      nickName: auth.nickname,
-      email: auth.loginEmail,
+      name: auth?.name,
+      nickName: auth?.nickname,
+      email: auth?.loginEmail,
       jobName: 'test',
       careerYear: '3년',
     });
@@ -97,12 +110,27 @@ export default function Setting() {
           <SettingLineBox>
             <SettingCategory>프로필 사진</SettingCategory>
             <SettingImageBox>
-              <SettingImage src="/static/image/Naver-Logo-Green.svg" />
+              <SettingImage
+                src={imgUrl || 'images/test.jpeg'}
+                onClick={uploadImage}
+                alt="setting-image"
+              />
+              {/* <SettingImageHover>
+                <Image
+                  src="/images/icons/setting-image-icon.svg"
+                  alt="setting-image"
+                  height={32}
+                  width={32}
+                />
+              </SettingImageHover> */}
+
               <input
                 id="input-file"
                 type="file"
                 accept="image/png, image/jpg"
                 onChange={handleChangeFile}
+                ref={inputRef}
+                hidden
               />
             </SettingImageBox>
           </SettingLineBox>

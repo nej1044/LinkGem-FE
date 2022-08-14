@@ -17,12 +17,14 @@ import {
   LogoImage,
 } from './Header.style';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
   const [isLogin, setIsLogin] = useState(false);
   const [text, setText] = useState({ linksave: '+ 링크저장', name: '계정' });
+  const history = useRouter();
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -42,8 +44,12 @@ function Header() {
       name: localStorage.getItem('name')?.slice(1, 3) as string,
     });
     setIsLogin(useLogin());
-  }, [joinUserInfo.accessToken]);
+  }, [joinUserInfo.accessToken, isLogin]);
 
+  useEffect(() => {
+    setIsLogin(useLogin());
+  }, [history.pathname]);
+  console.log('여기');
   return (
     <HeaderContainer login={isLogin}>
       <LogoContainer>
