@@ -20,6 +20,7 @@ import {
   SideMenuButton,
 } from 'components/Setting/Setting.style';
 import Axios from 'utils/Axios';
+import MuiDialog from 'components/atom/Dialog/MuiDialog';
 
 export default function Setting() {
   const router = useRouter();
@@ -34,6 +35,12 @@ export default function Setting() {
   const [imgUrl, setImgUrl] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [isModal, setIsModal] = useState(false);
+  const [dialogContext, setDialogContext] = useState({
+    handleDialog() {},
+    title: '',
+    context: '',
+    isOpen: false,
+  });
 
   const changeInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -57,13 +64,18 @@ export default function Setting() {
     inputRef.current?.click();
   };
 
+  const handleDialog = () => {
+    setDialogContext({ ...dialogContext, isOpen: false });
+  };
+
   const handleUserSetting = async () => {
     try {
+      const auth = JSON.parse(localStorage.getItem('auth') as string);
       const response = await Axios('/api/v1/user/settingUserInfo', {
         method: 'post',
         data: {
-          profileImage: file,
-          nickName: form.nickName,
+          profileImage: file || '',
+          nickName: auth?.nickname === form.nickName ? null : form.nickName,
           jobName: form.jobName,
           careerYear:
             typeof form.careerYear === 'string'
@@ -73,14 +85,44 @@ export default function Setting() {
         fileUpload: true,
       });
       console.log(response);
+
+      console.log('auth');
+      console.log(auth);
+      const _auth = {
+        ...auth,
+        jobName: form.jobName,
+        careerYear:
+          typeof form.careerYear === 'string'
+            ? Number(form.careerYear.split('년')[0])
+            : form.careerYear,
+        nickname: form.nickName,
+      };
+      localStorage.setItem('auth', JSON.stringify(_auth));
+      setDialogContext({
+        handleDialog,
+        title: '회원 정보',
+        context: '회원 정보를 수정 했습니다.',
+        isOpen: true,
+      });
     } catch (e: any) {
       console.log('에러발생', e);
       if (e?.response?.data?.code === 'USER_NICKNAME_ALREADY_EXIST') {
-        console.log('이미 존재하는 닉네임입니다.');
+        console.log('durl');
+        setDialogContext({
+          handleDialog,
+          title: '회원 정보 수정 실패',
+          context: '이미 존재하는 닉네임입니다.',
+          isOpen: true,
+        });
       }
+      setDialogContext({
+        handleDialog,
+        title: '회원 정보 수정 실패',
+        context: '에러가 발생했습니다.',
+        isOpen: true,
+      });
     }
   };
-
   const handleModal = () => {
     console.log('야호');
     setIsModal(!isModal);
@@ -95,7 +137,7 @@ export default function Setting() {
       jobName: auth?.jobName,
       careerYear: auth?.careerYear,
     });
-    setImgUrl(auth.profileImageUrl);
+    setImgUrl(auth?.profileImageUrl);
   }, []);
 
   console.log('form');
@@ -230,6 +272,7 @@ export default function Setting() {
 
         <span onClick={handleLogout}>로그아웃</span>
       </EctContainer>
+      {dialogContext.isOpen && <MuiDialog dialogContext={dialogContext} />}
     </SettingContainer>
   );
 }
