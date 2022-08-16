@@ -54,6 +54,11 @@ function JobInfo() {
             },
           }
         );
+        const _auth =
+          localStorage.getItem('auth') &&
+          JSON.parse(localStorage.getItem('auth') as string);
+        _auth.userPhase = 'REGISTERED';
+        localStorage.setItem('auth', JSON.stringify(_auth));
         window.location.href = '/';
       } catch (error) {
         console.log('에러가 발생했습니다', error);
