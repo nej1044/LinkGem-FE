@@ -67,6 +67,7 @@ export interface IPropsGemboxModal {
 export interface IPropsGemboxStyles {
   isChecked?: boolean;
   error?: string | boolean;
+  isMore?: boolean;
 }
 
 export interface IPropsLinkCard {

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { IPropsGemboxStyles } from './gembox.types';
+import MemoOutlined from '../../public/icons/MemoOutlined.svg';
+import AddOutlined from '../../public/icons/AddOutlined.svg';
+import ChangeOutlined from '../../public/icons/ChangeOutlined.svg';
+import DeleteOutlined from '../../public/icons/DeleteOutlined.svg';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -119,6 +123,8 @@ export const LinkBox = styled.article`
   margin-right: 24px;
   margin-top: 32px;
   border-radius: 16px;
+  background-color: ${(props: IPropsGemboxStyles) =>
+    props.isMore ? '#a0a0a0' : 'white'};
   overflow: hidden;
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
 `;
@@ -126,6 +132,8 @@ export const LinkBox = styled.article`
 export const LinkBoxImg = styled.img`
   width: 100%;
   height: 50%;
+  filter: ${(props: IPropsGemboxStyles) =>
+    props.isMore ? 'brightness(60%)' : 'brightness(100%)'};
 `;
 
 export const LinkBoxContents = styled.div`
@@ -135,7 +143,80 @@ export const LinkBoxContents = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 50%;
-  padding: 24px 16px;
+  padding: ${(props: IPropsGemboxStyles) => (props.isMore ? '28px' : '24px')};
+  border-radius: 16px;
+  background-color: white;
+  border-radius: ${(props: IPropsGemboxStyles) =>
+    props.isMore ? '16px' : '0px'};
+`;
+
+export const MoreItems = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const MoreItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25%;
+  height: 40%;
+  min-height: 55px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  color: #1a1b1d;
+`;
+
+export const MemoIcon = styled(MemoOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: #0f0223;
+  border-radius: 50%;
+`;
+
+export const AddIcon = styled(AddOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 9px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: #0f0223;
+  border-radius: 50%;
+`;
+
+export const ChangeIcon = styled(ChangeOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: #0f0223;
+  border-radius: 50%;
+`;
+
+export const DeleteIcon = styled(DeleteOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: #0f0223;
+  border-radius: 50%;
 `;
 
 export const LinkBoxTitle = styled.span`
@@ -150,9 +231,11 @@ export const LinkBoxTitle = styled.span`
   white-space: nowrap;
 `;
 export const LinkBoxRemark = styled.span`
+  box-sizing: border-box;
   display: block;
   width: 100%;
-  height: 40px;
+  height: 46px;
+  padding: 10px 0;
   color: #3c3c3f;
   font-size: 14px;
   line-height: 19.6px;
