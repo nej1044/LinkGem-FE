@@ -30,7 +30,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
   };
   return (
     <>
-      {isCopy ? <Snackbar setIsCopy={setIsCopy} /> : <></>}
+      {isCopy ? <Snackbar setIsCopy={setIsCopy} isLinkCopy={isCopy} /> : <></>}
       <S.Wrapper>
         <S.Sidebar>
           <S.GemboxList>
@@ -55,7 +55,7 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
                   <GemCount id={el.id} />
                 </S.GemboxText>
               ))}
-              <S.GemboxButton onClick={props.openCreate}>
+              <S.GemboxButton onClick={props.openCreate()}>
                 + 잼박스 만들기
               </S.GemboxButton>
             </S.GemboxItem>
@@ -92,6 +92,10 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
                 el={el}
                 onClickPick={props.onClickPick}
                 onClickCopyLink={onClickCopyLink}
+                openMemo={props.openMemo}
+                data={props.data}
+                openCreate={props.openCreate}
+                deleteLink={props.deleteLink}
               />
             ))}
           </S.LinkBoxWrapper>
@@ -105,12 +109,14 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
         </S.GemboxSection>
       </S.Wrapper>
       <GemboxModal
+        onClickMemo={props.onClickMemo}
         open={props.open}
         setOpen={props.setOpen}
         handleClose={props.handleClose}
         data={props.data}
         totalData={props.totalData}
         openCreate={props.openCreate}
+        defaultMemo={props.defaultMemo}
       />
     </>
   );

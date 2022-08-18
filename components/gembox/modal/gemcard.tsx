@@ -9,12 +9,13 @@ import {
   createState,
   deleteState,
   editState,
+  linkIdsState,
   modalTitleState,
 } from 'store/store';
 
 export const GemCard = (props: IPropsGemCard) => {
   const [name, setName] = useState<string>('');
-  const [linkIds, setLinkIds] = useState<number[]>([]);
+  const [linkIds, setLinkIds] = useRecoilState<number[]>(linkIdsState);
   const [error, setError] = useState<string>('');
   const [isCreate, setIsCreate] = useRecoilState(createState);
   const [isEdit, setIsEdit] = useRecoilState(editState);

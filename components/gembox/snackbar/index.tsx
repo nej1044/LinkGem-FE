@@ -1,11 +1,14 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { Dispatch, SetStateAction } from 'react';
-import { useRecoilValue } from 'recoil';
-import copyState from 'store/store';
 import styled, { keyframes } from 'styled-components';
 
 interface IPropsSnackBarStyles {
   isLinkCopy: boolean;
+}
+
+interface IPropsSnackBar {
+  isLinkCopy: boolean;
+  setIsCopy: Dispatch<SetStateAction<boolean>>;
 }
 
 const boxFade = keyframes`
@@ -33,6 +36,7 @@ const LinkCopyContainer = styled.div`
   left: 0;
   right: 0;
   bottom: 88px;
+  z-index: 10;
 
   background: ${(props: IPropsSnackBarStyles) =>
     props.isLinkCopy ? '#252730' : '#FFF1F1'};
@@ -60,19 +64,17 @@ export const XIconImage = styled(CloseOutlined)`
   }
 `;
 
-const Snackbar = (props: { setIsCopy: Dispatch<SetStateAction<boolean>> }) => {
-  const isLinkCopy = useRecoilValue(copyState);
-
+const Snackbar = (props: IPropsSnackBar) => {
   return (
-    <LinkCopyContainer isLinkCopy={isLinkCopy}>
-      <LinkCopyText isLinkCopy={isLinkCopy}>
-        {isLinkCopy ? '링크가 복사되었습니다.' : '오류가 발생했습니다.'}
+    <LinkCopyContainer isLinkCopy={props.isLinkCopy}>
+      <LinkCopyText isLinkCopy={props.isLinkCopy}>
+        {props.isLinkCopy ? '링크가 복사되었습니다.' : '오류가 발생했습니다.'}
       </LinkCopyText>
       <XIconImage
         alt="plus-icon"
         width={12}
         height={11}
-        isLinkCopy={isLinkCopy}
+        isLinkCopy={props.isLinkCopy}
         onClick={() => props.setIsCopy(false)}
       />
     </LinkCopyContainer>
