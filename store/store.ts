@@ -66,4 +66,9 @@ export const linkIdsState = atom({
   default: [0],
 });
 
+export const deleteMemoState = atom({
+  key: `memoDeleteState/${v1()}`,
+  default: false,
+});
+
 export { loginState, joinState, modalState, userInfo };

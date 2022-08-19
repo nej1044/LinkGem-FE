@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ChangeEvent, useState } from 'react';
 import {
   createState,
+  deleteMemoState,
   deleteState,
   editState,
   memoState,
@@ -25,6 +26,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
   const [isMemo] = useRecoilState(memoState);
   const [selectedId, setSelectedId] = useState<number>(0);
   const [memo, setMemo] = useState('');
+  const [isMemoDelete, setIsMemoDelete] = useRecoilState(deleteMemoState);
 
   const openEdit = (id: number) => () => {
     setIsEdit(true);
@@ -56,10 +58,15 @@ const GemboxModal = (props: IPropsGemboxModal) => {
     >
       <Fade in={props.open}>
         <Box sx={S.style}>
-          <S.ModalClose onClick={props.handleClose} />
+          <S.ModalClose
+            onClick={() => {
+              props.handleClose();
+              setIsMemoDelete(false);
+            }}
+          />
           <S.GembaxWrapper>
             <S.ModalTitle>{modalTitle}</S.ModalTitle>
-            {isMemo ? (
+            {isMemo && !isMemoDelete && (
               <S.MemoWrapper>
                 <S.MemoArea
                   onChange={onChangeMemo}
@@ -68,7 +75,13 @@ const GemboxModal = (props: IPropsGemboxModal) => {
 분명 소중히 쓰일 순간이 생길거에요"
                 ></S.MemoArea>
                 <S.MemoFooter>
-                  <DeleteOutlined style={{ fontSize: '1.6vw' }} />
+                  <DeleteOutlined
+                    style={{ fontSize: '1.6vw' }}
+                    onClick={() => {
+                      setModalTitle('');
+                      setIsMemoDelete(true);
+                    }}
+                  />
                   <S.GemBoxButton
                     onClick={props.onClickMemo(memo)}
                     style={{ fontSize: '1vw', padding: '1.2vh 1.4vw' }}
@@ -77,7 +90,33 @@ const GemboxModal = (props: IPropsGemboxModal) => {
                   </S.GemBoxButton>
                 </S.MemoFooter>
               </S.MemoWrapper>
-            ) : (
+            )}
+            {isMemoDelete && (
+              <S.MemoDeleteWrapper>
+                <S.DeleteTitle>정말 메모를 삭제할까요?</S.DeleteTitle>
+                <div>
+                  <S.DeleteText>삭제한 메모는 복구 할 수 없어요</S.DeleteText>
+                </div>
+                <S.ButtonWrapper>
+                  <S.GemBoxButton
+                    onClick={() => {
+                      setIsMemoDelete(false);
+                      setModalTitle('잼키퍼 메모장');
+                    }}
+                    style={{ padding: '2vh 1.2vw', backgroundColor: '#0F0223' }}
+                  >
+                    다시 생각 해볼게요
+                  </S.GemBoxButton>
+                  <S.GemBoxButton
+                    onClick={props.onClickMemo('string')}
+                    style={{ padding: '2vh 1.2vw' }}
+                  >
+                    네, 삭제할게요
+                  </S.GemBoxButton>
+                </S.ButtonWrapper>
+              </S.MemoDeleteWrapper>
+            )}
+            {!isMemo && (
               <S.GemWrapper>
                 {props.data?.map((el: IDataType, i: number) => (
                   <GemCard

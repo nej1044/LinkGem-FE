@@ -7,6 +7,7 @@ import {
   editState,
   modalTitleState,
   memoState,
+  deleteMemoState,
 } from 'store/store';
 import { getTotalLinkCount } from 'utils/getTotalLinkCount';
 import { getTotalLinkData } from 'utils/getTotalLinkData';
@@ -20,6 +21,7 @@ const Gembox = () => {
   const [isDelete, setIsDelete] = useRecoilState<boolean>(deleteState);
   const [, setModalTitle] = useRecoilState<string>(modalTitleState);
   const [isMemo, setIsMemo] = useRecoilState<boolean>(memoState);
+  const [, setIsMemoDelete] = useRecoilState(deleteMemoState);
   const [data, setDate] = useState<IDataType[] | any>([]);
   const [linkData, setLinkData] = useState<object[]>([]);
   const [gemBoxId, setGemBoxId] = useState<string | number>('');
@@ -159,6 +161,7 @@ const Gembox = () => {
       );
       setOpen(false);
       setIsMemo(false);
+      setIsMemoDelete(false);
     } catch (error) {
       console.log(error);
     }

@@ -514,6 +514,14 @@ export const MemoWrapper = styled.div`
   padding: 40px 20px 0px 20px;
 `;
 
+export const MemoDeleteWrapper = styled(MemoWrapper)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18% 20px;
+`;
+
 export const MemoArea = styled.textarea`
   box-sizing: border-box;
   width: 100%;
