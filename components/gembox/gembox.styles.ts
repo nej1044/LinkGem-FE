@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { IPropsGemboxStyles } from './gembox.types';
+import MemoOutlined from '../../public/icons/MemoOutlined.svg';
+import AddOutlined from '../../public/icons/AddOutlined.svg';
+import ChangeOutlined from '../../public/icons/ChangeOutlined.svg';
+import DeleteOutlined from '../../public/icons/DeleteOutlined.svg';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -112,6 +116,7 @@ export const LinkBoxWrapper = styled.div`
 `;
 
 export const LinkBox = styled.article`
+  position: relative;
   width: 13.6vw;
   min-width: 280px;
   height: 32.5vh;
@@ -119,6 +124,8 @@ export const LinkBox = styled.article`
   margin-right: 24px;
   margin-top: 32px;
   border-radius: 16px;
+  background-color: ${(props: IPropsGemboxStyles) =>
+    props.isMore ? '#a0a0a0' : 'white'};
   overflow: hidden;
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
 `;
@@ -126,6 +133,8 @@ export const LinkBox = styled.article`
 export const LinkBoxImg = styled.img`
   width: 100%;
   height: 50%;
+  filter: ${(props: IPropsGemboxStyles) =>
+    props.isMore ? 'brightness(60%)' : 'brightness(100%)'};
 `;
 
 export const LinkBoxContents = styled.div`
@@ -135,7 +144,81 @@ export const LinkBoxContents = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 50%;
-  padding: 24px 16px;
+  padding: ${(props: IPropsGemboxStyles) => (props.isMore ? '28px' : '24px')};
+  border-radius: 16px;
+  background-color: white;
+  border-radius: ${(props: IPropsGemboxStyles) =>
+    props.isMore ? '16px' : '0px'};
+`;
+
+export const MoreItems = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const MoreItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25%;
+  height: 40%;
+  min-height: 55px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  color: #1a1b1d;
+`;
+
+export const MemoIcon = styled(MemoOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: #0f0223;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
+export const AddIcon = styled(AddOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 9px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: #0f0223;
+  border-radius: 50%;
+`;
+
+export const ChangeIcon = styled(ChangeOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: ${(props) => (props.isEdit ? '#5200FF' : '#0f0223')};
+  border-radius: 50%;
+`;
+
+export const DeleteIcon = styled(DeleteOutlined)`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  fill: #ffffff;
+  font-size: 900;
+  text-align: center;
+  background-color: #0f0223;
+  border-radius: 50%;
 `;
 
 export const LinkBoxTitle = styled.span`
@@ -150,9 +233,11 @@ export const LinkBoxTitle = styled.span`
   white-space: nowrap;
 `;
 export const LinkBoxRemark = styled.span`
+  box-sizing: border-box;
   display: block;
   width: 100%;
-  height: 40px;
+  height: 46px;
+  padding: 10px 0;
   color: #3c3c3f;
   font-size: 14px;
   line-height: 19.6px;
@@ -198,8 +283,8 @@ export const style = {
 export const GembaxWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
-  height: 43vh;
-  padding: 5vh 2vw 0vh 2vw;
+  height: 100%;
+  padding: 5vh 2vw 8vh 2vw;
 `;
 
 export const ModalTitle = styled.div`
@@ -328,7 +413,7 @@ export const GemBoxButton = styled.button`
 
 export const ModalButton = styled.button`
   width: 100%;
-  height: 7vh;
+  height: 9vh;
   border: none;
   background-color: #f3edff;
   color: #0f0223;
@@ -345,8 +430,8 @@ export const ModalButton = styled.button`
 
 export const ModalClose = styled(CloseOutlined)`
   position: absolute;
-  top: 2.5vh;
-  right: 1.8vw;
+  top: 3.5vh;
+  right: 3vw;
   color: #1a1b1d;
   font-size: 1.5vw;
 `;
@@ -420,4 +505,130 @@ export const CheckIcon = styled(CheckOutlined)`
   font-size: 0.8vw;
   font-weight: 900;
   color: white;
+`;
+
+export const MemoWrapper = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px 0px 20px;
+`;
+
+export const MemoDeleteWrapper = styled(MemoWrapper)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18% 20px;
+`;
+
+export const MemoArea = styled.textarea`
+  box-sizing: border-box;
+  width: 100%;
+  height: 80%;
+  padding: 20px 16px;
+  border: 1px solid #cecece;
+  border-radius: 8px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 0.98vw;
+  letter-spacing: -0.02em;
+  resize: none;
+  :focus {
+    border: 2px solid #cecece;
+    outline: none;
+  }
+`;
+
+export const MemoFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  height: 20%;
+`;
+
+export const LeftSubInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 85px;
+`;
+
+export const Memobox = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  bottom: -70px;
+  left: 100px;
+  z-index: 2;
+  width: 212px;
+  max-height: 158px;
+  padding: 20px 36px 10px 16px;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
+  border-radius: 8px;
+`;
+
+export const MemoText = styled.div`
+  margin-bottom: 10px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  color: #1a1b1d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+`;
+
+export const MemoOption = styled.span`
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  text-decoration-line: underline;
+  color: #3c3c3f;
+  cursor: pointer;
+`;
+
+export const MemoClose = styled(ModalClose)`
+  top: 15px;
+  right: 15px;
+  font-size: 13px;
+  font-weight: 900;
+`;
+
+export const Changebox = styled(Memobox)`
+  bottom: -80px;
+  left: 145px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 212px;
+  height: 221px;
+  padding: 20px;
+`;
+
+export const ChangeList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+`;
+
+export const ChangeItem = styled.li`
+  height: 50%;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 11px;
+  letter-spacing: -0.02em;
+  color: #1a1b1d;
+`;
+
+export const ChagneInput = styled.input`
+  box-sizing: border-box;
+  padding: 11px;
+  border: 1px solid #ededed;
+  border-radius: 8px;
+  font-size: 13px;
 `;
