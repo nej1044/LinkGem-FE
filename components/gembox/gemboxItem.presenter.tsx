@@ -57,7 +57,7 @@ const LinkCard = (props: IPropsLinkCard) => {
               <S.MoreItem onClick={props.openMemo(props.el)}>
                 <S.MemoIcon /> 메모
               </S.MoreItem>
-              <S.MoreItem>
+              <S.MoreItem onClick={props.openCreate()}>
                 <S.AddIcon /> 잼박스추가
               </S.MoreItem>
               <S.MoreItem onClick={() => setIsEdit(true)}>

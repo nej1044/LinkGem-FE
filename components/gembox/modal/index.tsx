@@ -134,7 +134,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
             )}
           </S.GembaxWrapper>
           {!isEdit && !isDelete && !isCreate && !isMemo && (
-            <S.ModalButton onClick={props.openCreate}>
+            <S.ModalButton onClick={props.openCreate()}>
               + 추가할 수 있는 잼박스
               <span>{`${8 - props.data?.length}개`}</span>
             </S.ModalButton>

@@ -284,7 +284,7 @@ export const GembaxWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 5vh 2vw 8vh 2vw;
+  padding: 5vh 2vw 6.5vh 2vw;
 `;
 
 export const ModalTitle = styled.div`
@@ -300,7 +300,7 @@ export const GemWrapper = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  padding: 0.7vw 0;
+  margin-top: 1.5vh;
 `;
 
 export const GemCard = styled.div`
@@ -308,7 +308,8 @@ export const GemCard = styled.div`
   min-width: 85px;
   height: 16vh;
   min-height: 105px;
-  margin-right: 0.8vw;
+  margin-right: 0.4vw;
+  margin-left: 0.4vw;
 `;
 
 export const GemImg = styled.img`
@@ -413,7 +414,7 @@ export const GemBoxButton = styled.button`
 
 export const ModalButton = styled.button`
   width: 100%;
-  height: 9vh;
+  height: 120px;
   border: none;
   background-color: #f3edff;
   color: #0f0223;

@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { createState } from 'store/store';
 
 export const getTotalLinkData = () => {
   const [totalData, setTotalData] = useState();
+  const isCreate = useRecoilValue(createState);
   const fetchLinkData = async () => {
     try {
       const result = await axios.get('/api/v1/links', {
@@ -12,6 +15,7 @@ export const getTotalLinkData = () => {
         },
         params: {
           size: 10000,
+          hasGembox: false,
         },
       });
       setTotalData(result?.data?.result?.contents);
@@ -22,7 +26,7 @@ export const getTotalLinkData = () => {
 
   useEffect(() => {
     fetchLinkData();
-  }, []);
+  }, [isCreate]);
 
   return totalData;
 };

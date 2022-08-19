@@ -68,7 +68,7 @@ export interface IPropsGemboxModal {
   data: IDataType[] | any;
   selectedId?: number;
   totalData: IDataType[] | any;
-  openCreate: () => void;
+  openCreate: (id?: number) => () => void;
   defaultMemo: string;
   onClickMemo: (memo: string) => () => void;
 }
