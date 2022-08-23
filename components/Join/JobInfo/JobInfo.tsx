@@ -126,7 +126,7 @@ function JobInfo() {
         }
         width={type === 'nickname' ? '234px' : '156px'}
         height="62px"
-        text={type === 'nickname' ? '링크젬시작' : '다음'}
+        text={type === 'nickname' ? '링크잼시작' : '다음'}
         fontSize="24px"
       />
     </JobInfoContainer>
