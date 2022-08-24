@@ -1,12 +1,7 @@
-import axios from 'axios';
+import { ILinkSaveProps } from 'types/Link.types';
 import Image from 'next/image';
-import React, {
-  ChangeEvent,
-  Dispatch,
-  memo,
-  SetStateAction,
-  useState,
-} from 'react';
+
+import React, { ChangeEvent, memo, useState } from 'react';
 import {
   LinkSaveContainer,
   LinkTextContainer,
@@ -17,43 +12,28 @@ import {
   FailMessage,
   XIconImage,
 } from './LinkSave.style';
-interface ILink {
-  setRecentLink: Dispatch<SetStateAction<never[]>>;
-  recentLink: never[];
-}
+import Axios from 'utils/Axios';
 
-function Link({ setRecentLink, recentLink }: ILink) {
+function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
+
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
   const [isSuccessLink, setIsSuccessLink] = useState(false);
   const onClickLinkSaveButton = async () => {
     try {
-      const response = await axios.post(
-        '/api/v1/links',
-        {
-          memo: '',
+
+      const response = await Axios('/api/v1/links', {
+        method: 'post',
+        data: {
           url: urlText,
         },
-        {
-          headers: {
-            Authorization: localStorage.getItem('accessToken') as string,
-          },
-        }
-      );
+      });
       const saveLink = await response?.data?.result;
       const _recentLink = recentLink.slice(0, 3);
-
-      console.log('response');
-      console.log(response);
-      console.log('saveLink');
-      console.log(saveLink);
       setRecentLink([{ ...saveLink }, ..._recentLink]);
       setIsSuccessLink(true);
       setUrlText('');
-
-      console.log('!!!!!!!!!!!!!!!!!!');
-      console.log(recentLink);
     } catch (error) {
       console.log('정보가 없습니다');
       setIsSuccessLink(false);

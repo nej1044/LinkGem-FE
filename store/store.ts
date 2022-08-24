@@ -36,7 +36,6 @@ const userInfo = atom({
   },
 });
 
-
 export const createState = atom({
   key: `createState/${v1()}`,
   default: false,

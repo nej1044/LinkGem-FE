@@ -8,9 +8,7 @@ import {
 } from './LinkCopy.style';
 
 function LinkCopy() {
-  const isCopy = true;
-  console.log('isLinkCopy11');
-  console.log(isCopy);
+  const isLinkCopy = useRecoilValue(copyState);
   return (
     <LinkCopyContainer>
       {isCopy ? (

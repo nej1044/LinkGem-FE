@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export const HeaderContainer = styled.header<{ isLogin: boolean }>`
-  background-color: ${(props) => (props.isLogin ? '#29115b' : '#0f0223')};
+interface IHeaderContainer {
+  login: boolean;
+}
+
+export const HeaderContainer = styled.header<IHeaderContainer>`
+  background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
   width: 100%;
   height: 84px;
   display: flex;
@@ -110,6 +114,9 @@ export const StarImage = styled.div`
 export const ImageContainer = styled.div`
   position: relative;
   display: flex;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const LinkSaveButton = styled.button`
@@ -173,4 +180,8 @@ export const Initial = styled.div`
   /* main/purple */
 
   color: #29115b;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

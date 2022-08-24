@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const LinkSaveContainer = styled.section`
   position: relative;
-  margin-top: 80px;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,10 +73,9 @@ interface LinkSaveSuccessBarProps {
 export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
   display: ${(props) => (props.isVisibleMessage ? 'block' : 'none')};
 
-  margin-top: 16px;
+  margin-top: 75px;
   padding: 16px 24px;
   gap: 24px;
-  top: 56px;
   position: absolute;
 
   /* sub/purple */
