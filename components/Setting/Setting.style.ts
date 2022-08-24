@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 export const SettingContainer = styled.main`
   width: 100%;
   background-color: #faf5ff;
@@ -141,7 +140,15 @@ export const SettingDisabledInfo = styled.div<{ type: string }>`
   }
 `;
 
-export const SettingImageBox = styled.div``;
+export const SettingImageBox = styled.div`
+  position: relative;
+  div {
+    opacity: 0;
+  }
+  img:hover div {
+    opacity: 1;
+  }
+`;
 
 export const SettingImage = styled.img`
   width: 140px;
@@ -149,19 +156,23 @@ export const SettingImage = styled.img`
   border-radius: 16px;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
   }
+`;
 
-  &::after {
-    background: rgba(0, 0, 0, 0.6);
-    content: '';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
+export const SettingImageHover = styled.div`
+  position: absolute;
+  top: 0px;
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
   }
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 export const InfoBox = styled.div`

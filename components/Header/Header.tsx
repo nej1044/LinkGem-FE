@@ -1,8 +1,8 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useState } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { joinState, modalState, userInfo } from 'store/store';
+import { joinState, modalState } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -15,14 +15,19 @@ import {
   AlarmImage,
   Initial,
   LogoImage,
+  UrlCategory,
+  SpaceCell,
+  UrlCategoryItem,
 } from './Header.style';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
-  const [user, setUser] = useRecoilState(userInfo);
-
-  const isLogin = useLogin();
+  const [isLogin, setIsLogin] = useState(false);
+  const history = useRouter();
+  const [path, setPath] = useState('/');
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -31,50 +36,58 @@ function Header() {
   const handleCloseJoinModal = () => {
     setIsOpenModal(false);
   };
-
-  const getUser = () => {
-    if (typeof window !== 'undefined') {
-      const auth =
-        localStorage.getItem('auth') &&
-        JSON.parse(localStorage.getItem('auth') as string);
-
-      console.log('로컬 스토리지 auth');
-      console.log(auth);
-      if (
-        auth?.accessToken &&
-        auth?.userPhase === 'REGISTERED' &&
-        auth?.loginEmail
-      ) {
-        console.log('로그인 정보가 있습니다');
-        setUser(auth);
-        return true;
-      }
-    }
-  };
-
+  console.log(joinUserInfo);
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
     }
-    getUser();
+    setIsLogin(useLogin());
   }, [joinUserInfo.accessToken, isLogin]);
-  console.log('joinUserInfo');
-  console.log(user.nickname);
-  console.log(user.nickname.slice(0, 2));
 
+  useEffect(() => {
+    setIsLogin(useLogin());
+    setPath(history.pathname);
+  }, [history.pathname]);
+
+  console.log('path');
+  console.log(path);
   return (
-    <HeaderContainer isLogin={isLogin}>
+    <HeaderContainer login={isLogin}>
       <LogoContainer>
-        <ImageContainer>
-          <LogoImage src="/static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
-        </ImageContainer>
-
+        <Link href="/">
+          <ImageContainer>
+            <LogoImage
+              src="/static/image/Linkgem-Logo.svg"
+              alt="linkgem-logo"
+            />
+          </ImageContainer>
+        </Link>
         <span>Beta</span>
       </LogoContainer>
+      {isLogin ? (
+        <UrlCategory>
+          <Link href="/">
+            <a>
+              <UrlCategoryItem current={path === '/'}>Home</UrlCategoryItem>
+            </a>
+          </Link>
+          <Link href="/gembox">
+            <a>
+              <UrlCategoryItem current={path === '/gembox'}>
+                My Gem Box
+              </UrlCategoryItem>
+            </a>
+          </Link>
+        </UrlCategory>
+      ) : (
+        ''
+      )}
+
+      <SpaceCell />
       <ButtonContainer>
         {isLogin ? (
           <>
-            <LinkSaveButton>+ 링크저장</LinkSaveButton>
+            <LinkSaveButton>+링크저장</LinkSaveButton>
             <AlarmImage>
               <Image
                 priority
@@ -84,7 +97,9 @@ function Header() {
                 height={28}
               />
             </AlarmImage>
-            <Initial>{user.nickname.slice(0, 2)}</Initial>
+            <Link href="/setting">
+              <Initial></Initial>
+            </Link>
           </>
         ) : (
           <JoinButton

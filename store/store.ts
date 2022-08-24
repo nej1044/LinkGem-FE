@@ -22,6 +22,13 @@ const joinState = atom({
   },
 });
 
+const copyState = atom({
+  key: 'copyState',
+  default: true,
+});
+
+export default copyState;
+
 const userInfo = atom({
   key: 'userInfo',
   default: {
