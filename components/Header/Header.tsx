@@ -2,7 +2,7 @@ import React, { useEffect, memo, useState } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { joinState, modalState, userInfo } from 'store/store';
+import { joinState, modalState } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -33,7 +33,6 @@ function Header() {
   const handleCloseJoinModal = () => {
     setIsOpenModal(false);
   };
-  console.log('userInfo');
   console.log(joinUserInfo);
   useEffect(() => {
     if (joinUserInfo.accessToken) {
@@ -45,7 +44,7 @@ function Header() {
     });
     setIsLogin(useLogin());
   }, [joinUserInfo.accessToken, isLogin]);
-  
+
   useEffect(() => {
     setIsLogin(useLogin());
   }, [history.pathname]);
