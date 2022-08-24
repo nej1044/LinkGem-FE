@@ -22,6 +22,17 @@ export const ImageContainer = styled.div`
 
 export const LinkDetailContainer = styled.div`
   padding: 24px;
+  a:link {
+    color: black;
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+  }
 `;
 
 export const LinkDetailTitle = styled.div`

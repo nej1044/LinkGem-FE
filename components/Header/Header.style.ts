@@ -4,12 +4,15 @@ interface IHeaderContainer {
   login: boolean;
 }
 
+interface IUrlCategoryItem {
+  current: boolean;
+}
+
 export const HeaderContainer = styled.header<IHeaderContainer>`
   background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
   width: 100%;
   height: 84px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -184,4 +187,38 @@ export const Initial = styled.div`
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const UrlCategory = styled.div`
+  display: flex;
+  margin-left: 5%;
+  text-align: center;
+  a {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    /* identical to box height */
+
+    letter-spacing: -0.03em;
+    margin-right: 40px;
+  }
+  a:link {
+    text-decoration: none;
+  }
+  a:visited {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+`;
+
+export const SpaceCell = styled.div`
+  flex: 1 1 0;
+`;
+
+export const UrlCategoryItem = styled.div<IUrlCategoryItem>`
+  color: ${({ current }) => (current ? '#41FB6A' : '#FFFFFF')};
 `;
