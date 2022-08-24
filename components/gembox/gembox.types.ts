@@ -15,6 +15,8 @@ export type ILinkDataType = {
   createDate: string;
   isFavorites: boolean;
   url: string;
+  memo: string;
+  gemboxId: number;
 };
 
 export type ILinkParams = {
@@ -35,13 +37,18 @@ export interface IPropsGemBoxUI {
   gemboxTitle: string;
   setGembox: (el?: IDataType) => () => void;
   totalData: IDataType[] | any;
-  openCreate: () => void;
+  openCreate: (id?: number) => () => void;
   onClickPick: (el: ILinkDataType) => () => void;
   onClickFavor: () => void;
   startPage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
   current: number;
   setCurrent: Dispatch<SetStateAction<number>>;
+  openMemo: (el: ILinkDataType) => () => void;
+  defaultMemo: string;
+  onClickMemo: (memo: string) => () => void;
+  setId: Dispatch<SetStateAction<number>>;
+  deleteLink: (id: number) => () => void;
 }
 
 export interface IPropsGemCard {
@@ -62,15 +69,22 @@ export interface IPropsGemboxModal {
   selectedId?: number;
   totalData: IDataType[] | any;
   openCreate: () => void;
+  defaultMemo: string;
+  onClickMemo: (memo: string) => () => void;
 }
 
 export interface IPropsGemboxStyles {
   isChecked?: boolean;
   error?: string | boolean;
+  isMore?: boolean;
 }
 
 export interface IPropsLinkCard {
   el: ILinkDataType;
   onClickPick: (el: ILinkDataType) => () => void;
   onClickCopyLink: (url: string) => () => void;
+  openMemo: (el: ILinkDataType) => () => void;
+  data?: IDataType[] | any;
+  openCreate: (id?: number) => () => void;
+  deleteLink: (id: number) => () => void;
 }

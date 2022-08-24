@@ -6,6 +6,8 @@ import {
   deleteState,
   editState,
   modalTitleState,
+  memoState,
+  deleteMemoState,
 } from 'store/store';
 import { getTotalLinkCount } from 'utils/getTotalLinkCount';
 import { getTotalLinkData } from 'utils/getTotalLinkData';
@@ -14,10 +16,12 @@ import { IDataType, ILinkDataType, ILinkParams } from './gembox.types';
 
 const Gembox = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [isCreate, setIsCreate] = useRecoilState(createState);
-  const [isEdit, setIsEdit] = useRecoilState(editState);
-  const [isDelete, setIsDelete] = useRecoilState(deleteState);
-  const [, setModalTitle] = useRecoilState(modalTitleState);
+  const [isCreate, setIsCreate] = useRecoilState<boolean>(createState);
+  const [isEdit, setIsEdit] = useRecoilState<boolean>(editState);
+  const [isDelete, setIsDelete] = useRecoilState<boolean>(deleteState);
+  const [, setModalTitle] = useRecoilState<string>(modalTitleState);
+  const [isMemo, setIsMemo] = useRecoilState<boolean>(memoState);
+  const [, setIsMemoDelete] = useRecoilState(deleteMemoState);
   const [data, setDate] = useState<IDataType[] | any>([]);
   const [linkData, setLinkData] = useState<object[]>([]);
   const [gemBoxId, setGemBoxId] = useState<string | number>('');
@@ -26,6 +30,8 @@ const Gembox = () => {
   const [isFavorMenu, setIsFavorMenu] = useState<boolean>(false);
   const [startPage, setStartPage] = useState<number>(1);
   const [current, setCurrent] = useState<number>(1);
+  const [id, setId] = useState<number>(0);
+  const [defaultMemo, setDefaultMemo] = useState<string>('');
 
   const fetchData = async () => {
     try {
@@ -77,6 +83,7 @@ const Gembox = () => {
     if (isEdit) setIsEdit(false);
     if (isDelete) setIsDelete(false);
     if (isCreate) setIsCreate(false);
+    if (isMemo) setIsMemo(false);
     setModalTitle('MY GEMBOX');
   };
 
@@ -97,11 +104,23 @@ const Gembox = () => {
   const totalCount = getTotalLinkCount();
   const totalData = getTotalLinkData();
 
-  const openCreate = () => {
+  const openCreate = (id?: number) => () => {
     if (data.length === 8) return;
     setOpen(true);
     setModalTitle('잼박스 추가');
     setIsCreate(true);
+  };
+
+  const openMemo = (el: ILinkDataType) => () => {
+    if (el?.memo !== 'string') {
+      setDefaultMemo(el?.memo);
+    } else {
+      setDefaultMemo('');
+    }
+    setId(el?.id);
+    setModalTitle('잼키퍼 메모장');
+    setIsMemo(true);
+    setOpen(true);
   };
 
   const onClickPick = (el: ILinkDataType) => async () => {
@@ -125,15 +144,57 @@ const Gembox = () => {
     }
   };
 
+  const onClickMemo = (memo: string) => async () => {
+    try {
+      await axios.patch(
+        `api/v1/links/${id}`,
+        {
+          id,
+          memo,
+        },
+        {
+          headers: {
+            Authorization:
+              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+          },
+        }
+      );
+      setOpen(false);
+      setIsMemo(false);
+      setIsMemoDelete(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteLink = (id: number) => async () => {
+    const ids = [id];
+    try {
+      await axios.delete('api/v1/links', {
+        headers: {
+          Authorization:
+            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+        },
+        data: {
+          ids,
+        },
+      });
+      setIsMemo(!isMemo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchLinkData();
-  }, [isFavorites, isFavorMenu, current]);
+  }, [isFavorites, isFavorMenu, current, isMemo]);
 
   useEffect(() => {
     fetchData();
     fetchLinkData();
   }, [gemBoxId, isEdit, isDelete, isCreate]);
 
+  console.log(linkData);
   return (
     <GemboxUI
       data={data}
@@ -153,6 +214,11 @@ const Gembox = () => {
       setCurrent={setCurrent}
       startPage={startPage}
       setStartPage={setStartPage}
+      openMemo={openMemo}
+      setId={setId}
+      onClickMemo={onClickMemo}
+      defaultMemo={defaultMemo}
+      deleteLink={deleteLink}
     />
   );
 };
