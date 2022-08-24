@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState, memo, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import { gemboxModalState } from 'store/store';
 import { getTotalLinkCount } from 'utils/getTotalLinkCount';
-import { getTotalLinkData } from 'utils/getTotalLinkData';
 import GemboxUI from './gembox.presenter';
 import {
   IDataType,
@@ -25,7 +24,7 @@ const Gembox = (props: IPropsGembox) => {
   const [id, setId] = useState<number>(0);
   const [defaultMemo, setDefaultMemo] = useState<string>('');
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const result = await axios.get('/api/v1/gemboxes', {
         headers: {
@@ -37,9 +36,9 @@ const Gembox = (props: IPropsGembox) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
-  const fetchGembox = async () => {
+  const fetchGembox = useCallback(async () => {
     try {
       const result = await axios.get(
         `/api/v1/gemboxes/${router.query.gemBoxId}`,
@@ -57,7 +56,7 @@ const Gembox = (props: IPropsGembox) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [router.query.gemBoxId]);
 
   const params: ILinkParams = {
     size: 24,
@@ -67,7 +66,7 @@ const Gembox = (props: IPropsGembox) => {
   if (router.query.gemBoxId) params.gemBoxId = Number(router.query.gemBoxId);
   if (props.isFavorMenu) params.isFavorites = true;
 
-  const fetchLinkData = async () => {
+  const fetchLinkData = useCallback(async () => {
     try {
       const result = await axios.get('/api/v1/links', {
         headers: {
@@ -80,9 +79,8 @@ const Gembox = (props: IPropsGembox) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [params]);
 
-  const totalData = getTotalLinkData();
   const totalCount = getTotalLinkCount();
 
   const openCreate = (id?: number) => () => {
@@ -187,7 +185,6 @@ const Gembox = (props: IPropsGembox) => {
       data={data}
       linkData={linkData}
       openCreate={openCreate}
-      totalData={totalData}
       onClickPick={onClickPick}
       current={current}
       setCurrent={setCurrent}

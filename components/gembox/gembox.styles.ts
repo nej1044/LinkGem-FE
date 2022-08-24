@@ -11,6 +11,7 @@ import { Select } from 'antd';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  min-height: 76.1vh;
   padding: 10vh 3vw;
 `;
 

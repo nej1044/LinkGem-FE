@@ -37,7 +37,6 @@ export interface IPropsGemBoxUI {
   data?: IDataType[] | any;
   linkData?: ILinkDataType[] | any;
   gemboxData?: IGemboxDataType[] | any;
-  totalData: IDataType[] | any;
   openCreate: (id?: number) => () => void;
   onClickPick: (el: ILinkDataType) => () => void;
   startPage: number;
@@ -58,14 +57,12 @@ export interface IPropsGemCard {
   el: IDataType;
   openEdit: (id: number) => () => void;
   openDelete: (id: number) => () => void;
-  totalData: IDataType[] | any;
   i: number;
 }
 
 export interface IPropsGemboxModal {
   data: IDataType[] | any;
   selectedId?: number;
-  totalData: IDataType[] | any;
   openCreate: (id?: number) => () => void;
   defaultMemo: string;
   onClickMemo: (memo: string) => () => void;

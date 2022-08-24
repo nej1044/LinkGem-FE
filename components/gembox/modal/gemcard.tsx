@@ -6,12 +6,15 @@ import * as S from '../gembox.styles';
 import { v4 as uuidv4 } from 'uuid';
 import { useRecoilState } from 'recoil';
 import { gemboxModalState, linkIdsState } from 'store/store';
+import { getTotalLinkData } from 'utils/getTotalLinkData';
 
 export const GemCard = (props: IPropsGemCard) => {
   const [modalState, setModalState] = useRecoilState(gemboxModalState);
   const [name, setName] = useState<string>('');
   const [linkIds, setLinkIds] = useRecoilState<number[]>(linkIdsState);
   const [error, setError] = useState<string>('');
+
+  const totalData = getTotalLinkData();
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -133,7 +136,7 @@ export const GemCard = (props: IPropsGemCard) => {
           <S.WriteList>
             <S.GemModalText>잼박스 추가</S.GemModalText>
             <S.GemLinkWrapper>
-              {props.totalData?.map((el: IDataType) => (
+              {totalData?.map((el: IDataType) => (
                 <S.LinkItem key={uuidv4()} onClick={onClickLink(el.id)}>
                   <S.CheckBox isChecked={linkIds.includes(el.id)}>
                     <S.CheckIcon color="blue" />

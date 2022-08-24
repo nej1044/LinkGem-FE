@@ -6,7 +6,7 @@ import * as S from '../gembox.styles';
 import GemCard from './gemcard';
 import { IDataType, IPropsGemboxModal } from '../gembox.types';
 import { v4 as uuidv4 } from 'uuid';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { gemboxModalState } from 'store/store';
 import { useRecoilState } from 'recoil';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -18,7 +18,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
   const [selectedId, setSelectedId] = useState<number>(0);
   const [memo, setMemo] = useState('');
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const result = await axios.get('/api/v1/gemboxes', {
         headers: {
@@ -30,7 +30,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   const openEdit = (id: number) => () => {
     setSelectedId(id);
@@ -143,7 +143,6 @@ const GemboxModal = (props: IPropsGemboxModal) => {
                   openEdit={openEdit}
                   openDelete={openDelete}
                   selectedId={selectedId}
-                  totalData={props.totalData}
                 />
               ))}
             </S.GemWrapper>

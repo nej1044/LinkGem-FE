@@ -61,7 +61,6 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
       <GemboxModal
         onClickMemo={props.onClickMemo}
         data={props.data}
-        totalData={props.totalData}
         openCreate={props.openCreate}
         defaultMemo={props.defaultMemo}
       />
