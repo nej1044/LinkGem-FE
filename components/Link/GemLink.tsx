@@ -168,14 +168,14 @@ function GemLink({
               src="/images/icons/link-gemboxplus-icon.svg"
               alt="memo-img"
             />
-            <span>젬박스 추가</span>
+            <span>잼박스 추가</span>
           </LinkEtcButtonContainer>
           <LinkEtcButtonContainer>
             <LinkEtcButton
               src="/images/icons/link-gemboxchange-icon.svg"
               alt="memo-img"
             />
-            <span>젬박스 변경</span>
+            <span>잼박스 변경</span>
           </LinkEtcButtonContainer>
           <LinkEtcButtonContainer>
             <LinkEtcButton

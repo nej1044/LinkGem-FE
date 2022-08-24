@@ -25,7 +25,7 @@ function Home() {
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
     } catch (error: any) {
-      if (error.response.data.code === 'ACCESS_TOKEN_EXPIRED') {
+      if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
         const response = await axios.post(
           '/api/v1/oauth/reissue',
           {},
@@ -44,6 +44,8 @@ function Home() {
       console.log(error);
     }
   };
+  console.log('user');
+  console.log(user);
   useEffect(() => {
     getLink();
   }, []);

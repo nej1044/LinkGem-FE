@@ -15,6 +15,9 @@ import {
   AlarmImage,
   Initial,
   LogoImage,
+  UrlCategory,
+  SpaceCell,
+  UrlCategoryItem,
 } from './Header.style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -23,8 +26,8 @@ function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
   const [isLogin, setIsLogin] = useState(false);
-  const [text, setText] = useState({ linksave: '+ 링크저장', name: '계정' });
   const history = useRouter();
+  const [path, setPath] = useState('/');
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -38,17 +41,16 @@ function Header() {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
     }
-    setText({
-      ...text,
-      name: localStorage.getItem('name')?.slice(1, 3) as string,
-    });
     setIsLogin(useLogin());
   }, [joinUserInfo.accessToken, isLogin]);
 
   useEffect(() => {
     setIsLogin(useLogin());
+    setPath(history.pathname);
   }, [history.pathname]);
-  console.log('여기');
+
+  console.log('path');
+  console.log(path);
   return (
     <HeaderContainer login={isLogin}>
       <LogoContainer>
@@ -62,10 +64,30 @@ function Header() {
         </Link>
         <span>Beta</span>
       </LogoContainer>
+      {isLogin ? (
+        <UrlCategory>
+          <Link href="/">
+            <a>
+              <UrlCategoryItem current={path === '/'}>Home</UrlCategoryItem>
+            </a>
+          </Link>
+          <Link href="/gembox">
+            <a>
+              <UrlCategoryItem current={path === '/gembox'}>
+                My Gem Box
+              </UrlCategoryItem>
+            </a>
+          </Link>
+        </UrlCategory>
+      ) : (
+        ''
+      )}
+
+      <SpaceCell />
       <ButtonContainer>
         {isLogin ? (
           <>
-            <LinkSaveButton>{text.linksave}</LinkSaveButton>
+            <LinkSaveButton>+링크저장</LinkSaveButton>
             <AlarmImage>
               <Image
                 priority
@@ -76,7 +98,7 @@ function Header() {
               />
             </AlarmImage>
             <Link href="/setting">
-              <Initial>{text.name}</Initial>
+              <Initial></Initial>
             </Link>
           </>
         ) : (
