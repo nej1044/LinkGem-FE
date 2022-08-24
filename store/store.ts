@@ -1,12 +1,6 @@
 import { atom } from 'recoil';
 import { v1 } from 'uuid';
 
-const copyState = atom({
-  key: 'copyState',
-  default: true,
-});
-
-export default copyState;
 const loginState = atom({
   key: 'loginState',
   default: false,
@@ -63,3 +57,4 @@ export const modalTitleState = atom({
 });
 
 export { loginState, joinState, modalState, userInfo };
+

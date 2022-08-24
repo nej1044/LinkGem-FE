@@ -86,7 +86,6 @@ function JoinDropdown({
                 {job}
               </ListItem>
             ))}
-            {/* {type === 'job' && <ListItem>하시는 일을 입력해 주세요</ListItem>} */}
           </DropDownList>
         </DropDownListContainer>
       )}

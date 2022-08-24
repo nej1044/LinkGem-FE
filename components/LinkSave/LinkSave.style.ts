@@ -72,10 +72,10 @@ interface LinkSaveSuccessBarProps {
 
 export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
   display: ${(props) => (props.isVisibleMessage ? 'block' : 'none')};
+
   margin-top: 75px;
   padding: 16px 24px;
   gap: 24px;
-
   position: absolute;
 
   /* sub/purple */
@@ -106,6 +106,7 @@ export const SuccessMessage = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 export const FailMessage = styled.div`
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;

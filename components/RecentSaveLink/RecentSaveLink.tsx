@@ -24,6 +24,7 @@ interface IUserInfo {
   isFavorites: boolean;
 }
 
+
 function RecentSaveLink({ recentLink, getLink }: IRecentSaveProps) {
   const user = useRecoilValue(userInfo);
   const [size, setSize] = useState(4);

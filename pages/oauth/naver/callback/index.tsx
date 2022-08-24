@@ -25,7 +25,6 @@ function Index() {
       const result = await response.data;
       const userInfo = result?.result;
       localStorage.setItem('auth', JSON.stringify(userInfo));
-
       localStorage.setItem('accessToken', userInfo.accessToken);
       localStorage.setItem('refreshToken', userInfo.refreshToken);
       setUserState(userInfo);

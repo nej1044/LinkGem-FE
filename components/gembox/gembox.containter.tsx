@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   createState,
@@ -10,7 +10,7 @@ import {
 import { getTotalLinkCount } from 'utils/getTotalLinkCount';
 import { getTotalLinkData } from 'utils/getTotalLinkData';
 import GemboxUI from './gembox.presenter';
-import { IDataType } from './gembox.types';
+import { IDataType, ILinkDataType, ILinkParams } from './gembox.types';
 
 const Gembox = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -22,11 +22,10 @@ const Gembox = () => {
   const [linkData, setLinkData] = useState<object[]>([]);
   const [gemBoxId, setGemBoxId] = useState<string | number>('');
   const [gemboxTitle, setGemboxTitle] = useState<string>('전체');
-
-  useEffect(() => {
-    fetchData();
-    fetchLinkData();
-  }, [gemBoxId, isEdit, isDelete, isCreate]);
+  const [isFavorites, setIsFavorites] = useState<boolean>(false);
+  const [isFavorMenu, setIsFavorMenu] = useState<boolean>(false);
+  const [startPage, setStartPage] = useState<number>(1);
+  const [current, setCurrent] = useState<number>(1);
 
   const fetchData = async () => {
     try {
@@ -42,6 +41,20 @@ const Gembox = () => {
     }
   };
 
+  const params: ILinkParams = {
+    size: 24,
+    page: current - 1,
+  };
+
+  const onClickFavor = () => {
+    setGemBoxId('');
+    setIsFavorMenu(true);
+    setGemboxTitle('즐겨찾기');
+  };
+
+  if (gemBoxId) params.gemBoxId = gemBoxId;
+  if (isFavorMenu) params.isFavorites = true;
+
   const fetchLinkData = async () => {
     try {
       const result = await axios.get('/api/v1/links', {
@@ -49,10 +62,7 @@ const Gembox = () => {
           Authorization:
             'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
         },
-        params: {
-          gemBoxId,
-          size: 48,
-        },
+        params,
       });
       setLinkData(result?.data?.result);
     } catch (error) {
@@ -74,9 +84,13 @@ const Gembox = () => {
     if (el) {
       setGemBoxId(el?.id);
       setGemboxTitle(el?.name);
+      params.isFavorites = false;
+      setIsFavorMenu(false);
     } else {
       setGemBoxId('');
       setGemboxTitle('전체');
+      params.isFavorites = false;
+      setIsFavorMenu(false);
     }
   };
 
@@ -84,10 +98,41 @@ const Gembox = () => {
   const totalData = getTotalLinkData();
 
   const openCreate = () => {
+    if (data.length === 8) return;
     setOpen(true);
     setModalTitle('잼박스 추가');
     setIsCreate(true);
   };
+
+  const onClickPick = (el: ILinkDataType) => async () => {
+    setIsFavorites((prev) => !prev);
+    try {
+      await axios.patch(
+        `api/v1/links/${el?.id}`,
+        {
+          id: el?.id,
+          isFavorites: !el?.isFavorites,
+        },
+        {
+          headers: {
+            Authorization:
+              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLinkData();
+  }, [isFavorites, isFavorMenu, current]);
+
+  useEffect(() => {
+    fetchData();
+    fetchLinkData();
+  }, [gemBoxId, isEdit, isDelete, isCreate]);
 
   return (
     <GemboxUI
@@ -102,8 +147,14 @@ const Gembox = () => {
       setGembox={setGembox}
       openCreate={openCreate}
       totalData={totalData}
+      onClickPick={onClickPick}
+      onClickFavor={onClickFavor}
+      current={current}
+      setCurrent={setCurrent}
+      startPage={startPage}
+      setStartPage={setStartPage}
     />
   );
 };
 
-export default Gembox;
+export default memo(Gembox);

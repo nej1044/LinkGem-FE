@@ -42,6 +42,7 @@ function GemLink({
   getLink,
 }: GemLinkProps) {
   const [isCopy, setIsCopy] = useState(false);
+
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
   const copyToClipboard = (val: string) => {

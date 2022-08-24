@@ -8,10 +8,20 @@ export type IDataType = {
 };
 
 export type ILinkDataType = {
+  id: number;
   imageUrl: string;
   title: string;
   description: string;
   createDate: string;
+  isFavorites: boolean;
+  url: string;
+};
+
+export type ILinkParams = {
+  gemBoxId?: string | number;
+  size: number;
+  isFavorites?: boolean;
+  page: number;
 };
 
 export interface IPropsGemBoxUI {
@@ -21,11 +31,17 @@ export interface IPropsGemBoxUI {
   handleClose: () => void;
   data?: IDataType[] | any;
   linkData?: ILinkDataType[] | any;
-  totalCount: number | undefined;
+  totalCount: number | any;
   gemboxTitle: string;
   setGembox: (el?: IDataType) => () => void;
   totalData: IDataType[] | any;
   openCreate: () => void;
+  onClickPick: (el: ILinkDataType) => () => void;
+  onClickFavor: () => void;
+  startPage: number;
+  setStartPage: Dispatch<SetStateAction<number>>;
+  current: number;
+  setCurrent: Dispatch<SetStateAction<number>>;
 }
 
 export interface IPropsGemCard {
@@ -55,4 +71,6 @@ export interface IPropsGemboxStyles {
 
 export interface IPropsLinkCard {
   el: ILinkDataType;
+  onClickPick: (el: ILinkDataType) => () => void;
+  onClickCopyLink: (url: string) => () => void;
 }
