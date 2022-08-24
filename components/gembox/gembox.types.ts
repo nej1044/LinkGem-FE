@@ -13,11 +13,14 @@ export type ILinkDataType = {
   title: string;
   description: string;
   createDate: string;
-  isFavorites: boolean;
+  isFavorites?: boolean;
+  favorites?: boolean;
   url: string;
   memo: string;
   gemboxId: number;
 };
+
+export type IGemboxDataType = {};
 
 export type ILinkParams = {
   gemBoxId?: string | number;
@@ -26,20 +29,17 @@ export type ILinkParams = {
   page: number;
 };
 
+export interface IPropsGembox {
+  isFavorMenu?: boolean;
+}
+
 export interface IPropsGemBoxUI {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  handleOpen: () => void;
-  handleClose: () => void;
   data?: IDataType[] | any;
   linkData?: ILinkDataType[] | any;
-  totalCount: number | any;
-  gemboxTitle: string;
-  setGembox: (el?: IDataType) => () => void;
+  gemboxData?: IGemboxDataType[] | any;
   totalData: IDataType[] | any;
   openCreate: (id?: number) => () => void;
   onClickPick: (el: ILinkDataType) => () => void;
-  onClickFavor: () => void;
   startPage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
   current: number;
@@ -49,11 +49,12 @@ export interface IPropsGemBoxUI {
   onClickMemo: (memo: string) => () => void;
   setId: Dispatch<SetStateAction<number>>;
   deleteLink: (id: number) => () => void;
+  isFavorMenu?: boolean;
+  totalCount: number | any;
 }
 
 export interface IPropsGemCard {
   selectedId: number;
-  setOpen: Dispatch<SetStateAction<boolean>>;
   el: IDataType;
   openEdit: (id: number) => () => void;
   openDelete: (id: number) => () => void;
@@ -62,9 +63,6 @@ export interface IPropsGemCard {
 }
 
 export interface IPropsGemboxModal {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  handleClose: () => void;
   data: IDataType[] | any;
   selectedId?: number;
   totalData: IDataType[] | any;

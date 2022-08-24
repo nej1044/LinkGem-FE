@@ -1,5 +1,4 @@
 import * as S from './gembox.styles';
-import { v4 as uuidv4 } from 'uuid';
 import { onError } from 'utils/onError';
 import { getDate } from 'utils/getDate';
 import {
@@ -9,15 +8,24 @@ import {
   StarFilled,
   CloseOutlined,
 } from '@ant-design/icons';
-import { IDataType, IPropsLinkCard } from './gembox.types';
+import { IPropsLinkCard } from './gembox.types';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import SelectBoxPage from '../atom/selectBox';
+import { gemboxModalState } from 'store/store';
+import { useRecoilState } from 'recoil';
 
 const LinkCard = (props: IPropsLinkCard) => {
   const [isMore, setIsMore] = useState<boolean>(false);
   const [isMemoView, setIsMemoView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [boxName, setBoxName] = useState('');
+  // const [gembox, setGembox] = useState('');
+  const [modalState, setModalState] = useRecoilState(gemboxModalState);
+
+  // const handleChange = (event: { target: { value: string } }) => {
+  //   setGembox(event.target.value);
+  // };
 
   const fetchBoxName = async () => {
     if (!props.el?.gemboxId) return;
@@ -40,6 +48,30 @@ const LinkCard = (props: IPropsLinkCard) => {
   useEffect(() => {
     fetchBoxName();
   });
+
+  const chnageGembox = (id: number) => async () => {
+    try {
+      await axios.patch(
+        `api/v1/links/${id}`,
+        {
+          id,
+          // gemBoxId: gembox,
+          gemBoxId: 0,
+        },
+        {
+          headers: {
+            Authorization:
+              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+          },
+        }
+      );
+      setIsMore(false);
+      setIsEdit(false);
+      setModalState(modalState);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div style={{ position: 'relative' }}>
@@ -94,7 +126,7 @@ const LinkCard = (props: IPropsLinkCard) => {
                 )}
               </S.LeftSubInfo>
               <div>
-                {props.el?.isFavorites ? (
+                {props.el?.favorites ? (
                   <StarFilled
                     style={{
                       fontSize: '17px',
@@ -152,22 +184,22 @@ const LinkCard = (props: IPropsLinkCard) => {
           <S.ChangeList>
             <S.ChangeItem>
               현재 잼박스
-              <input type="text" value={boxName || '기본'} disabled />
+              <S.ItemBox type="text" value={boxName || '기본'} disabled />
             </S.ChangeItem>
             <S.ChangeItem>
               변경할 잼박스
-              <select>
-                <option disabled>잼박스 선택</option>
-                {props.data?.map((box: IDataType) => (
-                  <option key={uuidv4()} value={box.id}>
-                    {box.name}
-                  </option>
-                ))}
-              </select>
+              <SelectBoxPage
+                selectList={props.data}
+                // gembox={gembox}
+                // handleChange={handleChange}
+              />
             </S.ChangeItem>
           </S.ChangeList>
 
-          <S.GemBoxButton style={{ padding: '8px 16px', fontSize: '14px' }}>
+          <S.GemBoxButton
+            onClick={chnageGembox(props.el?.id)}
+            style={{ padding: '8px 16px', fontSize: '14px' }}
+          >
             변경
           </S.GemBoxButton>
           <S.MemoClose onClick={() => setIsEdit(false)} />

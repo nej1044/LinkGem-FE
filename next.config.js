@@ -11,7 +11,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        destination: 'http://dev.linkgem.co.kr/api/:path*',
+        destination: 'https://dev.linkgem.co.kr/api/:path*',
         source: '/api/:path*',
       },
     ];
