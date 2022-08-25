@@ -1,8 +1,8 @@
-import React, { useEffect, memo, useState } from 'react';
+import React, { useEffect, memo } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { joinState, modalState } from 'store/store';
+import { joinState, modalState, userInfo } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -15,19 +15,20 @@ import {
   AlarmImage,
   Initial,
   LogoImage,
-  UrlCategory,
-  SpaceCell,
-  UrlCategoryItem,
+  MenuContainer,
+  Menu,
 } from './Header.style';
-import Link from 'next/link';
+import { headerFormData } from './form';
+import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 
 function Header() {
+  const router = useRouter();
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
-  const [isLogin, setIsLogin] = useState(false);
-  const history = useRouter();
-  const [path, setPath] = useState('/');
+  const [user, setUser] = useRecoilState(userInfo);
+
+  const isLogin = useLogin();
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -36,58 +37,68 @@ function Header() {
   const handleCloseJoinModal = () => {
     setIsOpenModal(false);
   };
-  console.log(joinUserInfo);
+
+  const getUser = () => {
+    if (typeof window !== 'undefined') {
+      const auth =
+        localStorage.getItem('auth') &&
+        JSON.parse(localStorage.getItem('auth') as string);
+
+      console.log('로컬 스토리지 auth');
+      console.log(auth);
+      if (
+        auth?.accessToken &&
+        auth?.userPhase === 'REGISTERED' &&
+        auth?.loginEmail
+      ) {
+        console.log('로그인 정보가 있습니다');
+        setUser(auth);
+        return true;
+      }
+    }
+  };
+
+  const movePage = (url: string) => () => {
+    router.push(`${url}`);
+  };
+
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
     }
-    setIsLogin(useLogin());
+    getUser();
   }, [joinUserInfo.accessToken, isLogin]);
+  console.log('joinUserInfo');
+  console.log(user.nickname);
+  console.log(user.nickname.slice(0, 2));
 
-  useEffect(() => {
-    setIsLogin(useLogin());
-    setPath(history.pathname);
-  }, [history.pathname]);
-
-  console.log('path');
-  console.log(path);
   return (
-    <HeaderContainer login={isLogin}>
+    <HeaderContainer isLogin={isLogin}>
       <LogoContainer>
-        <Link href="/">
-          <ImageContainer>
-            <LogoImage
-              src="/static/image/Linkgem-Logo.svg"
-              alt="linkgem-logo"
-            />
-          </ImageContainer>
-        </Link>
+        <ImageContainer>
+          <LogoImage src="/static/image/Linkgem-Logo.svg" alt="linkgem-logo" />
+        </ImageContainer>
+
         <span>Beta</span>
       </LogoContainer>
-      {isLogin ? (
-        <UrlCategory>
-          <Link href="/">
-            <a>
-              <UrlCategoryItem current={path === '/'}>Home</UrlCategoryItem>
-            </a>
-          </Link>
-          <Link href="/gembox">
-            <a>
-              <UrlCategoryItem current={path === '/gembox'}>
-                My Gem Box
-              </UrlCategoryItem>
-            </a>
-          </Link>
-        </UrlCategory>
-      ) : (
-        ''
-      )}
-
-      <SpaceCell />
+      <MenuContainer>
+        {headerFormData.map((li) => (
+          <Menu
+            onClick={movePage(li.url)}
+            key={uuidv4()}
+            current={
+              router.asPath === li.url ||
+              (li.url !== '/' && router.asPath.includes(li.url))
+            }
+          >
+            {li.title}
+          </Menu>
+        ))}
+      </MenuContainer>
       <ButtonContainer>
         {isLogin ? (
           <>
-            <LinkSaveButton>+링크저장</LinkSaveButton>
+            <LinkSaveButton>+ 링크저장</LinkSaveButton>
             <AlarmImage>
               <Image
                 priority
@@ -97,9 +108,7 @@ function Header() {
                 height={28}
               />
             </AlarmImage>
-            <Link href="/setting">
-              <Initial></Initial>
-            </Link>
+            <Initial>{user.nickname.slice(0, 2)}</Initial>
           </>
         ) : (
           <JoinButton

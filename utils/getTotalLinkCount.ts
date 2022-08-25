@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 export const getTotalLinkCount = () => {
   const [totalCount, setTotalCount] = useState();
-  const fetchLinkData = async () => {
+  const fetchLinkData = useCallback(async () => {
     try {
       const result = await axios.get('/api/v1/links', {
         headers: {
@@ -15,7 +15,7 @@ export const getTotalLinkCount = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchLinkData();

@@ -2,17 +2,17 @@ import { atom } from 'recoil';
 import { v1 } from 'uuid';
 
 const loginState = atom({
-  key: 'loginState',
+  key: `loginState//${v1()}`,
   default: false,
 });
 
 const modalState = atom({
-  key: 'modalState',
+  key: `modalState/${v1()}`,
   default: false,
 });
 
 const joinState = atom({
-  key: 'joinState',
+  key: `joinState/${v1()}`,
   default: {
     accessToken: '',
     job: '',
@@ -30,7 +30,7 @@ const copyState = atom({
 export default copyState;
 
 const userInfo = atom({
-  key: 'userInfo',
+  key: `userInfo/${v1()}`,
   default: {
     accessToken: '',
     id: 0,
@@ -43,39 +43,19 @@ const userInfo = atom({
   },
 });
 
-export const createState = atom({
-  key: `createState/${v1()}`,
-  default: false,
+export const gemboxModalState = atom({
+  key: `gemboxModalState/${v1()}`,
+  default: {
+    open: false,
+    boxState: '',
+    modalTitle: 'MY GEMBOX',
+  },
 });
-
-export const editState = atom({
-  key: `createState/${v1()}`,
-  default: false,
-});
-
-export const deleteState = atom({
-  key: `deleteState/${v1()}`,
-  default: false,
-});
-
-export const memoState = atom({
-  key: `memoState/${v1()}`,
-  default: false,
-});
-
-export const modalTitleState = atom({
-  key: `modalTitle/${v1()}`,
-  default: 'MY GEMBOX',
-});
+// });
 
 export const linkIdsState = atom({
   key: `linkIds/${v1()}`,
   default: [0],
-});
-
-export const deleteMemoState = atom({
-  key: `memoDeleteState/${v1()}`,
-  default: false,
 });
 
 export { loginState, joinState, modalState, userInfo };

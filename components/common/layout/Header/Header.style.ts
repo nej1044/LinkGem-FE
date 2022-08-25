@@ -11,7 +11,8 @@ interface IUrlCategoryItem {
 export const HeaderContainer = styled.header<IHeaderContainer>`
   background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
   width: 100%;
-  height: 84px;
+  height: 10vh;
+  max-height: 84px;
   display: flex;
   align-items: center;
 `;
@@ -43,6 +44,23 @@ export const LogoContainer = styled.div`
       color: #41fb6a;
     }
   }
+`;
+
+export const MenuContainer = styled.ul`
+  display: flex;
+  align-items: center;
+  width: 60%;
+`;
+
+export const Menu = styled.li`
+  box-sizing: border-box;
+  padding: 16px 24px 0px 24px;
+  font-family: 'Poppins';
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  color: ${(props: { current: boolean }) =>
+    props.current ? '#41FB6A' : '#ffffff'};
+  cursor: pointer;
 `;
 
 export const ButtonContainer = styled.div`

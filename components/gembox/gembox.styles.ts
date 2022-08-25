@@ -1,95 +1,18 @@
 import styled from 'styled-components';
+
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { IPropsGemboxStyles } from './gembox.types';
 import MemoOutlined from '../../public/icons/MemoOutlined.svg';
 import AddOutlined from '../../public/icons/AddOutlined.svg';
 import ChangeOutlined from '../../public/icons/ChangeOutlined.svg';
 import DeleteOutlined from '../../public/icons/DeleteOutlined.svg';
+import { Select } from 'antd';
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10vh 10vw;
-`;
-
-export const Sidebar = styled.ul`
-  width: 13vw;
-  min-width: 100px;
-`;
-
-export const GemboxList = styled.li`
-  border-bottom: 1px solid #cecece;
-`;
-
-export const FilterTitle = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 6vh;
-  min-height: 30px;
-  min-height: 16px;
-  color: #1a1b1d;
-  font-size: 1.35vw;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-
-  font-family: 'Poppins', sans-serif;
-  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-`;
-
-export const GemboxListTitle = styled(FilterTitle)`
-  font-size: 1.2vw;
-  padding: 0vh 1.6vw;
-  border-radius: 1vw;
-  background-color: #f3edff;
-`;
-
-export const GemboxItem = styled.ul`
-  padding: 4vh 1.8vw;
-`;
-
-export const GemboxTitle = styled.li`
-  cursor: pointer;
-  padding-bottom: 2.1vh;
-  font-size: 1.2vw;
-  font-weight: 500;
-  span {
-    font-size: 0.9vw;
-  }
-`;
-
-export const GemboxText = styled.li`
-  cursor: pointer;
-  padding-bottom: 2.6vh;
-  font-size: 1.2vw;
-  span {
-    font-size: 0.9vw;
-  }
-`;
-
-export const FilterText = styled(GemboxText)`
-  display: flex;
-  align-items: center;
-`;
-
-export const GemboxButton = styled.button`
-  width: 100%;
-  height: 4.6vh;
-  min-height: 30px;
-  border: none;
-  border-radius: 0.8vw;
-  cursor: pointer;
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1vw;
-  font-weight: 500;
-  color: #3c3c3f;
-  letter-spacing: -0.02em;
-`;
-
-export const FilterList = styled.li`
-  padding: 4vh 1.8vw;
+  min-height: 76.1vh;
+  padding: 10vh 3vw;
 `;
 
 export const GemboxSection = styled.div`
@@ -284,7 +207,7 @@ export const GembaxWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 5vh 2vw 8vh 2vw;
+  padding: 5vh 2vw 6.5vh 2vw;
 `;
 
 export const ModalTitle = styled.div`
@@ -300,7 +223,7 @@ export const GemWrapper = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  padding: 0.7vw 0;
+  margin-top: 1.5vh;
 `;
 
 export const GemCard = styled.div`
@@ -308,7 +231,8 @@ export const GemCard = styled.div`
   min-width: 85px;
   height: 16vh;
   min-height: 105px;
-  margin-right: 0.8vw;
+  margin-right: 0.4vw;
+  margin-left: 0.4vw;
 `;
 
 export const GemImg = styled.img`
@@ -413,7 +337,7 @@ export const GemBoxButton = styled.button`
 
 export const ModalButton = styled.button`
   width: 100%;
-  height: 9vh;
+  height: 120px;
   border: none;
   background-color: #f3edff;
   color: #0f0223;
@@ -606,8 +530,9 @@ export const Changebox = styled(Memobox)`
   align-items: center;
   justify-content: space-between;
   width: 212px;
-  height: 221px;
-  padding: 20px;
+  height: 220px;
+  max-height: 231px;
+  padding: 24px 24px 24px 20px;
 `;
 
 export const ChangeList = styled.ul`
@@ -619,6 +544,7 @@ export const ChangeList = styled.ul`
 
 export const ChangeItem = styled.li`
   height: 50%;
+  margin-bottom: 10px;
   font-family: 'Spoqa Han Sans Neo';
   font-size: 11px;
   letter-spacing: -0.02em;
@@ -631,4 +557,34 @@ export const ChagneInput = styled.input`
   border: 1px solid #ededed;
   border-radius: 8px;
   font-size: 13px;
+`;
+
+export const DataTitle = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+`;
+
+export const ItemBox = styled.input`
+  box-sizing: border-box;
+  width: 152px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #ededed;
+  margin-top: 4px;
+  padding-left: 8px;
+  font-size: 12px;
+`;
+
+export const ItemSelect = styled(Select)`
+  box-sizing: border-box;
+  width: 85%;
+  height: 36px;
+  margin-top: 4px;
+  border-radius: 8px;
+  /* border: 1px solid #ededed; */
+  /* padding-left: 8px; */
+  font-size: 12px;
 `;
