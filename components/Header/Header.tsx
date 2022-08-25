@@ -2,7 +2,7 @@ import React, { useEffect, memo, useState } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { joinState, modalState } from 'store/store';
+import { joinState, modalState, userInfo } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -25,6 +25,7 @@ import { useRouter } from 'next/router';
 function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
+  const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
   const [isLogin, setIsLogin] = useState(false);
   const history = useRouter();
   const [path, setPath] = useState('/');
@@ -42,6 +43,8 @@ function Header() {
       setIsOpenModal(true);
     }
     setIsLogin(useLogin());
+    const auth = JSON.parse(localStorage.getItem('auth') as string);
+    setUserInfoState({ ...auth });
   }, [joinUserInfo.accessToken, isLogin]);
 
   useEffect(() => {
@@ -49,8 +52,8 @@ function Header() {
     setPath(history.pathname);
   }, [history.pathname]);
 
-  console.log('path');
-  console.log(path);
+  console.log('userInfoState');
+  console.log(userInfoState);
   return (
     <HeaderContainer login={isLogin}>
       <LogoContainer>
