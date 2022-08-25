@@ -18,8 +18,8 @@ function NaverButton() {
       <NaverLoginImg
         src={
           isHover
-            ? '/static/image/Naver-Logo-White.svg'
-            : '/static/image/Naver-Logo-Green.svg'
+            ? '/images/Naver-Logo-White.svg'
+            : '/images/Naver-Logo-Green.svg'
         }
         alt="naver"
       />

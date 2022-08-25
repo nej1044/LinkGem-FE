@@ -59,10 +59,7 @@ function Header() {
       <LogoContainer>
         <Link href="/">
           <ImageContainer>
-            <LogoImage
-              src="/static/image/Linkgem-Logo.svg"
-              alt="linkgem-logo"
-            />
+            <LogoImage src="/images/Linkgem-Logo.svg" alt="linkgem-logo" />
           </ImageContainer>
         </Link>
         <span>Beta</span>
@@ -94,14 +91,22 @@ function Header() {
             <AlarmImage>
               <Image
                 priority
-                src="/static/image/icons/alarm-icon.svg"
+                src="/images/icons/alarm-icon.svg"
                 alt="linkgem-logo"
                 width={26}
                 height={28}
               />
             </AlarmImage>
             <Link href="/setting">
-              <Initial></Initial>
+              <Initial>
+                <img
+                  alt="profile-image"
+                  src={
+                    userInfoState.profileImageUrl ||
+                    '/images/header-profile-default.svg'
+                  }
+                ></img>
+              </Initial>
             </Link>
           </>
         ) : (
