@@ -45,7 +45,7 @@ const list = [
     url: 'https://velog.io/@teo/vite',
     imageUrl:
       'https://velog.velcdn.com/images/teo/post/fca299b5-7618-4bc2-8591-cb7df9fe60df/image.png',
-    createDate: '22-08-10',
+    createDate: '22.08.10',
   },
   {
     id: 2,
@@ -56,7 +56,7 @@ const list = [
     url: 'https://velog.io/@lokijoji2/ESLint%EB%9E%91-Prettier-%EC%93%B0%EA%B8%B0-%EA%B7%80%EC%B0%AE%EC%9C%BC%EB%A9%B4-%EC%9D%B4%EA%B1%B0-%EC%8D%A8-cak7e4uo',
     imageUrl:
       'https://velog.velcdn.com/images/lokijoji2/post/b3e61804-e1f9-4804-99c1-e45b03bf38a4/image.gif',
-    createDate: '22-08-10',
+    createDate: '22.08.10',
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ const list = [
     url: 'https://velog.io/@tmmoond8/React-Ionic%EC%9C%BC%EB%A1%9C-iOS-%EC%95%88%EB%93%9C-%EC%95%B1%EC%9D%84-%EB%A7%8C%EB%93%A0-%ED%9B%84%EA%B8%B0',
     imageUrl:
       'https://user-images.githubusercontent.com/11402468/180954960-02bdf638-7ca2-4ede-9e85-7f9f2b5afa25.png',
-    createDate: '22-08-10',
+    createDate: '22.08.10',
   },
   {
     id: 4,
@@ -78,6 +78,6 @@ const list = [
     url: 'https://velog.io/@phw3071/%EB%82%A1%EC%9D%80-%EC%BD%94%EB%93%9C-%EB%9C%AF%EC%96%B4%EA%B3%A0%EC%B9%98%EA%B8%B0-1',
     imageUrl:
       'https://velog.velcdn.com/images/phw3071/post/ecc52f1b-829c-4c59-83c3-f8f470550c2b/image.gif',
-    createDate: '22-08-10',
+    createDate: '22.08.10',
   },
 ];
