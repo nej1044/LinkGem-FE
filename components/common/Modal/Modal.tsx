@@ -47,7 +47,7 @@ export default function Modal({
       <ModalContainer visible={visible}>
         <Title>
           <CloseButton type="button" onClick={handleCloseModal}>
-            <ImageButton src="/static/image/X-vector.svg" alt="close" />
+            <ImageButton src="/images/icons/X-vector.svg" alt="close" />
           </CloseButton>
         </Title>
         <Content>{children}</Content>

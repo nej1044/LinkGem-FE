@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterLeft>
-        <img alt="linkgem-logo" src="/static/image/linkgem-logo-white.svg" />
+        <img alt="linkgem-logo" src="/images/linkgem-logo-white.svg" />
         <p>Copyright 2022 Linkgem. All rights reserved.</p>
       </FooterLeft>
       <FooterRight>

@@ -58,6 +58,9 @@ function JobInfo() {
           localStorage.getItem('auth') &&
           JSON.parse(localStorage.getItem('auth') as string);
         _auth.userPhase = 'REGISTERED';
+        _auth.careerYear = Number(joinUserInfo.year.split('년')[0]);
+        _auth.jobName = joinUserInfo.job;
+        _auth.nickname = joinUserInfo.nickname;
         localStorage.setItem('auth', JSON.stringify(_auth));
         window.location.href = '/';
       } catch (error) {

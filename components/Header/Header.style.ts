@@ -8,6 +8,10 @@ interface IUrlCategoryItem {
   current: boolean;
 }
 
+interface IHeaderLinkSave {
+  isLinkSave: boolean;
+}
+
 export const HeaderContainer = styled.header<IHeaderContainer>`
   background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
   width: 100%;
@@ -187,6 +191,12 @@ export const Initial = styled.div`
   &:hover {
     cursor: pointer;
   }
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 `;
 
 export const UrlCategory = styled.div`
@@ -221,4 +231,34 @@ export const SpaceCell = styled.div`
 
 export const UrlCategoryItem = styled.div<IUrlCategoryItem>`
   color: ${({ current }) => (current ? '#41FB6A' : '#FFFFFF')};
+`;
+
+export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
+  visibility: ${({ isLinkSave }) => (isLinkSave ? 'visible' : 'hidden')};
+  width: 430px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 7px 10px 7px 10px;
+  background-color: white;
+  margin-right: 10px;
+`;
+
+export const LinkText = styled.input`
+  width: 100%;
+  height: 22px;
+  top: 10px;
+  margin-left: 12px;
+  border-style: none;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  /* or 22px */
+
+  letter-spacing: -0.02em;
+  &:focus {
+    outline: none;
+  }
 `;
