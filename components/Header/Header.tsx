@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useState } from 'react';
+import React, { useEffect, memo, useState, ChangeEvent } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -18,9 +18,12 @@ import {
   UrlCategory,
   SpaceCell,
   UrlCategoryItem,
+  HeaderLinkSave,
+  LinkText,
 } from './Header.style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Axios from 'utils/Axios';
 
 function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
@@ -29,7 +32,12 @@ function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const history = useRouter();
   const [path, setPath] = useState('/');
+  const [urlText, setUrlText] = useState('');
+  const [isLinkSave, setIsLinkSave] = useState(false);
 
+  const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
+    setUrlText(e.target.value);
+  };
   const handleOpenModal = () => {
     setIsOpenModal(true);
   };
@@ -37,7 +45,29 @@ function Header() {
   const handleCloseJoinModal = () => {
     setIsOpenModal(false);
   };
-  console.log(joinUserInfo);
+
+  const handleLinkSave = async () => {
+    if (isLinkSave) {
+      await Axios('/api/v1/links', {
+        method: 'post',
+        data: {
+          url: urlText,
+        },
+      });
+      // const saveLink = await response?.data?.result;
+      // const _recentLink = recentLink.slice(0, 3);
+      // setRecentLink([{ ...saveLink }, ..._recentLink]);
+      // setIsSuccessLink(true);
+
+      setUrlText('');
+      setIsLinkSave(false);
+    } else {
+      setIsLinkSave(true);
+    }
+
+    console.log('urlText');
+    console.log(urlText);
+  };
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
@@ -52,8 +82,6 @@ function Header() {
     setPath(history.pathname);
   }, [history.pathname]);
 
-  console.log('userInfoState');
-  console.log(userInfoState);
   return (
     <HeaderContainer login={isLogin}>
       <LogoContainer>
@@ -87,7 +115,22 @@ function Header() {
       <ButtonContainer>
         {isLogin ? (
           <>
-            <LinkSaveButton>+링크저장</LinkSaveButton>
+            <HeaderLinkSave isLinkSave={isLinkSave}>
+              <Image
+                src="/images/icons/plus-icon.svg"
+                alt="plus-icon"
+                width={15}
+                height={16}
+              />
+              <LinkText
+                placeholder="링크를 넣어 저장하세요 Https://..."
+                onChange={handleInputUrl}
+                value={urlText}
+              />
+            </HeaderLinkSave>
+            <LinkSaveButton onClick={handleLinkSave}>
+              {isLinkSave ? '' : '+'} 링크저장
+            </LinkSaveButton>
             <AlarmImage>
               <Image
                 priority
