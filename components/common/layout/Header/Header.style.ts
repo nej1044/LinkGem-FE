@@ -39,6 +39,23 @@ export const LogoContainer = styled.div`
   }
 `;
 
+export const MenuContainer = styled.ul`
+  display: flex;
+  align-items: center;
+  width: 60%;
+`;
+
+export const Menu = styled.li`
+  box-sizing: border-box;
+  padding: 16px 24px 0px 24px;
+  font-family: 'Poppins';
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  color: ${(props: { current: boolean }) =>
+    props.current ? '#41FB6A' : '#ffffff'};
+  cursor: pointer;
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;

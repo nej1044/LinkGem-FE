@@ -41,14 +41,14 @@ const Gembox = (props: IPropsGembox) => {
   const fetchGembox = useCallback(async () => {
     try {
       const result = await axios.get(
-        `/api/v1/gemboxes/${router.query.gemBoxId}`,
+        `/api/v1/gemboxes/${router.query.gemBoxId || ''}`,
         {
           headers: {
             Authorization:
               'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
           },
           params: {
-            id: Number(router.query.gemBoxId),
+            id: Number(router.query.gemBoxId || 0),
           },
         }
       );

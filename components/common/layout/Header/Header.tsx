@@ -15,9 +15,15 @@ import {
   AlarmImage,
   Initial,
   LogoImage,
+  MenuContainer,
+  Menu,
 } from './Header.style';
+import { headerFormData } from './form';
+import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/router';
 
 function Header() {
+  const router = useRouter();
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
   const [user, setUser] = useRecoilState(userInfo);
@@ -52,6 +58,10 @@ function Header() {
     }
   };
 
+  const movePage = (url: string) => () => {
+    router.push(`${url}`);
+  };
+
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
@@ -71,6 +81,20 @@ function Header() {
 
         <span>Beta</span>
       </LogoContainer>
+      <MenuContainer>
+        {headerFormData.map((li) => (
+          <Menu
+            onClick={movePage(li.url)}
+            key={uuidv4()}
+            current={
+              router.asPath === li.url ||
+              (li.url !== '/' && router.asPath.includes(li.url))
+            }
+          >
+            {li.title}
+          </Menu>
+        ))}
+      </MenuContainer>
       <ButtonContainer>
         {isLogin ? (
           <>
