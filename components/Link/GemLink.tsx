@@ -30,6 +30,7 @@ interface GemLinkProps {
   createDate: string;
   isFavorites: boolean;
   id: number;
+  getLink: () => void;
 }
 function GemLink({
   title,
