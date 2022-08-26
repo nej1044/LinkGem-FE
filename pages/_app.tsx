@@ -10,11 +10,9 @@ import Layout from '../components/common/layout';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
-      {/* <HeaderContainer /> */}
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      {/* <Footer /> */}
     </RecoilRoot>
   );
 }
