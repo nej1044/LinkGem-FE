@@ -40,6 +40,8 @@ const userInfo = atom({
     mailEmail: '',
     name: '',
     userPhase: '',
+    jobName: '',
+    profileImageUrl: '',
   },
 });
 
