@@ -24,7 +24,7 @@ const Sidebar = () => {
       ) : (
         <S.Sidebar>
           <S.ItemWrapper>
-            {sidebarFormData[current].map((item: IItem) => (
+            {sidebarFormData[current]?.map((item: IItem) => (
               <S.Item key={uuidv4()} onClick={selectMenu(item.url)}>
                 <S.SidebarIcon src={item.icon} alt="setting-icon" />
                 <S.ItemTitle>{item.title}</S.ItemTitle>
