@@ -20,12 +20,16 @@ import {
   UrlCategoryItem,
   HeaderLinkSave,
   LinkText,
+  MenuContainer,
+  Menu,
 } from './Header.style';
-import Link from 'next/link';
+import { headerFormData } from './form';
+import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 import Axios from 'utils/Axios';
 
 function Header() {
+  const router = useRouter();
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
@@ -76,6 +80,9 @@ function Header() {
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setUserInfoState({ ...auth });
   }, [joinUserInfo.accessToken, isLogin]);
+  console.log('joinUserInfo');
+  console.log(user.nickname);
+  console.log(user.nickname.slice(0, 2));
 
   useEffect(() => {
     setIsLogin(useLogin());
@@ -83,7 +90,7 @@ function Header() {
   }, [history.pathname]);
 
   return (
-    <HeaderContainer login={isLogin}>
+    <HeaderContainer isLogin={isLogin}>
       <LogoContainer>
         <Link href="/">
           <ImageContainer>
@@ -92,26 +99,20 @@ function Header() {
         </Link>
         <span>Beta</span>
       </LogoContainer>
-      {isLogin ? (
-        <UrlCategory>
-          <Link href="/">
-            <a>
-              <UrlCategoryItem current={path === '/'}>Home</UrlCategoryItem>
-            </a>
-          </Link>
-          <Link href="/gembox">
-            <a>
-              <UrlCategoryItem current={path === '/gembox'}>
-                My Gem Box
-              </UrlCategoryItem>
-            </a>
-          </Link>
-        </UrlCategory>
-      ) : (
-        ''
-      )}
-
-      <SpaceCell />
+      <MenuContainer>
+        {headerFormData.map((li) => (
+          <Menu
+            onClick={movePage(li.url)}
+            key={uuidv4()}
+            current={
+              router.asPath === li.url ||
+              (li.url !== '/' && router.asPath.includes(li.url))
+            }
+          >
+            {li.title}
+          </Menu>
+        ))}
+      </MenuContainer>
       <ButtonContainer>
         {isLogin ? (
           <>

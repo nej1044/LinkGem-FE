@@ -17,7 +17,9 @@ import {
   LinkEtcXButton,
 } from './GemLink.style';
 import LinkCopy from 'components/LinkCopy';
-import Axios from 'utils/Axios';
+import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from 'store/store';
 
 interface GemLinkProps {
   title: string;
@@ -28,7 +30,6 @@ interface GemLinkProps {
   createDate: string;
   isFavorites: boolean;
   id: number;
-  getLink?: () => void;
 }
 function GemLink({
   title,
@@ -39,10 +40,9 @@ function GemLink({
   createDate,
   isFavorites,
   id,
-  getLink,
 }: GemLinkProps) {
   const [isCopy, setIsCopy] = useState(false);
-
+  const user = useRecoilValue(userInfo);
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
   const copyToClipboard = (val: string) => {
@@ -68,10 +68,17 @@ function GemLink({
 
   const handleFavorite = async () => {
     try {
-      await Axios(`/api/v1/links/${id}`, {
-        method: 'patch',
-        data: { isFavorites: !isFavorites },
-      });
+      await axios.patch(
+        `/api/v1/links/${id}`,
+        {
+          isFavorites: !isFavorites,
+        },
+        {
+          headers: {
+            Authorization: user.accessToken,
+          },
+        }
+      );
       setIsBookMark(!isBookMark);
     } catch (error: any) {
       console.log('링크 좋아요 에러가 발생했습니다');
@@ -81,14 +88,15 @@ function GemLink({
 
   const handleLinkDelete = async () => {
     try {
-      await Axios(`/api/v1/links`, {
-        method: 'delete',
+      await axios.delete(`/api/v1/links`, {
+        headers: {
+          Authorization: user.accessToken,
+        },
         data: {
           ids: [id],
         },
       });
       setIsBookMark(!isBookMark);
-      getLink?.();
     } catch (error: any) {
       console.log('링크 삭제 에러가 발생했습니다');
       console.log(error);
@@ -168,14 +176,14 @@ function GemLink({
               src="/images/icons/link-gemboxplus-icon.svg"
               alt="memo-img"
             />
-            <span>잼박스 추가</span>
+            <span>젬박스 추가</span>
           </LinkEtcButtonContainer>
           <LinkEtcButtonContainer>
             <LinkEtcButton
               src="/images/icons/link-gemboxchange-icon.svg"
               alt="memo-img"
             />
-            <span>잼박스 변경</span>
+            <span>젬박스 변경</span>
           </LinkEtcButtonContainer>
           <LinkEtcButtonContainer>
             <LinkEtcButton

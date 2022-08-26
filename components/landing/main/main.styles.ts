@@ -6,8 +6,7 @@ export const Wrapper = styled.main`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 86vh;
-  min-height: 560px;
+  height: 83vh;
   color: white;
   background-color: #0f0223;
 `;

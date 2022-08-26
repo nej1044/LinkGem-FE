@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const GemCrewPickContainer = styled.section`
   padding-top: 80px;
   padding-left: 240px;
+  padding-right: 240px;
+  margin-top: 80px;
   padding-bottom: 160px;
 `;
 

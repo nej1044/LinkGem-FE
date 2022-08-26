@@ -25,6 +25,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const sectionTitle = styled.h2`
+  color: #ffffff;
   margin-bottom: 8px;
   font-weight: 800;
   line-height: 72px;
@@ -122,59 +123,59 @@ export const DoughnutBall = styled(PinkBall)`
 `;
 
 export const SaveLinkText = styled.div`
-  transform: translate(0, 420%);
+  transform: translate(0, 230%);
 `;
 
 export const GreenClip = styled.img`
   width: 35%;
-  transform: translate(50%, -40%) rotate(50deg);
+  transform: translate(50%, -60%) rotate(50deg);
   animation: green-bounce 2s infinite;
   animation-delay: 2s;
   @keyframes green-bounce {
     0% {
-      transform: translate(50%, -40%) rotate(50deg);
+      transform: translate(50%, -60%) rotate(50deg);
     }
     50% {
-      transform: translate(50%, -45%) rotate(50deg);
+      transform: translate(50%, -65%) rotate(50deg);
     }
     100% {
-      transform: translate(50%, -40%) rotate(50deg);
+      transform: translate(50%, -60%) rotate(50deg);
     }
   }
 `;
 
 export const PinkClip = styled.img`
   width: 35%;
-  transform: translate(0%, -20%) rotate(40deg);
+  transform: translate(0%, -40%) rotate(40deg);
   animation: pink-bounce 2s infinite;
   animation-delay: 2.5s;
   @keyframes pink-bounce {
     0% {
-      transform: translate(0%, -20%) rotate(40deg);
+      transform: translate(0%, -40%) rotate(40deg);
     }
     50% {
-      transform: translate(0%, -25%) rotate(40deg);
+      transform: translate(0%, -45%) rotate(40deg);
     }
     100% {
-      transform: translate(0%, -20%) rotate(40deg);
+      transform: translate(0%, -40%) rotate(40deg);
     }
   }
 `;
 
 export const GreyClip = styled.img`
   width: 25%;
-  transform: translate(-80%, -30%) rotate(30deg);
+  transform: translate(-80%, -50%) rotate(30deg);
   animation: grey-bounce 2s infinite;
   animation-delay: 1s;
   @keyframes grey-bounce {
     0% {
-      transform: translate(-80%, -30%) rotate(30deg);
+      transform: translate(-80%, -50%) rotate(30deg);
     }
     50% {
-      transform: translate(-80%, -35%) rotate(30deg);
+      transform: translate(-80%, -55%) rotate(30deg);
     }
     100% {
-      transform: translate(-80%, -30%) rotate(30deg);
+      transform: translate(-80%, -50%) rotate(30deg);
     }
   }
 `;

@@ -5,22 +5,16 @@ import { onErrorGembox } from 'utils/onError';
 import * as S from '../gembox.styles';
 import { v4 as uuidv4 } from 'uuid';
 import { useRecoilState } from 'recoil';
-import {
-  createState,
-  deleteState,
-  editState,
-  linkIdsState,
-  modalTitleState,
-} from 'store/store';
+import { gemboxModalState, linkIdsState } from 'store/store';
+import { getTotalLinkData } from 'utils/getTotalLinkData';
 
 export const GemCard = (props: IPropsGemCard) => {
+  const [modalState, setModalState] = useRecoilState(gemboxModalState);
   const [name, setName] = useState<string>('');
   const [linkIds, setLinkIds] = useRecoilState<number[]>(linkIdsState);
   const [error, setError] = useState<string>('');
-  const [isCreate, setIsCreate] = useRecoilState(createState);
-  const [isEdit, setIsEdit] = useRecoilState(editState);
-  const [isDelete, setIsDelete] = useRecoilState(deleteState);
-  const [, setModalTitle] = useRecoilState(modalTitleState);
+
+  const totalData = getTotalLinkData();
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -63,7 +57,11 @@ export const GemCard = (props: IPropsGemCard) => {
         }
       );
       alert('잼박스가 생성되었습니다.');
-      setIsCreate(false);
+      setModalState({
+        ...modalState,
+        modalTitle: 'MY GEMBOX',
+        boxState: '',
+      });
     } catch (error) {
       console.log(error);
     }
@@ -89,8 +87,11 @@ export const GemCard = (props: IPropsGemCard) => {
         }
       );
       alert('잼박스 이름이 수정되었습니다.');
-      setIsEdit(false);
-      setModalTitle('MY GEMBOX');
+      setModalState({
+        ...modalState,
+        modalTitle: 'MY GEMBOX',
+        boxState: '',
+      });
     } catch (error) {
       console.log(error);
     }
@@ -108,8 +109,11 @@ export const GemCard = (props: IPropsGemCard) => {
         },
       });
       alert('잼박스가 삭제되었습니다.');
-      setIsDelete(false);
-      setModalTitle('MY GEMBOX');
+      setModalState({
+        ...modalState,
+        modalTitle: 'MY GEMBOX',
+        boxState: '',
+      });
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +121,7 @@ export const GemCard = (props: IPropsGemCard) => {
 
   return (
     <>
-      {isCreate && props.i === 0 && (
+      {modalState.boxState === 'isCreate' && props.i === 0 && (
         <S.CreateWrapper>
           <S.WriteList>
             <S.GemModalText>잼박스 이름</S.GemModalText>
@@ -132,12 +136,12 @@ export const GemCard = (props: IPropsGemCard) => {
           <S.WriteList>
             <S.GemModalText>잼박스 추가</S.GemModalText>
             <S.GemLinkWrapper>
-              {props.totalData?.map((el: IDataType) => (
+              {totalData?.map((el: IDataType) => (
                 <S.LinkItem key={uuidv4()} onClick={onClickLink(el.id)}>
                   <S.CheckBox isChecked={linkIds.includes(el.id)}>
                     <S.CheckIcon color="blue" />
                   </S.CheckBox>
-                  <span>{el.title}</span>
+                  <S.DataTitle>{el.title}</S.DataTitle>
                 </S.LinkItem>
               ))}
             </S.GemLinkWrapper>
@@ -145,7 +149,7 @@ export const GemCard = (props: IPropsGemCard) => {
           <S.GemBoxButton onClick={onClickSubmit}>저장</S.GemBoxButton>
         </S.CreateWrapper>
       )}
-      {isDelete && props.el.id === props.selectedId && (
+      {modalState.boxState === 'isDelete' && props.el.id === props.selectedId && (
         <S.DeleteWrapper>
           <S.DeleteTitle>정말 잼박스를 삭제할까요?</S.DeleteTitle>
           <div>
@@ -159,8 +163,11 @@ export const GemCard = (props: IPropsGemCard) => {
           <S.ButtonWrapper>
             <S.GemBoxButton
               onClick={() => {
-                setIsDelete(false);
-                setModalTitle('MY GEMBOX');
+                setModalState({
+                  ...modalState,
+                  modalTitle: 'MY GEMBOX',
+                  boxState: '',
+                });
               }}
               style={{ padding: '2vh 1.2vw', backgroundColor: '#0F0223' }}
             >
@@ -175,28 +182,7 @@ export const GemCard = (props: IPropsGemCard) => {
           </S.ButtonWrapper>
         </S.DeleteWrapper>
       )}
-      {isEdit && props.el.id === props.selectedId && (
-        <S.WriteWrapper>
-          <S.WriteList>
-            <S.GemModalText>현재 잼박스</S.GemModalText>
-            <S.GemModalInput
-              type="text"
-              defaultValue={props.el.name}
-              disabled={isEdit}
-            />
-          </S.WriteList>
-          <S.WriteList>
-            <S.GemModalText>수정할 잼박스 이름</S.GemModalText>
-            <S.GemModalInput
-              type="text"
-              placeholder="수정할 잼박스 이름을 적어주세요"
-              onChange={onChangeName}
-            />
-          </S.WriteList>
-          <S.GemBoxButton onClick={onClickEdit}>저장</S.GemBoxButton>
-        </S.WriteWrapper>
-      )}
-      {!isEdit && !isDelete && !isCreate && (
+      {modalState.boxState === '' && (
         <S.GemCard>
           <S.GemImg src={props.el?.imageUrl} onError={onErrorGembox} />
           <S.GemInfo>
@@ -209,6 +195,27 @@ export const GemCard = (props: IPropsGemCard) => {
             </div>
           </S.GemInfo>
         </S.GemCard>
+      )}
+      {modalState.boxState === 'isEdit' && (
+        <S.WriteWrapper>
+          <S.WriteList>
+            <S.GemModalText>현재 잼박스</S.GemModalText>
+            <S.GemModalInput
+              type="text"
+              defaultValue={props.el.name}
+              disabled={modalState.boxState === 'isEdit'}
+            />
+          </S.WriteList>
+          <S.WriteList>
+            <S.GemModalText>수정할 잼박스 이름</S.GemModalText>
+            <S.GemModalInput
+              type="text"
+              placeholder="수정할 잼박스 이름을 적어주세요"
+              onChange={onChangeName}
+            />
+          </S.WriteList>
+          <S.GemBoxButton onClick={onClickEdit}>저장</S.GemBoxButton>
+        </S.WriteWrapper>
       )}
     </>
   );

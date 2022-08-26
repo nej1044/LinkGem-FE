@@ -6,37 +6,47 @@ import * as S from '../gembox.styles';
 import GemCard from './gemcard';
 import { IDataType, IPropsGemboxModal } from '../gembox.types';
 import { v4 as uuidv4 } from 'uuid';
-import { ChangeEvent, useState } from 'react';
-import {
-  createState,
-  deleteMemoState,
-  deleteState,
-  editState,
-  memoState,
-  modalTitleState,
-} from 'store/store';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { gemboxModalState } from 'store/store';
 import { useRecoilState } from 'recoil';
 import { DeleteOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 const GemboxModal = (props: IPropsGemboxModal) => {
-  const [isCreate] = useRecoilState(createState);
-  const [isEdit, setIsEdit] = useRecoilState(editState);
-  const [isDelete, setIsDelete] = useRecoilState(deleteState);
-  const [modalTitle, setModalTitle] = useRecoilState(modalTitleState);
-  const [isMemo] = useRecoilState(memoState);
+  const [data, setDate] = useState<IDataType[] | any>([]);
+  const [modalState, setModalState] = useRecoilState(gemboxModalState);
   const [selectedId, setSelectedId] = useState<number>(0);
   const [memo, setMemo] = useState('');
-  const [isMemoDelete, setIsMemoDelete] = useRecoilState(deleteMemoState);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const result = await axios.get('/api/v1/gemboxes', {
+        headers: {
+          Authorization:
+            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+        },
+      });
+      setDate(result?.data?.result.contents);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const openEdit = (id: number) => () => {
-    setIsEdit(true);
-    setModalTitle('잼박스 수정');
     setSelectedId(id);
+    setModalState({
+      ...modalState,
+      boxState: 'isEdit',
+      modalTitle: '잼박스 수정',
+    });
   };
 
   const openDelete = (id: number) => () => {
-    setIsDelete(true);
-    setModalTitle('');
+    setModalState({
+      ...modalState,
+      boxState: 'isDelete',
+      modalTitle: '',
+    });
     setSelectedId(id);
   };
 
@@ -44,29 +54,36 @@ const GemboxModal = (props: IPropsGemboxModal) => {
     setMemo(event.target.value);
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [modalState]);
+
   return (
     <Modal
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
-      open={props.open}
-      onClose={props.handleClose}
+      open={modalState.open}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
       }}
     >
-      <Fade in={props.open}>
+      <Fade in={modalState.open}>
         <Box sx={S.style}>
           <S.ModalClose
-            onClick={() => {
-              props.handleClose();
-              setIsMemoDelete(false);
-            }}
+            onClick={() =>
+              setModalState({
+                ...modalState,
+                open: false,
+                boxState: '',
+                modalTitle: 'MY GEMBOX',
+              })
+            }
           />
           <S.GembaxWrapper>
-            <S.ModalTitle>{modalTitle}</S.ModalTitle>
-            {isMemo && !isMemoDelete && (
+            <S.ModalTitle>{modalState.modalTitle}</S.ModalTitle>
+            {modalState.boxState === 'isMemo' && (
               <S.MemoWrapper>
                 <S.MemoArea
                   onChange={onChangeMemo}
@@ -78,8 +95,10 @@ const GemboxModal = (props: IPropsGemboxModal) => {
                   <DeleteOutlined
                     style={{ fontSize: '1.6vw' }}
                     onClick={() => {
-                      setModalTitle('');
-                      setIsMemoDelete(true);
+                      setModalState({
+                        ...modalState,
+                        boxState: 'isMemoDelete',
+                      });
                     }}
                   />
                   <S.GemBoxButton
@@ -91,7 +110,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
                 </S.MemoFooter>
               </S.MemoWrapper>
             )}
-            {isMemoDelete && (
+            {modalState.boxState === 'isMemoDelete' && (
               <S.MemoDeleteWrapper>
                 <S.DeleteTitle>정말 메모를 삭제할까요?</S.DeleteTitle>
                 <div>
@@ -100,8 +119,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
                 <S.ButtonWrapper>
                   <S.GemBoxButton
                     onClick={() => {
-                      setIsMemoDelete(false);
-                      setModalTitle('잼키퍼 메모장');
+                      setModalState({ ...modalState, boxState: 'isMemo' });
                     }}
                     style={{ padding: '2vh 1.2vw', backgroundColor: '#0F0223' }}
                   >
@@ -116,25 +134,21 @@ const GemboxModal = (props: IPropsGemboxModal) => {
                 </S.ButtonWrapper>
               </S.MemoDeleteWrapper>
             )}
-            {!isMemo && (
-              <S.GemWrapper>
-                {props.data?.map((el: IDataType, i: number) => (
-                  <GemCard
-                    key={uuidv4()}
-                    el={el}
-                    i={i}
-                    openEdit={openEdit}
-                    openDelete={openDelete}
-                    selectedId={selectedId}
-                    setOpen={props.setOpen}
-                    totalData={props.totalData}
-                  />
-                ))}
-              </S.GemWrapper>
-            )}
+            <S.GemWrapper>
+              {data?.map((el: IDataType, i: number) => (
+                <GemCard
+                  key={uuidv4()}
+                  el={el}
+                  i={i}
+                  openEdit={openEdit}
+                  openDelete={openDelete}
+                  selectedId={selectedId}
+                />
+              ))}
+            </S.GemWrapper>
           </S.GembaxWrapper>
-          {!isEdit && !isDelete && !isCreate && !isMemo && (
-            <S.ModalButton onClick={props.openCreate}>
+          {modalState.boxState === '' && (
+            <S.ModalButton onClick={props.openCreate()}>
               + 추가할 수 있는 잼박스
               <span>{`${8 - props.data?.length}개`}</span>
             </S.ModalButton>
