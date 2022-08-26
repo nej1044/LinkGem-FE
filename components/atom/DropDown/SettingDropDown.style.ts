@@ -29,7 +29,7 @@ export const DropDownListContainer = styled.div`
 `;
 
 export const DropDownList = styled.ul`
-  height: 250px;
+  height: 300px;
   padding-top: 12px;
   background: white;
   color: black;
