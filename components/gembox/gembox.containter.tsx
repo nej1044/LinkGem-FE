@@ -104,7 +104,7 @@ const Gembox = () => {
   const totalCount = getTotalLinkCount();
   const totalData = getTotalLinkData();
 
-  const openCreate = (id?: number) => () => {
+  const openCreate = () => {
     if (data.length === 8) return;
     setOpen(true);
     setModalTitle('잼박스 추가');

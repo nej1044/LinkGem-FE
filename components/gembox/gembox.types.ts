@@ -37,7 +37,7 @@ export interface IPropsGemBoxUI {
   gemboxTitle: string;
   setGembox: (el?: IDataType) => () => void;
   totalData: IDataType[] | any;
-  openCreate: (id?: number) => () => void;
+  openCreate: () => void;
   onClickPick: (el: ILinkDataType) => () => void;
   onClickFavor: () => void;
   startPage: number;
