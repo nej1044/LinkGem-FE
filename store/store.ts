@@ -45,39 +45,18 @@ const userInfo = atom({
   },
 });
 
-export const createState = atom({
-  key: `createState/${v1()}`,
-  default: false,
-});
-
-export const editState = atom({
-  key: `createState/${v1()}`,
-  default: false,
-});
-
-export const deleteState = atom({
-  key: `deleteState/${v1()}`,
-  default: false,
-});
-
-export const memoState = atom({
-  key: `memoState/${v1()}`,
-  default: false,
-});
-
-export const modalTitleState = atom({
-  key: `modalTitle/${v1()}`,
-  default: 'MY GEMBOX',
+export const gemboxModalState = atom({
+  key: `gemboxModalState/${v1()}`,
+  default: {
+    open: false,
+    boxState: '',
+    modalTitle: 'MY GEMBOX',
+  },
 });
 
 export const linkIdsState = atom({
   key: `linkIds/${v1()}`,
   default: [0],
-});
-
-export const deleteMemoState = atom({
-  key: `memoDeleteState/${v1()}`,
-  default: false,
 });
 
 export { loginState, joinState, modalState, userInfo };
