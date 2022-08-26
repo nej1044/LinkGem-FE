@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import Link from 'components/Link';
 import FirstLink from 'components/Link/FirstLink';
 // import { useRouter } from 'next/router';
@@ -24,8 +24,21 @@ interface IUserInfo {
   isFavorites: boolean;
 }
 
-function RecentSaveLink({ recentLink }) {
+function RecentSaveLink({ recentLink, getLink }: IRecentSaveProps) {
   const user = useRecoilValue(userInfo);
+  const [size, setSize] = useState(4);
+
+  const handleLinkSize = useCallback(() => {
+    console.log('asdf');
+    if (size === 4) {
+      setSize(8);
+    } else {
+      setSize(4);
+    }
+  }, [recentLink, size]);
+  console.log('size');
+  console.log(size);
+  useEffect(() => {}, [size]);
   return (
     <RecentSaveLinkContainer>
       <RecentSaveLinkTitleOption>
@@ -49,6 +62,7 @@ function RecentSaveLink({ recentLink }) {
                 createDate={link?.createDate}
                 isFavorites={link?.isFavorites}
                 id={link?.id}
+                getLink={getLink}
               />
             ))}
         {recentLink.length < 1 && <FirstLink name={user?.nickname} />}
