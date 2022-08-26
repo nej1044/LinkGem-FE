@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.footer`
+  box-sizing: border-box;
   width: 100%;
   height: 141px;
   display: flex;
