@@ -54,9 +54,9 @@ function SettingDropdown({ dropDownList }: settingDropdownProps) {
         </DropDownHeaderText>
 
         {!isOpen ? (
-          <ImageButton src="/static/image/Arrow-Bottom.svg" alt="close" />
+          <ImageButton src="/images/icons/Arrow-Bottom.svg" alt="close" />
         ) : (
-          <ImageButton src="/static/image/Arrow-Top.svg" alt="close" />
+          <ImageButton src="/images/icons/Arrow-Top.svg" alt="close" />
         )}
       </DropDownHeader>
       {isOpen && (

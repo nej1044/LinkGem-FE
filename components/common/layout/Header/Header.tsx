@@ -28,6 +28,8 @@ import { useRouter } from 'next/router';
 import Axios from 'utils/Axios';
 import { headerFormData } from './form';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/router';
+import Axios from 'utils/Axios';
 
 function Header() {
   const router = useRouter();
@@ -69,15 +71,13 @@ function Header() {
     } else {
       setIsLinkSave(true);
     }
-
     console.log('urlText');
     console.log(urlText);
   };
 
-  const movePage = (url: string) => () => {
-    router.push(`${url}`);
+    console.log('urlText');
+    console.log(urlText);
   };
-
   useEffect(() => {
     if (joinUserInfo.accessToken) {
       setIsOpenModal(true);
@@ -91,6 +91,11 @@ function Header() {
   //   setIsLogin(useLogin());
   //   setPath(history.pathname);
   // }, [history.pathname]);
+
+  useEffect(() => {
+    setIsLogin(useLogin());
+    setPath(history.pathname);
+  }, [history.pathname]);
 
   return (
     <HeaderContainer login={isLogin}>

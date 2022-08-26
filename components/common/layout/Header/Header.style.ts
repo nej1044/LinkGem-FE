@@ -209,6 +209,12 @@ export const Initial = styled.div`
   &:hover {
     cursor: pointer;
   }
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 `;
 
 export const UrlCategory = styled.div`

@@ -146,6 +146,7 @@ export default function Setting() {
     <SettingContainer>
       <SideMenu>
         <SideMenuButton>
+          <img src="/images/icons/setting-icon.svg" alt="setting-icon" />
           <span>설정</span>
         </SideMenuButton>
       </SideMenu>
@@ -187,10 +188,7 @@ export default function Setting() {
           <SettingLineBox>
             <SettingCategory>로그인 계정</SettingCategory>
             <SettingDisabledInfo type="none">
-              <img
-                src="/static/image/icons/setting-naver-logo.svg"
-                alt="naver-logo"
-              />
+              <img src="images/icons/setting-naver-logo.svg" alt="naver-logo" />
               <span>{form.email}</span>
             </SettingDisabledInfo>
           </SettingLineBox>
