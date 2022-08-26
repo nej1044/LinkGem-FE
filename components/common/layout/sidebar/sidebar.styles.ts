@@ -6,6 +6,35 @@ export const Sidebar = styled.ul`
   padding-top: 12vh;
 `;
 
+export const ItemWrapper = styled.div`
+  width: 160px;
+  border-radius: 8px;
+  background-color: #f3edff;
+`;
+
+export const SidebarIcon = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+`;
+
+export const Item = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 10px 20px;
+  cursor: pointer;
+`;
+
+export const ItemTitle = styled.div`
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: #1a1b1d;
+`;
+
 export const GemboxList = styled.li`
   border-bottom: 1px solid #cecece;
 `;

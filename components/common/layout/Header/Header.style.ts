@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface IHeaderContainer {
-  login: boolean;
+  isLogin: boolean;
 }
 
 interface IUrlCategoryItem {
@@ -9,7 +9,7 @@ interface IUrlCategoryItem {
 }
 
 export const HeaderContainer = styled.header<IHeaderContainer>`
-  background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
+  background-color: ${({ isLogin }) => (isLogin ? '#29115B' : '#0f0223')};
   width: 100%;
   height: 10vh;
   max-height: 84px;
@@ -54,7 +54,7 @@ export const MenuContainer = styled.ul`
 
 export const Menu = styled.li`
   box-sizing: border-box;
-  padding: 16px 24px 0px 24px;
+  padding: 16px 0px 0px 60px;
   font-family: 'Poppins';
   font-size: 18px;
   letter-spacing: -0.03em;

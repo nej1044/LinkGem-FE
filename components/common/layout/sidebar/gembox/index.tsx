@@ -20,7 +20,11 @@ export type IDataType = {
   title: string;
 };
 
-const GemboxSidebar = (props) => {
+interface IGemBoxSideBarProps {
+  selectMenu: (menu: string, url?: string | number) => () => void;
+}
+
+const GemboxSidebar = (props: IGemBoxSideBarProps) => {
   const router = useRouter();
   const [modalState, setModalState] = useRecoilState(gemboxModalState);
   const [data, setDate] = useState<IDataType[] | any>([]);
