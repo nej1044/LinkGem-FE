@@ -146,7 +146,6 @@ export default function Setting() {
     <SettingContainer>
       <SideMenu>
         <SideMenuButton>
-          <img src="/static/image/icons/setting-icon.svg" alt="setting-icon" />
           <span>설정</span>
         </SideMenuButton>
       </SideMenu>
