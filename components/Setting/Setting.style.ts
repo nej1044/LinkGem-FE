@@ -75,7 +75,7 @@ export const SettingBasicInfo = styled.section`
     margin: 16px 0 0 0;
     border: 0.5px solid #cecece;
     width: 90%;
-    background: #cecece;
+    background-color: #cecece;
   }
 `;
 
@@ -95,7 +95,7 @@ export const SettingInfo = styled.input`
   display: flex;
   align-items: center;
   text-indent: 12px;
-  background: #ffffff;
+  background-color: #ffffff;
   /* gray/gray2 */
 
   border: 1px solid #0f0223;
