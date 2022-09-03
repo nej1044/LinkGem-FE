@@ -12,6 +12,7 @@ import {
   SettingDisabledInfo,
   SettingImage,
   SettingImageBox,
+  SettingImageHover,
   SettingInfo,
   SettingInfoContainer,
   SettingLineBox,
@@ -155,10 +156,17 @@ export default function Setting() {
             <SettingImageBox>
               <SettingImage
                 src={imgUrl || 'images/test.jpeg'}
-                onClick={uploadImage}
                 alt="setting-image"
               />
-
+              <SettingImageHover onClick={uploadImage}>
+                <div>
+                  <img
+                    src={'images/icons/setting-image-icon.svg'}
+                    alt="setting-image"
+                  />
+                </div>
+                <img src={imgUrl || 'images/test.jpeg'} alt="setting-image" />
+              </SettingImageHover>
               <input
                 id="input-file"
                 type="file"

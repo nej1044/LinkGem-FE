@@ -141,37 +141,52 @@ export const SettingDisabledInfo = styled.div<{ type: string }>`
 
 export const SettingImageBox = styled.div`
   position: relative;
-  div {
-    opacity: 0;
-  }
-  img:hover div {
-    opacity: 1;
+  img {
+    transition: 0.4s;
   }
 `;
 
 export const SettingImage = styled.img`
+  position: relative;
   width: 140px;
   height: 140px;
   border-radius: 16px;
-
-  &:hover {
+  opacity: 1;
+  /* &:hover {
     cursor: pointer;
-  }
+    opacity: 0;
+  } */
 `;
 
 export const SettingImageHover = styled.div`
   position: absolute;
-  top: 0px;
-  width: 140px;
-  height: 140px;
-  border-radius: 16px;
+  top: 0;
   display: flex;
   justify-content: center;
-
+  align-items: center;
+  opacity: 0;
+  div {
+    position: absolute;
+    opacity: 1;
+    z-index: 3;
+    img {
+      width: 32px;
+      height: 32px;
+      opacity: 1;
+      z-index: 1;
+      filter: brightness(100%);
+    }
+  }
+  img {
+    width: 140px;
+    height: 140px;
+    border-radius: 16px;
+    filter: brightness(0.5);
+  }
   &:hover {
+    opacity: 1;
     cursor: pointer;
   }
-  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 export const InfoBox = styled.div`
