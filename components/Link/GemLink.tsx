@@ -16,7 +16,8 @@ import {
   LinkEtcButton,
   LinkEtcXButton,
 } from './GemLink.style';
-import LinkCopy from 'components/LinkCopy';
+import { getDate } from 'utils/getDate';
+
 import Axios from 'utils/Axios';
 
 interface GemLinkProps {
@@ -29,6 +30,7 @@ interface GemLinkProps {
   isFavorites: boolean;
   id: number;
   getLink?: () => void;
+  copyToClipboard: (url: string) => void;
 }
 function GemLink({
   title,
@@ -40,31 +42,10 @@ function GemLink({
   isFavorites,
   id,
   getLink,
+  copyToClipboard,
 }: GemLinkProps) {
-  const [isCopy, setIsCopy] = useState(false);
-
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
-  const copyToClipboard = (val: string) => {
-    const element = document.createElement('textarea');
-    element.value = val;
-    element.setAttribute('readonly', '');
-    element.style.position = 'absolute';
-    element.style.left = '-9999px';
-    document.body.appendChild(element);
-    element.select();
-    const returnValue = document.execCommand('copy');
-    document.body.removeChild(element);
-
-    if (!returnValue) {
-      console.log('복사하기가 실패했습니다');
-    }
-    setIsCopy(true);
-
-    setTimeout(() => {
-      setIsCopy(false);
-    }, 3000);
-  };
 
   const handleFavorite = async () => {
     try {
@@ -128,7 +109,7 @@ function GemLink({
         </LinkDetailDescription>
         <LinkDetailSetting>
           <LinkDetailSettingDate>
-            {createDate || '22.07.13'}
+            {getDate(createDate) || '22.07.13'}
           </LinkDetailSettingDate>
           <LinkDetailSettingOption>
             <Image
@@ -192,7 +173,6 @@ function GemLink({
           />
         </LinkEtcContainer>
       )}
-      {isCopy && <LinkCopy />}
     </LinkContainer>
   );
 }

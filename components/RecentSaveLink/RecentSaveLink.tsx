@@ -24,8 +24,11 @@ interface IUserInfo {
   isFavorites: boolean;
 }
 
-
-function RecentSaveLink({ recentLink, getLink }: IRecentSaveProps) {
+function RecentSaveLink({
+  recentLink,
+  getLink,
+  copyToClipboard,
+}: IRecentSaveProps) {
   const user = useRecoilValue(userInfo);
   const [size, setSize] = useState(4);
 
@@ -64,6 +67,7 @@ function RecentSaveLink({ recentLink, getLink }: IRecentSaveProps) {
                 isFavorites={link?.isFavorites}
                 id={link?.id}
                 getLink={getLink}
+                copyToClipboard={copyToClipboard}
               />
             ))}
         {recentLink.length < 1 && <FirstLink name={user?.nickname} />}

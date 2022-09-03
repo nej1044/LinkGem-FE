@@ -33,4 +33,5 @@ export interface ILinkSaveProps {
 export interface IRecentSaveProps {
   recentLink: TLinkSave[] | any;
   getLink: () => void;
+  copyToClipboard: (url: string) => void;
 }
