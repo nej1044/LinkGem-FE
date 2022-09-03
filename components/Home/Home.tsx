@@ -8,11 +8,19 @@ import { userInfo } from 'store/store';
 import { TLinkSave } from 'types/Link.types';
 import Axios from 'utils/Axios';
 import LinkCopy from 'components/LinkCopy';
+import Modal from 'components/common/Modal/HomeModal';
 function Home() {
   const [recentLink, setRecentLink] = useState<TLinkSave[]>([]);
   // const router = useRouter();
   const [user, setUser] = useRecoilState(userInfo);
   const [isCopy, setIsCopy] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const handleModal = () => {
+    console.log('야호야호');
+    setIsOpenModal(!isOpenModal);
+  };
+
   const copyToClipboard = (val: string) => {
     const element = document.createElement('textarea');
     element.value = val;
@@ -77,10 +85,16 @@ function Home() {
         recentLink={recentLink}
         getLink={getLink}
         copyToClipboard={copyToClipboard}
+        handleModal={handleModal}
       />
       <GemCrewPick copyToClipboard={copyToClipboard} />
 
-      {isCopy && <LinkCopy />}
+      {isCopy && <LinkCopy setIsCopy={setIsCopy} />}
+      {isOpenModal && (
+        <Modal visible={isOpenModal} handleModal={handleModal}>
+          asdasdasd
+        </Modal>
+      )}
     </>
   );
 }

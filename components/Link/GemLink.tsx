@@ -31,6 +31,7 @@ interface GemLinkProps {
   id: number;
   getLink?: () => void;
   copyToClipboard: (url: string) => void;
+  siteName?: string;
 }
 function GemLink({
   title,
@@ -43,10 +44,12 @@ function GemLink({
   id,
   getLink,
   copyToClipboard,
+  siteName,
 }: GemLinkProps) {
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
-
+  console.log('siteName');
+  console.log(siteName);
   const handleFavorite = async () => {
     try {
       await Axios(`/api/v1/links/${id}`, {
@@ -84,27 +87,26 @@ function GemLink({
   return (
     <LinkContainer>
       <ImageContainer>
-        <Link href={url || 'https://www.naver.com'}>
+        <Link href={url || 'https://devlinkgem.netlify.app/'}>
           <a target="_blank">
-            <img alt="link-image" src={imageUrl} width={342} height={180} />
+            <img
+              alt="link-image"
+              src={imageUrl || 'images/home-link-default.svg'}
+              width={320}
+              height={180}
+            />
           </a>
         </Link>
       </ImageContainer>
       <LinkDetailContainer>
         <LinkDetailTitle>
-          <Link href={url || 'https://www.naver.com'}>
-            <a target="_blank">
-              {title ||
-                '반가워요 다이아 키퍼님반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님'}
-            </a>
+          <Link href={url || 'https://devlinkgem.netlify.app/'}>
+            <a target="_blank">{title || siteName || url}</a>
           </Link>
         </LinkDetailTitle>
         <LinkDetailDescription>
-          <Link href={url || 'https://www.naver.com'}>
-            <a target="_blank">
-              {description ||
-                '설명설명설명설명설명설명설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명'}
-            </a>
+          <Link href={url || 'https://devlinkgem.netlify.app/'}>
+            <a target="_blank">{description}</a>
           </Link>
         </LinkDetailDescription>
         <LinkDetailSetting>

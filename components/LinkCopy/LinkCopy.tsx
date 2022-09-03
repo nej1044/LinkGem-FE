@@ -6,7 +6,11 @@ import {
   XIconImage,
 } from './LinkCopy.style';
 
-function LinkCopy() {
+interface ILinkCopy {
+  setIsCopy: (boo: boolean) => void;
+}
+
+function LinkCopy({ setIsCopy }: ILinkCopy) {
   return (
     <LinkCopyContainer>
       <LinkCopySuccess>링크가 복사되었습니다.</LinkCopySuccess>
@@ -14,9 +18,10 @@ function LinkCopy() {
       <XIconImage>
         <Image
           src="/images/icons/x-icon-white.svg"
-          alt="plus-icon"
+          alt="x-icon"
           width={12}
           height={11}
+          onClick={() => setIsCopy(false)}
         />
       </XIconImage>
     </LinkCopyContainer>

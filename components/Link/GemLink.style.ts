@@ -48,6 +48,7 @@ export const LinkDetailTitle = styled.div`
 
   color: #1a1b1d;
   a {
+    color: black;
     text-decoration: none;
   }
   a:visited {
@@ -77,6 +78,7 @@ export const LinkDetailDescription = styled.div`
 
   color: #3c3c3f;
   a {
+    color: black;
     text-decoration: none;
   }
   a:visited {

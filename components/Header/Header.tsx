@@ -123,7 +123,7 @@ function Header() {
                 height={16}
               />
               <LinkText
-                placeholder="링크를 넣어 저장하세요 Https://..."
+                placeholder="링크를 넣어 저장하세요 https://..."
                 onChange={handleInputUrl}
                 value={urlText}
               />

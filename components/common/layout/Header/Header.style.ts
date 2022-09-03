@@ -253,14 +253,21 @@ export const UrlCategoryItem = styled.div<IUrlCategoryItem>`
 
 export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
   visibility: ${({ isLinkSave }) => (isLinkSave ? 'visible' : 'hidden')};
-  width: 430px;
+  width: 420px;
   height: 32px;
   display: flex;
   align-items: center;
   border-radius: 4px;
   padding: 7px 10px 7px 10px;
   background-color: white;
-  margin-right: 10px;
+  margin-right: 20px;
+
+  img {
+    padding-right: 5px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const LinkText = styled.input`
@@ -277,5 +284,67 @@ export const LinkText = styled.input`
   letter-spacing: -0.02em;
   &:focus {
     outline: none;
+  }
+`;
+
+export const SettingBox = styled.div`
+  position: relative;
+`;
+
+export const SettingModal = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  top: 50px;
+  right: 5px;
+  width: 180px;
+  height: 95px;
+  padding: 13px 16px 0px 16px;
+
+  background: #ffffff;
+
+  z-index: 1;
+  /* shadow */
+  color: black;
+  box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
+  border-radius: 8px;
+  p {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+
+    &:nth-child(1) {
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    &:nth-child(3) {
+      padding-left: 2px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    span {
+      font-family: 'Spoqa Han Sans Neo';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      /* identical to box height */
+
+      letter-spacing: -0.02em;
+    }
+  }
+  hr {
+    border: 1px solid #ededed;
+    width: 100%;
+    background-color: #cecece;
   }
 `;

@@ -17,8 +17,9 @@ import {
 
 interface IFirstLink {
   name: string;
+  handleModal: (boo: boolean) => void;
 }
-function FirstLink({ name }: IFirstLink) {
+function FirstLink({ name, handleModal }: IFirstLink) {
   return (
     <>
       <LinkContainer>
@@ -51,7 +52,7 @@ function FirstLink({ name }: IFirstLink) {
           </Link>
 
           <LinkDetailSetting>
-            <LinkDetailSettingDate>22.03.04</LinkDetailSettingDate>
+            <LinkDetailSettingDate>22.09.17</LinkDetailSettingDate>
             <LinkDetailSettingOption>
               <Image
                 alt="link-image"
@@ -75,7 +76,7 @@ function FirstLink({ name }: IFirstLink) {
           {name} 키퍼님의
           <br />첫 링크를 저장해 주세요
         </FirstLinkTitle>
-        <FirstLinkImage>
+        <FirstLinkImage onClick={() => handleModal(true)}>
           <Image
             alt="link-image"
             src="/images/link-plus.svg"

@@ -22,12 +22,14 @@ interface IUserInfo {
   imageUrl: string;
   createDate: string;
   isFavorites: boolean;
+  siteName: string;
 }
 
 function RecentSaveLink({
   recentLink,
   getLink,
   copyToClipboard,
+  handleModal,
 }: IRecentSaveProps) {
   const user = useRecoilValue(userInfo);
   const [size, setSize] = useState(4);
@@ -40,8 +42,6 @@ function RecentSaveLink({
       setSize(4);
     }
   }, [recentLink, size]);
-  console.log('size');
-  console.log(size);
   useEffect(() => {}, [size]);
   return (
     <RecentSaveLinkContainer>
@@ -68,9 +68,12 @@ function RecentSaveLink({
                 id={link?.id}
                 getLink={getLink}
                 copyToClipboard={copyToClipboard}
+                siteName={link?.siteName}
               />
             ))}
-        {recentLink.length < 1 && <FirstLink name={user?.nickname} />}
+        {recentLink.length < 1 && (
+          <FirstLink name={user?.nickname} handleModal={handleModal} />
+        )}
       </RecentSaveLinkOption>
     </RecentSaveLinkContainer>
   );

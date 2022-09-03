@@ -22,6 +22,8 @@ import {
   LinkText,
   MenuContainer,
   Menu,
+  SettingBox,
+  SettingModal,
 } from './Header.style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -39,6 +41,7 @@ function Header() {
   // const [path, setPath] = useState('/');
   const [urlText, setUrlText] = useState('');
   const [isLinkSave, setIsLinkSave] = useState(false);
+  const [isSettingModal, setIsSettingModal] = useState(false);
 
   const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlText(e.target.value);
@@ -51,6 +54,10 @@ function Header() {
     setIsOpenModal(false);
   };
 
+  const handleSettingModal = () => {
+    setIsSettingModal(!isSettingModal);
+  };
+
   const handleLinkSave = async () => {
     if (isLinkSave) {
       await Axios('/api/v1/links', {
@@ -59,10 +66,6 @@ function Header() {
           url: urlText,
         },
       });
-      // const saveLink = await response?.data?.result;
-      // const _recentLink = recentLink.slice(0, 3);
-      // setRecentLink([{ ...saveLink }, ..._recentLink]);
-      // setIsSuccessLink(true);
 
       setUrlText('');
       setIsLinkSave(false);
@@ -73,6 +76,9 @@ function Header() {
     console.log('urlText');
     console.log(urlText);
   };
+
+  console.log('userInfoState');
+  console.log(userInfoState);
 
   const movePage = (url: string) => () => {
     router.push(`${url}`);
@@ -87,11 +93,6 @@ function Header() {
     setUserInfoState({ ...auth });
   }, [joinUserInfo.accessToken, isLogin]);
 
-  // useEffect(() => {
-  //   setIsLogin(useLogin());
-  //   setPath(history.pathname);
-  // }, [history.pathname]);
-
   return (
     <HeaderContainer login={isLogin}>
       <LogoContainer>
@@ -102,24 +103,6 @@ function Header() {
         </Link>
         <span>Beta</span>
       </LogoContainer>
-      {/* {isLogin ? (
-        <UrlCategory>
-          <Link href="/">
-            <a>
-              <UrlCategoryItem current={path === '/'}>Home</UrlCategoryItem>
-            </a>
-          </Link>
-          <Link href="/gembox">
-            <a>
-              <UrlCategoryItem current={path === '/gembox'}>
-                My Gem Box
-              </UrlCategoryItem>
-            </a>
-          </Link>
-        </UrlCategory>
-      ) : (
-        ''
-      )} */}
       {isLogin && (
         <MenuContainer>
           {headerFormData.map((li) => (
@@ -148,9 +131,14 @@ function Header() {
                 height={16}
               />
               <LinkText
-                placeholder="링크를 넣어 저장하세요 Https://..."
+                placeholder="링크를 넣어 저장하세요 https://..."
                 onChange={handleInputUrl}
                 value={urlText}
+              />
+              <img
+                src="/images/icons/link-x.svg"
+                alt="memo-img"
+                onClick={() => setIsLinkSave(false)}
               />
             </HeaderLinkSave>
             <LinkSaveButton onClick={handleLinkSave}>
@@ -165,7 +153,7 @@ function Header() {
                 height={28}
               />
             </AlarmImage>
-            <Link href="/setting">
+            <SettingBox>
               <Initial>
                 <img
                   alt="profile-image"
@@ -173,9 +161,34 @@ function Header() {
                     userInfoState.profileImageUrl ||
                     '/images/header-profile-default.svg'
                   }
+                  onClick={handleSettingModal}
                 ></img>
               </Initial>
-            </Link>
+              {isSettingModal && (
+                <SettingModal>
+                  <p>
+                    <img
+                      alt="profile-image"
+                      src={
+                        userInfoState.profileImageUrl ||
+                        '/images/header-profile-default.svg'
+                      }
+                    />
+                    <span>{userInfoState.nickname}</span>
+                  </p>
+                  <hr />
+                  <Link href="/setting">
+                    <p onClick={handleSettingModal}>
+                      <img
+                        alt="profile-image"
+                        src={'/icons/header-setting-icon.svg'}
+                      />
+                      <span>설정</span>
+                    </p>
+                  </Link>
+                </SettingModal>
+              )}
+            </SettingBox>
           </>
         ) : (
           <JoinButton

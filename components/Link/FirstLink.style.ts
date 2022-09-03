@@ -135,4 +135,7 @@ export const FirstLinkTitle = styled.div`
 export const FirstLinkImage = styled.div`
   display: flex;
   justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
