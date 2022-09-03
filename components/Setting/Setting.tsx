@@ -2,7 +2,7 @@ import SettingDropDown from 'components/atom/DropDown/SettingDropDown';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
-  EctContainer,
+  EtcContainer,
   InfoBox,
   SettingBasicInfo,
   SettingButton,
@@ -16,8 +16,6 @@ import {
   SettingInfoContainer,
   SettingLineBox,
   SettingTitle,
-  SideMenu,
-  SideMenuButton,
 } from 'components/Setting/Setting.style';
 import Axios from 'utils/Axios';
 import MuiDialog from 'components/atom/Dialog/MuiDialog';
@@ -144,12 +142,6 @@ export default function Setting() {
   console.log(form);
   return (
     <SettingContainer>
-      <SideMenu>
-        <SideMenuButton>
-          <img src="/images/icons/setting-icon.svg" alt="setting-icon" />
-          <span>설정</span>
-        </SideMenuButton>
-      </SideMenu>
       <SettingInfoContainer>
         <SettingTitle>
           <h3>설정</h3>
@@ -166,14 +158,6 @@ export default function Setting() {
                 onClick={uploadImage}
                 alt="setting-image"
               />
-              {/* <SettingImageHover>
-                <Image
-                  src="/images/icons/setting-image-icon.svg"
-                  alt="setting-image"
-                  height={32}
-                  width={32}
-                />
-              </SettingImageHover> */}
 
               <input
                 id="input-file"
@@ -258,7 +242,7 @@ export default function Setting() {
           새롭게 저장하기
         </SettingButton>
       </SettingButtonContontainer>
-      <EctContainer>
+      <EtcContainer>
         <a
           href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
           rel="noreferrer"
@@ -268,7 +252,7 @@ export default function Setting() {
         </a>
 
         <span onClick={handleLogout}>로그아웃</span>
-      </EctContainer>
+      </EtcContainer>
       {dialogContext.isOpen && <MuiDialog dialogContext={dialogContext} />}
     </SettingContainer>
   );

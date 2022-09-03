@@ -17,7 +17,6 @@ export const SettingContainer = styled.main`
 
 export const SettingInfoContainer = styled.main`
   width: 900px;
-  margin-left: 480px;
 `;
 
 export const SettingTitle = styled.section`
@@ -117,7 +116,7 @@ export const SettingDisabledInfo = styled.div<{ type: string }>`
   display: flex;
   align-items: center;
   text-indent: 12px;
-  background: #ededed;
+  background-color: #ededed;
   /* gray/gray2 */
 
   border: 1px solid #cecece;
@@ -192,8 +191,8 @@ export const InfoBox = styled.div`
 
 export const SettingButtonContontainer = styled.div`
   position: relative;
-  left: 700px;
   margin-top: 80px;
+  padding-left: 300px;
 `;
 
 export const SettingButton = styled.button<{ color: string }>`
@@ -217,9 +216,9 @@ export const SettingButton = styled.button<{ color: string }>`
   }
 `;
 
-export const EctContainer = styled.div`
+export const EtcContainer = styled.div`
   position: relative;
-  left: 800px;
+  left: 400px;
   margin-top: 64px;
 
   span {
@@ -239,43 +238,5 @@ export const EctContainer = styled.div`
     &:hover {
       cursor: pointer;
     }
-  }
-`;
-
-export const SideMenu = styled.div`
-  position: absolute;
-  margin-left: 250px;
-`;
-
-export const SideMenuButton = styled.div`
-  display: flex;
-  width: 160px;
-  height: 40px;
-  padding-left: 20px;
-  background: #f3edff;
-  border-radius: 8px;
-  align-items: center;
-  &:hover {
-    cursor: pointer;
-  }
-
-  img {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-  }
-  span {
-    padding-top: 2px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    /* identical to box height */
-
-    letter-spacing: -0.02em;
-
-    /* text/black */
-
-    color: #1a1b1d;
-    text-align: center;
   }
 `;
