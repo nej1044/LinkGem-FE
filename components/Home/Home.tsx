@@ -56,7 +56,7 @@ function Home() {
     } catch (error: any) {
       if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
         const response = await axios.post(
-          '/api/v1/oauth/reissue',
+          '/api/v1/user/oauth/reissue',
           {},
           {
             headers: {

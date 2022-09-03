@@ -24,6 +24,10 @@ import {
   Menu,
   SettingBox,
   SettingModal,
+  AlarmBox,
+  AlramModal,
+  AlramContent,
+  PolygonBox,
 } from './Header.style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -42,6 +46,7 @@ function Header() {
   const [urlText, setUrlText] = useState('');
   const [isLinkSave, setIsLinkSave] = useState(false);
   const [isSettingModal, setIsSettingModal] = useState(false);
+  const [isAlarmModal, setIsAlarmModal] = useState(false);
 
   const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlText(e.target.value);
@@ -56,6 +61,11 @@ function Header() {
 
   const handleSettingModal = () => {
     setIsSettingModal(!isSettingModal);
+    setIsAlarmModal(false);
+  };
+  const handleAlarmModal = () => {
+    setIsAlarmModal(!isAlarmModal);
+    setIsSettingModal(false);
   };
 
   const handleLinkSave = async () => {
@@ -142,17 +152,64 @@ function Header() {
               />
             </HeaderLinkSave>
             <LinkSaveButton onClick={handleLinkSave}>
-              {isLinkSave ? '' : '+'} 링크저장
+              {isLinkSave ? '' : '+ '} 링크저장
             </LinkSaveButton>
-            <AlarmImage>
-              <Image
-                priority
-                src="/images/icons/alarm-icon.svg"
-                alt="linkgem-logo"
-                width={26}
-                height={28}
-              />
-            </AlarmImage>
+            <AlarmBox>
+              <AlarmImage onClick={handleAlarmModal}>
+                <Image
+                  priority
+                  src="/images/icons/alarm-icon.svg"
+                  alt="linkgem-logo"
+                  width={30}
+                  height={30}
+                />
+                {isAlarmModal && (
+                  <PolygonBox>
+                    <img
+                      src="/images/icons/header-Polygon 1.svg"
+                      alt="linkgem-logo"
+                    />
+                  </PolygonBox>
+                )}
+              </AlarmImage>
+              {isAlarmModal && (
+                <AlramModal>
+                  <AlramContent>
+                    <span>공지 - 24일전 </span>
+                    <p>
+                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                      <br />
+                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                      소통해보세요!
+                    </p>
+                    <button>커뮤니티 확인하기</button>
+                  </AlramContent>
+                  <hr />
+                  <AlramContent>
+                    <span>공지 - 24일전 </span>
+                    <p>
+                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                      <br />
+                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                      소통해보세요!
+                    </p>
+                    <button>커뮤니티 확인하기</button>
+                  </AlramContent>
+                  <hr />
+                  <AlramContent>
+                    <span>공지 - 24일전 </span>
+                    <p>
+                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                      <br />
+                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                      소통해보세요!
+                    </p>
+                    <button>커뮤니티 확인하기</button>
+                  </AlramContent>
+                </AlramModal>
+              )}
+            </AlarmBox>
+
             <SettingBox>
               <Initial>
                 <img
@@ -163,6 +220,14 @@ function Header() {
                   }
                   onClick={handleSettingModal}
                 ></img>
+                {isSettingModal && (
+                  <PolygonBox>
+                    <img
+                      src="/images/icons/header-Polygon 1.svg"
+                      alt="linkgem-logo"
+                    />
+                  </PolygonBox>
+                )}
               </Initial>
               {isSettingModal && (
                 <SettingModal>
@@ -197,7 +262,7 @@ function Header() {
             color="#1A1B1D"
             width="120px"
             height="48px"
-            text="로그인"
+            text="시작하기"
             fontSize="18px"
             type=""
             hoverColor="#1CE047"
