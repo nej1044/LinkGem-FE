@@ -21,6 +21,7 @@ function JobInfo() {
   const [type, setType] = useState('');
   const [isButtonValueValid, setIsButtonValueValid] = useState(true);
   const joinUserInfo = useRecoilValue(joinState);
+  const [isNickNameError, setIsNickNameError] = useState(false);
 
   const changeType = async () => {
     if (type === 'job') {
@@ -63,7 +64,11 @@ function JobInfo() {
         _auth.nickname = joinUserInfo.nickname;
         localStorage.setItem('auth', JSON.stringify(_auth));
         window.location.href = '/';
-      } catch (error) {
+      } catch (error: any) {
+        if (error.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
+          console.log('닉네임 에러');
+          setIsNickNameError(true);
+        }
         console.log('에러가 발생했습니다', error);
       }
     }
@@ -75,6 +80,7 @@ function JobInfo() {
 
   const changeButtonColorGreenToGrey = () => {
     setIsButtonValueValid(true);
+    setIsNickNameError(false);
   };
 
   useEffect(() => {
@@ -87,6 +93,7 @@ function JobInfo() {
       setContext({ ...nickNameInfo });
     }
     setIsButtonValueValid(true);
+    setIsNickNameError(false);
   }, [type]);
 
   return (
@@ -105,6 +112,7 @@ function JobInfo() {
         <JoinTextInput
           changeButtonColor={changeButtonColor}
           changeButtonColorGreenToGrey={changeButtonColorGreenToGrey}
+          isNickNameError={isNickNameError}
         />
       )}
       <JoinButton

@@ -17,9 +17,14 @@ import {
   SettingInfoContainer,
   SettingLineBox,
   SettingTitle,
+  NickNameErrorMessage,
+  SettingNinkName,
 } from 'components/Setting/Setting.style';
 import Axios from 'utils/Axios';
 import MuiDialog from 'components/atom/Dialog/MuiDialog';
+import useLogin from 'utils/useLogin';
+import { useSetRecoilState } from 'recoil';
+import { userInfo } from 'store/store';
 
 export default function Setting() {
   const router = useRouter();
@@ -34,15 +39,33 @@ export default function Setting() {
   const [imgUrl, setImgUrl] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [isModal, setIsModal] = useState(false);
+  const setUserInfoState = useSetRecoilState(userInfo);
   const [dialogContext, setDialogContext] = useState({
     handleDialog() {},
     title: '',
     context: '',
     isOpen: false,
   });
+  const [isErrorNickName, setIsErrorNickName] = useState({
+    error: false,
+    message:
+      '* 한글, 영문, 숫자로만 가능합니다. 특수문자 및 이모지는 사용이 안됩니다.',
+  });
 
-  const changeInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const nickNameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+
+  const handleChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.id]: e.target.value });
+    console.log(!nickNameRegex.test(e.target.value));
+    if (!nickNameRegex.test(e.target.value)) {
+      setIsErrorNickName({
+        message:
+          '* 한글, 영문, 숫자로만 가능합니다. 특수문자 및 이모지는 사용이 안됩니다.',
+        error: true,
+      });
+    } else {
+      setIsErrorNickName({ ...isErrorNickName, error: false });
+    }
   };
 
   const handleLogout = () => {
@@ -54,7 +77,6 @@ export default function Setting() {
     if (e.target.files) {
       const file = e.target.files[0];
       setFile(file);
-      console.log(URL.createObjectURL(file));
       setImgUrl(URL.createObjectURL(file));
     }
   };
@@ -67,14 +89,25 @@ export default function Setting() {
     setDialogContext({ ...dialogContext, isOpen: false });
   };
 
+  const handleDefaultUserSetting = () => {
+    const auth = JSON.parse(localStorage.getItem('auth') as string);
+    setForm({
+      name: auth?.name,
+      nickName: auth?.nickname,
+      email: auth?.loginEmail,
+      jobName: auth?.jobName,
+      careerYear: auth?.careerYear,
+    });
+  };
+
   const handleUserSetting = async () => {
     try {
       const auth = JSON.parse(localStorage.getItem('auth') as string);
-      const response = await Axios('/api/v1/user/settingUserInfo', {
+      await Axios('/api/v1/user/settingUserInfo', {
         method: 'post',
         data: {
           profileImage: file || '',
-          nickName: auth?.nickname === form.nickName ? null : form.nickName,
+          nickName: form?.nickName,
           jobName: form.jobName,
           careerYear:
             typeof form.careerYear === 'string'
@@ -83,10 +116,6 @@ export default function Setting() {
         },
         fileUpload: true,
       });
-      console.log(response);
-
-      console.log('auth');
-      console.log(auth);
       const _auth = {
         ...auth,
         jobName: form.jobName,
@@ -96,6 +125,7 @@ export default function Setting() {
             : form.careerYear,
         nickname: form.nickName,
       };
+      setUserInfoState(_auth);
       localStorage.setItem('auth', JSON.stringify(_auth));
       setDialogContext({
         handleDialog,
@@ -103,23 +133,22 @@ export default function Setting() {
         context: '회원 정보를 수정 했습니다.',
         isOpen: true,
       });
+      useLogin();
     } catch (e: any) {
-      console.log('에러발생', e);
-      if (e?.response?.data?.code === 'USER_NICKNAME_ALREADY_EXIST') {
-        console.log('durl');
+      console.log('에러', e);
+      if (e.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
+        setIsErrorNickName({
+          error: true,
+          message: '이미 있는 닉네임입니다',
+        });
+      } else {
         setDialogContext({
           handleDialog,
           title: '회원 정보 수정 실패',
-          context: '이미 존재하는 닉네임입니다.',
+          context: '에러가 발생했습니다.',
           isOpen: true,
         });
       }
-      setDialogContext({
-        handleDialog,
-        title: '회원 정보 수정 실패',
-        context: '에러가 발생했습니다.',
-        isOpen: true,
-      });
     }
   };
   const handleModal = () => {
@@ -140,7 +169,7 @@ export default function Setting() {
   }, []);
 
   console.log('form');
-  console.log(form);
+  console.log(isErrorNickName.error);
   return (
     <SettingContainer>
       <SettingInfoContainer>
@@ -190,12 +219,18 @@ export default function Setting() {
           </SettingLineBox>
           <SettingLineBox>
             <SettingCategory>닉네임</SettingCategory>
-            <SettingInfo
+            <SettingNinkName
               type="text"
               value={form.nickName}
               id="nickName"
-              onChange={changeInfo}
+              onChange={handleChangeNickname}
+              isErrorNickName={isErrorNickName.error}
             />
+            {form?.nickName.length > 0 && isErrorNickName.error && (
+              <NickNameErrorMessage isErrorNickName={isErrorNickName.error}>
+                {isErrorNickName.message}
+              </NickNameErrorMessage>
+            )}
           </SettingLineBox>
           <SettingLineBox>
             <SettingCategory>이메일</SettingCategory>
@@ -245,7 +280,9 @@ export default function Setting() {
         </SettingBasicInfo>
       </SettingInfoContainer>
       <SettingButtonContontainer>
-        <SettingButton color="#0F0223">원래대로 돌아가기</SettingButton>
+        <SettingButton color="#0F0223" onClick={handleDefaultUserSetting}>
+          원래대로 돌아가기
+        </SettingButton>
         <SettingButton color="#5200FF" onClick={handleUserSetting}>
           새롭게 저장하기
         </SettingButton>

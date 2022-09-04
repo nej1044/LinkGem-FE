@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+
+interface NickNameErrorMessageProps {
+  isErrorNickName: boolean;
+}
+
 export const SettingContainer = styled.main`
   width: 100%;
   background-color: #faf5ff;
@@ -80,8 +85,9 @@ export const SettingBasicInfo = styled.section`
 `;
 
 export const SettingLineBox = styled.div`
+  position: relative;
   display: flex;
-  margin-top: 24px;
+  margin-top: 30px;
   align-items: center;
 `;
 
@@ -108,6 +114,30 @@ export const SettingInfo = styled.input`
   /* or 22px */
 
   letter-spacing: -0.02em;
+`;
+export const SettingNinkName = styled.input<NickNameErrorMessageProps>`
+  width: 520px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  text-indent: 12px;
+  background-color: #ffffff;
+  /* gray/gray2 */
+
+  border: 1px solid;
+  border-color: ${(props) => props.isErrorNickName && 'red'};
+  border-radius: 16px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  /* or 22px */
+
+  letter-spacing: -0.02em;
+  &:focus {
+    outline: ${(props) => (props.isErrorNickName ? 'red' : 'black')};
+  }
 `;
 
 export const SettingDisabledInfo = styled.div<{ type: string }>`
@@ -254,4 +284,13 @@ export const EtcContainer = styled.div`
       cursor: pointer;
     }
   }
+`;
+
+export const NickNameErrorMessage = styled.span<NickNameErrorMessageProps>`
+  /* display: ${(props) => (props.isErrorNickName ? 'block' : 'none')}; */
+  position: absolute;
+  top: 65px;
+  left: 160px;
+  font-size: 14px;
+  color: red;
 `;

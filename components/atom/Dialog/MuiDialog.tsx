@@ -16,10 +16,7 @@ interface IMuiDialog {
 }
 
 function MuiDialog({ dialogContext }: IMuiDialog) {
-  console.log('야호');
   const handleClose = () => {
-    console.log('여기');
-    console.log(dialogContext);
     dialogContext.handleDialog();
   };
   return (

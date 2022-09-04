@@ -41,8 +41,6 @@ function Header() {
   const joinUserInfo = useRecoilValue(joinState);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
   const [isLogin, setIsLogin] = useState(false);
-  // const history = useRouter();
-  // const [path, setPath] = useState('/');
   const [urlText, setUrlText] = useState('');
   const [isLinkSave, setIsLinkSave] = useState(false);
   const [isSettingModal, setIsSettingModal] = useState(false);
@@ -82,13 +80,7 @@ function Header() {
     } else {
       setIsLinkSave(true);
     }
-
-    console.log('urlText');
-    console.log(urlText);
   };
-
-  console.log('userInfoState');
-  console.log(userInfoState);
 
   const movePage = (url: string) => () => {
     router.push(`${url}`);
@@ -102,6 +94,8 @@ function Header() {
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setUserInfoState({ ...auth });
   }, [joinUserInfo.accessToken, isLogin]);
+
+  useEffect(() => {}, [userInfoState]);
 
   return (
     <HeaderContainer login={isLogin}>

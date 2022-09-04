@@ -66,10 +66,8 @@ function SettingDropdown({
     setIsOpen(false);
     const _form = { ...form };
     if (type === 'careerYear') {
-      console.log('연차');
       setForm({ ..._form, careerYear: value });
     } else if (type === 'jobName') {
-      console.log('직업');
       setForm({ ..._form, jobName: value });
     }
   };
