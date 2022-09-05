@@ -12,6 +12,7 @@ export type TLinkSave = {
   url: string;
   userId: number;
   userNickname: string;
+  siteName: string;
 };
 
 export type TLocalStorageAuth = {
@@ -33,4 +34,6 @@ export interface ILinkSaveProps {
 export interface IRecentSaveProps {
   recentLink: TLinkSave[] | any;
   getLink: () => void;
+  copyToClipboard: (url: string) => void;
+  handleModal: (boo: boolean) => void;
 }

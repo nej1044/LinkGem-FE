@@ -22,6 +22,12 @@ import {
   LinkText,
   MenuContainer,
   Menu,
+  SettingBox,
+  SettingModal,
+  AlarmBox,
+  AlramModal,
+  AlramContent,
+  PolygonBox,
 } from './Header.style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -35,10 +41,10 @@ function Header() {
   const joinUserInfo = useRecoilValue(joinState);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
   const [isLogin, setIsLogin] = useState(false);
-  // const history = useRouter();
-  // const [path, setPath] = useState('/');
   const [urlText, setUrlText] = useState('');
   const [isLinkSave, setIsLinkSave] = useState(false);
+  const [isSettingModal, setIsSettingModal] = useState(false);
+  const [isAlarmModal, setIsAlarmModal] = useState(false);
 
   const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlText(e.target.value);
@@ -51,6 +57,15 @@ function Header() {
     setIsOpenModal(false);
   };
 
+  const handleSettingModal = () => {
+    setIsSettingModal(!isSettingModal);
+    setIsAlarmModal(false);
+  };
+  const handleAlarmModal = () => {
+    setIsAlarmModal(!isAlarmModal);
+    setIsSettingModal(false);
+  };
+
   const handleLinkSave = async () => {
     if (isLinkSave) {
       await Axios('/api/v1/links', {
@@ -59,19 +74,12 @@ function Header() {
           url: urlText,
         },
       });
-      // const saveLink = await response?.data?.result;
-      // const _recentLink = recentLink.slice(0, 3);
-      // setRecentLink([{ ...saveLink }, ..._recentLink]);
-      // setIsSuccessLink(true);
 
       setUrlText('');
       setIsLinkSave(false);
     } else {
       setIsLinkSave(true);
     }
-
-    console.log('urlText');
-    console.log(urlText);
   };
 
   const movePage = (url: string) => () => {
@@ -87,10 +95,7 @@ function Header() {
     setUserInfoState({ ...auth });
   }, [joinUserInfo.accessToken, isLogin]);
 
-  // useEffect(() => {
-  //   setIsLogin(useLogin());
-  //   setPath(history.pathname);
-  // }, [history.pathname]);
+  useEffect(() => {}, [userInfoState]);
 
   return (
     <HeaderContainer login={isLogin}>
@@ -102,24 +107,6 @@ function Header() {
         </Link>
         <span>Beta</span>
       </LogoContainer>
-      {/* {isLogin ? (
-        <UrlCategory>
-          <Link href="/">
-            <a>
-              <UrlCategoryItem current={path === '/'}>Home</UrlCategoryItem>
-            </a>
-          </Link>
-          <Link href="/gembox">
-            <a>
-              <UrlCategoryItem current={path === '/gembox'}>
-                My Gem Box
-              </UrlCategoryItem>
-            </a>
-          </Link>
-        </UrlCategory>
-      ) : (
-        ''
-      )} */}
       {isLogin && (
         <MenuContainer>
           {headerFormData.map((li) => (
@@ -148,24 +135,76 @@ function Header() {
                 height={16}
               />
               <LinkText
-                placeholder="링크를 넣어 저장하세요 Https://..."
+                placeholder="링크를 넣어 저장하세요 https://..."
                 onChange={handleInputUrl}
                 value={urlText}
               />
+              <img
+                src="/images/icons/link-x.svg"
+                alt="memo-img"
+                onClick={() => setIsLinkSave(false)}
+              />
             </HeaderLinkSave>
             <LinkSaveButton onClick={handleLinkSave}>
-              {isLinkSave ? '' : '+'} 링크저장
+              {isLinkSave ? '' : '+ '} 링크저장
             </LinkSaveButton>
-            <AlarmImage>
-              <Image
-                priority
-                src="/images/icons/alarm-icon.svg"
-                alt="linkgem-logo"
-                width={26}
-                height={28}
-              />
-            </AlarmImage>
-            <Link href="/setting">
+            <AlarmBox>
+              <AlarmImage onClick={handleAlarmModal}>
+                <Image
+                  priority
+                  src="/images/icons/alarm-icon.svg"
+                  alt="linkgem-logo"
+                  width={30}
+                  height={30}
+                />
+                {isAlarmModal && (
+                  <PolygonBox>
+                    <img
+                      src="/images/icons/header-Polygon 1.svg"
+                      alt="linkgem-logo"
+                    />
+                  </PolygonBox>
+                )}
+              </AlarmImage>
+              {isAlarmModal && (
+                <AlramModal>
+                  <AlramContent>
+                    <span>공지 - 24일전 </span>
+                    <p>
+                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                      <br />
+                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                      소통해보세요!
+                    </p>
+                    <button>커뮤니티 확인하기</button>
+                  </AlramContent>
+                  <hr />
+                  <AlramContent>
+                    <span>공지 - 24일전 </span>
+                    <p>
+                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                      <br />
+                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                      소통해보세요!
+                    </p>
+                    <button>커뮤니티 확인하기</button>
+                  </AlramContent>
+                  <hr />
+                  <AlramContent>
+                    <span>공지 - 24일전 </span>
+                    <p>
+                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                      <br />
+                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                      소통해보세요!
+                    </p>
+                    <button>커뮤니티 확인하기</button>
+                  </AlramContent>
+                </AlramModal>
+              )}
+            </AlarmBox>
+
+            <SettingBox>
               <Initial>
                 <img
                   alt="profile-image"
@@ -173,9 +212,42 @@ function Header() {
                     userInfoState.profileImageUrl ||
                     '/images/header-profile-default.svg'
                   }
+                  onClick={handleSettingModal}
                 ></img>
+                {isSettingModal && (
+                  <PolygonBox>
+                    <img
+                      src="/images/icons/header-Polygon 1.svg"
+                      alt="linkgem-logo"
+                    />
+                  </PolygonBox>
+                )}
               </Initial>
-            </Link>
+              {isSettingModal && (
+                <SettingModal>
+                  <p>
+                    <img
+                      alt="profile-image"
+                      src={
+                        userInfoState.profileImageUrl ||
+                        '/images/header-profile-default.svg'
+                      }
+                    />
+                    <span>{userInfoState.nickname}</span>
+                  </p>
+                  <hr />
+                  <Link href="/setting">
+                    <p onClick={handleSettingModal}>
+                      <img
+                        alt="profile-image"
+                        src={'/icons/header-setting-icon.svg'}
+                      />
+                      <span>설정</span>
+                    </p>
+                  </Link>
+                </SettingModal>
+              )}
+            </SettingBox>
           </>
         ) : (
           <JoinButton
@@ -184,7 +256,7 @@ function Header() {
             color="#1A1B1D"
             width="120px"
             height="48px"
-            text="로그인"
+            text="시작하기"
             fontSize="18px"
             type=""
             hoverColor="#1CE047"

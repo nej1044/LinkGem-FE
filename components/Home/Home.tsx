@@ -7,11 +7,40 @@ import { useRecoilState } from 'recoil';
 import { userInfo } from 'store/store';
 import { TLinkSave } from 'types/Link.types';
 import Axios from 'utils/Axios';
+import LinkCopy from 'components/LinkCopy';
+import Modal from 'components/common/Modal/HomeModal';
 function Home() {
   const [recentLink, setRecentLink] = useState<TLinkSave[]>([]);
   // const router = useRouter();
   const [user, setUser] = useRecoilState(userInfo);
+  const [isCopy, setIsCopy] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
+  const handleModal = () => {
+    console.log('야호야호');
+    setIsOpenModal(!isOpenModal);
+  };
+
+  const copyToClipboard = (val: string) => {
+    const element = document.createElement('textarea');
+    element.value = val;
+    element.setAttribute('readonly', '');
+    element.style.position = 'absolute';
+    element.style.left = '-9999px';
+    document.body.appendChild(element);
+    element.select();
+    const returnValue = document.execCommand('copy');
+    document.body.removeChild(element);
+
+    if (!returnValue) {
+      console.log('복사하기가 실패했습니다');
+    }
+    setIsCopy(true);
+
+    setTimeout(() => {
+      setIsCopy(false);
+    }, 3000);
+  };
   const getLink: () => void = async () => {
     try {
       const response = await Axios({
@@ -27,7 +56,7 @@ function Home() {
     } catch (error: any) {
       if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
         const response = await axios.post(
-          '/api/v1/oauth/reissue',
+          '/api/v1/user/oauth/reissue',
           {},
           {
             headers: {
@@ -52,8 +81,20 @@ function Home() {
   return (
     <>
       <LinkSave setRecentLink={setRecentLink} recentLink={recentLink} />
-      <RecentSaveLink recentLink={recentLink} getLink={getLink} />
-      <GemCrewPick />
+      <RecentSaveLink
+        recentLink={recentLink}
+        getLink={getLink}
+        copyToClipboard={copyToClipboard}
+        handleModal={handleModal}
+      />
+      <GemCrewPick copyToClipboard={copyToClipboard} />
+
+      {isCopy && <LinkCopy setIsCopy={setIsCopy} />}
+      {isOpenModal && (
+        <Modal visible={isOpenModal} handleModal={handleModal}>
+          asdasdasd
+        </Modal>
+      )}
     </>
   );
 }

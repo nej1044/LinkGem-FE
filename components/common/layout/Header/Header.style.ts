@@ -147,6 +147,10 @@ export const ImageContainer = styled.div`
 export const LinkSaveButton = styled.button`
   width: 120px;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 
   background: #5200ff;
   border: 0;
@@ -172,6 +176,7 @@ export const LinkSaveButton = styled.button`
 
 export const AlarmImage = styled.div`
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 26px;
@@ -179,10 +184,15 @@ export const AlarmImage = styled.div`
   margin-left: 26px;
   margin-right: 26px;
   display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Initial = styled.div`
   display: flex;
+  position: relative;
   width: 40px;
   height: 40px;
   justify-content: center;
@@ -253,14 +263,21 @@ export const UrlCategoryItem = styled.div<IUrlCategoryItem>`
 
 export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
   visibility: ${({ isLinkSave }) => (isLinkSave ? 'visible' : 'hidden')};
-  width: 430px;
+  width: 420px;
   height: 32px;
   display: flex;
   align-items: center;
   border-radius: 4px;
   padding: 7px 10px 7px 10px;
   background-color: white;
-  margin-right: 10px;
+  margin-right: 20px;
+
+  img {
+    padding-right: 5px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const LinkText = styled.input`
@@ -277,5 +294,164 @@ export const LinkText = styled.input`
   letter-spacing: -0.02em;
   &:focus {
     outline: none;
+  }
+`;
+
+export const SettingBox = styled.div`
+  position: relative;
+`;
+
+export const SettingModal = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  top: 55px;
+  right: 5px;
+  width: 180px;
+  height: 95px;
+  padding: 13px 16px 0px 16px;
+
+  background: #ffffff;
+
+  z-index: 1;
+  /* shadow */
+  color: black;
+  box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
+  border-radius: 8px;
+  p {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+
+    &:nth-child(1) {
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    &:nth-child(3) {
+      padding-left: 2px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    span {
+      font-family: 'Spoqa Han Sans Neo';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      /* identical to box height */
+
+      letter-spacing: -0.02em;
+    }
+  }
+  hr {
+    border: 1px solid #ededed;
+    width: 100%;
+    background-color: #cecece;
+  }
+`;
+
+export const AlarmBox = styled.div`
+  position: relative;
+`;
+
+export const AlramModal = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  top: 50px;
+  right: 5px;
+  width: 300px;
+  padding: 20px 16px 20px 16px;
+
+  background: #ffffff;
+
+  z-index: 1;
+  /* shadow */
+  color: black;
+  box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
+  border-radius: 8px;
+
+  hr {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ededed;
+    width: 100%;
+    background-color: #cecece;
+  }
+`;
+export const AlramContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  span {
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 13px;
+    /* identical to box height */
+
+    letter-spacing: -0.02em;
+
+    /* text/placeholder */
+
+    color: #8e8e8e;
+  }
+  p {
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    /* or 150% */
+
+    letter-spacing: -0.02em;
+
+    /* text/black */
+
+    color: #1a1b1d;
+  }
+
+  button {
+    display: block;
+    padding: 8px;
+    background: #5200ff;
+    border-radius: 4px;
+    color: white;
+    border-style: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export const PolygonBox = styled.div`
+  position: absolute;
+  top: 40px;
+
+  img {
+    width: 12px;
+    height: 12px;
+  }
+`;
+
+export const PolygonBox2 = styled.div`
+  position: absolute;
+  top: 50px;
+
+  img {
+    width: 12px;
+    height: 12px;
   }
 `;

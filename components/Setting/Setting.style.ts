@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+
+interface NickNameErrorMessageProps {
+  isErrorNickName: boolean;
+}
+
 export const SettingContainer = styled.main`
   width: 100%;
   background-color: #faf5ff;
@@ -17,7 +22,6 @@ export const SettingContainer = styled.main`
 
 export const SettingInfoContainer = styled.main`
   width: 900px;
-  margin-left: 480px;
 `;
 
 export const SettingTitle = styled.section`
@@ -76,13 +80,14 @@ export const SettingBasicInfo = styled.section`
     margin: 16px 0 0 0;
     border: 0.5px solid #cecece;
     width: 90%;
-    background: #cecece;
+    background-color: #cecece;
   }
 `;
 
 export const SettingLineBox = styled.div`
+  position: relative;
   display: flex;
-  margin-top: 24px;
+  margin-top: 30px;
   align-items: center;
 `;
 
@@ -96,7 +101,7 @@ export const SettingInfo = styled.input`
   display: flex;
   align-items: center;
   text-indent: 12px;
-  background: #ffffff;
+  background-color: #ffffff;
   /* gray/gray2 */
 
   border: 1px solid #0f0223;
@@ -110,6 +115,30 @@ export const SettingInfo = styled.input`
 
   letter-spacing: -0.02em;
 `;
+export const SettingNinkName = styled.input<NickNameErrorMessageProps>`
+  width: 520px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  text-indent: 12px;
+  background-color: #ffffff;
+  /* gray/gray2 */
+
+  border: 1px solid;
+  border-color: ${(props) => props.isErrorNickName && 'red'};
+  border-radius: 16px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  /* or 22px */
+
+  letter-spacing: -0.02em;
+  &:focus {
+    outline: ${(props) => (props.isErrorNickName ? 'red' : 'black')};
+  }
+`;
 
 export const SettingDisabledInfo = styled.div<{ type: string }>`
   width: 520px;
@@ -117,7 +146,7 @@ export const SettingDisabledInfo = styled.div<{ type: string }>`
   display: flex;
   align-items: center;
   text-indent: 12px;
-  background: #ededed;
+  background-color: #ededed;
   /* gray/gray2 */
 
   border: 1px solid #cecece;
@@ -142,37 +171,52 @@ export const SettingDisabledInfo = styled.div<{ type: string }>`
 
 export const SettingImageBox = styled.div`
   position: relative;
-  div {
-    opacity: 0;
-  }
-  img:hover div {
-    opacity: 1;
+  img {
+    transition: 0.4s;
   }
 `;
 
 export const SettingImage = styled.img`
+  position: relative;
   width: 140px;
   height: 140px;
   border-radius: 16px;
-
-  &:hover {
+  opacity: 1;
+  /* &:hover {
     cursor: pointer;
-  }
+    opacity: 0;
+  } */
 `;
 
 export const SettingImageHover = styled.div`
   position: absolute;
-  top: 0px;
-  width: 140px;
-  height: 140px;
-  border-radius: 16px;
+  top: 0;
   display: flex;
   justify-content: center;
-
+  align-items: center;
+  opacity: 0;
+  div {
+    position: absolute;
+    opacity: 1;
+    z-index: 3;
+    img {
+      width: 32px;
+      height: 32px;
+      opacity: 1;
+      z-index: 1;
+      filter: brightness(100%);
+    }
+  }
+  img {
+    width: 140px;
+    height: 140px;
+    border-radius: 16px;
+    filter: brightness(0.5);
+  }
   &:hover {
+    opacity: 1;
     cursor: pointer;
   }
-  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 export const InfoBox = styled.div`
@@ -192,8 +236,8 @@ export const InfoBox = styled.div`
 
 export const SettingButtonContontainer = styled.div`
   position: relative;
-  left: 700px;
   margin-top: 80px;
+  padding-left: 300px;
 `;
 
 export const SettingButton = styled.button<{ color: string }>`
@@ -217,9 +261,9 @@ export const SettingButton = styled.button<{ color: string }>`
   }
 `;
 
-export const EctContainer = styled.div`
+export const EtcContainer = styled.div`
   position: relative;
-  left: 800px;
+  left: 400px;
   margin-top: 64px;
 
   span {
@@ -242,40 +286,11 @@ export const EctContainer = styled.div`
   }
 `;
 
-export const SideMenu = styled.div`
+export const NickNameErrorMessage = styled.span<NickNameErrorMessageProps>`
+  /* display: ${(props) => (props.isErrorNickName ? 'block' : 'none')}; */
   position: absolute;
-  margin-left: 250px;
-`;
-
-export const SideMenuButton = styled.div`
-  display: flex;
-  width: 160px;
-  height: 40px;
-  padding-left: 20px;
-  background: #f3edff;
-  border-radius: 8px;
-  align-items: center;
-  &:hover {
-    cursor: pointer;
-  }
-
-  img {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-  }
-  span {
-    padding-top: 2px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    /* identical to box height */
-
-    letter-spacing: -0.02em;
-
-    /* text/black */
-
-    color: #1a1b1d;
-    text-align: center;
-  }
+  top: 65px;
+  left: 160px;
+  font-size: 14px;
+  color: red;
 `;

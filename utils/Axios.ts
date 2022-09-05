@@ -50,7 +50,7 @@ Axios.interceptors.response.use(
       try {
         console.log('재요청 리퀘스트 해야합니다');
         const { data } = await axios.post(
-          '/api/v1/oauth/reissue',
+          '/api/v1/user/oauth/reissue',
           {},
           {
             headers: {

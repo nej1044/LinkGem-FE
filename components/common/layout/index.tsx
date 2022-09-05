@@ -18,10 +18,12 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const BodyWrapper = styled.div`
+const BodyWrapper = styled.div<{ pathname: string }>`
   display: flex;
   justify-content: center;
   width: 100%;
+  background-color: ${(props) =>
+    props.pathname === 'setting' ? '#faf5ff' : '#ffffff'};
 `;
 
 const Body = styled.section``;
@@ -29,11 +31,12 @@ const Body = styled.section``;
 const Layout = (props: IPropsLayout) => {
   const router = useRouter();
   const isHideSidebar = HIDE_SIDEBAR.includes(router.asPath);
+  const pathname = router.pathname.split('/')[1];
 
   return (
     <Wrapper>
       <Header />
-      <BodyWrapper>
+      <BodyWrapper pathname={pathname}>
         {!isHideSidebar && <Sidebar />}
         <Body>{props.children}</Body>
       </BodyWrapper>

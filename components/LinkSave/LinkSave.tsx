@@ -15,14 +15,12 @@ import {
 import Axios from 'utils/Axios';
 
 function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
-
   const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
   const [isSuccessLink, setIsSuccessLink] = useState(false);
   const onClickLinkSaveButton = async () => {
     try {
-
       const response = await Axios('/api/v1/links', {
         method: 'post',
         data: {
@@ -63,7 +61,7 @@ function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
             height={16}
           />
           <LinkText
-            placeholder="링크를 넣어 저장하세요 Https://..."
+            placeholder="링크를 넣어 저장하세요 https://..."
             onChange={handleInputUrl}
             value={urlText}
           />

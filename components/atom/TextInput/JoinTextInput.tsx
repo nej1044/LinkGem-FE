@@ -12,18 +12,20 @@ import {
 type JoinTextInputProps = {
   changeButtonColor: () => void;
   changeButtonColorGreenToGrey: () => void;
+  isNickNameError: boolean;
 };
 
 function JoinTextInput({
   changeButtonColor,
   changeButtonColorGreenToGrey,
+  isNickNameError,
 }: JoinTextInputProps) {
   const [nickName, setNickName] = useState('');
   const [isErrorNickname, setIsErrorNickname] = useState(false);
   const setJoinInfo = useSetRecoilState(joinState);
 
   const nickNameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
-  const changeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (!nickNameRegex.test(value)) {
       setIsErrorNickname(true);
@@ -37,19 +39,24 @@ function JoinTextInput({
     setJoinInfo((prev) => ({ ...prev, nickname: nickName }));
     if (nickName.length === 0) changeButtonColorGreenToGrey();
   }, [nickName]);
+
+  useEffect(() => {
+    if (isNickNameError) setIsErrorNickname(true);
+  }, [isNickNameError]);
   return (
     <JoinTextInputContainer>
       <JoinTextInputTextContainer>
         <JoinTextInputText
           placeholder="예) 링크잼 크루"
-          onChange={changeNickname}
+          onChange={handleChangeNickname}
           value={nickName}
         />
       </JoinTextInputTextContainer>
       {nickName.length > 0 && (
         <NickNameErrorMessage isErrorNickName={isErrorNickname}>
-          * 한글, 영문, 숫자로만 가능합니다. 특수문자 및 이모지는 사용이
-          안됩니다.
+          {isNickNameError
+            ? '이미 있는 닉네임입니다'
+            : '* 한글, 영문, 숫자로만 가능합니다. 특수문자 및 이모지는 사용이 안됩니다.'}
         </NickNameErrorMessage>
       )}
     </JoinTextInputContainer>

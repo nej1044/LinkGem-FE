@@ -23,7 +23,7 @@ function Index() {
     setLoading(false);
     try {
       await Axios({
-        url: '/api/v1/oauth/leave',
+        url: '/api/v1/user/oauth/leave',
         method: 'post',
         data: {
           code: token,

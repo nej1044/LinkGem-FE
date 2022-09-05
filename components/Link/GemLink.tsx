@@ -16,7 +16,8 @@ import {
   LinkEtcButton,
   LinkEtcXButton,
 } from './GemLink.style';
-import LinkCopy from 'components/LinkCopy';
+import { getDate } from 'utils/getDate';
+
 import Axios from 'utils/Axios';
 
 interface GemLinkProps {
@@ -29,6 +30,8 @@ interface GemLinkProps {
   isFavorites: boolean;
   id: number;
   getLink?: () => void;
+  copyToClipboard: (url: string) => void;
+  siteName?: string;
 }
 function GemLink({
   title,
@@ -40,32 +43,13 @@ function GemLink({
   isFavorites,
   id,
   getLink,
+  copyToClipboard,
+  siteName,
 }: GemLinkProps) {
-  const [isCopy, setIsCopy] = useState(false);
-
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
-  const copyToClipboard = (val: string) => {
-    const element = document.createElement('textarea');
-    element.value = val;
-    element.setAttribute('readonly', '');
-    element.style.position = 'absolute';
-    element.style.left = '-9999px';
-    document.body.appendChild(element);
-    element.select();
-    const returnValue = document.execCommand('copy');
-    document.body.removeChild(element);
-
-    if (!returnValue) {
-      console.log('복사하기가 실패했습니다');
-    }
-    setIsCopy(true);
-
-    setTimeout(() => {
-      setIsCopy(false);
-    }, 3000);
-  };
-
+  console.log('siteName');
+  console.log(siteName);
   const handleFavorite = async () => {
     try {
       await Axios(`/api/v1/links/${id}`, {
@@ -103,32 +87,31 @@ function GemLink({
   return (
     <LinkContainer>
       <ImageContainer>
-        <Link href={url || 'https://www.naver.com'}>
+        <Link href={url || 'https://devlinkgem.netlify.app/'}>
           <a target="_blank">
-            <img alt="link-image" src={imageUrl} width={342} height={180} />
+            <img
+              alt="link-image"
+              src={imageUrl || 'images/home-link-default.svg'}
+              width={320}
+              height={180}
+            />
           </a>
         </Link>
       </ImageContainer>
       <LinkDetailContainer>
         <LinkDetailTitle>
-          <Link href={url || 'https://www.naver.com'}>
-            <a target="_blank">
-              {title ||
-                '반가워요 다이아 키퍼님반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님 반가워요 다이아 키퍼님'}
-            </a>
+          <Link href={url || 'https://devlinkgem.netlify.app/'}>
+            <a target="_blank">{title || siteName || url}</a>
           </Link>
         </LinkDetailTitle>
         <LinkDetailDescription>
-          <Link href={url || 'https://www.naver.com'}>
-            <a target="_blank">
-              {description ||
-                '설명설명설명설명설명설명설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명 설명설명'}
-            </a>
+          <Link href={url || 'https://devlinkgem.netlify.app/'}>
+            <a target="_blank">{description}</a>
           </Link>
         </LinkDetailDescription>
         <LinkDetailSetting>
           <LinkDetailSettingDate>
-            {createDate || '22.07.13'}
+            {getDate(createDate) || '22.07.13'}
           </LinkDetailSettingDate>
           <LinkDetailSettingOption>
             <Image
@@ -192,7 +175,6 @@ function GemLink({
           />
         </LinkEtcContainer>
       )}
-      {isCopy && <LinkCopy />}
     </LinkContainer>
   );
 }
