@@ -1,0 +1,21 @@
+import { Dispatch, SetStateAction } from 'react';
+
+export interface IDeleteBoxProps {
+  selectedId: number;
+  setIsDelete: Dispatch<SetStateAction<boolean>>;
+  refetch: () => void;
+}
+
+export interface IEditBoxProps {
+  selectedId: number;
+  isEdit: boolean;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  refetch: () => void;
+}
+
+export interface IPropsGemboxModal {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  title: string | boolean;
+  Component: any;
+}

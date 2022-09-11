@@ -2,7 +2,7 @@ import PaginationUI from './pagination.presenter';
 import { IPagination } from './pagination.types';
 
 const Pagination = (props: IPagination) => {
-  const lastPage = Math.ceil(props.count / 24);
+  const lastPage = props.count && Math.ceil(props.count / 24);
 
   const onClickPrevPage = () => {
     if (props.startPage === 1) return;
@@ -11,7 +11,7 @@ const Pagination = (props: IPagination) => {
   };
 
   const onClickNextPage = () => {
-    if (props.startPage + 10 > lastPage) return;
+    if (lastPage && props.startPage + 10 > lastPage) return;
     props.setStartPage((prev) => prev + 10);
     props.setCurrent(props.current + 10);
   };

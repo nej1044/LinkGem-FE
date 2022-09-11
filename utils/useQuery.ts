@@ -1,31 +1,35 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-interface IPropsGemCount {
-  id: number;
-}
+export const useQuery = (apiName: string, params?: object) => {
+  const [state, setState] = useState<any>({
+    data: null,
+  });
+  const [trigger, setTrigger] = useState(0);
 
-const GemCount = (props: IPropsGemCount) => {
-  const [count, setCount] = useState<number>(0);
+  const refetch = () => {
+    setState({
+      ...state,
+    });
+    setTrigger(Date.now());
+  };
 
   useEffect(() => {
     let unmounted = false;
     const source = axios.CancelToken.source();
 
     axios
-      .get(`/api/v1/links`, {
+      .get(`https://dev.linkgem.co.kr/api/v1/${apiName || ''}`, {
         cancelToken: source.token,
         headers: {
           Authorization:
             'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
         },
-        params: {
-          gemBoxId: props.id,
-        },
+        params,
       })
       .then((res) => {
         if (!unmounted) {
-          setCount(res?.data.result.totalCount);
+          setState({ ...state, data: res.data.result });
         }
       })
       .catch(() => {
@@ -35,9 +39,7 @@ const GemCount = (props: IPropsGemCount) => {
       unmounted = true;
       source.cancel('cancle');
     };
-  }, []);
+  }, [trigger]);
 
-  return <span>({count})</span>;
+  return { ...state, refetch };
 };
-
-export default GemCount;

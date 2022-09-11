@@ -1,15 +1,18 @@
 import * as S from './gembox.styles';
-import * as React from 'react';
-import { IPropsGemBoxUI, ILinkDataType } from './gembox.types';
+import { IPropsGemBoxUI } from './gembox.types';
 import { v4 as uuidv4 } from 'uuid';
-import GemboxModal from './modal';
 import LinkCard from './gemboxItem.presenter';
 import Snackbar from './snackbar';
-import { useState, memo } from 'react';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { boxNameState } from 'store/store';
 import Pagination from '../common/pagination/pagination.container';
+import { getTotalLinkCount } from 'utils/getTotalLinkCount';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
   const [isCopy, setIsCopy] = useState<boolean>(false);
+  const boxName = useRecoilValue(boxNameState);
+  const count = getTotalLinkCount();
 
   const onClickCopyLink = (url: string) => async () => {
     try {
@@ -22,50 +25,42 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
       console.log(error);
     }
   };
+
   return (
     <>
-      {isCopy ? <Snackbar setIsCopy={setIsCopy} isLinkCopy={isCopy} /> : <></>}
       <S.Wrapper>
-        <S.GemboxSection>
-          <S.GexboxSectionTitle>
-            {props.isFavorMenu && '즐겨찾기'}
-            {!props.isFavorMenu &&
-              props.gemboxData?.name &&
-              `${props.gemboxData?.name}`}
-            {!props.isFavorMenu && !props.gemboxData.name && '전체'}
-            <span>({props.linkData?.totalCount})</span>
-          </S.GexboxSectionTitle>
-          <S.LinkBoxWrapper>
-            {props.linkData?.contents?.map((el: ILinkDataType) => (
-              <LinkCard
-                key={uuidv4()}
-                el={el}
-                onClickPick={props.onClickPick}
-                onClickCopyLink={onClickCopyLink}
-                openMemo={props.openMemo}
-                data={props.data}
-                openCreate={props.openCreate}
-                deleteLink={props.deleteLink}
-              />
-            ))}
-          </S.LinkBoxWrapper>
-          <Pagination
-            count={props.totalCount}
-            startPage={props.startPage}
-            setStartPage={props.setStartPage}
-            setCurrent={props.setCurrent}
-            current={props.current}
-          />
-        </S.GemboxSection>
+        <S.GexboxSectionTitle>
+          {boxName}
+          <span>({props.data?.totalCount})</span>
+        </S.GexboxSectionTitle>
+        <S.LinkBoxWrapper>
+          {props.data?.contents?.map((el: any) => (
+            <LinkCard
+              key={uuidv4()}
+              el={el}
+              onClickPick={props.onClickPick}
+              onClickCopyLink={onClickCopyLink}
+              refetch={props.refetch}
+              setIsDelete={props.setIsDelete}
+            />
+          ))}
+        </S.LinkBoxWrapper>
+        <Pagination
+          count={count}
+          startPage={props.startPage}
+          setStartPage={props.setStartPage}
+          current={props.current}
+          setCurrent={props.setCurrent}
+        />
       </S.Wrapper>
-      <GemboxModal
-        onClickMemo={props.onClickMemo}
-        data={props.data}
-        openCreate={props.openCreate}
-        defaultMemo={props.defaultMemo}
-      />
+      {isCopy ? <Snackbar setIsCopy={setIsCopy} isLinkCopy={isCopy} /> : <></>}
+      {props.isDelete ? (
+        <Snackbar setIsCopy={props.setIsDelete} isDelete={props.isDelete} />
+      ) : (
+        <></>
+      )}
     </>
   );
 };
 
-export default memo(GemboxUI);
+export default GemboxUI;

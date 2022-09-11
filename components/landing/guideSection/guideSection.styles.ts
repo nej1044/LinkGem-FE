@@ -16,7 +16,7 @@ export const Article = styled.article`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 75%;
   height: 80vh;
 `;
 
@@ -123,7 +123,7 @@ export const DoughnutBall = styled(PinkBall)`
 `;
 
 export const SaveLinkText = styled.div`
-  transform: translate(0, 230%);
+  transform: translate(0, 400%);
 `;
 
 export const GreenClip = styled.img`

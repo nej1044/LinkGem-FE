@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { gemboxRefetch } from 'store/store';
 
 export const getTotalLinkCount = () => {
-  const [totalCount, setTotalCount] = useState();
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  const [boxRefetch] = useRecoilState(gemboxRefetch);
   const fetchLinkData = async () => {
     try {
       const result = await axios.get('/api/v1/links', {
@@ -19,7 +22,7 @@ export const getTotalLinkCount = () => {
 
   useEffect(() => {
     fetchLinkData();
-  }, []);
+  }, [boxRefetch]);
 
   return totalCount;
 };

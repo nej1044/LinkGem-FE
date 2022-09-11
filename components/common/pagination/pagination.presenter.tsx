@@ -11,6 +11,7 @@ const PaginationUI = (props: IPaginationUI) => {
       />
       {new Array(10).fill(1).map(
         (_, index) =>
+          props.lastPage &&
           props.startPage + index <= props.lastPage && (
             <S.Pages
               key={uuidv4()}
@@ -23,7 +24,9 @@ const PaginationUI = (props: IPaginationUI) => {
       )}
       <S.NextArrow
         onClick={props.onClickNextPage}
-        disabled={props.startPage + 10 > props.lastPage}
+        disabled={
+          props.lastPage !== null && props.startPage + 10 > props.lastPage
+        }
       />
     </S.ListFooter>
   );

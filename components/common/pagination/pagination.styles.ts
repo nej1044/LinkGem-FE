@@ -3,12 +3,13 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { IPaginationStyled } from './pagination.types';
 
 export const ListFooter = styled.section`
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 600px;
+  justify-content: space-around;
+  width: 87%;
   height: 200px;
-  margin: 0 auto;
+  padding: 0 10vw;
 `;
 
 export const PrevArrow = styled(LeftOutlined)`
@@ -27,7 +28,7 @@ export const Pages = styled.button`
   color: ${(props: IPaginationStyled) =>
     props.current === true ? 'white' : 'black'};
   border: ${(props: IPaginationStyled) =>
-    props.current === true ? '1px solid #0F0223' : '1px solid #fbdea2'};
+    props.current === true ? '1px solid #0F0223' : 'none'};
   border-radius: 50%;
   background-color: ${(props: IPaginationStyled) =>
     props.current === true ? '#0F0223' : 'white'};

@@ -3,11 +3,12 @@ import { Dispatch, SetStateAction } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 interface IPropsSnackBarStyles {
-  isLinkCopy: boolean;
+  isLinkCopy?: boolean;
 }
 
 interface IPropsSnackBar {
-  isLinkCopy: boolean;
+  isLinkCopy?: boolean;
+  isDelete?: boolean;
   setIsCopy: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -66,15 +67,17 @@ export const XIconImage = styled(CloseOutlined)`
 
 const Snackbar = (props: IPropsSnackBar) => {
   return (
-    <LinkCopyContainer isLinkCopy={props.isLinkCopy}>
-      <LinkCopyText isLinkCopy={props.isLinkCopy}>
-        {props.isLinkCopy ? '링크가 복사되었습니다.' : '오류가 발생했습니다.'}
+    <LinkCopyContainer isLinkCopy={props.isLinkCopy || props.isDelete}>
+      <LinkCopyText isLinkCopy={props.isLinkCopy || props.isDelete}>
+        {props.isLinkCopy && '링크가 복사되었습니다.'}
+        {props.isDelete && '링크가 삭제되었습니다.'}
+        {!props.isLinkCopy && !props.isDelete && '오류가 발생했습니다.'}
       </LinkCopyText>
       <XIconImage
         alt="plus-icon"
         width={12}
         height={11}
-        isLinkCopy={props.isLinkCopy}
+        isLinkCopy={props.isLinkCopy || props.isDelete}
         onClick={() => props.setIsCopy(false)}
       />
     </LinkCopyContainer>
