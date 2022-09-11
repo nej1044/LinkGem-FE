@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { gemboxModalState } from 'store/store';
 
 export const getTotalLinkData = () => {
   const [totalData, setTotalData] = useState([]);
-  const modalState = useRecoilValue(gemboxModalState);
   const fetchLinkData = async () => {
     try {
       const result = await axios.get('/api/v1/links', {
@@ -25,7 +22,7 @@ export const getTotalLinkData = () => {
 
   useEffect(() => {
     fetchLinkData();
-  }, [modalState]);
+  }, []);
 
   return totalData;
 };
