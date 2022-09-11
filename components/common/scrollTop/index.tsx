@@ -3,7 +3,7 @@ import TopIcon from '../../../public/icons/scroll-top.svg';
 
 const ScrollTopIcon = styled.div`
   position: fixed;
-  bottom: 3vh;
+  bottom: 10vh;
   right: 2vw;
   z-index: 5;
   display: flex;

@@ -15,7 +15,13 @@ const MainUI = () => {
     <>
       <S.Wrapper>
         <ScrollTop />
-        <>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <S.Title>
             <span style={{ color: 'white', fontSize: '48px' }}>WELCOME TO</span>
             <br />
@@ -27,7 +33,7 @@ const MainUI = () => {
             이제 링크잼으로 관리하세요
           </S.TitleRemark>
           <S.MainButton onClick={openModal}>지금 바로 시작하기</S.MainButton>
-        </>
+        </div>
         <Twinkle />
       </S.Wrapper>
       <VerticalText />

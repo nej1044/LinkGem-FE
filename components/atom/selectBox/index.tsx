@@ -3,6 +3,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputBase from '@mui/material/InputBase';
+import { ReactNode } from 'react';
+import { SelectChangeEvent } from '@mui/material';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -59,13 +61,17 @@ export type IDataType = {
   title: string;
 };
 
-const SelectBoxPage = (props: { selectList: any[] }) => {
+const SelectBoxPage = (props: {
+  selectList: any[];
+  gembox: string;
+  handleChange: (event: SelectChangeEvent<string>, child: ReactNode) => void;
+}) => {
   return (
     <div>
       <FormControl variant="standard">
         <Select
-          // value={props.gembox}
-          // onChange={props.handleChange}
+          value={props.gembox}
+          onChange={props.handleChange}
           input={<BootstrapInput />}
           label="잼박스 선택"
         >

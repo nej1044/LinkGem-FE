@@ -45,18 +45,14 @@ const userInfo = atom({
   },
 });
 
-export const gemboxModalState = atom({
-  key: `gemboxModalState/${v1()}`,
-  default: {
-    open: false,
-    boxState: '',
-    modalTitle: 'MY GEMBOX',
-  },
+export const boxNameState = atom({
+  key: `boxNameState/${v1()}`,
+  default: '전체',
 });
 
-export const linkIdsState = atom({
-  key: `linkIds/${v1()}`,
-  default: [0],
+export const gemboxRefetch = atom({
+  key: `gemboxRefetch/${v1()}`,
+  default: false,
 });
 
 export { loginState, joinState, modalState, userInfo };

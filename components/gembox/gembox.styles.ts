@@ -9,10 +9,9 @@ import DeleteOutlined from '../../public/icons/DeleteOutlined.svg';
 import { Select } from 'antd';
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  min-height: 76.1vh;
-  padding: 10vh 3vw;
+  box-sizing: border-box;
+  width: 80vw;
+  padding: 80px;
 `;
 
 export const GemboxSection = styled.div`
@@ -22,12 +21,13 @@ export const GemboxSection = styled.div`
 export const GexboxSectionTitle = styled.h1`
   font-family: 'Spoqa Han Sans Neo';
   font-weight: 500;
-  font-size: 1.3vw;
+  font-size: 20px;
   letter-spacing: -0.02em;
   color: #1a1b1d;
   span {
-    margin-left: 0.1vw;
-    font-size: 0.9vw;
+    margin-left: 2px;
+    font-weight: 400;
+    font-size: 12px;
   }
 `;
 
@@ -99,7 +99,7 @@ export const MemoIcon = styled(MemoOutlined)`
   box-sizing: border-box;
   width: 32px;
   height: 32px;
-  padding: 8px;
+  padding: 7px;
   fill: #ffffff;
   font-size: 900;
   text-align: center;
@@ -193,27 +193,27 @@ export const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '35vw',
-  minWidth: '400px',
-  height: '55vh',
-  minHeight: '300px',
+  width: '720px',
+  height: '588px',
   bgcolor: 'background.paper',
-  borderRadius: '2vw',
+  borderRadius: '24px',
   boxShadow: 24,
   overflow: 'hidden',
+  boxSizing: 'border-box',
 };
 
-export const GembaxWrapper = styled.div`
+export const GemboxWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 5vh 2vw 6.5vh 2vw;
+  padding-top: 50px;
 `;
 
 export const ModalTitle = styled.div`
+  margin-bottom: 40px;
   font-family: 'Poppins';
   font-weight: 600;
-  font-size: 1.8vw;
+  font-size: 32px;
   text-align: center;
   color: #1a1b1d;
 `;
@@ -227,38 +227,39 @@ export const GemWrapper = styled.div`
 `;
 
 export const GemCard = styled.div`
-  width: 6.85vw;
-  min-width: 85px;
-  height: 16vh;
-  min-height: 105px;
-  margin-right: 0.4vw;
-  margin-left: 0.4vw;
+  width: 140px;
+  height: 170px;
+  margin-left: 24px;
+  margin-bottom: 25px;
 `;
 
 export const GemImg = styled.img`
   width: 100%;
-  height: 11.5vh;
-  min-height: 65px;
+  height: 120px;
   border-radius: 8px;
 `;
 
 export const GemInfo = styled.div`
   box-sizing: border-box;
-  padding: 0.5vh 0.5vw;
+  width: 100%;
+  height: 50px;
+  padding-top: 9px;
 `;
 
 export const GemName = styled.span`
   font-family: 'Spoqa Han Sans Neo';
   font-weight: 700;
-  font-size: 0.78vw;
+  font-size: 16px;
   letter-spacing: -0.02em;
+  color: #000000;
 `;
 
 export const GemText = styled.span`
-  margin-right: 5px;
+  margin-right: 9px;
   font-family: 'Spoqa Han Sans Neo';
   font-weight: 400;
-  font-size: 0.58vw;
+  font-size: 12px;
+  text-align: center;
   letter-spacing: -0.02em;
   color: #3c3c3f;
   cursor: pointer;
@@ -274,12 +275,8 @@ export const WriteWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100%;
-  padding: 4vh 4vw;
-`;
-
-export const CreateWrapper = styled(WriteWrapper)`
-  padding: 1.5vh 3vw;
+  height: 360px;
+  padding: 60px 80px 0px 80px;
 `;
 
 export const WriteList = styled.div`
@@ -288,11 +285,14 @@ export const WriteList = styled.div`
   width: 100%;
 `;
 
+export const CreateWrapper = styled(WriteWrapper)`
+  padding: 20px 100px 0px 100px;
+`;
+
 export const GemModalText = styled.span`
   margin-bottom: 8px;
   font-family: 'Spoqa Han Sans Neo';
-  font-weight: 400;
-  font-size: 0.78vw;
+  font-size: 14px;
   letter-spacing: -0.02em;
   color: #3c3c3f;
 `;
@@ -300,13 +300,13 @@ export const GemModalText = styled.span`
 export const GemModalInput = styled.input`
   box-sizing: border-box;
   width: 100%;
-  height: 6vh;
-  padding: 1vw;
+  height: 56px;
+  padding: 16px;
   border-radius: 8px;
   outline: none;
   border: ${(props: IPropsGemboxStyles) =>
     props.error ? '1px solid #FF0000' : '1px solid #cecece'};
-  font-size: 0.9vw;
+  font-size: 16px;
   letter-spacing: -0.02em;
   color: #8e8e8e;
   :focus {
@@ -324,11 +324,10 @@ export const ErrorMessage = styled.div`
 `;
 
 export const GemBoxButton = styled.button`
-  padding: 2vh 2vw;
   background-color: #5200ff;
   border-radius: 50px;
   font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.2vw;
+  font-size: 18px;
   letter-spacing: -0.02em;
   color: #ffffff;
   border: none;
@@ -354,10 +353,10 @@ export const ModalButton = styled.button`
 
 export const ModalClose = styled(CloseOutlined)`
   position: absolute;
-  top: 3.5vh;
-  right: 3vw;
+  top: 28px;
+  right: 28px;
   color: #1a1b1d;
-  font-size: 1.5vw;
+  font-size: 24px;
 `;
 
 export const DeleteWrapper = styled.div`
@@ -365,29 +364,31 @@ export const DeleteWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 7vh;
+  width: 100%;
+  height: 250px;
+  margin-top: 120px;
 `;
 
 export const DeleteTitle = styled.span`
   font-family: 'Spoqa Han Sans Neo';
   font-weight: 700;
-  font-size: 2.1vw;
+  font-size: 32px;
+  text-align: center;
   letter-spacing: -0.02em;
   color: #1a1b1d;
 `;
 
-export const DeleteText = styled.span`
-  display: inline-block;
-  width: 100%;
+export const DeleteText = styled.div`
   font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.05vw;
+  font-size: 16px;
+  line-height: 23px;
   text-align: center;
   letter-spacing: -0.02em;
   color: #1a1b1d;
 `;
 
 export const ButtonWrapper = styled.div`
-  width: 90%;
+  width: 50%;
   display: flex;
   justify-content: space-around;
 `;
@@ -435,7 +436,7 @@ export const MemoWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 40px 20px 0px 20px;
+  padding: 0px 30px 60px 30px;
 `;
 
 export const MemoDeleteWrapper = styled(MemoWrapper)`
@@ -464,11 +465,13 @@ export const MemoArea = styled.textarea`
 `;
 
 export const MemoFooter = styled.div`
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
   height: 20%;
+  padding: 0px 20px;
 `;
 
 export const LeftSubInfo = styled.div`
@@ -523,7 +526,7 @@ export const MemoClose = styled(ModalClose)`
 `;
 
 export const Changebox = styled(Memobox)`
-  bottom: -80px;
+  bottom: -170px;
   left: 145px;
   display: flex;
   flex-direction: column;
@@ -587,4 +590,9 @@ export const ItemSelect = styled(Select)`
   /* border: 1px solid #ededed; */
   /* padding-left: 8px; */
   font-size: 12px;
+`;
+
+export const RenderBox = styled.div`
+  width: 100%;
+  height: 470px;
 `;

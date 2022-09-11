@@ -27,59 +27,45 @@ export type ILinkParams = {
   size: number;
   isFavorites?: boolean;
   page: number;
+  hasMemo?: boolean;
 };
 
 export interface IPropsGembox {
   isFavorMenu?: boolean;
+  hasMemo?: boolean;
 }
 
 export interface IPropsGemBoxUI {
   data?: IDataType[] | any;
-  linkData?: ILinkDataType[] | any;
-  gemboxData?: IGemboxDataType[] | any;
-  openCreate: (id?: number) => () => void;
+  refetch: () => void;
   onClickPick: (el: ILinkDataType) => () => void;
+  isDelete: boolean;
+  setIsDelete: Dispatch<SetStateAction<boolean>>;
   startPage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
   current: number;
   setCurrent: Dispatch<SetStateAction<number>>;
-  openMemo: (el: ILinkDataType) => () => void;
-  defaultMemo: string;
-  onClickMemo: (memo: string) => () => void;
-  setId: Dispatch<SetStateAction<number>>;
-  deleteLink: (id: number) => () => void;
   isFavorMenu?: boolean;
-  totalCount: number | any;
 }
 
 export interface IPropsGemCard {
-  selectedId: number;
+  selectedId?: number;
   el: IDataType;
   openEdit: (id: number) => () => void;
   openDelete: (id: number) => () => void;
   i: number;
 }
 
-export interface IPropsGemboxModal {
-  data: IDataType[] | any;
-  selectedId?: number;
-  openCreate: (id?: number) => () => void;
-  defaultMemo: string;
-  onClickMemo: (memo: string) => () => void;
+export interface IPropsLinkCard {
+  el: any;
+  setIsDelete: Dispatch<SetStateAction<boolean>>;
+  refetch: () => void;
+  onClickPick: (el: ILinkDataType) => () => void;
+  onClickCopyLink: (url: string) => () => void;
 }
 
 export interface IPropsGemboxStyles {
+  error?: string;
   isChecked?: boolean;
-  error?: string | boolean;
   isMore?: boolean;
-}
-
-export interface IPropsLinkCard {
-  el: ILinkDataType;
-  onClickPick: (el: ILinkDataType) => () => void;
-  onClickCopyLink: (url: string) => () => void;
-  openMemo: (el: ILinkDataType) => () => void;
-  data?: IDataType[] | any;
-  openCreate: (id?: number) => () => void;
-  deleteLink: (id: number) => () => void;
 }
