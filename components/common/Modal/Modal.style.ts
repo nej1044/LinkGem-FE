@@ -36,8 +36,8 @@ export const Background = styled.div<{ visible: boolean }>`
 `;
 
 export const ModalContainer = styled.div<{ visible: boolean }>`
-  width: 490px;
-  height: 390px;
+  width: 420px;
+  height: 340px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -50,14 +50,29 @@ export const ModalContainer = styled.div<{ visible: boolean }>`
   -webkit-transition: opacity 0.1s 0, visibility 0 0.1s;
   -moz-transition: opacity 0.1s 0, visibility 0 0.1s;
   transition: opacity 0.1s 0, visibility 0 0.1s;
+
+  @media screen and (max-width: 500px) {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Title = styled.div`
   display: flex;
   justify-content: flex-end;
+
+  @media screen and (max-width: 500px) {
+    margin-top: 34px;
+    margin-right: 34px;
+  }
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  @media screen and (max-width: 500px) {
+    margin-top: 106px;
+  }
+`;
 
 export const CloseButton = styled.button`
   border: none;
@@ -67,6 +82,6 @@ export const CloseButton = styled.button`
 `;
 
 export const ImageButton = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 `;

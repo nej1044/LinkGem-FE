@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const DropDownContainer = styled.div`
-  padding-top: 16px;
-  padding-bottom: 48px;
+  padding-top: 20px;
+  padding-bottom: 40px;
   margin: 0 auto;
 `;
 
 export const DropDownHeader = styled.div`
-  width: 422px;
-  height: 68px;
+  width: 400px;
+  height: 56px;
   background: white;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
   color: black;
@@ -24,7 +24,7 @@ export const DropDownHeader = styled.div`
 `;
 
 export const DropDownListContainer = styled.div`
-  width: 422px;
+  width: 400px;
   position: absolute;
   margin-top: 12px;
   overflow: hidden;

@@ -14,10 +14,31 @@ export const Title = styled.div`
     padding-bottom: 8px;
     font-size: 32px;
     font-weight: 700;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    line-height: 30px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: -0.02em;
+    @media screen and (max-width: 500px) {
+      font-size: 24px;
+    }
   }
   p {
-    font-size: 16px;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
     font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    /* or 24px */
+
+    text-align: center;
+    letter-spacing: -0.02em;
+    @media screen and (max-width: 500px) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
   }
 `;
 
@@ -27,9 +48,19 @@ export const SocialContainer = styled.div`
 `;
 
 export const Info = styled.div`
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
   font-size: 12px;
-  font-weight: 500;
-  line-height: 18px;
+  line-height: 150%;
+  /* or 16px */
+
+  text-align: center;
+  letter-spacing: -0.02em;
+
+  @media screen and (max-width: 500px) {
+    font-size: 11px;
+  }
 
   a {
     color: white;

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 
 export const RecentSaveLinkContainer = styled.section`
-  padding-left: 240px;
+  width: 100%;
   padding-top: 80px;
 `;
 
 export const RecentSaveLinkTitleOption = styled.div`
   display: flex;
-  width: 85%;
   justify-content: space-between;
   margin-bottom: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 export const RecentSaveLinkTitle = styled.div`
@@ -50,6 +51,7 @@ export const RecentSaveLinkOption = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  padding-left: 10px;
   section {
     margin-bottom: 32px;
   }
