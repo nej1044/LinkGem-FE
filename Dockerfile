@@ -4,5 +4,5 @@ WORKDIR /LINKGEM-FE/
 COPY . /LINKGEM-FE/
 
 RUN yarn install
-RUN yarn build
+RUN yarn build:ssr
 CMD yarn start
