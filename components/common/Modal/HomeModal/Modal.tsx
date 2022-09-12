@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import {
   Background,
   ModalContainer,
@@ -18,10 +18,9 @@ interface ModalProps {
   visible: boolean;
   /** 닫기 버튼 혹은 백그라운드 클릭 시 실행할 함수 */
   handleModal: () => void;
-  children: ReactNode;
 }
 
-export default function Modal({ children, visible, handleModal }: ModalProps) {
+export default function Modal({ visible, handleModal }: ModalProps) {
   const [open, setOpen] = useState(false);
   const [urlText, setUrlText] = useState('');
 

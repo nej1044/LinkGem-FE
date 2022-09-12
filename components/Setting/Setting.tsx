@@ -25,6 +25,7 @@ import MuiDialog from 'components/atom/Dialog/MuiDialog';
 import useLogin from 'utils/useLogin';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from 'store/store';
+import Modal from 'components/common/Modal/SettingModal';
 
 export default function Setting() {
   const router = useRouter();
@@ -38,8 +39,15 @@ export default function Setting() {
   const [file, setFile] = useState<File>();
   const [imgUrl, setImgUrl] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isModal, setIsModal] = useState(false);
+  const [isDropDownList, setIsDropDownList] = useState(false);
   const setUserInfoState = useSetRecoilState(userInfo);
+
+  const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
+
+  const handleWithdrawalModal = () => {
+    setIsWithdrawalModal(!isWithdrawalModal);
+  };
+
   const [dialogContext, setDialogContext] = useState({
     handleDialog() {},
     title: '',
@@ -151,9 +159,8 @@ export default function Setting() {
       }
     }
   };
-  const handleModal = () => {
-    console.log('야호');
-    setIsModal(!isModal);
+  const handleDropDownList = () => {
+    setIsDropDownList(!isDropDownList);
   };
 
   useEffect(() => {
@@ -171,135 +178,146 @@ export default function Setting() {
   console.log('form');
   console.log(isErrorNickName.error);
   return (
-    <SettingContainer>
-      <SettingInfoContainer>
-        <SettingTitle>
-          <h3>설정</h3>
-          <p>개인 정보 관리와 맞춤 정보 설정을 할 수 있어요</p>
-        </SettingTitle>
-        <SettingBasicInfo>
-          <p>기본 정보</p>
-          <hr />
-          <SettingLineBox>
-            <SettingCategory>프로필 사진</SettingCategory>
-            <SettingImageBox>
-              <SettingImage
-                src={imgUrl || 'images/test.jpeg'}
-                alt="setting-image"
+    <>
+      <SettingContainer>
+        <SettingInfoContainer>
+          <SettingTitle>
+            <h3>설정</h3>
+            <p>개인 정보 관리와 맞춤 정보 설정을 할 수 있어요</p>
+          </SettingTitle>
+          <SettingBasicInfo>
+            <p>기본 정보</p>
+            <hr />
+            <SettingLineBox>
+              <SettingCategory>프로필 사진</SettingCategory>
+              <SettingImageBox>
+                <SettingImage
+                  src={imgUrl || 'images/test.jpeg'}
+                  alt="setting-image"
+                />
+                <SettingImageHover onClick={uploadImage}>
+                  <div>
+                    <img
+                      src={'images/icons/setting-image-icon.svg'}
+                      alt="setting-image"
+                    />
+                  </div>
+                  <img src={imgUrl || 'images/test.jpeg'} alt="setting-image" />
+                </SettingImageHover>
+                <input
+                  id="input-file"
+                  type="file"
+                  accept="image/png, image/jpg"
+                  onChange={handleChangeFile}
+                  ref={inputRef}
+                  hidden
+                />
+              </SettingImageBox>
+            </SettingLineBox>
+            <SettingLineBox>
+              <SettingCategory>로그인 계정</SettingCategory>
+              <SettingDisabledInfo type="none">
+                <img
+                  src="images/icons/setting-naver-logo.svg"
+                  alt="naver-logo"
+                />
+                <span>{form.email}</span>
+              </SettingDisabledInfo>
+            </SettingLineBox>
+            <SettingLineBox>
+              <SettingCategory>이름</SettingCategory>
+              <SettingDisabledInfo type="none">{form.name}</SettingDisabledInfo>
+            </SettingLineBox>
+            <SettingLineBox>
+              <SettingCategory>닉네임</SettingCategory>
+              <SettingNinkName
+                type="text"
+                value={form.nickName}
+                id="nickName"
+                onChange={handleChangeNickname}
+                isErrorNickName={isErrorNickName.error}
               />
-              <SettingImageHover onClick={uploadImage}>
-                <div>
-                  <img
-                    src={'images/icons/setting-image-icon.svg'}
-                    alt="setting-image"
-                  />
-                </div>
-                <img src={imgUrl || 'images/test.jpeg'} alt="setting-image" />
-              </SettingImageHover>
-              <input
-                id="input-file"
-                type="file"
-                accept="image/png, image/jpg"
-                onChange={handleChangeFile}
-                ref={inputRef}
-                hidden
+              {form?.nickName.length > 0 && isErrorNickName.error && (
+                <NickNameErrorMessage isErrorNickName={isErrorNickName.error}>
+                  {isErrorNickName.message}
+                </NickNameErrorMessage>
+              )}
+            </SettingLineBox>
+            <SettingLineBox>
+              <SettingCategory>이메일</SettingCategory>
+              <SettingInfo
+                disabled={true}
+                type="text"
+                value={form.email}
+                id="email"
               />
-            </SettingImageBox>
-          </SettingLineBox>
-          <SettingLineBox>
-            <SettingCategory>로그인 계정</SettingCategory>
-            <SettingDisabledInfo type="none">
-              <img src="images/icons/setting-naver-logo.svg" alt="naver-logo" />
-              <span>{form.email}</span>
-            </SettingDisabledInfo>
-          </SettingLineBox>
-          <SettingLineBox>
-            <SettingCategory>이름</SettingCategory>
-            <SettingDisabledInfo type="none">{form.name}</SettingDisabledInfo>
-          </SettingLineBox>
-          <SettingLineBox>
-            <SettingCategory>닉네임</SettingCategory>
-            <SettingNinkName
-              type="text"
-              value={form.nickName}
-              id="nickName"
-              onChange={handleChangeNickname}
-              isErrorNickName={isErrorNickName.error}
-            />
-            {form?.nickName.length > 0 && isErrorNickName.error && (
-              <NickNameErrorMessage isErrorNickName={isErrorNickName.error}>
-                {isErrorNickName.message}
-              </NickNameErrorMessage>
-            )}
-          </SettingLineBox>
-          <SettingLineBox>
-            <SettingCategory>이메일</SettingCategory>
-            <SettingInfo
-              disabled={true}
-              type="text"
-              value={form.email}
-              id="email"
-            />
-          </SettingLineBox>
-        </SettingBasicInfo>
-        <SettingBasicInfo>
-          <p>키퍼님의 맞춤 정보</p>
-          <SettingLineBox>
-            <SettingCategory>직업</SettingCategory>
-            <SettingDropDown
-              dropDownList={jobInfo.defaultCategory}
-              isModal={isModal}
-              handleModal={handleModal}
-              info={form.jobName}
-              type="jobName"
-              setForm={setForm}
-              form={form}
-            />
-          </SettingLineBox>
-          <SettingLineBox>
-            <SettingCategory>총 경력</SettingCategory>
-            <SettingDropDown
-              dropDownList={['1년', '2년', '3년', '4년', '5년 이상']}
-              isModal={isModal}
-              handleModal={handleModal}
-              info={form.careerYear}
-              setForm={setForm}
-              type="careerYear"
-              form={form}
-            />
-          </SettingLineBox>
-          <SettingLineBox>
-            <SettingCategory>관심 카테고리</SettingCategory>
-            <SettingDisabledInfo type="ready">
-              아직 준비중이에요. 잠시만 기다려주세요.
-            </SettingDisabledInfo>
-          </SettingLineBox>
-          <InfoBox>
-            링크잼에서 제공하는 맞춤 링크의 기본 데이터로 활용됩니다
-          </InfoBox>
-        </SettingBasicInfo>
-      </SettingInfoContainer>
-      <SettingButtonContontainer>
-        <SettingButton color="#0F0223" onClick={handleDefaultUserSetting}>
-          원래대로 돌아가기
-        </SettingButton>
-        <SettingButton color="#5200FF" onClick={handleUserSetting}>
-          새롭게 저장하기
-        </SettingButton>
-      </SettingButtonContontainer>
-      <EtcContainer>
-        <a
-          href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
-          rel="noreferrer"
-          style={{ textDecoration: 'none' }}
-        >
-          <span>회원탈퇴</span>
-        </a>
+            </SettingLineBox>
+          </SettingBasicInfo>
+          <SettingBasicInfo>
+            <p>키퍼님의 맞춤 정보</p>
+            <SettingLineBox>
+              <SettingCategory>직업</SettingCategory>
+              <SettingDropDown
+                dropDownList={jobInfo.defaultCategory}
+                isModal={isDropDownList}
+                handleModal={handleDropDownList}
+                info={form.jobName}
+                type="jobName"
+                setForm={setForm}
+                form={form}
+              />
+            </SettingLineBox>
+            <SettingLineBox>
+              <SettingCategory>총 경력</SettingCategory>
+              <SettingDropDown
+                dropDownList={['1년', '2년', '3년', '4년', '5년 이상']}
+                isModal={isDropDownList}
+                handleModal={handleDropDownList}
+                info={form.careerYear}
+                setForm={setForm}
+                type="careerYear"
+                form={form}
+              />
+            </SettingLineBox>
+            <SettingLineBox>
+              <SettingCategory>관심 카테고리</SettingCategory>
+              <SettingDisabledInfo type="ready">
+                아직 준비중이에요. 잠시만 기다려주세요.
+              </SettingDisabledInfo>
+            </SettingLineBox>
+            <InfoBox>
+              링크잼에서 제공하는 맞춤 링크의 기본 데이터로 활용됩니다
+            </InfoBox>
+          </SettingBasicInfo>
+        </SettingInfoContainer>
+        <SettingButtonContontainer>
+          <SettingButton color="#0F0223" onClick={handleDefaultUserSetting}>
+            원래대로 돌아가기
+          </SettingButton>
+          <SettingButton color="#5200FF" onClick={handleUserSetting}>
+            새롭게 저장하기
+          </SettingButton>
+        </SettingButtonContontainer>
+        <EtcContainer>
+          {/* <a
+            href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
+            rel="noreferrer"
+            style={{ textDecoration: 'none' }}
+          > */}
+          <span onClick={handleWithdrawalModal}>회원탈퇴</span>
+          {/* </a> */}
 
-        <span onClick={handleLogout}>로그아웃</span>
-      </EtcContainer>
-      {dialogContext.isOpen && <MuiDialog dialogContext={dialogContext} />}
-    </SettingContainer>
+          <span onClick={handleLogout}>로그아웃</span>
+        </EtcContainer>
+        {dialogContext.isOpen && <MuiDialog dialogContext={dialogContext} />}
+      </SettingContainer>
+      {isWithdrawalModal && (
+        <Modal
+          visible={isWithdrawalModal}
+          handleModal={handleWithdrawalModal}
+        />
+      )}
+    </>
   );
 }
 type joinType = {
