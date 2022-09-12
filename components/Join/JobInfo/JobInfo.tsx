@@ -42,6 +42,11 @@ function JobInfo() {
         return;
       }
       try {
+        const nickNameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+        if (!nickNameRegex.test(joinUserInfo.nickname)) {
+          alert('닉네임을 수정해주세요.');
+          return;
+        }
         await axios.patch(
           '/api/v1/user/addDetailInfo',
           {
@@ -123,21 +128,21 @@ function JobInfo() {
             ? '#3C3C3F'
             : type === 'nickname'
             ? '#41FB6A'
-            : '#1A1B1D'
+            : '#41FB6A'
         }
         color={
           isButtonValueValid
             ? '#CECECE'
             : type === 'nickname'
             ? '#1A1B1D'
-            : '#FFFFFF'
+            : '#1A1B1D'
         }
         hoverColor={
           type === 'nickname' ? (joinUserInfo.nickname ? '#1CE047' : '') : ''
         }
-        width={type === 'nickname' ? '234px' : '156px'}
-        height="62px"
-        text={type === 'nickname' ? '링크잼시작' : '다음'}
+        width="140px"
+        height="56px"
+        text={type === 'nickname' ? '링크잼 시작!' : '다음'}
         fontSize="24px"
       />
     </JobInfoContainer>

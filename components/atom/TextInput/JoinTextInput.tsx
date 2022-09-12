@@ -50,6 +50,7 @@ function JoinTextInput({
           placeholder="예) 링크잼 크루"
           onChange={handleChangeNickname}
           value={nickName}
+          isErrorNickName={isErrorNickname}
         />
       </JoinTextInputTextContainer>
       {nickName.length > 0 && (

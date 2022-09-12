@@ -11,7 +11,14 @@ export const JobInfoContainer = styled.section`
 `;
 
 export const JobText = styled.p`
-  margin-top: 16px;
-  font-size: 32px;
+  margin-top: 20px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
   font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+  /* identical to box height, or 34px */
+
+  text-align: center;
+  letter-spacing: -0.02em;
 `;

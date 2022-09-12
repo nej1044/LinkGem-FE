@@ -28,8 +28,14 @@ export const LogoContainer = styled.div`
   justify-content: flex-end;
   color: white;
   margin-left: 240px;
-  @media screen and (max-width: 916px) {
-    margin-left: 100px;
+  @media screen and (max-width: 1400px) {
+    margin-left: 60px;
+  }
+  @media screen and (max-width: 1000px) {
+    margin-left: 48px;
+  }
+  @media screen and (max-width: 500px) {
+    margin-left: 20px;
   }
 
   span {
@@ -53,58 +59,51 @@ export const LogoContainer = styled.div`
 export const MenuContainer = styled.ul`
   display: flex;
   align-items: center;
-  width: 60%;
+  padding-left: 60px;
+  gap: 30px;
+  @media screen and (max-width: 1000px) {
+    gap: 20px;
+  }
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 
 export const Menu = styled.li`
   box-sizing: border-box;
-  padding: 0px 0px 0px 60px;
   font-family: 'Poppins';
   font-size: 18px;
   letter-spacing: -0.03em;
+  white-space: nowrap;
   color: ${(props: { current: boolean }) =>
     props.current ? '#41FB6A' : '#ffffff'};
   cursor: pointer;
+  @media screen and (max-width: 1200px) {
+    font-size: 16px;
+  }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   color: white;
-  margin-right: 240px;
-  @media screen and (max-width: 916px) {
-    margin-right: 80px;
+  padding-right: 240px;
+  @media screen and (max-width: 1650px) {
+    padding-right: 130px;
   }
-`;
-
-export const LoginButton = styled.button`
-  width: 70px;
-  height: 48px;
-  margin-right: 32px;
-  border: none;
-  background-color: transparent;
-  color: white;
-  font-size: 16px;
-  text-align: right;
-  cursor: pointer;
-
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  /* identical to box height */
-
-  letter-spacing: -0.02em;
-
-  @media screen and (max-width: 916px) {
-    width: 50px;
-    height: 28px;
+  @media screen and (max-width: 1400px) {
+    padding-right: 100px;
+  }
+  @media screen and (max-width: 1200px) {
+    padding-right: 48px;
+  }
+  @media screen and (max-width: 500px) {
+    padding-right: 20px;
   }
 `;
 
 export const JoinButton = styled.button`
-  width: 120px;
+  width: 520px;
   height: 48px;
   border: none;
   border-radius: 100px;
@@ -129,6 +128,10 @@ export const JoinButton = styled.button`
 export const LogoImage = styled.img`
   width: 165px;
   height: 27px;
+  @media screen and (max-width: 500px) {
+    width: 140px;
+    height: 23px;
+  }
 `;
 
 export const StarImage = styled.div`
@@ -171,6 +174,9 @@ export const LinkSaveButton = styled.button`
 
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 1000px) {
+    display: none;
   }
 `;
 
@@ -277,6 +283,12 @@ export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
     &:hover {
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 1400px) {
+    width: 320px;
+  }
+  @media screen and (max-width: 1000px) {
+    display: none;
   }
 `;
 

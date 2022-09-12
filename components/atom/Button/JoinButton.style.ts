@@ -13,7 +13,7 @@ export const JoinButtonContainer = styled.button<JoinButtonContainerProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border: none;
-  border-radius: 100px;
+  border-radius: 8px;
   background-color: ${(props) => props.backgroundColor};
   font-size: ${(props) => props.fontSize};
   color: ${(props) => props.color};
@@ -32,4 +32,8 @@ export const JoinButtonContainer = styled.button<JoinButtonContainerProps>`
   /* identical to box height */
 
   letter-spacing: -0.02em;
+
+  @media screen and (max-width: 916px) {
+    width: 140px;
+  }
 `;

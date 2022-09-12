@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
 export const LinkSaveContainer = styled.section`
+  width: 100%;
   position: relative;
   padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 
   div {
     display: flex;
@@ -20,6 +24,9 @@ export const LinkTextContainer = styled.div`
   border: 1px solid #0f0223;
   border-radius: 4px;
   padding: 17px 20px 17px 20px;
+  @media screen and (max-width: 1000px) {
+    width: 400px;
+  }
 `;
 
 export const LinkText = styled.input`
@@ -59,6 +66,11 @@ export const LinkSaveButton = styled.button`
   /* text/white */
 
   color: #ffffff;
+
+  @media screen and (max-width: 1000px) {
+    width: 80px;
+    font-size: 14px;
+  }
 
   &:hover {
     background: #29115b;
