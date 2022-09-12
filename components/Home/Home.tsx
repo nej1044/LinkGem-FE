@@ -17,7 +17,6 @@ function Home() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleModal = () => {
-    console.log('야호야호');
     setIsOpenModal(!isOpenModal);
   };
 
@@ -90,11 +89,7 @@ function Home() {
       <GemCrewPick copyToClipboard={copyToClipboard} />
 
       {isCopy && <LinkCopy setIsCopy={setIsCopy} />}
-      {isOpenModal && (
-        <Modal visible={isOpenModal} handleModal={handleModal}>
-          asdasdasd
-        </Modal>
-      )}
+      {isOpenModal && <Modal visible={isOpenModal} handleModal={handleModal} />}
     </>
   );
 }

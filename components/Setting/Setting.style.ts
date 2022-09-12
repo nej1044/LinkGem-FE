@@ -235,15 +235,15 @@ export const InfoBox = styled.div`
 `;
 
 export const SettingButtonContontainer = styled.div`
-  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
   margin-top: 80px;
-  padding-left: 300px;
 `;
 
 export const SettingButton = styled.button<{ color: string }>`
   background-color: ${(props) => props.color};
   padding: 16px 24px 16px 24px;
-  margin-right: 16px;
   border-radius: 50px;
   color: #ffffff;
   border: 0;
@@ -262,12 +262,12 @@ export const SettingButton = styled.button<{ color: string }>`
 `;
 
 export const EtcContainer = styled.div`
-  position: relative;
-  left: 400px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   margin-top: 64px;
 
   span {
-    margin-left: 24px;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
