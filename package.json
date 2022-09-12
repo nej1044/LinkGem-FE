@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build:ssg": "next build && next export",
     "build:ssr": "next build",
-    "start": "next start",
+    "start": "next start -p 4000",
     "lint": "next lint",
     "lint-front": "lint-staged",
     "prepare": "npx husky install"
