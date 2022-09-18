@@ -17,7 +17,9 @@ function Home() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleModal = () => {
+    console.log('d여기');
     setIsOpenModal(!isOpenModal);
+    getLink();
   };
 
   const copyToClipboard = (val: string) => {
@@ -72,8 +74,6 @@ function Home() {
       console.log(error);
     }
   };
-  console.log('user');
-  console.log(user);
   useEffect(() => {
     getLink();
   }, []);

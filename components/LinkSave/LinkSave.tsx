@@ -1,7 +1,7 @@
 import { ILinkSaveProps } from 'types/Link.types';
 import Image from 'next/image';
 
-import React, { ChangeEvent, memo, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, memo, useState } from 'react';
 import {
   LinkSaveContainer,
   LinkTextContainer,
@@ -19,12 +19,18 @@ function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
   const [urlText, setUrlText] = useState('');
   // const [opacity, setOpacity] = useState(100);
   const [isSuccessLink, setIsSuccessLink] = useState(false);
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'Enter') {
+      onClickLinkSaveButton();
+    }
+  };
   const onClickLinkSaveButton = async () => {
     try {
       const response = await Axios('/api/v1/links', {
         method: 'post',
         data: {
-          url: urlText,
+          url: urlText.includes('https://') ? urlText : `https://${urlText}`,
         },
       });
       const saveLink = await response?.data?.result;
@@ -64,6 +70,7 @@ function Link({ setRecentLink, recentLink }: ILinkSaveProps) {
             placeholder="링크를 넣어 저장하세요 https://..."
             onChange={handleInputUrl}
             value={urlText}
+            onKeyPress={handleKeyPress}
           />
         </LinkTextContainer>
         <LinkSaveButton onClick={onClickLinkSaveButton}>
