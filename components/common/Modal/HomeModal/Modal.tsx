@@ -21,6 +21,7 @@ interface ModalProps {
 }
 
 export default function Modal({ visible, handleModal }: ModalProps) {
+  console.log('여기여기여기');
   const [open, setOpen] = useState(false);
   const [urlText, setUrlText] = useState('');
 
@@ -66,7 +67,6 @@ export default function Modal({ visible, handleModal }: ModalProps) {
   if (!open) {
     return null;
   }
-  console.log('asdf');
 
   return (
     <>
@@ -92,7 +92,7 @@ export default function Modal({ visible, handleModal }: ModalProps) {
               value={urlText}
             />
           </LinkTextContainer>
-          <LinkSaveButton onClick={onClickLinkSaveButton}>
+          <LinkSaveButton onClick={() => onClickLinkSaveButton()}>
             링크 저장
           </LinkSaveButton>
         </Content>

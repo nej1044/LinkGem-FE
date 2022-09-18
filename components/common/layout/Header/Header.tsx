@@ -1,4 +1,10 @@
-import React, { useEffect, memo, useState, ChangeEvent } from 'react';
+import React, {
+  useEffect,
+  memo,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+} from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -71,7 +77,7 @@ function Header() {
       await Axios('/api/v1/links', {
         method: 'post',
         data: {
-          url: urlText,
+          url: urlText.includes('https://') ? urlText : `https://${urlText}`,
         },
       });
 
@@ -84,6 +90,12 @@ function Header() {
 
   const movePage = (url: string) => () => {
     router.push(`${url}`);
+  };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'Enter') {
+      handleLinkSave();
+    }
   };
 
   useEffect(() => {
@@ -138,6 +150,7 @@ function Header() {
                 placeholder="링크를 넣어 저장하세요 https://..."
                 onChange={handleInputUrl}
                 value={urlText}
+                onKeyPress={handleKeyPress}
               />
               <img
                 src="/images/icons/link-x.svg"
@@ -145,7 +158,7 @@ function Header() {
                 onClick={() => setIsLinkSave(false)}
               />
             </HeaderLinkSave>
-            <LinkSaveButton onClick={handleLinkSave}>
+            <LinkSaveButton onClick={() => handleLinkSave()}>
               {isLinkSave ? '' : '+ '} 링크저장
             </LinkSaveButton>
             <AlarmBox>
