@@ -277,7 +277,11 @@ function Header() {
         )}
       </ButtonContainer>
       {!isLogin && (
-        <Modal visible={isOpenModal} handleCloseModal={handleCloseJoinModal}>
+        <Modal
+          visible={isOpenModal}
+          handleCloseModal={handleCloseJoinModal}
+          setIsOpenModal={setIsOpenModal}
+        >
           <Join />
         </Modal>
       )}
