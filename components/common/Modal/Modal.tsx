@@ -14,12 +14,14 @@ interface ModalProps {
   /** 닫기 버튼 혹은 백그라운드 클릭 시 실행할 함수 */
   handleCloseModal: () => void;
   children: ReactNode;
+  setIsOpenModal: (any: boolean) => void;
 }
 
 export default function Modal({
   children,
   visible,
   handleCloseModal,
+  setIsOpenModal,
 }: ModalProps) {
   const [open, setOpen] = useState(false);
 
@@ -43,7 +45,7 @@ export default function Modal({
 
   return (
     <>
-      <Background visible={visible} />
+      <Background visible={visible} onClick={() => setIsOpenModal(false)} />
       <ModalContainer visible={visible}>
         <Title>
           <CloseButton type="button" onClick={handleCloseModal}>

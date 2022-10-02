@@ -38,7 +38,7 @@ export const Background = styled.div<{ visible: boolean }>`
 export const ModalContainer = styled.div<{ visible: boolean }>`
   width: 420px;
   height: 340px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
