@@ -5,7 +5,7 @@ function Success() {
   return (
     <EmailContainer>
       <EmailBox>
-        <img src="/images/email-success.svg" alt="close" />
+        <img src="" alt="close" />
         <h1>이메일 인증 성공 🎉</h1>
         <p>이메일 인증이 확인되었어요.</p>
         <p>
