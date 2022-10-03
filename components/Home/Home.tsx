@@ -4,15 +4,16 @@ import LinkSave from 'components/LinkSave';
 import RecentSaveLink from 'components/RecentSaveLink';
 import GemCrewPick from 'components/GemCrewPick';
 import { useRecoilState } from 'recoil';
-import { userInfo } from 'store/store';
-import { TLinkSave } from 'types/Link.types';
+import { recentLinkState, userInfo } from 'store/store';
 import Axios from 'utils/Axios';
 import LinkCopy from 'components/LinkCopy';
 import Modal from 'components/common/Modal/HomeModal';
+import styled from 'styled-components';
 function Home() {
-  const [recentLink, setRecentLink] = useState<TLinkSave[]>([]);
+  // const [recentLink, setRecentLink] = useState<TLinkSave[]>([]);
   // const router = useRouter();
   const [user, setUser] = useRecoilState(userInfo);
+  const [recentLink, setRecentLink] = useRecoilState(recentLinkState);
   const [isCopy, setIsCopy] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -54,6 +55,8 @@ function Home() {
       });
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
+      console.log('recentLink');
+      console.log(recentLink);
     } catch (error: any) {
       if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
         const response = await axios.post(
@@ -78,8 +81,8 @@ function Home() {
     getLink();
   }, []);
   return (
-    <>
-      <LinkSave setRecentLink={setRecentLink} recentLink={recentLink} />
+    <HomeContainer>
+      <LinkSave getLink={getLink} recentLink={recentLink} />
       <RecentSaveLink
         recentLink={recentLink}
         getLink={getLink}
@@ -89,9 +92,19 @@ function Home() {
       <GemCrewPick copyToClipboard={copyToClipboard} />
 
       {isCopy && <LinkCopy setIsCopy={setIsCopy} />}
-      {isOpenModal && <Modal visible={isOpenModal} handleModal={handleModal} />}
-    </>
+      {isOpenModal && (
+        <Modal
+          visible={isOpenModal}
+          handleModal={handleModal}
+          setIsOpenModal={setIsOpenModal}
+        />
+      )}
+    </HomeContainer>
   );
 }
 
 export default Home;
+
+const HomeContainer = styled.div`
+  padding-top: 80px;
+`;

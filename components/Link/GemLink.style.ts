@@ -38,7 +38,7 @@ export const LinkDetailTitle = styled.div`
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 140%;
   /* or 25px */
 
@@ -48,11 +48,11 @@ export const LinkDetailTitle = styled.div`
 
   color: #1a1b1d;
   a {
-    color: black;
+    color: #1a1b1d;
     text-decoration: none;
   }
   a:visited {
-    color: black;
+    color: #1a1b1d;
   }
 `;
 export const LinkDetailDescription = styled.div`
@@ -78,11 +78,11 @@ export const LinkDetailDescription = styled.div`
 
   color: #3c3c3f;
   a {
-    color: black;
+    color: #3c3c3f;
     text-decoration: none;
   }
   a:visited {
-    color: black;
+    color: #3c3c3f;
   }
 `;
 export const LinkDetailSetting = styled.div`

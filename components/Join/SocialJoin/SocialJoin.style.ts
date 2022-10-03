@@ -21,6 +21,9 @@ export const Title = styled.div`
 
     text-align: center;
     letter-spacing: -0.02em;
+    p {
+      white-space: nowrap;
+    }
     @media screen and (max-width: 500px) {
       font-size: 24px;
     }

@@ -21,7 +21,7 @@ interface IUserInfo {
   url: string;
   imageUrl: string;
   createDate: string;
-  isFavorites: boolean;
+  favorites: boolean;
   siteName: string;
 }
 
@@ -52,7 +52,7 @@ function RecentSaveLink({
         </RecentSaveLinkWholeSeries>
       </RecentSaveLinkTitleOption>
       <RecentSaveLinkOption>
-        {recentLink &&
+        {recentLink.length > 0 &&
           recentLink
             .slice(0, size)
             .map((link: IUserInfo) => (
@@ -64,7 +64,7 @@ function RecentSaveLink({
                 url={link?.url}
                 imageUrl={link?.imageUrl}
                 createDate={link?.createDate}
-                isFavorites={link?.isFavorites}
+                isFavorites={link?.favorites}
                 id={link?.id}
                 getLink={getLink}
                 copyToClipboard={copyToClipboard}

@@ -13,7 +13,7 @@ export const JoinButtonContainer = styled.button<JoinButtonContainerProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border: none;
-  border-radius: 8px;
+  border-radius: 100px;
   background-color: ${(props) => props.backgroundColor};
   font-size: ${(props) => props.fontSize};
   color: ${(props) => props.color};

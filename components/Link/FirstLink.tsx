@@ -38,7 +38,7 @@ function FirstLink({ name, handleModal }: IFirstLink) {
         <LinkDetailContainer>
           <Link href="https://www.notion.so/WELCOME-TO-LINK-GEM-9390ebe25a854abc8b053ca4ee970330">
             <a target="_blank">
-              <LinkDetailTitle>반가워요 다이아 키퍼님</LinkDetailTitle>
+              <LinkDetailTitle>반가워요 {name} 키퍼님</LinkDetailTitle>
             </a>
           </Link>
           <Link href="https://www.notion.so/WELCOME-TO-LINK-GEM-9390ebe25a854abc8b053ca4ee970330">

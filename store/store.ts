@@ -55,4 +55,24 @@ export const gemboxRefetch = atom({
   default: false,
 });
 
-export { loginState, joinState, modalState, userInfo };
+const recentLinkState = atom({
+  key: 'recentLink',
+  default: [],
+});
+
+const linkSaveState = atom({
+  key: 'linkSaveState',
+  default: {
+    isSuccess: false,
+    isVisible: false,
+  },
+});
+
+export {
+  loginState,
+  joinState,
+  modalState,
+  userInfo,
+  recentLinkState,
+  linkSaveState,
+};

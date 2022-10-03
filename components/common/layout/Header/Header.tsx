@@ -7,8 +7,14 @@ import React, {
 } from 'react';
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { joinState, modalState, userInfo } from 'store/store';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  recentLinkState,
+  joinState,
+  modalState,
+  userInfo,
+  linkSaveState,
+} from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -34,15 +40,18 @@ import {
   AlramModal,
   AlramContent,
   PolygonBox,
+  PolygonBox2,
 } from './Header.style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Axios from 'utils/Axios';
 import { headerFormData } from './form';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 function Header() {
   const router = useRouter();
+  const [user, setUser] = useRecoilState(userInfo);
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
@@ -51,6 +60,8 @@ function Header() {
   const [isLinkSave, setIsLinkSave] = useState(false);
   const [isSettingModal, setIsSettingModal] = useState(false);
   const [isAlarmModal, setIsAlarmModal] = useState(false);
+  const setRecentLink = useSetRecoilState(recentLinkState);
+  const setLinkSaveBar = useSetRecoilState(linkSaveState);
 
   const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlText(e.target.value);
@@ -73,23 +84,73 @@ function Header() {
   };
 
   const handleLinkSave = async () => {
-    if (isLinkSave) {
-      await Axios('/api/v1/links', {
-        method: 'post',
-        data: {
-          url: urlText.includes('https://') ? urlText : `https://${urlText}`,
-        },
-      });
+    try {
+      if (isLinkSave) {
+        if (!urlText) {
+          setIsLinkSave(false);
+          return;
+        }
+        await Axios('/api/v1/links', {
+          method: 'post',
+          data: {
+            url: urlText.includes('https://') ? urlText : `https://${urlText}`,
+          },
+        });
 
-      setUrlText('');
+        setUrlText('');
+        setIsLinkSave(false);
+        getLink();
+        setLinkSaveBar({ isVisible: true, isSuccess: true });
+      } else {
+        setIsLinkSave(true);
+      }
+    } catch (error) {
+      console.error(error);
       setIsLinkSave(false);
-    } else {
-      setIsLinkSave(true);
+      setLinkSaveBar({ isVisible: true, isSuccess: false });
     }
+
+    setTimeout(() => {
+      // setIsVisibleMessage(false);
+      setLinkSaveBar({ isVisible: false, isSuccess: false });
+    }, 3000);
   };
 
   const movePage = (url: string) => () => {
     router.push(`${url}`);
+  };
+
+  const getLink: () => void = async () => {
+    try {
+      const response = await Axios({
+        url: '/api/v1/links',
+        method: 'get',
+        params: {
+          page: 0,
+          size: 8,
+        },
+      });
+      const contents = await response?.data?.result?.contents;
+      setRecentLink(contents);
+    } catch (error: any) {
+      if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
+        const response = await axios.post(
+          '/api/v1/user/oauth/reissue',
+          {},
+          {
+            headers: {
+              'ACCESS-TOKEN': user.accessToken,
+              'REFRESH-TOKEN': user.refreshToken,
+            },
+          }
+        );
+        const accessToken = await response?.data?.result?.accessToken;
+        localStorage.setItem('accessToken', accessToken);
+        setUser({ ...user, accessToken });
+        // return axios(originalRequest);
+      }
+      console.log(error);
+    }
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLElement>) => {
@@ -155,7 +216,10 @@ function Header() {
               <img
                 src="/images/icons/link-x.svg"
                 alt="memo-img"
-                onClick={() => setIsLinkSave(false)}
+                onClick={() => {
+                  setIsLinkSave(false);
+                  setUrlText('');
+                }}
               />
             </HeaderLinkSave>
             <LinkSaveButton onClick={() => handleLinkSave()}>
@@ -170,50 +234,50 @@ function Header() {
                   width={30}
                   height={30}
                 />
-                {isAlarmModal && (
-                  <PolygonBox>
-                    <img
-                      src="/images/icons/header-Polygon 1.svg"
-                      alt="linkgem-logo"
-                    />
-                  </PolygonBox>
-                )}
               </AlarmImage>
               {isAlarmModal && (
-                <AlramModal>
-                  <AlramContent>
-                    <span>공지 - 24일전 </span>
-                    <p>
-                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
-                      <br />
-                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
-                      소통해보세요!
-                    </p>
-                    <button>커뮤니티 확인하기</button>
-                  </AlramContent>
-                  <hr />
-                  <AlramContent>
-                    <span>공지 - 24일전 </span>
-                    <p>
-                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
-                      <br />
-                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
-                      소통해보세요!
-                    </p>
-                    <button>커뮤니티 확인하기</button>
-                  </AlramContent>
-                  <hr />
-                  <AlramContent>
-                    <span>공지 - 24일전 </span>
-                    <p>
-                      링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
-                      <br />
-                      지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
-                      소통해보세요!
-                    </p>
-                    <button>커뮤니티 확인하기</button>
-                  </AlramContent>
-                </AlramModal>
+                <>
+                  <AlramModal isAlarmModal={isAlarmModal}>
+                    <PolygonBox>
+                      <img
+                        src="/images/icons/header-Polygon 1.svg"
+                        alt="linkgem-logo"
+                      />
+                    </PolygonBox>
+                    <AlramContent>
+                      <span>공지 - 24일전 </span>
+                      <p>
+                        링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                        <br />
+                        지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                        소통해보세요!
+                      </p>
+                      <button>커뮤니티 확인하기</button>
+                    </AlramContent>
+                    <hr />
+                    <AlramContent>
+                      <span>공지 - 24일전 </span>
+                      <p>
+                        링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                        <br />
+                        지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                        소통해보세요!
+                      </p>
+                      <button>커뮤니티 확인하기</button>
+                    </AlramContent>
+                    <hr />
+                    <AlramContent>
+                      <span>공지 - 24일전 </span>
+                      <p>
+                        링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                        <br />
+                        지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                        소통해보세요!
+                      </p>
+                      <button>커뮤니티 확인하기</button>
+                    </AlramContent>
+                  </AlramModal>
+                </>
               )}
             </AlarmBox>
 
@@ -227,17 +291,15 @@ function Header() {
                   }
                   onClick={handleSettingModal}
                 ></img>
-                {isSettingModal && (
-                  <PolygonBox>
+              </Initial>
+              {isSettingModal && (
+                <SettingModal isSettingModal={isSettingModal}>
+                  <PolygonBox2>
                     <img
                       src="/images/icons/header-Polygon 1.svg"
                       alt="linkgem-logo"
                     />
-                  </PolygonBox>
-                )}
-              </Initial>
-              {isSettingModal && (
-                <SettingModal>
+                  </PolygonBox2>
                   <p>
                     <img
                       alt="profile-image"

@@ -22,13 +22,12 @@ const BodyWrapper = styled.div<{ pathname: string }>`
   display: flex;
   justify-content: center;
   width: 100%;
+  padding: 80px;
   background-color: ${(props) =>
     props.pathname === 'setting' ? '#faf5ff' : '#ffffff'};
 `;
 
-const Body = styled.section`
-  margin-top: 84px;
-`;
+const Body = styled.section``;
 
 const Layout = (props: IPropsLayout) => {
   const router = useRouter();

@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export type TLinkSave = {
   createDate: string;
   description: string;
@@ -28,7 +26,7 @@ export type TLocalStorageAuth = {
 
 export interface ILinkSaveProps {
   recentLink: TLinkSave[] | any;
-  setRecentLink: Dispatch<SetStateAction<TLinkSave[]>>;
+  getLink: () => void;
 }
 
 export interface IRecentSaveProps {

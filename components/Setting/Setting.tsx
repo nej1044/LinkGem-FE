@@ -291,11 +291,20 @@ export default function Setting() {
           </SettingBasicInfo>
         </SettingInfoContainer>
         <SettingButtonContontainer>
-          <SettingButton color="#0F0223" onClick={handleDefaultUserSetting}>
-            원래대로 돌아가기
+          {/* 텍스트 컬러 수정해야함 */}
+          <SettingButton
+            bgColor="#3C3C3F"
+            color="#CECECE"
+            onClick={handleDefaultUserSetting}
+          >
+            취소
           </SettingButton>
-          <SettingButton color="#5200FF" onClick={handleUserSetting}>
-            새롭게 저장하기
+          <SettingButton
+            bgColor="#5200FF"
+            color="#ffffff"
+            onClick={handleUserSetting}
+          >
+            저장
           </SettingButton>
         </SettingButtonContontainer>
         <EtcContainer>

@@ -11,7 +11,7 @@ export const GemCrewPickTitle = styled.div`
   padding-left: 10px;
   font-weight: 700;
   font-size: 24px;
-  line-height: 140%;
+  line-height: 30px;
   /* identical to box height, or 34px */
 
   letter-spacing: -0.02em;
