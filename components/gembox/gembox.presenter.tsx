@@ -7,12 +7,11 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { boxNameState } from 'store/store';
 import Pagination from '../common/pagination/pagination.container';
-import { getTotalLinkCount } from 'utils/getTotalLinkCount';
 
 const GemboxUI = (props: IPropsGemBoxUI) => {
   const [isCopy, setIsCopy] = useState<boolean>(false);
   const boxName = useRecoilValue(boxNameState);
-  const count = getTotalLinkCount();
+  const count = props.data?.totalCount;
 
   const onClickCopyLink = (url: string) => async () => {
     try {
@@ -45,13 +44,15 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
             />
           ))}
         </S.LinkBoxWrapper>
-        <Pagination
-          count={count}
-          startPage={props.startPage}
-          setStartPage={props.setStartPage}
-          current={props.current}
-          setCurrent={props.setCurrent}
-        />
+        {count >= 24 && (
+          <Pagination
+            count={count}
+            startPage={props.startPage}
+            setStartPage={props.setStartPage}
+            current={props.current}
+            setCurrent={props.setCurrent}
+          />
+        )}
       </S.Wrapper>
       {isCopy ? <Snackbar setIsCopy={setIsCopy} isLinkCopy={isCopy} /> : <></>}
       {props.isDelete ? (

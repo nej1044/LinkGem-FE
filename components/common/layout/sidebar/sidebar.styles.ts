@@ -8,7 +8,7 @@ interface IPropsGemboxStyles {
 
 export const Sidebar = styled.ul`
   width: 160px;
-  margin-top: 80px;
+  margin-top: 180px;
   margin-left: 8vw;
 `;
 
@@ -72,6 +72,7 @@ export const GemboxListTitle = styled(FilterTitle)`
   font-size: 16px;
   letter-spacing: -0.02em;
   color: #1a1b1d;
+  cursor: pointer;
 `;
 
 export const GemboxItem = styled.ul`
