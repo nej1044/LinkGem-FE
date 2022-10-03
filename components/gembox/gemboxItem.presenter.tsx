@@ -75,6 +75,15 @@ const LinkCard = (props: IPropsLinkCard) => {
           </a>
           {isMore ? (
             <S.LinkBoxContents isMore={isMore}>
+              <CloseOutlined
+                style={{
+                  fontSize: '18px',
+                  position: 'absolute',
+                  top: 16,
+                  right: 24,
+                }}
+                onClick={() => setIsMore(false)}
+              />
               <S.MoreItems>
                 <MemoIcon
                   el={props.el}
@@ -96,10 +105,6 @@ const LinkCard = (props: IPropsLinkCard) => {
                   <S.DeleteIcon onClick={onClickDelete} /> 삭제
                 </S.MoreItem>
               </S.MoreItems>
-              <CloseOutlined
-                style={{ fontSize: '20px', textAlign: 'right' }}
-                onClick={() => setIsMore(false)}
-              />
             </S.LinkBoxContents>
           ) : (
             <S.LinkBoxContents>
@@ -117,8 +122,8 @@ const LinkCard = (props: IPropsLinkCard) => {
                   <S.LinkDate>{getDate(props.el?.createDate)}</S.LinkDate>
                   {props.el?.memo !== '' && (
                     <S.MemoIcon
+                      src="/icons/memoIcon.png"
                       onClick={() => setIsMemoView(true)}
-                      style={{ width: '24px', height: '24px', padding: '5px' }}
                     />
                   )}
                 </S.LeftSubInfo>

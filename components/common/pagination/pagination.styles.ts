@@ -6,18 +6,18 @@ export const ListFooter = styled.section`
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-around;
   width: 87%;
   height: 200px;
-  padding: 0 10vw;
 `;
 
 export const PrevArrow = styled(LeftOutlined)`
+  margin-right: 20px;
   color: ${(props) => (props.disabled ? '#CECECE' : '#1A1B1D')};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `;
 
 export const NextArrow = styled(RightOutlined)`
+  margin-left: 20px;
   color: ${(props) => (props.disabled ? '#CECECE' : '#1A1B1D')};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `;
@@ -25,6 +25,7 @@ export const NextArrow = styled(RightOutlined)`
 export const Pages = styled.button`
   width: 40px;
   height: 40px;
+  margin: 0 10px;
   color: ${(props: IPaginationStyled) =>
     props.current === true ? 'white' : 'black'};
   border: ${(props: IPaginationStyled) =>

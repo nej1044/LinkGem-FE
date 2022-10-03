@@ -28,7 +28,11 @@ const MemoIcon = (props: IMemoIconProps) => {
   return (
     <>
       <S.MoreItem onClick={() => props.setOpen(true)}>
-        <S.MemoIcon /> 메모
+        <S.MemoIcon
+          src="/icons/memoIcon.png"
+          style={{ width: '34px', height: '34px', padding: 0 }}
+        />{' '}
+        메모
       </S.MoreItem>
       <GemboxModal
         open={props.open}

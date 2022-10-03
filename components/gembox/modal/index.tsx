@@ -12,6 +12,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={props.open}
+      onClose={() => props.setOpen(false)}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{

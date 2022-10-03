@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+// import { useRecoilState } from 'recoil';
+// import { userInfo } from 'store/store';
 
 export const useQuery = (apiName: string, params?: object) => {
   const [state, setState] = useState<any>({
     data: null,
   });
   const [trigger, setTrigger] = useState(0);
+  // const [aaa] = useRecoilState(userInfo);
 
   const refetch = () => {
     setState({

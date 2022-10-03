@@ -88,7 +88,6 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
               style={{
                 fontSize: '20px',
                 color: '#8E8E8E',
-                cursor: 'pointer',
               }}
               onClick={() => setOpen(true)}
             />

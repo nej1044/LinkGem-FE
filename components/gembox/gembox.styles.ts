@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { IPropsGemboxStyles } from './gembox.types';
-import MemoOutlined from '../../public/icons/MemoOutlined.svg';
 import AddOutlined from '../../public/icons/AddOutlined.svg';
 import ChangeOutlined from '../../public/icons/ChangeOutlined.svg';
 import DeleteOutlined from '../../public/icons/DeleteOutlined.svg';
@@ -12,6 +11,7 @@ export const Wrapper = styled.div`
   box-sizing: border-box;
   width: 80vw;
   padding: 80px;
+  min-height: 76vh;
 `;
 
 export const GemboxSection = styled.div`
@@ -62,12 +62,13 @@ export const LinkBoxImg = styled.img`
 
 export const LinkBoxContents = styled.div`
   box-sizing: border-box;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
   height: 50%;
-  padding: ${(props: IPropsGemboxStyles) => (props.isMore ? '28px' : '24px')};
+  padding: ${(props: IPropsGemboxStyles) => (props.isMore ? '12px' : '24px')};
   border-radius: 16px;
   background-color: white;
   border-radius: ${(props: IPropsGemboxStyles) =>
@@ -95,16 +96,10 @@ export const MoreItem = styled.div`
   color: #1a1b1d;
 `;
 
-export const MemoIcon = styled(MemoOutlined)`
-  box-sizing: border-box;
-  width: 32px;
-  height: 32px;
+export const MemoIcon = styled.img`
+  width: 24px;
+  height: 24px;
   padding: 7px;
-  fill: #ffffff;
-  font-size: 900;
-  text-align: center;
-  background-color: #0f0223;
-  border-radius: 50%;
   cursor: pointer;
 `;
 

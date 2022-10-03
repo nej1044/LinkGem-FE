@@ -16,4 +16,5 @@ export const Text = styled.span`
   display: inline-block;
   font-weight: 500;
   font-size: 1.3vw;
+  padding-right: 10px;
 `;
