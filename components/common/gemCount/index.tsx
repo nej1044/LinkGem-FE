@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from 'store/store';
 
 interface IPropsGemCount {
   id: number;
 }
 
 const GemCount = (props: IPropsGemCount) => {
+  const accessToken = useRecoilValue(userInfo).accessToken;
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
@@ -16,8 +19,7 @@ const GemCount = (props: IPropsGemCount) => {
       .get(`/api/v1/links`, {
         cancelToken: source.token,
         headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+          Authorization: accessToken,
         },
         params: {
           gemBoxId: props.id,

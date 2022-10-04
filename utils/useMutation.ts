@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from 'store/store';
 
 export const useMutation = (method: string) => {
+  const accessToken = useRecoilValue(userInfo).accessToken;
   const mutation = async (apiName: string, params?: object) => {
     if (method === 'patch') {
       try {
@@ -9,8 +12,7 @@ export const useMutation = (method: string) => {
           params,
           {
             headers: {
-              Authorization:
-                'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+              Authorization: accessToken,
             },
           }
         );
@@ -26,8 +28,7 @@ export const useMutation = (method: string) => {
           params,
           {
             headers: {
-              Authorization:
-                'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+              Authorization: accessToken,
             },
           }
         );
@@ -42,8 +43,7 @@ export const useMutation = (method: string) => {
           `https://dev.linkgem.co.kr/api/v1/${apiName}`,
           {
             headers: {
-              Authorization:
-                'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+              Authorization: accessToken,
             },
             data: params,
           }

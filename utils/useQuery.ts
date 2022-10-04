@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import { useRecoilState } from 'recoil';
-// import { userInfo } from 'store/store';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from 'store/store';
 
 export const useQuery = (apiName: string, params?: object) => {
+  const accessToken = useRecoilValue(userInfo).accessToken;
   const [state, setState] = useState<any>({
     data: null,
   });
   const [trigger, setTrigger] = useState(0);
-  // const [aaa] = useRecoilState(userInfo);
 
   const refetch = () => {
     setState({
@@ -25,8 +25,7 @@ export const useQuery = (apiName: string, params?: object) => {
       .get(`https://dev.linkgem.co.kr/api/v1/${apiName || ''}`, {
         cancelToken: source.token,
         headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiTElOS19HRU0iLCJpYXQiOjE2NTc3MTQ3NzV9.PLAL9te0_Tszon7MMMPzMmDj7Cumt4nJGSVbx_6UT0g',
+          Authorization: accessToken,
         },
         params,
       })
