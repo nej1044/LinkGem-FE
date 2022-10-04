@@ -303,7 +303,7 @@ export const GemModalInput = styled.input`
     props.error ? '1px solid #FF0000' : '1px solid #cecece'};
   font-size: 16px;
   letter-spacing: -0.02em;
-  color: #8e8e8e;
+  color: ${(props) => (props.error ? '#FF0000' : '#cecece')};
   :focus {
     border: 1px solid #1a1b1d;
     color: #1a1b1d;

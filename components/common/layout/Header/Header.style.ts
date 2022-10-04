@@ -16,7 +16,7 @@ export const HeaderContainer = styled.header<IHeaderContainer>`
   position: fixed;
   background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
   width: 100%;
-  height: 10vh;
+  height: 11vh;
   max-height: 84px;
   display: flex;
   align-items: center;
