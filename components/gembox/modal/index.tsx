@@ -12,7 +12,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={props.open}
-      onClose={() => props.setOpen(false)}
+      onClose={props.onClose}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
@@ -21,7 +21,7 @@ const GemboxModal = (props: IPropsGemboxModal) => {
     >
       <Fade in={props.open}>
         <Box sx={S.style}>
-          <S.ModalClose onClick={() => props.setOpen(false)} />
+          <S.ModalClose onClick={props.onClose} />
 
           <S.GemboxWrapper>
             <S.ModalTitle>{props.title}</S.ModalTitle>

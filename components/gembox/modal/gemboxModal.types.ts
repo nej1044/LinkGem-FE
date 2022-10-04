@@ -16,6 +16,7 @@ export interface IEditBoxProps {
 export interface IPropsGemboxModal {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  onClose?: () => void;
   title: string | boolean;
   Component: any;
 }

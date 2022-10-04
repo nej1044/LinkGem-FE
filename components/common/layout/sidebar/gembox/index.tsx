@@ -40,6 +40,12 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
   const [boxRefetch] = useRecoilState(gemboxRefetch);
   const [, setBoxName] = useRecoilState(boxNameState);
 
+  const setClose = () => {
+    setOpen(false);
+    setIsDelete(false);
+    setIsEdit(false);
+  };
+
   const openCreate = () => {
     if (data.totalCount === 8) {
       alert('잼박스를 더 이상 추가할 수 없습니다.');
@@ -82,14 +88,13 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
     <>
       <S.Sidebar>
         <S.GemboxList>
-          <S.GemboxListTitle>
+          <S.GemboxListTitle onClick={() => setOpen(true)}>
             MY GEM BOX
             <EllipsisOutlined
               style={{
                 fontSize: '20px',
                 color: '#8E8E8E',
               }}
-              onClick={() => setOpen(true)}
             />
           </S.GemboxListTitle>
           <S.GemboxItem>
@@ -131,6 +136,7 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
       <GemboxModal
         open={open}
         setOpen={setOpen}
+        onClose={setClose}
         title={(isDelete && !'') || (isEdit && '잼박스 수정') || 'My Gem Box'}
         Component={
           <>

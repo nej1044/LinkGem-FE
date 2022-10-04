@@ -9,15 +9,38 @@ const EditBox = (props: IEditBoxProps) => {
   const [editBox] = useMutation('patch');
 
   const [name, setName] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+  const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
+    // if (event.target.value.length <= 0) {
+    //   setError('잼박스 이름을 설정해주세요.');
+    //   return;
+    // } else if (event.target.value.length >= 8) {
+    //   setError('잼박스 이름은 최대 8글자까지 만들 수 있습니다.');
+    //   return;
+    // } else if (!regex.test(event.target.value)) {
+    //   setError('잼박스 이름은 한글, 숫자, 영문으로만 작성 가능합니다.');
+    //   return;
+    // } else {
+    //   setError('');
+    // }
     setName(event.target.value);
   };
 
   const onClickEdit = async () => {
-    if (name.length >= 8 || name.length <= 0) {
-      alert('잼박스 이름은 0자 이하, 8자 이상일 수 없습니다.');
+    if (name.length <= 0) {
+      setError('잼박스 이름을 설정해주세요.');
       return;
+    } else if (name.length >= 8) {
+      setError('잼박스 이름은 최대 8글자까지 만들 수 있습니다.');
+      return;
+    } else if (!regex.test(name)) {
+      setError('잼박스 이름은 한글, 숫자, 영문으로만 작성 가능합니다.');
+      return;
+    } else {
+      setError('');
     }
     await editBox(`gemboxes/${props.selectedId}`, {
       id: props.selectedId,
@@ -43,7 +66,14 @@ const EditBox = (props: IEditBoxProps) => {
           type="text"
           placeholder="수정할 잼박스 이름을 적어주세요"
           onChange={onChangeName}
+          error={error}
+          style={
+            name && !error
+              ? { border: '1px solid #1a1b1d', color: '#1a1b1d' }
+              : {}
+          }
         />
+        <S.ErrorMessage>{error}</S.ErrorMessage>
       </S.WriteList>
       <S.GemBoxButton
         style={{ width: '97px', height: '55px', padding: '16px 32px' }}
