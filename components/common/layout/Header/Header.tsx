@@ -8,7 +8,7 @@ import React, {
 import Join from 'components/Join';
 import Modal from 'components/common/Modal';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { joinState, modalState, userInfo } from 'store/store';
+import { joinState, modalState, userInfo, gemboxRefetch } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
 import useLogin from 'utils/useLogin';
@@ -46,6 +46,7 @@ function Header() {
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
+  const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
   const [isLogin, setIsLogin] = useState(false);
   const [urlText, setUrlText] = useState('');
   const [isLinkSave, setIsLinkSave] = useState(false);
@@ -83,6 +84,7 @@ function Header() {
 
       setUrlText('');
       setIsLinkSave(false);
+      setBoxRefetch(true);
     } else {
       setIsLinkSave(true);
     }

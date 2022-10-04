@@ -5,7 +5,7 @@ import { gemboxRefetch, userInfo } from 'store/store';
 
 export const getTotalLinkCount = () => {
   const [totalCount, setTotalCount] = useState<number | null>(null);
-  const [boxRefetch] = useRecoilState(gemboxRefetch);
+  const [boxRefetch, setBoxRefetch] = useRecoilState(gemboxRefetch);
   const accessToken = useRecoilValue(userInfo).accessToken;
   const fetchLinkData = async () => {
     try {
@@ -22,6 +22,8 @@ export const getTotalLinkCount = () => {
 
   useEffect(() => {
     fetchLinkData();
+
+    return () => setBoxRefetch(false);
   }, [boxRefetch]);
 
   return totalCount;

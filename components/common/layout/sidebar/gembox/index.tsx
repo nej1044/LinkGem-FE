@@ -37,7 +37,7 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
   const [selectedId, setSelectedId] = useState(0);
   const [isDelete, setIsDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [boxRefetch] = useRecoilState(gemboxRefetch);
+  const [boxRefetch, setBoxRefetch] = useRecoilState(gemboxRefetch);
   const [, setBoxName] = useRecoilState(boxNameState);
 
   const setClose = () => {
@@ -82,6 +82,8 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
 
   useEffect(() => {
     refetch();
+
+    return () => setBoxRefetch(false);
   }, [boxRefetch]);
 
   return (
@@ -100,7 +102,7 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
           <S.GemboxItem>
             <S.GemboxTitle onClick={selectMenu('gembox')}>
               전체
-              <span>({totalCount})</span>
+              <span>({totalCount || 0})</span>
             </S.GemboxTitle>
             {data?.contents?.map((el: IDataType) => (
               <S.GemboxText key={uuidv4()} onClick={selectMenu('gembox', el)}>
