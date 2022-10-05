@@ -37,7 +37,7 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
   const [selectedId, setSelectedId] = useState(0);
   const [isDelete, setIsDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [boxRefetch, setBoxRefetch] = useRecoilState(gemboxRefetch);
+  const [boxRefetch] = useRecoilState(gemboxRefetch);
   const [, setBoxName] = useRecoilState(boxNameState);
 
   const setClose = () => {
@@ -82,8 +82,6 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
 
   useEffect(() => {
     refetch();
-
-    return () => setBoxRefetch(false);
   }, [boxRefetch]);
 
   return (
