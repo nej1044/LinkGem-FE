@@ -49,10 +49,6 @@ function GemLink({
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
 
-  console.log(title);
-  console.log('isFavorites');
-  console.log(isFavorites);
-
   const handleFavorite = async () => {
     try {
       await Axios(`/api/v1/links/${id}`, {
@@ -61,8 +57,7 @@ function GemLink({
       });
       setIsBookMark(!isBookMark);
     } catch (error: any) {
-      console.log('링크 좋아요 에러가 발생했습니다');
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -77,8 +72,7 @@ function GemLink({
       setIsBookMark(!isBookMark);
       getLink?.();
     } catch (error: any) {
-      console.log('링크 삭제 에러가 발생했습니다');
-      console.log(error);
+      console.error(error);
     }
   };
 

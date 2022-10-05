@@ -23,8 +23,8 @@ import {
 import Axios from 'utils/Axios';
 import MuiDialog from 'components/atom/Dialog/MuiDialog';
 import useLogin from 'utils/useLogin';
-import { useSetRecoilState } from 'recoil';
-import { userInfo } from 'store/store';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { joinState, userInfo } from 'store/store';
 import Modal from 'components/common/Modal/SettingModal';
 
 export default function Setting() {
@@ -41,6 +41,7 @@ export default function Setting() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDropDownList, setIsDropDownList] = useState(false);
   const setUserInfoState = useSetRecoilState(userInfo);
+  const resetJoinState = useResetRecoilState(joinState);
 
   const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
 
@@ -64,7 +65,6 @@ export default function Setting() {
 
   const handleChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.id]: e.target.value });
-    console.log(!nickNameRegex.test(e.target.value));
     if (!nickNameRegex.test(e.target.value)) {
       setIsErrorNickName({
         message:
@@ -78,6 +78,7 @@ export default function Setting() {
 
   const handleLogout = () => {
     localStorage.clear();
+    resetJoinState();
     router.push('/');
   };
 
@@ -143,7 +144,7 @@ export default function Setting() {
       });
       useLogin();
     } catch (e: any) {
-      console.log('에러', e);
+      console.error(e);
       if (e.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
         setIsErrorNickName({
           error: true,
@@ -175,8 +176,6 @@ export default function Setting() {
     setImgUrl(auth?.profileImageUrl);
   }, []);
 
-  console.log('form');
-  console.log(isErrorNickName.error);
   return (
     <>
       <SettingContainer>

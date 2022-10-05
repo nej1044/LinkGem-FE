@@ -8,7 +8,6 @@ export default function useLogin(): boolean {
       auth?.userPhase === 'REGISTERED' &&
       auth?.loginEmail
     ) {
-      console.log('로그인 정보가 있습니다');
       localStorage.setItem('name', auth.name);
       return true;
     } else {

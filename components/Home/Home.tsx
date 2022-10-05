@@ -18,7 +18,6 @@ function Home() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleModal = () => {
-    console.log('d여기');
     setIsOpenModal(!isOpenModal);
     getLink();
   };
@@ -35,7 +34,7 @@ function Home() {
     document.body.removeChild(element);
 
     if (!returnValue) {
-      console.log('복사하기가 실패했습니다');
+      console.error('복사하기가 실패했습니다');
     }
     setIsCopy(true);
 
@@ -55,8 +54,6 @@ function Home() {
       });
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
-      console.log('recentLink');
-      console.log(recentLink);
     } catch (error: any) {
       if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
         const response = await axios.post(
@@ -74,7 +71,7 @@ function Home() {
         setUser({ ...user, accessToken });
         // return axios(originalRequest);
       }
-      console.log(error);
+      console.error(error);
     }
   };
   useEffect(() => {
@@ -106,5 +103,7 @@ function Home() {
 export default Home;
 
 const HomeContainer = styled.div`
+  width: 80vw;
+  max-width: 1400px;
   padding-top: 80px;
 `;

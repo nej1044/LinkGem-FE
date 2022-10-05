@@ -4,8 +4,8 @@ import JoinButton from 'components/atom/Button/JoinButton';
 import JoinProgressBar from 'components/atom/ProgressBar/JoinProgressBar';
 import JoinTextInput from 'components/atom/TextInput/JoinTextInput';
 import { JobInfoContainer, JobText } from './JobInfo.style';
-import { useRecoilValue } from 'recoil';
-import { joinState } from 'store/store';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { joinState, modalState } from 'store/store';
 import axios from 'axios';
 
 function JobInfo() {
@@ -18,6 +18,7 @@ function JobInfo() {
     buttonColor: '',
     defaultCategory: [],
   });
+  const setIsOpenModal = useSetRecoilState(modalState);
   const [type, setType] = useState('');
   const [isButtonValueValid, setIsButtonValueValid] = useState(true);
   const joinUserInfo = useRecoilValue(joinState);
@@ -60,6 +61,7 @@ function JobInfo() {
             },
           }
         );
+        setIsOpenModal(false);
         const _auth =
           localStorage.getItem('auth') &&
           JSON.parse(localStorage.getItem('auth') as string);
@@ -71,10 +73,10 @@ function JobInfo() {
         window.location.href = '/';
       } catch (error: any) {
         if (error.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
-          console.log('닉네임 에러');
+          console.error('닉네임 에러');
           setIsNickNameError(true);
         }
-        console.log('에러가 발생했습니다', error);
+        console.error('에러가 발생했습니다', error);
       }
     }
   };

@@ -83,7 +83,7 @@ export default function Modal({
       <Background visible={visible} onClick={() => setIsOpenModal(false)} />
       <ModalContainer visible={visible}>
         <Title>
-          <CloseButton type="button" onClick={handleModal}>
+          <CloseButton type="button" onClick={() => handleModal()}>
             <ImageButton src="/icons/Home-X-black.svg" alt="close" />
           </CloseButton>
         </Title>

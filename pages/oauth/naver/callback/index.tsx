@@ -31,7 +31,7 @@ function Index() {
       setLoading(false);
       router.push('/');
     } catch (error) {
-      console.log('에러가 발생했습니다', error);
+      console.error('에러가 발생했습니다', error);
     }
   };
 

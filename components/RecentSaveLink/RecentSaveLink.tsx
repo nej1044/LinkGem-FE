@@ -8,6 +8,7 @@ import {
   RecentSaveLinkOption,
   RecentSaveLinkTitleOption,
   RecentSaveLinkWholeSeries,
+  RecentLinkBox,
 } from './RecentSaveLink.style';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from 'store/store';
@@ -35,7 +36,6 @@ function RecentSaveLink({
   const [size, setSize] = useState(4);
 
   const handleLinkSize = useCallback(() => {
-    console.log('asdf');
     if (size === 4) {
       setSize(8);
     } else {
@@ -45,36 +45,38 @@ function RecentSaveLink({
   useEffect(() => {}, [size]);
   return (
     <RecentSaveLinkContainer>
-      <RecentSaveLinkTitleOption>
-        <RecentSaveLinkTitle>최근 저장한 링크</RecentSaveLinkTitle>
-        <RecentSaveLinkWholeSeries onClick={handleLinkSize}>
-          전체보기
-        </RecentSaveLinkWholeSeries>
-      </RecentSaveLinkTitleOption>
-      <RecentSaveLinkOption>
-        {recentLink.length > 0 &&
-          recentLink
-            .slice(0, size)
-            .map((link: IUserInfo) => (
-              <Link
-                key={link?.id}
-                title={link?.title}
-                description={link?.description}
-                memos={link?.memo}
-                url={link?.url}
-                imageUrl={link?.imageUrl}
-                createDate={link?.createDate}
-                isFavorites={link?.favorites}
-                id={link?.id}
-                getLink={getLink}
-                copyToClipboard={copyToClipboard}
-                siteName={link?.siteName}
-              />
-            ))}
-        {recentLink.length < 1 && (
-          <FirstLink name={user?.nickname} handleModal={handleModal} />
-        )}
-      </RecentSaveLinkOption>
+      <RecentLinkBox>
+        <RecentSaveLinkTitleOption>
+          <RecentSaveLinkTitle>최근 저장한 링크</RecentSaveLinkTitle>
+          <RecentSaveLinkWholeSeries onClick={handleLinkSize}>
+            {recentLink.length > 5 && '전체보기'}
+          </RecentSaveLinkWholeSeries>
+        </RecentSaveLinkTitleOption>
+        <RecentSaveLinkOption>
+          {recentLink.length > 0 &&
+            recentLink
+              .slice(0, size)
+              .map((link: IUserInfo) => (
+                <Link
+                  key={link?.id}
+                  title={link?.title}
+                  description={link?.description}
+                  memos={link?.memo}
+                  url={link?.url}
+                  imageUrl={link?.imageUrl}
+                  createDate={link?.createDate}
+                  isFavorites={link?.favorites}
+                  id={link?.id}
+                  getLink={getLink}
+                  copyToClipboard={copyToClipboard}
+                  siteName={link?.siteName}
+                />
+              ))}
+          {recentLink.length < 1 && (
+            <FirstLink name={user?.nickname} handleModal={handleModal} />
+          )}
+        </RecentSaveLinkOption>
+      </RecentLinkBox>
     </RecentSaveLinkContainer>
   );
 }
