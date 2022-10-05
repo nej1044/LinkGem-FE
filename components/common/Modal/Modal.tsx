@@ -5,7 +5,6 @@ import {
   Title,
   CloseButton,
   Content,
-  ImageButton,
 } from './Modal.style';
 
 interface ModalProps {
@@ -49,7 +48,7 @@ export default function Modal({
       <ModalContainer visible={visible}>
         <Title>
           <CloseButton type="button" onClick={handleCloseModal}>
-            <ImageButton src="/images/icons/X-vector.svg" alt="close" />
+            <img src="/images/setting-x.svg" alt="close" />
           </CloseButton>
         </Title>
         <Content>{children}</Content>

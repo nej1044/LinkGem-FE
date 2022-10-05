@@ -79,9 +79,8 @@ export const CloseButton = styled.button`
   background: none;
   color: white;
   cursor: pointer;
-`;
-
-export const ImageButton = styled.img`
-  width: 20px;
-  height: 20px;
+  img {
+    width: 20px;
+    height: 20px;
+  }
 `;

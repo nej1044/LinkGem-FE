@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import {
   Background,
   ModalContainer,
@@ -18,12 +18,22 @@ interface ModalProps {
   visible: boolean;
   /** 닫기 버튼 혹은 백그라운드 클릭 시 실행할 함수 */
   handleModal: () => void;
+  setIsOpenModal: (any: boolean) => void;
 }
 
-export default function Modal({ visible, handleModal }: ModalProps) {
-  console.log('여기여기여기');
+export default function Modal({
+  visible,
+  handleModal,
+  setIsOpenModal,
+}: ModalProps) {
   const [open, setOpen] = useState(false);
   const [urlText, setUrlText] = useState('');
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'Enter') {
+      onClickLinkSaveButton();
+    }
+  };
 
   const onClickLinkSaveButton = async () => {
     try {
@@ -31,7 +41,7 @@ export default function Modal({ visible, handleModal }: ModalProps) {
       await Axios('/api/v1/links', {
         method: 'post',
         data: {
-          url: urlText,
+          url: urlText.includes('https://') ? urlText : `https://${urlText}`,
         },
       });
       handleModal();
@@ -70,7 +80,7 @@ export default function Modal({ visible, handleModal }: ModalProps) {
 
   return (
     <>
-      <Background visible={visible} />
+      <Background visible={visible} onClick={() => setIsOpenModal(false)} />
       <ModalContainer visible={visible}>
         <Title>
           <CloseButton type="button" onClick={handleModal}>
@@ -90,6 +100,7 @@ export default function Modal({ visible, handleModal }: ModalProps) {
               placeholder="https://..."
               onChange={handleInputUrl}
               value={urlText}
+              onKeyPress={handleKeyPress}
             />
           </LinkTextContainer>
           <LinkSaveButton onClick={() => onClickLinkSaveButton()}>

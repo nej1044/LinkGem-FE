@@ -49,6 +49,10 @@ function GemLink({
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
 
+  console.log(title);
+  console.log('isFavorites');
+  console.log(isFavorites);
+
   const handleFavorite = async () => {
     try {
       await Axios(`/api/v1/links/${id}`, {

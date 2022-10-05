@@ -12,6 +12,14 @@ interface IHeaderLinkSave {
   isLinkSave: boolean;
 }
 
+interface IAlarmModal {
+  isAlarmModal: boolean;
+}
+
+interface ISettingModal {
+  isSettingModal: boolean;
+}
+
 export const HeaderContainer = styled.header<IHeaderContainer>`
   position: fixed;
   background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
@@ -21,6 +29,9 @@ export const HeaderContainer = styled.header<IHeaderContainer>`
   display: flex;
   align-items: center;
   z-index: 100;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
 `;
 
 export const LogoContainer = styled.div`
@@ -157,7 +168,7 @@ export const LinkSaveButton = styled.button`
   align-items: center;
   gap: 5px;
 
-  background: #5200ff;
+  background-color: #5200ff;
   border: 0;
   border-radius: 4px;
 
@@ -315,7 +326,7 @@ export const SettingBox = styled.div`
   position: relative;
 `;
 
-export const SettingModal = styled.div`
+export const SettingModal = styled.div<ISettingModal>`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -340,12 +351,15 @@ export const SettingModal = styled.div`
     align-items: center;
 
     &:nth-child(1) {
+    }
+
+    &:nth-child(2) {
       img {
         width: 30px;
         height: 30px;
       }
     }
-    &:nth-child(3) {
+    &:nth-child(4) {
       padding-left: 2px;
       img {
         width: 20px;
@@ -371,13 +385,32 @@ export const SettingModal = styled.div`
     width: 100%;
     background-color: #cecece;
   }
+
+  animation: 0.7s ${(props) => (props.isSettingModal ? 'showUp' : 'showOut')};
+
+  @keyframes showUp {
+    0% {
+      transform: translate(0, -10px);
+    }
+    100% {
+      transform: translate(0, 0px);
+    }
+  }
+  @keyframes showOut {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(-100%, 0);
+    }
+  }
 `;
 
 export const AlarmBox = styled.div`
   position: relative;
 `;
 
-export const AlramModal = styled.div`
+export const AlramModal = styled.div<IAlarmModal>`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -394,13 +427,24 @@ export const AlramModal = styled.div`
   color: black;
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
   border-radius: 8px;
+  animation: 0.7s ${(props) => (props.isAlarmModal ? 'showUp' : 'showOut')};
 
-  hr {
-    margin-top: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ededed;
-    width: 100%;
-    background-color: #cecece;
+  @keyframes showUp {
+    0% {
+      transform: translate(0, -10px);
+    }
+    100% {
+      transform: translate(0, 0px);
+    }
+  }
+  @keyframes showOut {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(-100%, 0);
+      display: none;
+    }
   }
 `;
 export const AlramContent = styled.div`
@@ -452,8 +496,8 @@ export const AlramContent = styled.div`
 
 export const PolygonBox = styled.div`
   position: absolute;
-  top: 40px;
-
+  top: -10px;
+  right: 30px;
   img {
     width: 12px;
     height: 12px;
@@ -462,7 +506,8 @@ export const PolygonBox = styled.div`
 
 export const PolygonBox2 = styled.div`
   position: absolute;
-  top: 50px;
+  top: -10px;
+  right: 10px;
 
   img {
     width: 12px;

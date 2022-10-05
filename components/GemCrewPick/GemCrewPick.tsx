@@ -15,7 +15,7 @@ function GemCrewPick({ copyToClipboard }: IGemCrewPick) {
     <GemCrewPickContainer>
       <GemCrewPickTitle>잼크루 PICK</GemCrewPickTitle>
       <GemCrewPickDescription>
-        딱 24시간만 공유되는 잼크루들의 관심링크
+        딱 24시간만 공유되는 잼크루들의 관심링크!
       </GemCrewPickDescription>
       <GemCrewPickOption>
         {list.map((item, index) => (

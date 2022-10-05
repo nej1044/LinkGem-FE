@@ -40,6 +40,10 @@ function JoinDropdown({
     setSelectedOption(value);
     setIsOpen(false);
     if (type === 'job') {
+      if (value === '직접 입력') {
+        return;
+      }
+
       setJoinInfo((prev) => ({ ...prev, job: value }));
     } else if (type === 'year') {
       setJoinInfo((prev) => ({ ...prev, year: value }));
@@ -51,6 +55,7 @@ function JoinDropdown({
     setInputText(e.target.value);
     setJoinInfo((prev) => ({ ...prev, job: e.target.value }));
     setIsOpen(false);
+    changeButtonColor();
   };
 
   useEffect(() => {

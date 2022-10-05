@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
-interface NickNameErrorMessageProps {
+interface INickNameErrorMessageProps {
   isErrorNickName: boolean;
+}
+
+interface IButton {
+  bgColor: string;
+  color: string;
 }
 
 export const SettingContainer = styled.main`
   width: 100%;
   background-color: #faf5ff;
-
   padding-top: 80px;
+  padding-left: 80px;
   padding-bottom: 160px;
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
@@ -115,7 +120,7 @@ export const SettingInfo = styled.input`
 
   letter-spacing: -0.02em;
 `;
-export const SettingNinkName = styled.input<NickNameErrorMessageProps>`
+export const SettingNinkName = styled.input<INickNameErrorMessageProps>`
   width: 520px;
   height: 56px;
   display: flex;
@@ -241,11 +246,11 @@ export const SettingButtonContontainer = styled.div`
   margin-top: 80px;
 `;
 
-export const SettingButton = styled.button<{ color: string }>`
-  background-color: ${(props) => props.color};
-  padding: 16px 24px 16px 24px;
-  border-radius: 50px;
-  color: #ffffff;
+export const SettingButton = styled.button<IButton>`
+  background-color: ${(props) => props.bgColor};
+  color: ${(props) => props.color};
+  padding: 16px 53px;
+  border-radius: 8px;
   border: 0;
   font-style: normal;
   font-weight: 400;
@@ -255,9 +260,10 @@ export const SettingButton = styled.button<{ color: string }>`
 
   text-align: center;
   letter-spacing: -0.02em;
-
+  opacity: 0.9;
   &:hover {
     cursor: pointer;
+    opacity: 1;
   }
 `;
 
@@ -286,7 +292,7 @@ export const EtcContainer = styled.div`
   }
 `;
 
-export const NickNameErrorMessage = styled.span<NickNameErrorMessageProps>`
+export const NickNameErrorMessage = styled.span<INickNameErrorMessageProps>`
   /* display: ${(props) => (props.isErrorNickName ? 'block' : 'none')}; */
   position: absolute;
   top: 65px;

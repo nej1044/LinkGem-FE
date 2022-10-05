@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const LinkSaveContainer = styled.section`
   width: 100%;
   position: relative;
-  padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,6 +79,7 @@ export const LinkSaveButton = styled.button`
 
 interface LinkSaveSuccessBarProps {
   isVisibleMessage: boolean;
+  isSuccessLink: boolean;
 }
 
 export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
@@ -92,8 +92,7 @@ export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
 
   /* sub/purple */
 
-  background-color: ${(props) =>
-    props.isVisibleMessage ? '#f3edff' : '#FFF1F1'};
+  background-color: ${(props) => (props.isSuccessLink ? '#f3edff' : '#FFF1F1')};
   border-radius: 16px;
 `;
 
@@ -136,6 +135,9 @@ export const FailMessage = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const XIconImage = styled.div`

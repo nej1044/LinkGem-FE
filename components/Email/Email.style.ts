@@ -32,9 +32,11 @@ export const EmailBox = styled.div`
     font-size: 28px;
     line-height: 150%;
     margin-bottom: 16px;
+    font-family: 'Spoqa Han Sans Neo';
   }
 
   p {
+    font-family: 'Spoqa Han Sans Neo';
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
