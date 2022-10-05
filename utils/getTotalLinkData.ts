@@ -18,7 +18,7 @@ export const getTotalLinkData = () => {
       });
       setTotalData(result?.data?.result?.contents);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

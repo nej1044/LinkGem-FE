@@ -67,6 +67,7 @@ function Header() {
     setUrlText(e.target.value);
   };
   const handleOpenModal = () => {
+    console.log('asdfasdf');
     setIsOpenModal(true);
   };
 
@@ -149,7 +150,7 @@ function Header() {
         setUser({ ...user, accessToken });
         // return axios(originalRequest);
       }
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -160,15 +161,26 @@ function Header() {
   };
 
   useEffect(() => {
-    if (joinUserInfo.accessToken) {
-      setIsOpenModal(true);
-    }
+    // if (joinUserInfo.accessToken) {
+    //   console.log('!!!!!!!!');
+    //   setIsOpenModal(true);
+    // }
     setIsLogin(useLogin());
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setUserInfoState({ ...auth });
   }, [joinUserInfo.accessToken, isLogin]);
 
   useEffect(() => {}, [userInfoState]);
+
+  useEffect(() => {
+    setIsOpenModal(false);
+    setIsLogin(useLogin());
+  }, [router.pathname]);
+
+  console.log('isOpenModal');
+  console.log(isOpenModal);
+  console.log('isLogin');
+  console.log(isLogin);
 
   return (
     <HeaderContainer login={isLogin}>

@@ -5,7 +5,6 @@ import useLogin from 'utils/useLogin';
 
 function Main() {
   const [isLogin, setIsLogin] = useState(false);
-  console.log('isLogin', isLogin);
 
   useEffect(() => {
     setIsLogin(useLogin());

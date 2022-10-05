@@ -10,8 +10,6 @@ declare module 'axios' {
 }
 Axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
-    console.log('config');
-    console.log(config);
     const token: string | any =
       localStorage.getItem('accessToken') === null
         ? ''
@@ -34,8 +32,8 @@ Axios.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log('엑시오스 모듈 에러가 났습니다');
-    console.log(error);
+    console.error('엑시오스 모듈 에러가 났습니다');
+    console.error(error);
     if (
       error.response.status === 400 &&
       error.response.data.code === 'ACCESS_TOKEN_EXPIRED'
@@ -61,17 +59,13 @@ Axios.interceptors.response.use(
         );
         const { result } = data;
         const reAccessToken = result.accessToken;
-        console.log('reAccessToken');
-        console.log(reAccessToken);
         localStorage.setItem('accessToken', reAccessToken);
         originalRequest.headers = {
           Authorization: reAccessToken,
         };
-        console.log('재요청 리퀘스트액세스 토큰이 만료됐습니다');
-        console.log(originalRequest);
         return axios(originalRequest);
       } catch (error: any) {
-        console.log('리프레쉬 토큰 발급 에러', error);
+        console.error('리프레쉬 토큰 발급 에러', error);
       }
     } else if (
       error.response.status === 400 &&

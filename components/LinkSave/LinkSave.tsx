@@ -39,7 +39,7 @@ function Link({ getLink, recentLink }: ILinkSaveProps) {
       setLinkSaveBar({ isVisible: true, isSuccess: true });
       setUrlText('');
     } catch (error) {
-      console.log('정보가 없습니다');
+      console.error(error);
       setLinkSaveBar({ isVisible: true, isSuccess: false });
       // setIsSuccessLink(false);
     }
@@ -59,9 +59,6 @@ function Link({ getLink, recentLink }: ILinkSaveProps) {
   const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlText(e.target.value);
   };
-
-  console.log('linkSaveBar');
-  console.log(linkSaveBar);
 
   return (
     <LinkSaveContainer>

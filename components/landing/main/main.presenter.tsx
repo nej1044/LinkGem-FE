@@ -9,6 +9,7 @@ const MainUI = () => {
   const setIsOpenModal = useSetRecoilState(modalState);
 
   const openModal = () => {
+    console.log('여긴가');
     setIsOpenModal(true);
   };
   return (
@@ -32,7 +33,9 @@ const MainUI = () => {
             <br />
             이제 링크잼으로 관리하세요
           </S.TitleRemark>
-          <S.MainButton onClick={openModal}>지금 바로 시작하기</S.MainButton>
+          <S.MainButton onClick={() => openModal()}>
+            지금 바로 시작하기
+          </S.MainButton>
         </div>
         <Twinkle />
       </S.Wrapper>

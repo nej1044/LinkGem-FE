@@ -18,7 +18,7 @@ export const useMutation = (method: string) => {
         );
         return result;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     if (method === 'post') {
@@ -34,7 +34,7 @@ export const useMutation = (method: string) => {
         );
         return result;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     if (method === 'delete') {

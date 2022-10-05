@@ -16,7 +16,7 @@ export const getTotalLinkCount = () => {
       });
       setTotalCount(result?.data?.result?.totalCount);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

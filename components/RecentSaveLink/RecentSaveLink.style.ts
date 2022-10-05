@@ -56,3 +56,7 @@ export const RecentSaveLinkOption = styled.div`
     margin-bottom: 32px;
   }
 `;
+
+export const RecentLinkBox = styled.div`
+  display: inline;
+`;

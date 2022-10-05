@@ -36,7 +36,7 @@ function JoinButton({
   };
   return (
     <JoinButtonContainer
-      onClick={nextStep}
+      onClick={() => nextStep()}
       color={color}
       width={width}
       height={height}
