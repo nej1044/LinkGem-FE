@@ -40,7 +40,7 @@ export const sectionText = styled.span`
   line-height: 36px;
   letter-spacing: -2%;
   word-break: keep-all;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
 `;
 
 export const ArticleContent = styled.div`
