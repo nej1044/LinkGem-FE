@@ -14,18 +14,6 @@ const EditBox = (props: IEditBoxProps) => {
   const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    // if (event.target.value.length <= 0) {
-    //   setError('잼박스 이름을 설정해주세요.');
-    //   return;
-    // } else if (event.target.value.length >= 8) {
-    //   setError('잼박스 이름은 최대 8글자까지 만들 수 있습니다.');
-    //   return;
-    // } else if (!regex.test(event.target.value)) {
-    //   setError('잼박스 이름은 한글, 숫자, 영문으로만 작성 가능합니다.');
-    //   return;
-    // } else {
-    //   setError('');
-    // }
     setName(event.target.value);
   };
 

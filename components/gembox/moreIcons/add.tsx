@@ -73,6 +73,10 @@ const AddIcon = (props: IAddIconProps) => {
       <GemboxModal
         open={props.open}
         setOpen={props.setOpen}
+        onClose={() => {
+          props.onClose && props.onClose();
+          setName('');
+        }}
         title="잼박스 추가"
         Component={
           <S.CreateWrapper>
@@ -83,6 +87,11 @@ const AddIcon = (props: IAddIconProps) => {
                 placeholder="링크를 찾기 쉽도록 관련 카테고리로 이름을 지어주세요"
                 onChange={onChangeName}
                 error={error}
+                style={
+                  name && !error
+                    ? { border: '1px solid #1a1b1d', color: '#1a1b1d' }
+                    : {}
+                }
               />
               <S.ErrorMessage>{error}</S.ErrorMessage>
             </S.WriteList>

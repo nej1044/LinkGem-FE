@@ -57,8 +57,7 @@ export const FilterTitle = styled.div`
   font-weight: 500;
   letter-spacing: -0.02em;
 
-  font-family: 'Poppins', sans-serif;
-  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  font-family: 'Poppins';
 `;
 
 export const GemboxListTitle = styled(FilterTitle)`

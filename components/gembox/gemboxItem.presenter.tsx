@@ -1,12 +1,7 @@
 import * as S from './gembox.styles';
 import { onError } from 'utils/onError';
 import { getDate } from 'utils/getDate';
-import {
-  EllipsisOutlined,
-  StarOutlined,
-  StarFilled,
-  CloseOutlined,
-} from '@ant-design/icons';
+import { EllipsisOutlined, StarOutlined, StarFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import { gemboxRefetch } from 'store/store';
 import { useRecoilState } from 'recoil';
@@ -75,9 +70,11 @@ const LinkCard = (props: IPropsLinkCard) => {
           </a>
           {isMore ? (
             <S.LinkBoxContents isMore={isMore}>
-              <CloseOutlined
+              <img
+                src="/icons/closeIcon.jpg"
                 style={{
-                  fontSize: '18px',
+                  width: '16px',
+                  height: '16px',
                   position: 'absolute',
                   top: 16,
                   right: 24,
@@ -102,7 +99,11 @@ const LinkCard = (props: IPropsLinkCard) => {
                   잼박스변경
                 </S.MoreItem>
                 <S.MoreItem>
-                  <S.DeleteIcon onClick={onClickDelete} /> 삭제
+                  <S.DeleteIcon
+                    src="/icons/deleteIcon.jpg"
+                    onClick={onClickDelete}
+                  />{' '}
+                  삭제
                 </S.MoreItem>
               </S.MoreItems>
             </S.LinkBoxContents>
@@ -122,7 +123,7 @@ const LinkCard = (props: IPropsLinkCard) => {
                   <S.LinkDate>{getDate(props.el?.createDate)}</S.LinkDate>
                   {props.el?.memo !== '' && (
                     <S.MemoIcon
-                      src="/icons/memoIcon.png"
+                      src="/icons/memoIcon.jpg"
                       onClick={() => setIsMemoView(true)}
                     />
                   )}

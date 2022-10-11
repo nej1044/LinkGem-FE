@@ -42,6 +42,7 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
 
   const setClose = () => {
     setOpen(false);
+    setOpenAdd(false);
     setIsDelete(false);
     setIsEdit(false);
   };
@@ -178,7 +179,12 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
         }
       />
       <div style={{ display: 'none' }}>
-        <AddIcon open={openAdd} setOpen={setOpenAdd} refetch={refetch} />
+        <AddIcon
+          open={openAdd}
+          setOpen={setOpenAdd}
+          onClose={setClose}
+          refetch={refetch}
+        />
       </div>
     </>
   );

@@ -4,6 +4,7 @@ export interface IAddIconProps {
   el?: any;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  onClose?: () => void;
   refetch: () => void;
 }
 

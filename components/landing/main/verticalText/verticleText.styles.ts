@@ -12,9 +12,4 @@ export const Text = styled.span`
   color: #ffffff;
   text-transform: uppercase;
   font-family: 'Poppins';
-  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-  display: inline-block;
-  font-weight: 500;
-  font-size: 1.3vw;
-  padding-right: 10px;
 `;

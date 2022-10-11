@@ -21,8 +21,8 @@ const Wrapper = styled.div`
 const BodyWrapper = styled.div<{ pathname: string }>`
   display: flex;
   justify-content: center;
+  padding-top: 8vh;
   width: 100%;
-  padding: 80px;
   background-color: ${(props) =>
     props.pathname === 'setting' ? '#faf5ff' : '#ffffff'};
 `;

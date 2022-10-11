@@ -28,7 +28,7 @@ const Landing = () => {
 const HomeBlock = styled.div`
   width: 100%;
   overflow: hidden;
-  font-family: Rammetto One;
+  font-family: 'Rammetto One';
   background-color: #0f0223;
 `;
 

@@ -4,7 +4,6 @@ import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { IPropsGemboxStyles } from './gembox.types';
 import AddOutlined from '../../public/icons/AddOutlined.svg';
 import ChangeOutlined from '../../public/icons/ChangeOutlined.svg';
-import DeleteOutlined from '../../public/icons/DeleteOutlined.svg';
 import { Select } from 'antd';
 
 export const Wrapper = styled.div`
@@ -78,6 +77,7 @@ export const LinkBoxContents = styled.div`
 export const MoreItems = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
 `;
@@ -87,7 +87,7 @@ export const MoreItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 25%;
+  width: 20%;
   height: 40%;
   min-height: 55px;
   font-family: 'Spoqa Han Sans Neo';
@@ -127,16 +127,10 @@ export const ChangeIcon = styled(ChangeOutlined)`
   border-radius: 50%;
 `;
 
-export const DeleteIcon = styled(DeleteOutlined)`
-  box-sizing: border-box;
+export const DeleteIcon = styled.img`
   width: 32px;
   height: 32px;
-  padding: 8px;
-  fill: #ffffff;
-  font-size: 900;
-  text-align: center;
-  background-color: #0f0223;
-  border-radius: 50%;
+  cursor: pointer;
 `;
 
 export const LinkBoxTitle = styled.span`

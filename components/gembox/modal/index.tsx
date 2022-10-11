@@ -22,7 +22,6 @@ const GemboxModal = (props: IPropsGemboxModal) => {
       <Fade in={props.open}>
         <Box sx={S.style}>
           <S.ModalClose onClick={props.onClose} />
-
           <S.GemboxWrapper>
             <S.ModalTitle>{props.title}</S.ModalTitle>
             <S.RenderBox>{renderComponents(props.Component)}</S.RenderBox>
