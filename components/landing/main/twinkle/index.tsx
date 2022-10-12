@@ -102,7 +102,7 @@ const starList = [
     svg: 'star-16',
     figmaSize: 47,
     figmaLeft: 325,
-    figmaTop: 504,
+    figmaTop: 498,
     color: '#FF5F05',
   },
   {

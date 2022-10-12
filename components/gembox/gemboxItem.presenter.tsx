@@ -25,6 +25,10 @@ const LinkCard = (props: IPropsLinkCard) => {
 
   const { data } = useQuery('gemboxes');
 
+  const setClose = () => {
+    setMemoOpen(false);
+  };
+
   const boxName = useQuery(`gemboxes/${props.el?.gemBoxId}`, {
     id: props.el.gemboxId,
   }).data?.name;
@@ -79,7 +83,10 @@ const LinkCard = (props: IPropsLinkCard) => {
                   top: 16,
                   right: 24,
                 }}
-                onClick={() => setIsMore(false)}
+                onClick={() => {
+                  setIsMore(false);
+                  setIsEdit(false);
+                }}
               />
               <S.MoreItems>
                 <MemoIcon
@@ -87,12 +94,14 @@ const LinkCard = (props: IPropsLinkCard) => {
                   refetch={props.refetch}
                   open={memoOpen}
                   setOpen={setMemoOpen}
+                  onClose={setClose}
                 />
                 <AddIcon
                   el={props.el}
                   refetch={props.refetch}
                   open={addOpen}
                   setOpen={setAddOpen}
+                  onClose={setClose}
                 />
                 <S.MoreItem onClick={() => setIsEdit(true)}>
                   <S.ChangeIcon />
@@ -106,6 +115,52 @@ const LinkCard = (props: IPropsLinkCard) => {
                   삭제
                 </S.MoreItem>
               </S.MoreItems>
+              {isEdit && (
+                <S.Changebox>
+                  <S.ChangeItem>
+                    현재 잼박스
+                    <S.ItemBox type="text" value={boxName || '기본'} disabled />
+                  </S.ChangeItem>
+                  <S.ChangeItem>
+                    변경할 잼박스
+                    <SelectBoxPage
+                      selectList={data?.contents}
+                      gembox={gembox}
+                      handleChange={handleChange}
+                    />
+                  </S.ChangeItem>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-around',
+                      width: '100%',
+                      height: '40px',
+                    }}
+                  >
+                    <S.GemBoxButton
+                      style={{
+                        padding: '11px 27px',
+                        fontSize: '14px',
+                        borderRadius: '8px',
+                        background: '#3C3C3F',
+                      }}
+                      onClick={() => setIsEdit(false)}
+                    >
+                      취소
+                    </S.GemBoxButton>
+                    <S.GemBoxButton
+                      onClick={onClickChangeGembox}
+                      style={{
+                        padding: '11px 63px',
+                        fontSize: '14px',
+                        borderRadius: '8px',
+                      }}
+                    >
+                      변경
+                    </S.GemBoxButton>
+                  </div>
+                </S.Changebox>
+              )}
             </S.LinkBoxContents>
           ) : (
             <S.LinkBoxContents>
@@ -181,32 +236,6 @@ const LinkCard = (props: IPropsLinkCard) => {
             <S.MemoClose onClick={() => setIsMemoView(false)} />
           </S.Memobox>
         )}
-        {isEdit && (
-          <S.Changebox>
-            <S.ChangeList>
-              <S.ChangeItem>
-                현재 잼박스
-                <S.ItemBox type="text" value={boxName || '기본'} disabled />
-              </S.ChangeItem>
-              <S.ChangeItem>
-                변경할 잼박스
-                <SelectBoxPage
-                  selectList={data?.contents}
-                  gembox={gembox}
-                  handleChange={handleChange}
-                />
-              </S.ChangeItem>
-            </S.ChangeList>
-
-            <S.GemBoxButton
-              onClick={onClickChangeGembox}
-              style={{ padding: '8px 16px', fontSize: '14px' }}
-            >
-              변경
-            </S.GemBoxButton>
-            <S.MemoClose onClick={() => setIsEdit(false)} />
-          </S.Changebox>
-        )}
       </div>
       <div style={{ display: 'none' }}>
         <MemoIcon
@@ -214,6 +243,7 @@ const LinkCard = (props: IPropsLinkCard) => {
           refetch={props.refetch}
           open={memoOpen}
           setOpen={setMemoOpen}
+          onClose={setClose}
         />
       </div>
     </>

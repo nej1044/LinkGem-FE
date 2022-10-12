@@ -11,16 +11,15 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     marginTop: theme.spacing(1),
   },
   '& .MuiInputBase-input': {
+    'boxSizing': 'border-box',
     'borderRadius': 8,
     'position': 'relative',
-    'width': '114px',
-    'height': '0px',
-    'backgroundColor': theme.palette.background.paper,
+    'width': '240px',
+    'height': '40px',
     'border': '1px solid #ced4da',
     'fontSize': 12,
-    'padding': '7px 15px 12px 10px',
-    'transition': theme.transitions.create(['border-color', 'box-shadow']),
-    // Use the system font instead of the default Roboto font.
+    'marginTop': '10px',
+    'padding': '10px 16px',
     'fontFamily': [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -50,6 +49,7 @@ const ItemInput = styled(MenuItem)`
     background-color: #f3edff;
   }
   :hover {
+    color: #5200ff;
     background-color: #f3edff;
   }
 `;

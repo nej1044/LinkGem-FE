@@ -514,29 +514,37 @@ export const MemoClose = styled(ModalClose)`
   font-weight: 900;
 `;
 
-export const Changebox = styled(Memobox)`
-  bottom: -170px;
-  left: 145px;
+export const Changebox = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 212px;
-  height: 220px;
-  max-height: 231px;
-  padding: 24px 24px 24px 20px;
+  width: 100%;
+  height: 230px;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
+  border-radius: 8px;
 `;
 
 export const ChangeList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90%;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ChangeItem = styled.li`
-  height: 50%;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 60px;
   font-family: 'Spoqa Han Sans Neo';
   font-size: 11px;
   letter-spacing: -0.02em;
@@ -561,12 +569,12 @@ export const DataTitle = styled.span`
 
 export const ItemBox = styled.input`
   box-sizing: border-box;
-  width: 152px;
-  height: 36px;
+  width: 100%;
+  height: 40px;
   border-radius: 8px;
   border: 1px solid #ededed;
-  margin-top: 4px;
-  padding-left: 8px;
+  margin-top: 10px;
+  padding: 10px 16px;
   font-size: 12px;
 `;
 

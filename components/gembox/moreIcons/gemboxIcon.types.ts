@@ -4,7 +4,7 @@ export interface IAddIconProps {
   el?: any;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  onClose?: () => void;
+  onClose: () => void;
   refetch: () => void;
 }
 
@@ -13,4 +13,5 @@ export interface IMemoIconProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   refetch: () => void;
+  onClose?: () => void;
 }

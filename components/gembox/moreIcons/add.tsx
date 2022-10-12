@@ -74,7 +74,7 @@ const AddIcon = (props: IAddIconProps) => {
         open={props.open}
         setOpen={props.setOpen}
         onClose={() => {
-          props.onClose && props.onClose();
+          props.setOpen(false);
           setName('');
         }}
         title="잼박스 추가"

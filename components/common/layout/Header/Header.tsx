@@ -14,6 +14,7 @@ import {
   modalState,
   userInfo,
   linkSaveState,
+  gemboxRefetch,
 } from 'store/store';
 import JoinButton from 'components/atom/Button/JoinButton';
 import Image from 'next/image';
@@ -62,6 +63,7 @@ function Header() {
   const [isAlarmModal, setIsAlarmModal] = useState(false);
   const setRecentLink = useSetRecoilState(recentLinkState);
   const setLinkSaveBar = useSetRecoilState(linkSaveState);
+  const setBoxRefetch = useSetRecoilState(gemboxRefetch);
 
   const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlText(e.target.value);
@@ -101,6 +103,7 @@ function Header() {
         setUrlText('');
         setIsLinkSave(false);
         getLink();
+        setBoxRefetch((prev) => !prev);
         setLinkSaveBar({ isVisible: true, isSuccess: true });
       } else {
         setIsLinkSave(true);
@@ -176,11 +179,6 @@ function Header() {
     setIsOpenModal(false);
     setIsLogin(useLogin());
   }, [router.pathname]);
-
-  console.log('isOpenModal');
-  console.log(isOpenModal);
-  console.log('isLogin');
-  console.log(isLogin);
 
   return (
     <HeaderContainer login={isLogin}>

@@ -21,7 +21,17 @@ const GemboxModal = (props: IPropsGemboxModal) => {
     >
       <Fade in={props.open}>
         <Box sx={S.style}>
-          <S.ModalClose onClick={props.onClose} />
+          <img
+            src="/icons/closeIcon.jpg"
+            style={{
+              width: '24px',
+              height: '24px',
+              position: 'absolute',
+              top: 28,
+              right: 28,
+            }}
+            onClick={props.onClose}
+          />
           <S.GemboxWrapper>
             <S.ModalTitle>{props.title}</S.ModalTitle>
             <S.RenderBox>{renderComponents(props.Component)}</S.RenderBox>

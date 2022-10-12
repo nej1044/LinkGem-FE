@@ -35,6 +35,10 @@ const MemoIcon = (props: IMemoIconProps) => {
         메모
       </S.MoreItem>
       <GemboxModal
+        onClose={() => {
+          props.onClose && props.onClose();
+          setIsMemoDelete(false);
+        }}
         open={props.open}
         setOpen={props.setOpen}
         title={!isMemoDelete && '잼키퍼 메모장'}
