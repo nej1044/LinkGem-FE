@@ -11,6 +11,7 @@ const Gembox = (props: IPropsGembox) => {
   const router = useRouter();
   const [pickLink] = useMutation('patch');
   const [boxRefetch, setBoxRefetch] = useRecoilState(gemboxRefetch);
+
   const [isDelete, setIsDelete] = useState(false);
   const [current, setCurrent] = useState(1);
   const [startPage, setStartPage] = useState(1);

@@ -29,7 +29,7 @@ const LinkCard = (props: IPropsLinkCard) => {
     setMemoOpen(false);
   };
 
-  const boxName = useQuery(`gemboxes/${props.el?.gemBoxId}`, {
+  const boxName = useQuery(`gemboxes/${props.el?.gemBoxId || ''}`, {
     id: props.el.gemboxId,
   }).data?.name;
 

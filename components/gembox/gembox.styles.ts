@@ -593,3 +593,34 @@ export const RenderBox = styled.div`
   width: 100%;
   height: 470px;
 `;
+
+// export const SuccessMessage = styled.div`
+//   font-family: 'Spoqa Han Sans Neo';
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 16px;
+//   line-height: 150%;
+//   /* identical to box height, or 24px */
+
+//   /* main/purpleblack */
+
+//   color: #0f0223;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+//   margin: 0 auto;
+//   align-items: center;
+//   justify-content: center;
+// `;
+
+// export const XIconImage = styled.div`
+//   width: 12px;
+//   height: 12px;
+
+//   &:hover {
+//     cursor: pointer;
+//   }
+// `;

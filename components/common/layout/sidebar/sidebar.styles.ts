@@ -8,7 +8,7 @@ interface IPropsGemboxStyles {
 
 export const Sidebar = styled.ul`
   width: 160px;
-  margin-top: 100px;
+  margin-top: 180px;
   margin-left: 8vw;
 `;
 

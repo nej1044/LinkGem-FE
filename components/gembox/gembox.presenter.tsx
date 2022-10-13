@@ -11,6 +11,7 @@ import Pagination from '../common/pagination/pagination.container';
 const GemboxUI = (props: IPropsGemBoxUI) => {
   const [isCopy, setIsCopy] = useState<boolean>(false);
   const boxName = useRecoilValue(boxNameState);
+  // const [isLinkSave, setIsLinkSave] = useRecoilState(linkSaveState);
   const count = props.data?.totalCount;
 
   const onClickCopyLink = (url: string) => async () => {
@@ -25,6 +26,10 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
     }
   };
 
+  // const onCloseMessage = () => {
+  //   // setIsVisibleMessage(false);
+  //   setIsLinkSave({ ...isLinkSave, isVisible: false });
+  // };
   return (
     <>
       <S.Wrapper>
@@ -54,6 +59,25 @@ const GemboxUI = (props: IPropsGemBoxUI) => {
           />
         )}
       </S.Wrapper>
+      {/* {isLinkSave.isVisible && (
+        <>
+          {isLinkSave.isSuccess ? (
+            <S.SuccessMessage>
+              링크 저장 완료!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <S.XIconImage onClick={onCloseMessage}>
+                <img
+                  src="/images/icons/link-x.svg"
+                  alt="plus-icon"
+                  width={12}
+                  height={11}
+                />
+              </S.XIconImage>
+            </S.SuccessMessage>
+          ) : (
+            <></>
+          )}
+        </>
+      )} */}
       {isCopy ? <Snackbar setIsCopy={setIsCopy} isLinkCopy={isCopy} /> : <></>}
       {props.isDelete ? (
         <Snackbar setIsCopy={props.setIsDelete} isDelete={props.isDelete} />
