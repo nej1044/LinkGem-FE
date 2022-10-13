@@ -23,7 +23,6 @@ export default function Modal({
   setIsOpenModal,
 }: ModalProps) {
   const [open, setOpen] = useState(false);
-  console.log('여기가 나타난다');
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     if (visible) {

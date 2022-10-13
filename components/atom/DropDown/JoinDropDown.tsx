@@ -32,8 +32,14 @@ function JoinDropdown({
 
   const toggling = (e: MouseEvent) => {
     e.preventDefault();
-    setIsOpen(!isOpen);
-    setInputText('');
+    console.log('토글');
+    console.log(selectedOption);
+
+    if (selectedOption.includes('직접')) {
+      setInputText('');
+    } else {
+      setIsOpen(!isOpen);
+    }
   };
 
   const onOptionClicked = (value: string) => () => {
@@ -62,7 +68,8 @@ function JoinDropdown({
     setSelectedOption(type === 'job' ? '하고 있는일 선택' : '선택');
     setIsOpen(false);
   }, [type]);
-
+  console.log('isOpen');
+  console.log(isOpen);
   return (
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>
@@ -71,6 +78,11 @@ function JoinDropdown({
             <InputText
               value={inputText}
               onChange={changeJobInputText}
+              onFocus={() => {
+                setIsOpen(false);
+                console.log('여기');
+                console.log(isOpen);
+              }}
               placeholder="하시는 일을 입력해 주세요"
             />
           )) ||
@@ -78,9 +90,17 @@ function JoinDropdown({
         </DropDownHeaderText>
 
         {!isOpen ? (
-          <ImageButton src="/images/icons/Arrow-Bottom.svg" alt="close" />
+          <ImageButton
+            src="/images/icons/Arrow-Bottom.svg"
+            alt="arrow-bottom"
+            onClick={() => setIsOpen(!isOpen)}
+          />
         ) : (
-          <ImageButton src="/images/icons/Arrow-Top.svg" alt="close" />
+          <ImageButton
+            src="/images/icons/Arrow-Top.svg"
+            alt="arrow-top"
+            onClick={() => setIsOpen(!isOpen)}
+          />
         )}
       </DropDownHeader>
       {isOpen && (

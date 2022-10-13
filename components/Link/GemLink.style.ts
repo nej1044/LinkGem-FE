@@ -21,6 +21,9 @@ export const LinkContainer = styled.section`
 export const ImageContainer = styled.div`
   overflow: hidden;
   border-radius: 16px 16px 0px 0px;
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const LinkDetailContainer = styled.div`
@@ -177,4 +180,22 @@ export const LinkEtcXButton = styled.img`
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const GemCrewLink = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  /* or 22px */
+
+  letter-spacing: -0.02em;
+
+  /* text/black */
+
+  color: #1a1b1d;
 `;

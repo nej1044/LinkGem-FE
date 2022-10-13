@@ -80,6 +80,7 @@ export const LinkTextContainer = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
+  white-space: nowrap;
   /* or 24px */
 
   text-align: center;
@@ -98,9 +99,10 @@ export const LinkSaveButton = styled.button<{ bgColor: string }>`
   font-size: 18px;
   line-height: 23px;
   color: white;
-
+  opacity: 0.9;
   &:hover {
     cursor: pointer;
+    opacity: 1;
   }
 `;
 

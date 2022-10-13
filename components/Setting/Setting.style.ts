@@ -12,8 +12,9 @@ interface IButton {
 export const SettingContainer = styled.main`
   width: 100%;
   background-color: #faf5ff;
-  padding-top: 80px;
+  padding-top: 100px;
   padding-left: 80px;
+  padding-right: 80px;
   padding-bottom: 160px;
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
