@@ -107,4 +107,9 @@ const HomeContainer = styled.div`
   width: 80vw;
   max-width: 1400px;
   padding-top: 80px;
+
+  @media screen and (max-width: 480px) {
+    padding-top: 0px;
+    width: auto;
+  }
 `;

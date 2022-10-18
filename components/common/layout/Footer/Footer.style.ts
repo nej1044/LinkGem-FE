@@ -9,6 +9,16 @@ export const FooterContainer = styled.footer`
   align-items: center;
   padding: 35px 240px 41px 240px;
 
+  @media screen and (max-width: 956px) {
+    padding: 35px 120px 41px 120px;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 24px;
+    height: auto;
+    flex-direction: column;
+  }
+
   /* text/black */
 
   background: #1a1b1d;
@@ -16,6 +26,10 @@ export const FooterContainer = styled.footer`
   img {
     width: 108px;
     height: 36px;
+    @media screen and (max-width: 600px) {
+      width: 80px;
+      height: 13px;
+    }
   }
 
   p {
@@ -29,12 +43,21 @@ export const FooterContainer = styled.footer`
     letter-spacing: -0.02em;
 
     color: #ffffff;
+
+    @media screen and (max-width: 600px) {
+      font-size: 11px;
+    }
   }
 `;
-export const FooterLeft = styled.header`
+export const FooterLeft = styled.div`
   color: white;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
-export const FooterRight = styled.header`
+export const FooterRight = styled.div`
   a {
     color: white;
     font-family: 'Spoqa Han Sans Neo';
@@ -46,6 +69,9 @@ export const FooterRight = styled.header`
 
     letter-spacing: -0.02em;
     color: #ffffff;
+    @media screen and (max-width: 600px) {
+      font-size: 12px;
+    }
   }
 
   a:visited {
@@ -62,6 +88,7 @@ export const FooterRight = styled.header`
     letter-spacing: -0.02em;
 
     color: #ffffff;
+
     &:nth-child(1) {
       color: red;
       a {
@@ -75,4 +102,11 @@ export const FooterRight = styled.header`
   p:nth-child(1) {
     text-align: end;
   }
+`;
+export const MobileBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
 `;

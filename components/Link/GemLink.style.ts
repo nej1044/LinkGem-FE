@@ -4,7 +4,6 @@ export const LinkContainer = styled.section`
   position: relative;
   width: 320px;
   height: 376px;
-  margin-right: 24px;
 
   background: #ffffff;
 

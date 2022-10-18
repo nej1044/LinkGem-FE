@@ -10,8 +10,6 @@ function Main() {
     setIsLogin(useLogin());
   }, []);
 
-  console.log('isLogin');
-  console.log(isLogin);
   return <>{isLogin ? <Home /> : <Landing />}</>;
 }
 

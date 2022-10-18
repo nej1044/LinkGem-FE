@@ -52,8 +52,15 @@ export const RecentSaveLinkOption = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   padding-left: 10px;
+  gap: 24px;
   section {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+  }
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px;
+    align-content: flex-end;
   }
 `;
 
