@@ -73,7 +73,6 @@ function Header() {
     setUrlText(e.target.value);
   };
   const handleOpenModal = () => {
-    console.log('asdfasdf');
     setIsOpenModal(true);
   };
 

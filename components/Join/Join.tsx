@@ -6,8 +6,6 @@ import { joinState } from 'store/store';
 
 export default function Join() {
   const joinUserInfo = useRecoilValue(joinState);
-  console.log('joinUserInfo');
-  console.log(joinUserInfo);
   return (
     <>
       {(!joinUserInfo.accessToken ||

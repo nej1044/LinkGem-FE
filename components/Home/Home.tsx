@@ -42,7 +42,6 @@ function Home() {
     }, 3000);
   };
   const getLink: () => void = async () => {
-    console.log('getLink');
     try {
       const response = await Axios({
         url: '/api/v1/links',

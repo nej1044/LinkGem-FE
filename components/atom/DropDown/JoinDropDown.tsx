@@ -32,8 +32,6 @@ function JoinDropdown({
 
   const toggling = (e: MouseEvent) => {
     e.preventDefault();
-    console.log('토글');
-    console.log(selectedOption);
 
     if (selectedOption.includes('직접')) {
       setInputText('');
@@ -68,8 +66,6 @@ function JoinDropdown({
     setSelectedOption(type === 'job' ? '하고 있는일 선택' : '선택');
     setIsOpen(false);
   }, [type]);
-  console.log('isOpen');
-  console.log(isOpen);
   return (
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>
@@ -80,8 +76,6 @@ function JoinDropdown({
               onChange={changeJobInputText}
               onFocus={() => {
                 setIsOpen(false);
-                console.log('여기');
-                console.log(isOpen);
               }}
               placeholder="하시는 일을 입력해 주세요"
             />

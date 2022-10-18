@@ -40,8 +40,6 @@ function RecentSaveLink({
     router.push('/gembox');
   };
 
-  console.log('RecentSaveLink');
-
   return (
     <RecentSaveLinkContainer>
       <RecentLinkBox>
