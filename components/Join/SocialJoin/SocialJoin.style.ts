@@ -21,9 +21,7 @@ export const Title = styled.div`
 
     text-align: center;
     letter-spacing: -0.02em;
-    p {
-      white-space: nowrap;
-    }
+
     @media screen and (max-width: 500px) {
       font-size: 24px;
     }
@@ -35,13 +33,9 @@ export const Title = styled.div`
     font-size: 16px;
     line-height: 150%;
     /* or 24px */
-
+    white-space: nowrap;
     text-align: center;
     letter-spacing: -0.02em;
-    @media screen and (max-width: 500px) {
-      padding-left: 50px;
-      padding-right: 50px;
-    }
   }
 `;
 

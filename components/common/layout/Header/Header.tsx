@@ -52,6 +52,7 @@ import axios from 'axios';
 
 function Header() {
   const router = useRouter();
+  const [scrollPosition, setScrollPosition] = useState(0);
   const [user, setUser] = useRecoilState(userInfo);
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
@@ -65,11 +66,13 @@ function Header() {
   const setLinkSaveBar = useSetRecoilState(linkSaveState);
   const setBoxRefetch = useSetRecoilState(gemboxRefetch);
 
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
   const handleInputUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlText(e.target.value);
   };
   const handleOpenModal = () => {
-    console.log('asdfasdf');
     setIsOpenModal(true);
   };
 
@@ -174,6 +177,9 @@ function Header() {
   }, [joinUserInfo.accessToken, isLogin]);
 
   useEffect(() => {}, [userInfoState]);
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll);
+  }, []);
 
   useEffect(() => {
     setIsOpenModal(false);
@@ -181,7 +187,7 @@ function Header() {
   }, [router.pathname]);
 
   return (
-    <HeaderContainer login={isLogin}>
+    <HeaderContainer login={isLogin} scrollPosition={scrollPosition}>
       <LogoContainer>
         <Link href="/">
           <ImageContainer>

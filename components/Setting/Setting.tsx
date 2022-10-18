@@ -29,6 +29,7 @@ import Modal from 'components/common/Modal/SettingModal';
 
 export default function Setting() {
   const router = useRouter();
+  // const isLogin = useLogin();
   const [form, setForm] = useState({
     nickName: '',
     jobName: '',
@@ -166,6 +167,8 @@ export default function Setting() {
 
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem('auth') as string);
+
+    // if (!isLogin) router.push('/');
     setForm({
       name: auth?.name,
       nickName: auth?.nickname,
@@ -175,6 +178,8 @@ export default function Setting() {
     });
     setImgUrl(auth?.profileImageUrl);
   }, []);
+
+  // if (!isLogin) return <Loading />;
 
   return (
     <>
@@ -236,7 +241,7 @@ export default function Setting() {
                 onChange={handleChangeNickname}
                 isErrorNickName={isErrorNickName.error}
               />
-              {form?.nickName.length > 0 && isErrorNickName.error && (
+              {form?.nickName?.length > 0 && isErrorNickName.error && (
                 <NickNameErrorMessage isErrorNickName={isErrorNickName.error}>
                   {isErrorNickName.message}
                 </NickNameErrorMessage>

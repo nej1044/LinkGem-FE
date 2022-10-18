@@ -9,7 +9,6 @@ const MainUI = () => {
   const setIsOpenModal = useSetRecoilState(modalState);
 
   const openModal = () => {
-    console.log('여긴가');
     setIsOpenModal(true);
   };
   return (

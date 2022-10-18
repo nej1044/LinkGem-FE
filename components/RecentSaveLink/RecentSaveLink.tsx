@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import Link from 'components/Link';
 import FirstLink from 'components/Link/FirstLink';
 // import { useRouter } from 'next/router';
@@ -13,6 +13,7 @@ import {
 import { useRecoilValue } from 'recoil';
 import { userInfo } from 'store/store';
 import { IRecentSaveProps } from 'types/Link.types';
+import { useRouter } from 'next/router';
 
 interface IUserInfo {
   id: number;
@@ -33,29 +34,25 @@ function RecentSaveLink({
   handleModal,
 }: IRecentSaveProps) {
   const user = useRecoilValue(userInfo);
-  const [size, setSize] = useState(4);
+  const router = useRouter();
 
-  const handleLinkSize = useCallback(() => {
-    if (size === 4) {
-      setSize(8);
-    } else {
-      setSize(4);
-    }
-  }, [recentLink, size]);
-  useEffect(() => {}, [size]);
+  const handleGoGembox = () => {
+    router.push('/gembox');
+  };
+
   return (
     <RecentSaveLinkContainer>
       <RecentLinkBox>
         <RecentSaveLinkTitleOption>
           <RecentSaveLinkTitle>최근 저장한 링크</RecentSaveLinkTitle>
-          <RecentSaveLinkWholeSeries onClick={handleLinkSize}>
-            {recentLink.length > 5 && '전체보기'}
+          <RecentSaveLinkWholeSeries onClick={handleGoGembox}>
+            전체보기
           </RecentSaveLinkWholeSeries>
         </RecentSaveLinkTitleOption>
         <RecentSaveLinkOption>
           {recentLink.length > 0 &&
             recentLink
-              .slice(0, size)
+              .slice(0, 4)
               .map((link: IUserInfo) => (
                 <Link
                   key={link?.id}

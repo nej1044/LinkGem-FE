@@ -10,17 +10,9 @@ function Main() {
     setIsLogin(useLogin());
   }, []);
 
-  return (
-    <>
-      {isLogin ? (
-        <>
-          <Home />
-        </>
-      ) : (
-        <Landing />
-      )}
-    </>
-  );
+  console.log('isLogin');
+  console.log(isLogin);
+  return <>{isLogin ? <Home /> : <Landing />}</>;
 }
 
 export default Main;

@@ -9,9 +9,8 @@ import Axios from 'utils/Axios';
 import LinkCopy from 'components/LinkCopy';
 import Modal from 'components/common/Modal/HomeModal';
 import styled from 'styled-components';
+
 function Home() {
-  // const [recentLink, setRecentLink] = useState<TLinkSave[]>([]);
-  // const router = useRouter();
   const [user, setUser] = useRecoilState(userInfo);
   const [recentLink, setRecentLink] = useRecoilState(recentLinkState);
   const [isCopy, setIsCopy] = useState(false);
@@ -49,9 +48,10 @@ function Home() {
         method: 'get',
         params: {
           page: 0,
-          size: 8,
+          // size: 4,
         },
       });
+
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
     } catch (error: any) {
@@ -77,6 +77,7 @@ function Home() {
   useEffect(() => {
     getLink();
   }, []);
+
   return (
     <HomeContainer>
       <LinkSave getLink={getLink} recentLink={recentLink} />

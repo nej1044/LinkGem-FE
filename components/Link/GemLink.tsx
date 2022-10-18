@@ -15,6 +15,7 @@ import {
   LinkEtcButtonContainer,
   LinkEtcButton,
   LinkEtcXButton,
+  GemCrewLink,
 } from './GemLink.style';
 import { getDate } from 'utils/getDate';
 
@@ -32,6 +33,8 @@ interface GemLinkProps {
   getLink?: () => void;
   copyToClipboard: (url: string) => void;
   siteName?: string;
+  gemGrewItem?: boolean;
+  gemcrew?: string;
 }
 function GemLink({
   title,
@@ -45,10 +48,11 @@ function GemLink({
   getLink,
   copyToClipboard,
   siteName,
+  gemGrewItem,
+  gemcrew,
 }: GemLinkProps) {
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
-
   const handleFavorite = async () => {
     try {
       await Axios(`/api/v1/links/${id}`, {
@@ -56,6 +60,7 @@ function GemLink({
         data: { isFavorites: !isFavorites },
       });
       setIsBookMark(!isBookMark);
+      getLink?.();
     } catch (error: any) {
       console.error(error);
     }
@@ -108,7 +113,17 @@ function GemLink({
         </LinkDetailDescription>
         <LinkDetailSetting>
           <LinkDetailSettingDate>
-            {getDate(createDate) || '22.07.13'}
+            {gemGrewItem ? (
+              <GemCrewLink>
+                <img
+                  src="/images/icons/gemcrewpick-icon.svg"
+                  alt="gemcrewpick-icon"
+                />
+                <p>{gemcrew}</p>
+              </GemCrewLink>
+            ) : (
+              getDate(createDate)
+            )}
           </LinkDetailSettingDate>
           <LinkDetailSettingOption>
             <Image
