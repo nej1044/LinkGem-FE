@@ -69,43 +69,6 @@ export const ImageButton = styled.img`
   height: 16px;
 `;
 
-export const LinkTextContainer = styled.div`
-  width: 360px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  padding: 17px 20px 17px 20px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  white-space: nowrap;
-  /* or 24px */
-
-  text-align: center;
-  letter-spacing: -0.02em;
-`;
-
-export const LinkSaveButton = styled.button<{ bgColor: string }>`
-  margin-left: 8px;
-  padding: 16px 11px 16px 11px;
-  background-color: ${(props) => props.bgColor};
-  border: 0px;
-  border-radius: 8px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 23px;
-  color: white;
-  opacity: 0.9;
-  &:hover {
-    cursor: pointer;
-    opacity: 1;
-  }
-`;
-
 export const Content = styled.div`
   display: flex;
   padding-top: 20px;
@@ -128,10 +91,4 @@ export const Content = styled.div`
 
     color: #1a1b1d;
   }
-`;
-
-export const ButtonBox = styled.div`
-  display: flex;
-  gap: 8px;
-  justify-content: center;
 `;

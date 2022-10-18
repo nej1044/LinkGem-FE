@@ -1,5 +1,5 @@
 import SettingDropDown from 'components/atom/DropDown/SettingDropDown';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   EtcContainer,
@@ -13,12 +13,16 @@ import {
   SettingImage,
   SettingImageBox,
   SettingImageHover,
-  SettingInfo,
+  // SettingInfo,
   SettingInfoContainer,
   SettingLineBox,
   SettingTitle,
-  NickNameErrorMessage,
+  ErrorMessage,
   SettingNinkName,
+  SettingAuthEmail,
+  LinkTextContainer,
+  ButtonBox,
+  LinkSaveButton,
 } from 'components/Setting/Setting.style';
 import Axios from 'utils/Axios';
 import MuiDialog from 'components/atom/Dialog/MuiDialog';
@@ -37,13 +41,17 @@ export default function Setting() {
     email: '',
     name: '',
   });
+  const [authEmail, setAuthEmail] = useState('');
   const [file, setFile] = useState<File>();
   const [imgUrl, setImgUrl] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDropDownList, setIsDropDownList] = useState(false);
   const setUserInfoState = useSetRecoilState(userInfo);
   const resetJoinState = useResetRecoilState(joinState);
-
+  const [authEmailMessage, setAuthEmailMessage] = useState({
+    isMessage: false,
+    message: '',
+  });
   const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
 
   const handleWithdrawalModal = () => {
@@ -56,6 +64,7 @@ export default function Setting() {
     context: '',
     isOpen: false,
   });
+  const [isAuthEmailModal, setIsAuthEmailModal] = useState(false);
   const [isErrorNickName, setIsErrorNickName] = useState({
     error: false,
     message:
@@ -76,6 +85,15 @@ export default function Setting() {
       setIsErrorNickName({ ...isErrorNickName, error: false });
     }
   };
+
+  const handleInputChange = useCallback(
+    (e) => {
+      const { value } = e.target;
+
+      setAuthEmail(value);
+    },
+    [authEmail]
+  );
 
   const handleLogout = () => {
     localStorage.clear();
@@ -108,6 +126,7 @@ export default function Setting() {
       jobName: auth?.jobName,
       careerYear: auth?.careerYear,
     });
+    setAuthEmail(auth?.mailEmail);
   };
 
   const handleUserSetting = async () => {
@@ -144,9 +163,9 @@ export default function Setting() {
         isOpen: true,
       });
       useLogin();
-    } catch (e: any) {
-      console.error(e);
-      if (e.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
+    } catch (error: any) {
+      console.error(error);
+      if (error.response.data.code === 'USER_NICKNAME_ALREADY_EXIST') {
         setIsErrorNickName({
           error: true,
           message: '이미 있는 닉네임입니다',
@@ -161,8 +180,49 @@ export default function Setting() {
       }
     }
   };
+
+  const handleAuthEmail = async () => {
+    console.log('authEmail');
+    console.log(authEmail);
+    const regexEmail =
+      /* eslint-disable-next-line */
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (!regexEmail.test(authEmail)) {
+      console.log('이메일을 형식에 맞게 입력해주세요');
+      setAuthEmailMessage({
+        isMessage: true,
+        message: '이메일을 형식에 맞게 입력해주세요',
+      });
+      return null;
+    } else {
+      setAuthEmailMessage({
+        isMessage: false,
+        message: '',
+      });
+      setIsAuthEmailModal((prev) => !prev);
+    }
+    try {
+      await Axios('/api/v1/auth/mail/send', {
+        method: 'post',
+        data: {
+          emailAddress: authEmail,
+        },
+      });
+    } catch (e: any) {
+      console.error(e);
+      setAuthEmailMessage({
+        isMessage: false,
+        message: e,
+      });
+    }
+  };
+
   const handleDropDownList = () => {
     setIsDropDownList(!isDropDownList);
+  };
+
+  const handleAuthEmailModal = () => {
+    setIsAuthEmailModal((prev) => !prev);
   };
 
   useEffect(() => {
@@ -176,10 +236,9 @@ export default function Setting() {
       jobName: auth?.jobName,
       careerYear: auth?.careerYear,
     });
+    setAuthEmail(auth?.mailEmail);
     setImgUrl(auth?.profileImageUrl);
   }, []);
-
-  // if (!isLogin) return <Loading />;
 
   return (
     <>
@@ -242,19 +301,35 @@ export default function Setting() {
                 isErrorNickName={isErrorNickName.error}
               />
               {form?.nickName?.length > 0 && isErrorNickName.error && (
-                <NickNameErrorMessage isErrorNickName={isErrorNickName.error}>
+                <ErrorMessage isErrorNickName={isErrorNickName.error}>
                   {isErrorNickName.message}
-                </NickNameErrorMessage>
+                </ErrorMessage>
               )}
             </SettingLineBox>
             <SettingLineBox>
               <SettingCategory>이메일</SettingCategory>
-              <SettingInfo
-                disabled={true}
+              <SettingAuthEmail
                 type="text"
-                value={form.email}
-                id="email"
+                value={authEmail || ''}
+                id="authEmail"
+                onChange={handleInputChange}
+                placeholder="이메일 인증을 통해 다양한 혜택을 받아보세요."
               />
+              <SettingButton
+                bgColor="#5200FF"
+                color="#ffffff"
+                onClick={() => {
+                  handleAuthEmail();
+                }}
+                width="120px"
+              >
+                인증
+              </SettingButton>
+              {authEmailMessage.isMessage && (
+                <ErrorMessage isErrorNickName={authEmailMessage.isMessage}>
+                  {authEmailMessage.message}
+                </ErrorMessage>
+              )}
             </SettingLineBox>
           </SettingBasicInfo>
           <SettingBasicInfo>
@@ -300,6 +375,7 @@ export default function Setting() {
             bgColor="#3C3C3F"
             color="#CECECE"
             onClick={handleDefaultUserSetting}
+            width="140px"
           >
             취소
           </SettingButton>
@@ -307,6 +383,7 @@ export default function Setting() {
             bgColor="#5200FF"
             color="#ffffff"
             onClick={handleUserSetting}
+            width="140px"
           >
             저장
           </SettingButton>
@@ -325,14 +402,56 @@ export default function Setting() {
         {dialogContext.isOpen && <MuiDialog dialogContext={dialogContext} />}
       </SettingContainer>
       {isWithdrawalModal && (
-        <Modal
-          visible={isWithdrawalModal}
-          handleModal={handleWithdrawalModal}
-        />
+        <Modal visible={isWithdrawalModal} handleModal={handleWithdrawalModal}>
+          <>
+            <h2>키퍼님, 정말 탈퇴하시겠어요?</h2>
+            <LinkTextContainer>
+              탈퇴하시면 회원님의 모든 정보와 활동기록이 삭제됩니다.
+              <br />
+              삭제된 정보는 복구할 수 없으니 신중히 생각해주세요.
+            </LinkTextContainer>
+            <ButtonBox>
+              <LinkSaveButton bgColor="#252730">
+                <a
+                  href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
+                  rel="noreferrer"
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  네, 탈퇴할게요
+                </a>
+              </LinkSaveButton>
+              <LinkSaveButton bgColor="#5200FF" onClick={handleWithdrawalModal}>
+                다시 생각할게요
+              </LinkSaveButton>
+            </ButtonBox>
+          </>
+        </Modal>
+      )}
+      {isAuthEmailModal && (
+        <Modal visible={isAuthEmailModal} handleModal={handleAuthEmailModal}>
+          <>
+            <h2>이메일 인증</h2>
+            <LinkTextContainer>
+              <p>적어주신 이메일로 인증 메일을 전송하였습니다.</p>
+              <p>
+                <span className="violet">이메일 인증 완료 후 </span>
+                <span className="bold">
+                  아래 이메일 인증완료 버튼을 눌러주세요.
+                </span>
+              </p>
+            </LinkTextContainer>
+            <ButtonBox>
+              <LinkSaveButton bgColor="#5200FF" onClick={handleAuthEmailModal}>
+                인증완료
+              </LinkSaveButton>
+            </ButtonBox>
+          </>
+        </Modal>
       )}
     </>
   );
 }
+
 type joinType = {
   titleText: string;
   width: string;

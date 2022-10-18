@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-interface INickNameErrorMessageProps {
+interface IErrorMessageProps {
   isErrorNickName: boolean;
 }
 
-interface IButton {
+interface ISettingButton {
   bgColor: string;
   color: string;
+  width: string;
 }
 
 export const SettingContainer = styled.main`
@@ -95,6 +96,7 @@ export const SettingLineBox = styled.div`
   display: flex;
   margin-top: 30px;
   align-items: center;
+  gap: 12px;
 `;
 
 export const SettingCategory = styled.div`
@@ -121,7 +123,7 @@ export const SettingInfo = styled.input`
 
   letter-spacing: -0.02em;
 `;
-export const SettingNinkName = styled.input<INickNameErrorMessageProps>`
+export const SettingNinkName = styled.input<IErrorMessageProps>`
   width: 520px;
   height: 56px;
   display: flex;
@@ -143,6 +145,31 @@ export const SettingNinkName = styled.input<INickNameErrorMessageProps>`
   letter-spacing: -0.02em;
   &:focus {
     outline: ${(props) => (props.isErrorNickName ? 'red' : 'black')};
+  }
+`;
+
+export const SettingAuthEmail = styled.input`
+  width: 520px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  text-indent: 12px;
+  background-color: #ffffff;
+  /* gray/gray2 */
+
+  border: 1px solid;
+  /* border-color: ${(props) => props.isErrorNickName && 'red'}; */
+  border-radius: 16px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  /* or 22px */
+
+  letter-spacing: -0.02em;
+  &:focus {
+    /* outline: ${(props) => (props.isErrorNickName ? 'red' : 'black')}; */
   }
 `;
 
@@ -247,10 +274,12 @@ export const SettingButtonContontainer = styled.div`
   margin-top: 80px;
 `;
 
-export const SettingButton = styled.button<IButton>`
+export const SettingButton = styled.button<ISettingButton>`
   background-color: ${(props) => props.bgColor};
   color: ${(props) => props.color};
-  padding: 16px 53px;
+  width: ${(props) => props.width};
+  height: 56px;
+  /* padding: 16px 53px; */
   border-radius: 8px;
   border: 0;
   font-style: normal;
@@ -293,11 +322,64 @@ export const EtcContainer = styled.div`
   }
 `;
 
-export const NickNameErrorMessage = styled.span<INickNameErrorMessageProps>`
+export const ErrorMessage = styled.span<IErrorMessageProps>`
   /* display: ${(props) => (props.isErrorNickName ? 'block' : 'none')}; */
   position: absolute;
   top: 65px;
   left: 160px;
   font-size: 14px;
   color: red;
+`;
+
+export const LinkTextContainer = styled.div`
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 17px 20px 17px 20px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  p {
+    white-space: nowrap;
+  }
+  /* or 24px */
+
+  text-align: center;
+  letter-spacing: -0.02em;
+  .violet {
+    color: #5200ff;
+    font-weight: 500;
+  }
+  .bold {
+    font-weight: 500;
+  }
+`;
+
+export const LinkSaveButton = styled.button<{ bgColor: string }>`
+  margin-left: 8px;
+  background-color: ${(props) => props.bgColor};
+  width: 140px;
+  height: 56px;
+  border: 0px;
+  border-radius: 8px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  color: white;
+  opacity: 0.9;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+`;
+
+export const ButtonBox = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 `;
