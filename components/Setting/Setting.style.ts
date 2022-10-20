@@ -11,7 +11,7 @@ interface ISettingButton {
 }
 
 export const SettingContainer = styled.main`
-  width: 100%;
+  width: 70vw;
   background-color: #faf5ff;
   padding-top: 100px;
   padding-left: 80px;
@@ -148,16 +148,15 @@ export const SettingNinkName = styled.input<IErrorMessageProps>`
   }
 `;
 
-export const SettingAuthEmail = styled.input`
+export const SettingAuthEmail = styled.input<{ isDisabled: boolean }>`
   width: 520px;
   height: 56px;
   display: flex;
   align-items: center;
   text-indent: 12px;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.isDisabled ? '#ededed' : '#ffffff')};
   /* gray/gray2 */
-
-  border: 1px solid;
+  border: 1px solid ${(props) => props.isDisabled && '#cecece'};
   /* border-color: ${(props) => props.isErrorNickName && 'red'}; */
   border-radius: 16px;
 
@@ -286,6 +285,7 @@ export const SettingButton = styled.button<ISettingButton>`
   font-weight: 400;
   font-size: 18px;
   line-height: 23px;
+  white-space: nowrap;
   /* identical to box height */
 
   text-align: center;
@@ -382,4 +382,13 @@ export const ButtonBox = styled.div`
   display: flex;
   gap: 8px;
   justify-content: center;
+`;
+
+export const EmailAuthBox = styled.div`
+  position: relative;
+  .imageBox {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+  }
 `;

@@ -23,6 +23,7 @@ import {
   LinkTextContainer,
   ButtonBox,
   LinkSaveButton,
+  EmailAuthBox,
 } from 'components/Setting/Setting.style';
 import Axios from 'utils/Axios';
 import MuiDialog from 'components/atom/Dialog/MuiDialog';
@@ -33,6 +34,7 @@ import Modal from 'components/common/Modal/SettingModal';
 
 export default function Setting() {
   const router = useRouter();
+  const auth = JSON.parse(localStorage.getItem('auth') as string);
   // const isLogin = useLogin();
   const [form, setForm] = useState({
     nickName: '',
@@ -53,7 +55,7 @@ export default function Setting() {
     message: '',
   });
   const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
-
+  const [isClickedEmailBtn, setIsClickedEmailBtn] = useState(false);
   const handleWithdrawalModal = () => {
     setIsWithdrawalModal(!isWithdrawalModal);
   };
@@ -202,11 +204,8 @@ export default function Setting() {
       setIsAuthEmailModal((prev) => !prev);
     }
     try {
-      await Axios('/api/v1/auth/mail/send', {
+      await Axios(`/api/v1/auth/mail/send?emailAddress=${authEmail}`, {
         method: 'post',
-        data: {
-          emailAddress: authEmail,
-        },
       });
     } catch (e: any) {
       console.error(e);
@@ -221,13 +220,37 @@ export default function Setting() {
     setIsDropDownList(!isDropDownList);
   };
 
-  const handleAuthEmailModal = () => {
+  const handleAuthEmailModal = async () => {
+    try {
+      const response = await Axios(
+        `/api/v1/auth/mail/confirm?emailAddress=${authEmail}`,
+        {
+          method: 'get',
+        }
+      );
+      const result = await response?.data?.result;
+      if (result.auth === true) {
+        console.log('인증이 완료 되었습니다');
+        return;
+      }
+      if (result.auth === false) {
+        setAuthEmailMessage({
+          isMessage: true,
+          message: '인증이 완료되지 않았습니다. 다시 인증을 진행해주세요',
+        });
+        throw new Error('인증에 실패했습니다.');
+      } else {
+        throw new Error('이메일 인증하는데 오류가 발생했습니다.');
+      }
+    } catch (e: any) {
+      console.error(e);
+    }
     setIsAuthEmailModal((prev) => !prev);
   };
+  console.log('authEmailMessage');
+  console.log(authEmailMessage);
 
   useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem('auth') as string);
-
     // if (!isLogin) router.push('/');
     setForm({
       name: auth?.name,
@@ -236,6 +259,7 @@ export default function Setting() {
       jobName: auth?.jobName,
       careerYear: auth?.careerYear,
     });
+    if (auth.mailEmail) setIsClickedEmailBtn(true);
     setAuthEmail(auth?.mailEmail);
     setImgUrl(auth?.profileImageUrl);
   }, []);
@@ -308,23 +332,59 @@ export default function Setting() {
             </SettingLineBox>
             <SettingLineBox>
               <SettingCategory>이메일</SettingCategory>
-              <SettingAuthEmail
-                type="text"
-                value={authEmail || ''}
-                id="authEmail"
-                onChange={handleInputChange}
-                placeholder="이메일 인증을 통해 다양한 혜택을 받아보세요."
-              />
-              <SettingButton
-                bgColor="#5200FF"
-                color="#ffffff"
-                onClick={() => {
-                  handleAuthEmail();
-                }}
-                width="120px"
-              >
-                인증
-              </SettingButton>
+
+              <EmailAuthBox>
+                <SettingAuthEmail
+                  type="text"
+                  value={authEmail || ''}
+                  isDisabled={isClickedEmailBtn}
+                  id="authEmail"
+                  onChange={handleInputChange}
+                  placeholder="이메일 인증을 통해 다양한 혜택을 받아보세요."
+                  disabled={isClickedEmailBtn}
+                />
+                {authEmail
+                  ? isClickedEmailBtn && (
+                      <div className="imageBox">
+                        <img
+                          src="images/icons/email-auth-success-icon.svg"
+                          alt="email-auth-success"
+                        />
+                      </div>
+                    )
+                  : authEmailMessage.isMessage && (
+                      <div className="imageBox">
+                        <img
+                          src="images/icons/email-auth-false-icon.svg"
+                          alt="email-auth-false"
+                        />
+                      </div>
+                    )}
+              </EmailAuthBox>
+              {!isClickedEmailBtn ? (
+                <SettingButton
+                  bgColor="#5200FF"
+                  color="#ffffff"
+                  onClick={() => {
+                    handleAuthEmail();
+                  }}
+                  width="120px"
+                >
+                  {auth.mailEmail ? '재인증' : '인증'}
+                </SettingButton>
+              ) : (
+                <SettingButton
+                  bgColor="#3C3C3F"
+                  color="#ffffff"
+                  onClick={() => {
+                    setIsClickedEmailBtn((prev) => !prev);
+                  }}
+                  width="172px"
+                >
+                  이메일 주소 변경
+                </SettingButton>
+              )}
+
               {authEmailMessage.isMessage && (
                 <ErrorMessage isErrorNickName={authEmailMessage.isMessage}>
                   {authEmailMessage.message}
@@ -428,7 +488,12 @@ export default function Setting() {
         </Modal>
       )}
       {isAuthEmailModal && (
-        <Modal visible={isAuthEmailModal} handleModal={handleAuthEmailModal}>
+        <Modal
+          visible={isAuthEmailModal}
+          handleModal={() => {
+            setIsAuthEmailModal((prev) => !prev);
+          }}
+        >
           <>
             <h2>이메일 인증</h2>
             <LinkTextContainer>
