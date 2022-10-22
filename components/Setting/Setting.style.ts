@@ -157,7 +157,6 @@ export const SettingAuthEmail = styled.input<{ isDisabled: boolean }>`
   background-color: ${(props) => (props.isDisabled ? '#ededed' : '#ffffff')};
   /* gray/gray2 */
   border: 1px solid ${(props) => props.isDisabled && '#cecece'};
-  /* border-color: ${(props) => props.isErrorNickName && 'red'}; */
   border-radius: 16px;
 
   font-style: normal;
@@ -167,9 +166,6 @@ export const SettingAuthEmail = styled.input<{ isDisabled: boolean }>`
   /* or 22px */
 
   letter-spacing: -0.02em;
-  &:focus {
-    /* outline: ${(props) => (props.isErrorNickName ? 'red' : 'black')}; */
-  }
 `;
 
 export const SettingDisabledInfo = styled.div<{ type: string }>`

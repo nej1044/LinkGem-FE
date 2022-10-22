@@ -34,7 +34,7 @@ import Modal from 'components/common/Modal/SettingModal';
 
 export default function Setting() {
   const router = useRouter();
-  const auth = JSON.parse(localStorage.getItem('auth') as string);
+
   // const isLogin = useLogin();
   const [form, setForm] = useState({
     nickName: '',
@@ -251,6 +251,7 @@ export default function Setting() {
   console.log(authEmailMessage);
 
   useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem('auth') as string);
     // if (!isLogin) router.push('/');
     setForm({
       name: auth?.name,
@@ -370,7 +371,7 @@ export default function Setting() {
                   }}
                   width="120px"
                 >
-                  {auth.mailEmail ? '재인증' : '인증'}
+                  {authEmail ? '재인증' : '인증'}
                 </SettingButton>
               ) : (
                 <SettingButton
@@ -449,6 +450,11 @@ export default function Setting() {
           </SettingButton>
         </SettingButtonContontainer>
         <EtcContainer>
+          {/* <a
+            href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
+            rel="noreferrer"
+            style={{ textDecoration: 'none' }}
+          > */}
           <span onClick={handleWithdrawalModal}>회원탈퇴</span>
           {/* </a> */}
 
