@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const LinkContainer = styled.section`
   width: 320px;
   height: 376px;
-  margin-right: 24px;
   background: #ffffff;
   /* shadow */
 

@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 export const LinkContainer = styled.section`
   position: relative;
-  width: 320px;
-  height: 376px;
-  margin-right: 24px;
+  max-width: 320px;
+  max-height: 376px;
 
   background: #ffffff;
 
@@ -16,6 +15,10 @@ export const LinkContainer = styled.section`
   &:hover {
     transform: translateY(-10px);
   }
+
+  @media screen and (max-width: 1700px) {
+    width: 280px;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -23,6 +26,7 @@ export const ImageContainer = styled.div`
   border-radius: 16px 16px 0px 0px;
   img {
     object-fit: cover;
+    width: 100%;
   }
 `;
 

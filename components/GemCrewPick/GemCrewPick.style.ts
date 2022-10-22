@@ -3,6 +3,13 @@ import styled from 'styled-components';
 export const GemCrewPickContainer = styled.section`
   padding-top: 80px;
   padding-bottom: 160px;
+  section {
+    margin-bottom: 24px;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding-bottom: 120px;
+  }
 `;
 
 export const GemCrewPickTitle = styled.div`
@@ -44,4 +51,12 @@ export const GemCrewPickOption = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   padding-left: 10px;
+  gap: 24px;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px;
+    align-content: flex-end;
+  }
 `;

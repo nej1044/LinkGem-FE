@@ -47,7 +47,7 @@ export const LogoContainer = styled.div`
   @media screen and (max-width: 1000px) {
     margin-left: 48px;
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     margin-left: 20px;
   }
 
@@ -62,7 +62,7 @@ export const LogoContainer = styled.div`
 
     letter-spacing: -0.02em;
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 480px) {
       font-size: 8px;
       color: #41fb6a;
     }
@@ -77,7 +77,7 @@ export const MenuContainer = styled.ul`
   @media screen and (max-width: 1000px) {
     gap: 20px;
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     display: none;
   }
 `;
@@ -110,7 +110,7 @@ export const ButtonContainer = styled.div`
   @media screen and (max-width: 1200px) {
     padding-right: 48px;
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     padding-right: 20px;
   }
 `;
@@ -141,7 +141,7 @@ export const JoinButton = styled.button`
 export const LogoImage = styled.img`
   width: 165px;
   height: 27px;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     width: 140px;
     height: 23px;
   }

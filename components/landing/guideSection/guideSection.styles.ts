@@ -137,7 +137,7 @@ export const GreenClip = styled.img`
 
 export const PinkClip = styled.img`
   width: 35%;
-  transform: translate(0%, -40%) rotate(40deg);
+  : translate(0%, -40%) rotate(40deg);
   animation: pink-bounce 2s infinite;
   animation-delay: 2.5s;
   @keyframes pink-bounce {
