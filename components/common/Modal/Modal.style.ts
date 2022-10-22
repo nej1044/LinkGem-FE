@@ -51,7 +51,7 @@ export const ModalContainer = styled.div<{ visible: boolean }>`
   -moz-transition: opacity 0.1s 0, visibility 0 0.1s;
   transition: opacity 0.1s 0, visibility 0 0.1s;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -62,14 +62,14 @@ export const Title = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     margin-top: 34px;
     margin-right: 34px;
   }
 `;
 
 export const Content = styled.div`
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     margin-top: 106px;
   }
 `;

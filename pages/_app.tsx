@@ -5,7 +5,6 @@ import { RecoilRoot } from 'recoil';
 import Layout from '../components/common/layout';
 import { useRouter } from 'next/router';
 import useLogin from 'utils/useLogin';
-import Loading from 'components/atom/Loading/Loadingx';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -20,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     (router.pathname.includes('/gembox') || router.pathname === '/setting') &&
     !isLogin
   )
-    return <Loading />;
+    return <div>로딩중</div>;
   return (
     <RecoilRoot>
       <Layout>

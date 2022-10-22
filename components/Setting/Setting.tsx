@@ -449,11 +449,6 @@ export default function Setting() {
           </SettingButton>
         </SettingButtonContontainer>
         <EtcContainer>
-          {/* <a
-            href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
-            rel="noreferrer"
-            style={{ textDecoration: 'none' }}
-          > */}
           <span onClick={handleWithdrawalModal}>회원탈퇴</span>
           {/* </a> */}
 

@@ -22,7 +22,7 @@ export const Title = styled.div`
     text-align: center;
     letter-spacing: -0.02em;
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 480px) {
       font-size: 24px;
     }
   }
@@ -55,7 +55,7 @@ export const Info = styled.div`
   text-align: center;
   letter-spacing: -0.02em;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     font-size: 11px;
   }
 

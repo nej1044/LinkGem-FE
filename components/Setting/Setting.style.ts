@@ -268,6 +268,7 @@ export const InfoBox = styled.div`
 
 export const SettingButtonContontainer = styled.div`
   display: flex;
+  width: 900px;
   justify-content: center;
   gap: 15px;
   margin-top: 80px;
@@ -299,6 +300,7 @@ export const SettingButton = styled.button<ISettingButton>`
 
 export const EtcContainer = styled.div`
   display: flex;
+  width: 900px;
   justify-content: center;
   gap: 20px;
   margin-top: 64px;

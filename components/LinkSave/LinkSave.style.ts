@@ -6,7 +6,7 @@ export const LinkSaveContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     display: none;
   }
 

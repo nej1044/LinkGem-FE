@@ -12,7 +12,7 @@ export const NaverLoginButton = styled.button`
   background-color: #48484b;
   color: white;
   border: 0px;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     width: 312px;
   }
   p {
