@@ -85,7 +85,6 @@ export const LinkText = styled.input`
   top: 10px;
   margin-left: 12px;
   border-style: none;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -106,7 +105,6 @@ export const LinkSaveButton = styled.button`
   background-color: #5200ff;
   border: 0px;
   border-radius: 8px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -134,7 +132,6 @@ export const Content = styled.div`
   gap: 20px;
 
   h2 {
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;

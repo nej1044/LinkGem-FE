@@ -124,7 +124,6 @@ export const JoinButton = styled.button`
   font-size: 18px;
   color: black;
   cursor: pointer;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 500;
   line-height: 23px;
@@ -172,13 +171,12 @@ export const LinkSaveButton = styled.button`
   border: 0;
   border-radius: 4px;
 
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
   /* identical to box height */
-
+  font-family: 'Spoqa Han Sans Neo';
   text-align: center;
 
   /* text/white */
@@ -222,7 +220,6 @@ export const Initial = styled.div`
 
   background: #cecece;
 
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -311,7 +308,6 @@ export const LinkText = styled.input`
   top: 10px;
   margin-left: 12px;
   border-style: none;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -370,7 +366,6 @@ export const SettingModal = styled.div<ISettingModal>`
       }
     }
     span {
-      font-family: 'Spoqa Han Sans Neo';
       font-style: normal;
       font-weight: 500;
       font-size: 14px;
@@ -452,7 +447,6 @@ export const AlramContent = styled.div`
   flex-direction: column;
   gap: 10px;
   span {
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
@@ -466,7 +460,6 @@ export const AlramContent = styled.div`
     color: #8e8e8e;
   }
   p {
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

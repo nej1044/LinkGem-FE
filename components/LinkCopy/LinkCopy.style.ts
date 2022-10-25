@@ -22,7 +22,6 @@ export const LinkCopyContainer = styled.div`
 `;
 
 export const LinkCopySuccess = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -34,7 +33,6 @@ export const LinkCopySuccess = styled.div`
   color: #ffffff;
 `;
 export const LinkCopyFail = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;

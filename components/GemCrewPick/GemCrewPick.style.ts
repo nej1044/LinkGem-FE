@@ -13,7 +13,6 @@ export const GemCrewPickContainer = styled.section`
 `;
 
 export const GemCrewPickTitle = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   padding-left: 10px;
   font-weight: 700;
@@ -32,7 +31,6 @@ export const GemCrewPickDescription = styled.p`
   margin-top: 8px;
   margin-bottom: 24px;
   padding-left: 10px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

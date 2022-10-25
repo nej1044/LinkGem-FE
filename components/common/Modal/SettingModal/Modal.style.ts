@@ -77,7 +77,6 @@ export const Content = styled.div`
   gap: 20px;
 
   h2 {
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
