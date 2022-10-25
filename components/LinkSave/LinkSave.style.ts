@@ -12,20 +12,23 @@ export const LinkSaveContainer = styled.section`
 
   div {
     display: flex;
+    justify-content: center;
+    width: 100%;
   }
 `;
 
 export const LinkTextContainer = styled.div`
-  width: 680px;
+  max-width: 680px;
+  width: 70%;
   height: 20px;
   display: flex;
   align-items: center;
   border: 1px solid #0f0223;
   border-radius: 4px;
   padding: 17px 20px 17px 20px;
-  @media screen and (max-width: 1000px) {
-    width: 400px;
-  }
+  /* @media screen and (max-width: 760px) {
+    width: 300px;
+  } */
 `;
 
 export const LinkText = styled.input`
@@ -66,7 +69,7 @@ export const LinkSaveButton = styled.button`
 
   color: #ffffff;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 760px) {
     width: 80px;
     font-size: 14px;
   }

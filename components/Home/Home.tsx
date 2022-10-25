@@ -107,6 +107,9 @@ const HomeContainer = styled.div`
   width: 80vw;
   max-width: 1400px;
   padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media screen and (max-width: 480px) {
     padding-top: 0px;

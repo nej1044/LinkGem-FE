@@ -44,10 +44,10 @@ export const LogoContainer = styled.div`
   @media screen and (max-width: 1400px) {
     margin-left: 60px;
   }
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1180px) {
     margin-left: 48px;
   }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 760px) {
     margin-left: 20px;
   }
 
@@ -74,10 +74,10 @@ export const MenuContainer = styled.ul`
   align-items: center;
   padding-left: 60px;
   gap: 30px;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1180px) {
     gap: 20px;
   }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 760px) {
     display: none;
   }
 `;
@@ -91,7 +91,7 @@ export const Menu = styled.li`
   color: ${(props: { current: boolean }) =>
     props.current ? '#41FB6A' : '#ffffff'};
   cursor: pointer;
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1180px) {
     font-size: 16px;
   }
 `;
@@ -110,8 +110,8 @@ export const ButtonContainer = styled.div`
   @media screen and (max-width: 1200px) {
     padding-right: 48px;
   }
-  @media screen and (max-width: 480px) {
-    padding-right: 20px;
+  @media screen and (max-width: 760px) {
+    padding-right: 0px;
   }
 `;
 
@@ -140,9 +140,9 @@ export const JoinButton = styled.button`
 export const LogoImage = styled.img`
   width: 165px;
   height: 27px;
-  @media screen and (max-width: 480px) {
-    width: 140px;
-    height: 23px;
+  @media screen and (max-width: 760px) {
+    width: 103px;
+    height: 16px;
   }
 `;
 
@@ -186,7 +186,7 @@ export const LinkSaveButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1180px) {
     display: none;
   }
 `;
@@ -204,6 +204,10 @@ export const AlarmImage = styled.div`
 
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 760px) {
+    width: 19px;
+    height: 21px;
   }
 `;
 
@@ -297,7 +301,7 @@ export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
   @media screen and (max-width: 1400px) {
     width: 320px;
   }
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1180px) {
     display: none;
   }
 `;
@@ -320,6 +324,9 @@ export const LinkText = styled.input`
 
 export const SettingBox = styled.div`
   position: relative;
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
 `;
 
 export const SettingModal = styled.div<ISettingModal>`

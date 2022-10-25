@@ -15,10 +15,6 @@ export const LinkContainer = styled.section`
   &:hover {
     transform: translateY(-10px);
   }
-
-  @media screen and (max-width: 1700px) {
-    width: 280px;
-  }
 `;
 
 export const ImageContainer = styled.div`

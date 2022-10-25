@@ -1,14 +1,27 @@
 import styled from 'styled-components';
 
 export const GemCrewPickContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-top: 80px;
   padding-bottom: 160px;
   section {
     margin-bottom: 24px;
   }
 
+  @media screen and (max-width: 1700px) {
+    width: 1080px;
+  }
+  @media screen and (max-width: 1180px) {
+    width: 700px;
+  }
+  @media screen and (max-width: 760px) {
+    width: 100%;
+  }
+
   @media screen and (max-width: 600px) {
-    padding-bottom: 120px;
+    padding-bottom: 96px;
   }
 `;
 
@@ -25,6 +38,10 @@ export const GemCrewPickTitle = styled.div`
   /* text/black */
 
   color: #1a1b1d;
+  @media screen and (max-width: 760px) {
+    font-size: 18px;
+    padding-left: 0px;
+  }
 `;
 export const GemCrewPickDescription = styled.p`
   width: 281px;
@@ -42,19 +59,22 @@ export const GemCrewPickDescription = styled.p`
   /* text/placeholder */
 
   color: #8e8e8e;
+  @media screen and (max-width: 760px) {
+    font-size: 14px;
+    padding-left: 0px;
+  }
 `;
 
 export const GemCrewPickOption = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding-left: 10px;
   gap: 24px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 760px) {
     flex-direction: column;
     justify-content: center;
     padding: 0px;
-    align-content: flex-end;
+    align-items: center;
   }
 `;
