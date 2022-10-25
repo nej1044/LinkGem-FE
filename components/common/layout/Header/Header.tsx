@@ -99,7 +99,11 @@ function Header() {
         await Axios('/api/v1/links', {
           method: 'post',
           data: {
-            url: urlText.includes('https://') ? urlText : `https://${urlText}`,
+            url: urlText.includes('https://')
+              ? urlText
+              : urlText.includes('http://')
+              ? `https://${urlText.split('http://')[1]}`
+              : `https://${urlText}`,
           },
         });
 
