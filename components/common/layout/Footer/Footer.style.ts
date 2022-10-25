@@ -33,7 +33,6 @@ export const FooterContainer = styled.footer`
   }
 
   p {
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -60,7 +59,6 @@ export const FooterLeft = styled.div`
 export const FooterRight = styled.div`
   a {
     color: white;
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -78,7 +76,6 @@ export const FooterRight = styled.div`
     color: white;
   }
   p {
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

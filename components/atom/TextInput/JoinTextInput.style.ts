@@ -48,7 +48,6 @@ export const JoinTextInputText = styled.input<IJoinTextInputText>`
 export const NickNameErrorMessage = styled.p<INickNameErrorMessage>`
   display: ${(props) => (props.isErrorNickName ? 'block' : 'none')};
   margin-top: 8px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

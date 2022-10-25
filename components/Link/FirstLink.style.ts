@@ -42,7 +42,6 @@ export const LinkDetailTitle = styled.div`
   text-overflow: ellipsis;
 
   white-space: nowrap;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -65,7 +64,6 @@ export const LinkDetailDescription = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -84,7 +82,6 @@ export const LinkDetailSetting = styled.div`
   align-items: center;
 `;
 export const LinkDetailSettingDate = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -116,7 +113,6 @@ export const FirstLinkTitle = styled.div`
   justify-content: center;
   margin-top: 97px;
   margin-bottom: 12px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 500;
   font-size: 20px;

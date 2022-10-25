@@ -17,7 +17,6 @@ export const SettingContainer = styled.main`
   padding-left: 80px;
   padding-right: 80px;
   padding-bottom: 160px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -252,7 +251,6 @@ export const InfoBox = styled.div`
   top: 10px;
   left: 150px;
   color: #8e8e8e;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -335,7 +333,6 @@ export const LinkTextContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 17px 20px 17px 20px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -363,7 +360,6 @@ export const LinkSaveButton = styled.button<{ bgColor: string }>`
   height: 56px;
   border: 0px;
   border-radius: 8px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;

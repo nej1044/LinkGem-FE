@@ -14,7 +14,6 @@ export const Title = styled.div`
     padding-bottom: 8px;
     font-size: 32px;
     font-weight: 700;
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     line-height: 30px;
     /* identical to box height */
@@ -27,7 +26,6 @@ export const Title = styled.div`
     }
   }
   p {
-    font-family: 'Spoqa Han Sans Neo';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -45,7 +43,6 @@ export const SocialContainer = styled.div`
 `;
 
 export const Info = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;

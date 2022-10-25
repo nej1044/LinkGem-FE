@@ -12,7 +12,6 @@ export const JobInfoContainer = styled.section`
 
 export const JobText = styled.p`
   margin-top: 20px;
-  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
