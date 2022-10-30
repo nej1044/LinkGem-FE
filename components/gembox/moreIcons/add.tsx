@@ -79,54 +79,57 @@ const AddIcon = (props: IAddIconProps) => {
         }}
         title="잼박스 추가"
         Component={
-          <S.CreateWrapper>
-            <S.WriteList>
-              <S.GemModalText>잼박스 이름</S.GemModalText>
-              <S.GemModalInput
-                type="text"
-                placeholder="링크를 찾기 쉽도록 관련 카테고리로 이름을 지어주세요"
-                onChange={onChangeName}
-                error={error}
-                style={
-                  name && !error
-                    ? { border: '1px solid #1a1b1d', color: '#1a1b1d' }
-                    : {}
-                }
-              />
-              <S.ErrorMessage>{error}</S.ErrorMessage>
-            </S.WriteList>
-            <S.WriteList>
-              <S.GemModalText>잼박스 추가</S.GemModalText>
-              <S.GemLinkWrapper>
-                {props.el && (
-                  <S.LinkItem onClick={onClickLink(props.el?.id)}>
-                    <S.CheckBox isChecked={true}>
-                      <S.CheckIcon color="blue" />
-                    </S.CheckBox>
-                    <S.DataTitle>{props.el?.title}</S.DataTitle>
-                  </S.LinkItem>
-                )}
-                {data?.contents
-                  .filter((el: any) => {
-                    return el?.id !== props.el?.id;
-                  })
-                  .map((el: any) => (
-                    <S.LinkItem key={uuidv4()} onClick={onClickLink(el.id)}>
-                      <S.CheckBox isChecked={linkIds.includes(el.id)}>
+          <form target="iframe">
+            <iframe name="iframe" src="" style={{ display: 'none' }}></iframe>
+            <S.CreateWrapper>
+              <S.WriteList>
+                <S.GemModalText>잼박스 이름</S.GemModalText>
+                <S.GemModalInput
+                  type="text"
+                  placeholder="링크를 찾기 쉽도록 관련 카테고리로 이름을 지어주세요"
+                  onChange={onChangeName}
+                  error={error}
+                  style={
+                    name && !error
+                      ? { border: '1px solid #1a1b1d', color: '#1a1b1d' }
+                      : {}
+                  }
+                />
+                <S.ErrorMessage>{error}</S.ErrorMessage>
+              </S.WriteList>
+              <S.WriteList>
+                <S.GemModalText>잼박스 추가</S.GemModalText>
+                <S.GemLinkWrapper>
+                  {props.el && (
+                    <S.LinkItem onClick={onClickLink(props.el?.id)}>
+                      <S.CheckBox isChecked={true}>
                         <S.CheckIcon color="blue" />
                       </S.CheckBox>
-                      <S.DataTitle>{el.title}</S.DataTitle>
+                      <S.DataTitle>{props.el?.title}</S.DataTitle>
                     </S.LinkItem>
-                  ))}
-              </S.GemLinkWrapper>
-            </S.WriteList>
-            <S.GemBoxButton
-              style={{ padding: '18px 32px' }}
-              onClick={onClickSubmit}
-            >
-              저장
-            </S.GemBoxButton>
-          </S.CreateWrapper>
+                  )}
+                  {data?.contents
+                    .filter((el: any) => {
+                      return el?.id !== props.el?.id;
+                    })
+                    .map((el: any) => (
+                      <S.LinkItem key={uuidv4()} onClick={onClickLink(el.id)}>
+                        <S.CheckBox isChecked={linkIds.includes(el.id)}>
+                          <S.CheckIcon color="blue" />
+                        </S.CheckBox>
+                        <S.DataTitle>{el.title}</S.DataTitle>
+                      </S.LinkItem>
+                    ))}
+                </S.GemLinkWrapper>
+              </S.WriteList>
+              <S.GemBoxButton
+                style={{ padding: '18px 32px' }}
+                onClick={onClickSubmit}
+              >
+                저장
+              </S.GemBoxButton>
+            </S.CreateWrapper>
+          </form>
         }
       />
     </>

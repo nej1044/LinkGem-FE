@@ -4,7 +4,9 @@ import { useRecoilValue } from 'recoil';
 import { userInfo } from 'store/store';
 
 interface IPropsGemCount {
-  id: number;
+  id?: number;
+  isFavorites?: boolean;
+  hasMemo?: boolean;
 }
 
 const GemCount = (props: IPropsGemCount) => {
@@ -22,7 +24,9 @@ const GemCount = (props: IPropsGemCount) => {
           Authorization: accessToken,
         },
         params: {
-          gemBoxId: props.id,
+          gemBoxId: props.id || '',
+          isFavorites: props.isFavorites || false,
+          hasMemo: props.hasMemo || false,
         },
       })
       .then((res) => {

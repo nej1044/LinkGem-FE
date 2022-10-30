@@ -14,13 +14,14 @@ import {
 } from './LinkSave.style';
 import Axios from 'utils/Axios';
 import { useRecoilState } from 'recoil';
-import { linkSaveState } from 'store/store';
+import { gemboxRefetch, linkSaveState } from 'store/store';
 
 function Link({ getLink, recentLink }: ILinkSaveProps) {
   // const [isVisibleMessage, setIsVisibleMessage] = useState(false);
   // const [isSuccessLink, setIsSuccessLink] = useState(false);
   const [linkSaveBar, setLinkSaveBar] = useRecoilState(linkSaveState);
   const [urlText, setUrlText] = useState('');
+  const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
 
   const handleKeyPress = (e: KeyboardEvent<HTMLElement>) => {
     if (e.key === 'Enter') {
@@ -39,6 +40,7 @@ function Link({ getLink, recentLink }: ILinkSaveProps) {
             : `https://${urlText}`,
         },
       });
+      setBoxRefetch((prev) => !prev);
       getLink();
       setLinkSaveBar({ isVisible: true, isSuccess: true });
       setUrlText('');

@@ -29,6 +29,7 @@ interface IGemBoxSideBarProps {
 const GemboxSidebar = (props: IGemBoxSideBarProps) => {
   const router = useRouter();
   const totalCount = getTotalLinkCount();
+  console.log(router);
 
   const { data, refetch } = useQuery('gemboxes');
 
@@ -123,6 +124,7 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
                 color="#0F0223"
               />
               즐겨찾기
+              <GemCount isFavorites={true} />
             </S.GemboxText>
             <S.GemboxText onClick={selectMenu('gembox/memo')}>
               <MemoIcon
@@ -130,6 +132,7 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
                 color="#0F0223"
               />
               메모
+              <GemCount hasMemo={true} />
             </S.GemboxText>
           </ul>
         </S.FilterList>
