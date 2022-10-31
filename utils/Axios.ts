@@ -66,6 +66,7 @@ Axios.interceptors.response.use(
         return axios(originalRequest);
       } catch (error: any) {
         console.error('리프레쉬 토큰 발급 에러', error);
+        localStorage.clear();
       }
     } else if (
       error.response.status === 400 &&

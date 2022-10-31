@@ -19,6 +19,8 @@ const LinkCard = (props: IPropsLinkCard) => {
   const [addOpen, setAddOpen] = useState(false);
   const [gembox, setGembox] = useState('');
   const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
+  console.log('props');
+  console.log(props);
 
   const [isMemoView, setIsMemoView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);

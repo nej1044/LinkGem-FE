@@ -22,6 +22,13 @@ export const RecentSaveLinkTitleOption = styled.div`
   justify-content: space-between;
   margin-bottom: 24px;
   width: 95%;
+  @media screen and (max-width: 1180px) {
+    width: 700px !important;
+  }
+
+  @media screen and (max-width: 760px) {
+    width: 300px !important;
+  }
 `;
 
 export const RecentSaveLinkTitle = styled.div`

@@ -42,6 +42,7 @@ import {
   AlramContent,
   PolygonBox,
   PolygonBox2,
+  HeaderBox,
 } from './Header.style';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -192,181 +193,183 @@ function Header() {
 
   return (
     <HeaderContainer login={isLogin} scrollPosition={scrollPosition}>
-      <LogoContainer>
-        <Link href="/">
-          <ImageContainer>
-            <LogoImage src="/images/Linkgem-Logo.svg" alt="linkgem-logo" />
-          </ImageContainer>
-        </Link>
-        <span>Beta</span>
-      </LogoContainer>
-      {isLogin && (
-        <MenuContainer>
-          {headerFormData.map((li) => (
-            <Menu
-              onClick={movePage(li.url)}
-              key={uuidv4()}
-              current={
-                router.asPath === li.url ||
-                (li.url !== '/' && router.asPath.includes(li.url))
-              }
-            >
-              {li.title}
-            </Menu>
-          ))}
-        </MenuContainer>
-      )}
-      <SpaceCell />
-      <ButtonContainer>
-        {isLogin ? (
-          <>
-            <HeaderLinkSave isLinkSave={isLinkSave}>
-              <Image
-                src="/images/icons/plus-icon.svg"
-                alt="plus-icon"
-                width={15}
-                height={16}
-              />
-              <LinkText
-                placeholder="링크를 넣어 저장하세요 https://..."
-                onChange={handleInputUrl}
-                value={urlText}
-                onKeyPress={handleKeyPress}
-              />
-              <img
-                src="/images/icons/link-x.svg"
-                alt="memo-img"
-                onClick={() => {
-                  setIsLinkSave(false);
-                  setUrlText('');
-                }}
-              />
-            </HeaderLinkSave>
-            <LinkSaveButton onClick={() => handleLinkSave()}>
-              {isLinkSave ? '' : '+ '} 링크저장
-            </LinkSaveButton>
-            <AlarmBox>
-              <AlarmImage onClick={handleAlarmModal}>
+      <HeaderBox>
+        <LogoContainer>
+          <Link href="/">
+            <ImageContainer>
+              <LogoImage src="/images/Linkgem-Logo.svg" alt="linkgem-logo" />
+            </ImageContainer>
+          </Link>
+          <span>Beta</span>
+        </LogoContainer>
+        {isLogin && (
+          <MenuContainer>
+            {headerFormData.map((li) => (
+              <Menu
+                onClick={movePage(li.url)}
+                key={uuidv4()}
+                current={
+                  router.asPath === li.url ||
+                  (li.url !== '/' && router.asPath.includes(li.url))
+                }
+              >
+                {li.title}
+              </Menu>
+            ))}
+          </MenuContainer>
+        )}
+        <SpaceCell />
+        <ButtonContainer>
+          {isLogin ? (
+            <>
+              <HeaderLinkSave isLinkSave={isLinkSave}>
                 <Image
-                  priority
-                  src="/images/icons/alarm-icon.svg"
-                  alt="linkgem-logo"
-                  width={30}
-                  height={30}
+                  src="/images/icons/plus-icon.svg"
+                  alt="plus-icon"
+                  width={15}
+                  height={16}
                 />
-              </AlarmImage>
-              {isAlarmModal && (
-                <>
-                  <AlramModal isAlarmModal={isAlarmModal}>
-                    <PolygonBox>
+                <LinkText
+                  placeholder="링크를 넣어 저장하세요 https://..."
+                  onChange={handleInputUrl}
+                  value={urlText}
+                  onKeyPress={handleKeyPress}
+                />
+                <img
+                  src="/images/icons/link-x.svg"
+                  alt="memo-img"
+                  onClick={() => {
+                    setIsLinkSave(false);
+                    setUrlText('');
+                  }}
+                />
+              </HeaderLinkSave>
+              <LinkSaveButton onClick={() => handleLinkSave()}>
+                {isLinkSave ? '' : '+ '} 링크저장
+              </LinkSaveButton>
+              <AlarmBox>
+                <AlarmImage onClick={handleAlarmModal}>
+                  <Image
+                    priority
+                    src="/images/icons/alarm-icon.svg"
+                    alt="linkgem-logo"
+                    width={30}
+                    height={30}
+                  />
+                </AlarmImage>
+                {isAlarmModal && (
+                  <>
+                    <AlramModal isAlarmModal={isAlarmModal}>
+                      <PolygonBox>
+                        <img
+                          src="/images/icons/header-Polygon 1.svg"
+                          alt="linkgem-logo"
+                        />
+                      </PolygonBox>
+                      <AlramContent>
+                        <span>공지 - 24일전 </span>
+                        <p>
+                          링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                          <br />
+                          지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                          소통해보세요!
+                        </p>
+                        <button>커뮤니티 확인하기</button>
+                      </AlramContent>
+                      <hr />
+                      <AlramContent>
+                        <span>공지 - 24일전 </span>
+                        <p>
+                          링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                          <br />
+                          지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                          소통해보세요!
+                        </p>
+                        <button>커뮤니티 확인하기</button>
+                      </AlramContent>
+                      <hr />
+                      <AlramContent>
+                        <span>공지 - 24일전 </span>
+                        <p>
+                          링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
+                          <br />
+                          지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
+                          소통해보세요!
+                        </p>
+                        <button>커뮤니티 확인하기</button>
+                      </AlramContent>
+                    </AlramModal>
+                  </>
+                )}
+              </AlarmBox>
+
+              <SettingBox>
+                <Initial>
+                  <img
+                    alt="profile-image"
+                    src={
+                      userInfoState.profileImageUrl ||
+                      '/images/header-profile-default.svg'
+                    }
+                    onClick={handleSettingModal}
+                  ></img>
+                </Initial>
+                {isSettingModal && (
+                  <SettingModal isSettingModal={isSettingModal}>
+                    <PolygonBox2>
                       <img
                         src="/images/icons/header-Polygon 1.svg"
                         alt="linkgem-logo"
                       />
-                    </PolygonBox>
-                    <AlramContent>
-                      <span>공지 - 24일전 </span>
-                      <p>
-                        링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
-                        <br />
-                        지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
-                        소통해보세요!
-                      </p>
-                      <button>커뮤니티 확인하기</button>
-                    </AlramContent>
-                    <hr />
-                    <AlramContent>
-                      <span>공지 - 24일전 </span>
-                      <p>
-                        링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
-                        <br />
-                        지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
-                        소통해보세요!
-                      </p>
-                      <button>커뮤니티 확인하기</button>
-                    </AlramContent>
-                    <hr />
-                    <AlramContent>
-                      <span>공지 - 24일전 </span>
-                      <p>
-                        링크젬에서 새로운 커뮤니티 서비스를 오픈했어요.
-                        <br />
-                        지금 확인하고 링크잼 커뮤니티로 다른분들과 함께
-                        소통해보세요!
-                      </p>
-                      <button>커뮤니티 확인하기</button>
-                    </AlramContent>
-                  </AlramModal>
-                </>
-              )}
-            </AlarmBox>
-
-            <SettingBox>
-              <Initial>
-                <img
-                  alt="profile-image"
-                  src={
-                    userInfoState.profileImageUrl ||
-                    '/images/header-profile-default.svg'
-                  }
-                  onClick={handleSettingModal}
-                ></img>
-              </Initial>
-              {isSettingModal && (
-                <SettingModal isSettingModal={isSettingModal}>
-                  <PolygonBox2>
-                    <img
-                      src="/images/icons/header-Polygon 1.svg"
-                      alt="linkgem-logo"
-                    />
-                  </PolygonBox2>
-                  <p>
-                    <img
-                      alt="profile-image"
-                      src={
-                        userInfoState.profileImageUrl ||
-                        '/images/header-profile-default.svg'
-                      }
-                    />
-                    <span>{userInfoState.nickname}</span>
-                  </p>
-                  <hr />
-                  <Link href="/setting">
-                    <p onClick={handleSettingModal}>
+                    </PolygonBox2>
+                    <p>
                       <img
                         alt="profile-image"
-                        src={'/icons/header-setting-icon.svg'}
+                        src={
+                          userInfoState.profileImageUrl ||
+                          '/images/header-profile-default.svg'
+                        }
                       />
-                      <span>설정</span>
+                      <span>{userInfoState.nickname}</span>
                     </p>
-                  </Link>
-                </SettingModal>
-              )}
-            </SettingBox>
-          </>
-        ) : (
-          <JoinButton
-            onClick={handleOpenModal}
-            backgroundColor="#41FB6A"
-            color="#1A1B1D"
-            width="120px"
-            height="48px"
-            text="시작하기"
-            fontSize="18px"
-            type=""
-            hoverColor="#1CE047"
-          />
+                    <hr />
+                    <Link href="/setting">
+                      <p onClick={handleSettingModal}>
+                        <img
+                          alt="profile-image"
+                          src={'/icons/header-setting-icon.svg'}
+                        />
+                        <span>설정</span>
+                      </p>
+                    </Link>
+                  </SettingModal>
+                )}
+              </SettingBox>
+            </>
+          ) : (
+            <JoinButton
+              onClick={handleOpenModal}
+              backgroundColor="#41FB6A"
+              color="#1A1B1D"
+              width="120px"
+              height="48px"
+              text="시작하기"
+              fontSize="18px"
+              type=""
+              hoverColor="#1CE047"
+            />
+          )}
+        </ButtonContainer>
+        {!isLogin && (
+          <Modal
+            visible={isOpenModal}
+            handleCloseModal={handleCloseJoinModal}
+            setIsOpenModal={setIsOpenModal}
+          >
+            <Join />
+          </Modal>
         )}
-      </ButtonContainer>
-      {!isLogin && (
-        <Modal
-          visible={isOpenModal}
-          handleCloseModal={handleCloseJoinModal}
-          setIsOpenModal={setIsOpenModal}
-        >
-          <Join />
-        </Modal>
-      )}
+      </HeaderBox>
     </HeaderContainer>
   );
 }

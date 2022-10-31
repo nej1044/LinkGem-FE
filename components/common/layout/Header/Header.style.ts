@@ -27,11 +27,24 @@ export const HeaderContainer = styled.header<IHeaderContainer>`
   width: 100%;
   height: 11vh;
   max-height: 84px;
-  display: flex;
-  align-items: center;
   z-index: 100;
   box-shadow: ${({ scrollPosition }) =>
     scrollPosition > 0 && 'rgba(0, 0, 0, 0.15) 0px 4px 10px'};
+  display: flex;
+  justify-content: center;
+`;
+export const HeaderBox = styled.div`
+  max-width: 1440px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 1180px) {
+    width: 800px;
+  }
+  @media screen and (max-width: 760px) {
+    width: 400px;
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -40,15 +53,9 @@ export const LogoContainer = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
   color: white;
-  margin-left: 240px;
-  @media screen and (max-width: 1400px) {
-    margin-left: 60px;
-  }
-  @media screen and (max-width: 1180px) {
-    margin-left: 48px;
-  }
+  padding-left: 50px;
   @media screen and (max-width: 760px) {
-    margin-left: 20px;
+    padding-left: 20px;
   }
 
   span {
@@ -61,11 +68,6 @@ export const LogoContainer = styled.div`
     /* identical to box height */
 
     letter-spacing: -0.02em;
-
-    @media screen and (max-width: 480px) {
-      font-size: 8px;
-      color: #41fb6a;
-    }
   }
 `;
 
@@ -100,16 +102,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   color: white;
-  padding-right: 240px;
-  @media screen and (max-width: 1650px) {
-    padding-right: 130px;
-  }
-  @media screen and (max-width: 1400px) {
-    padding-right: 100px;
-  }
-  @media screen and (max-width: 1200px) {
-    padding-right: 48px;
-  }
+  padding-right: 50px;
   @media screen and (max-width: 760px) {
     padding-right: 0px;
   }
