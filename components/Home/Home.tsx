@@ -111,7 +111,7 @@ const HomeContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 760px) {
     padding-top: 0px;
     width: auto;
   }

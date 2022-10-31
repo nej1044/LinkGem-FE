@@ -6,8 +6,8 @@ export const LinkSaveContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media screen and (max-width: 480px) {
-    display: none;
+  @media screen and (max-width: 760px) {
+    display: none !important;
   }
 
   div {
@@ -19,16 +19,15 @@ export const LinkSaveContainer = styled.section`
 
 export const LinkTextContainer = styled.div`
   max-width: 680px;
-  width: 70%;
   height: 20px;
   display: flex;
   align-items: center;
   border: 1px solid #0f0223;
   border-radius: 4px;
   padding: 17px 20px 17px 20px;
-  /* @media screen and (max-width: 760px) {
-    width: 300px;
-  } */
+  @media screen and (max-width: 1180px) {
+    width: 500px !important;
+  }
 `;
 
 export const LinkText = styled.input`
