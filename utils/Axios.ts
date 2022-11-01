@@ -32,10 +32,8 @@ Axios.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.error('엑시오스 모듈 에러가 났습니다');
-    console.error(error);
     if (
-      error.response.status === 400 &&
+      error.response.status === 401 &&
       error.response.data.code === 'ACCESS_TOKEN_EXPIRED'
     ) {
       const originalRequest = error.config;
@@ -46,7 +44,7 @@ Axios.interceptors.response.use(
         refreshToken = localStorage.getItem('refreshToken') as string;
       }
       try {
-        console.log('재요청 리퀘스트 해야합니다');
+        console.log('액세스토큰 재요청 해야합니다');
         const { data } = await axios.post(
           '/api/v1/user/oauth/reissue',
           {},
@@ -65,16 +63,28 @@ Axios.interceptors.response.use(
         };
         return axios(originalRequest);
       } catch (error: any) {
+        // TODO : reissue 케이스 추가해야함
         console.error('리프레쉬 토큰 발급 에러', error);
         localStorage.clear();
+        window.location.reload();
       }
     } else if (
       error.response.status === 400 &&
-      error.response.data.code === 'ACCESS_TOKEN_NOT_VALID'
+      error.response.data.code === 'Bad Request'
     ) {
-      localStorage.clear();
-      console.log('로그아웃 후 재로그인 하세요');
+      console.log('잘못된 요청입니다.');
       return Promise.reject(error);
+    } else if (
+      error.response.status === 401 &&
+      (error.response.data.code === 'ACCESS_TOKEN_NOT_VALID' ||
+        error.response.data.code === 'ACCESS_TOKEN_IS_EMPTY')
+    ) {
+      console.log('액세스 토큰이 유효하지 않습니다');
+      localStorage.clear();
+      window.location.reload();
+    } else {
+      localStorage.clear();
+      // window.location.reload();
     }
     return Promise.reject(error);
   }

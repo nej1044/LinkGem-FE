@@ -5,6 +5,7 @@ import {
   GemCrewPickTitle,
   GemCrewPickDescription,
   GemCrewPickOption,
+  GemCrewPickBox,
 } from './GemCrewPick.style';
 
 interface IGemCrewPick {
@@ -17,24 +18,26 @@ function GemCrewPick({ copyToClipboard }: IGemCrewPick) {
       <GemCrewPickDescription>
         딱 24시간만 공유되는 잼크루들의 관심링크!
       </GemCrewPickDescription>
-      <GemCrewPickOption>
-        {list.map((item, index) => (
-          <Link
-            key={item.id}
-            title={item.title}
-            description={item.description}
-            memos={item.memos}
-            url={item.url}
-            imageUrl={item.imageUrl}
-            gemcrew={item.gemcrew}
-            isFavorites={false}
-            id={item.id}
-            copyToClipboard={copyToClipboard}
-            gemGrewItem={true}
-            createDate="1"
-          />
-        ))}
-      </GemCrewPickOption>
+      <GemCrewPickBox>
+        <GemCrewPickOption>
+          {list.map((item, index) => (
+            <Link
+              key={item.id}
+              title={item.title}
+              description={item.description}
+              memos={item.memos}
+              url={item.url}
+              imageUrl={item.imageUrl}
+              gemcrew={item.gemcrew}
+              isFavorites={false}
+              id={item.id}
+              copyToClipboard={copyToClipboard}
+              gemGrewItem={true}
+              createDate="1"
+            />
+          ))}
+        </GemCrewPickOption>
+      </GemCrewPickBox>
     </GemCrewPickContainer>
   );
 }

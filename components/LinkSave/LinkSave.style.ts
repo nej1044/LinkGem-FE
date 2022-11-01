@@ -86,16 +86,19 @@ interface LinkSaveSuccessBarProps {
 
 export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
   display: ${(props) => (props.isVisibleMessage ? 'block' : 'none')};
-
   margin-top: 75px;
   padding: 16px 24px;
   gap: 24px;
   position: absolute;
-
+  width: ${(props) =>
+    props.isSuccessLink ? '130px !important;' : '330px !important;'};
+  height: 24px !important;
   /* sub/purple */
-
-  background-color: ${(props) => (props.isSuccessLink ? '#f3edff' : '#FFF1F1')};
+  background-color: ${(props) => (props.isSuccessLink ? '#F3EDFF' : '#FFF1F1')};
   border-radius: 16px;
+  div {
+    width: auto;
+  }
 `;
 
 export const SuccessMessage = styled.div`
