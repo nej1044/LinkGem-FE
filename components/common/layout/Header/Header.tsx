@@ -172,13 +172,11 @@ function Header() {
   };
 
   useEffect(() => {
-    // if (joinUserInfo.accessToken) {
-    //   console.log('!!!!!!!!');
-    //   setIsOpenModal(true);
-    // }
     setIsLogin(useLogin());
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setUserInfoState({ ...auth });
+    if (auth?.userPhase === 'READY') setIsOpenModal(true);
+    console.log(auth);
   }, [joinUserInfo.accessToken, isLogin]);
 
   useEffect(() => {}, [userInfoState]);
@@ -187,10 +185,9 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    setIsOpenModal(false);
+    if (router.pathname !== '/') setIsOpenModal(false);
     setIsLogin(useLogin());
   }, [router.pathname]);
-
   return (
     <HeaderContainer login={isLogin} scrollPosition={scrollPosition}>
       <HeaderBox>
