@@ -34,7 +34,7 @@ export const Item = styled.div`
 `;
 
 export const ItemTitle = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-weight: 500;
   font-size: 16px;
   letter-spacing: -0.02em;
@@ -106,7 +106,7 @@ export const GemboxButton = styled.button`
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 14px;
   font-weight: 500;
   color: #3c3c3f;
@@ -167,7 +167,7 @@ export const WriteList = styled.div`
 
 export const GemModalText = styled.span`
   margin-bottom: 8px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-weight: 400;
   font-size: 0.78vw;
   letter-spacing: -0.02em;
@@ -195,7 +195,7 @@ export const GemModalInput = styled.input`
 export const GemBoxButton = styled.button`
   background-color: #5200ff;
   border-radius: 50px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 18px;
   letter-spacing: -0.02em;
   color: #ffffff;

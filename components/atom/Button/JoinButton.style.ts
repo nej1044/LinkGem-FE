@@ -24,7 +24,7 @@ export const JoinButtonContainer = styled.button<JoinButtonContainerProps>`
     transition: background-color 0.1s ease-in;
   }
 
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

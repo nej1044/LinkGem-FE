@@ -18,7 +18,7 @@ export const GemboxSection = styled.div`
 `;
 
 export const GexboxSectionTitle = styled.h1`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-weight: 500;
   font-size: 20px;
   letter-spacing: -0.02em;
@@ -90,7 +90,7 @@ export const MoreItem = styled.div`
   width: 20%;
   height: 40%;
   min-height: 55px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 12px;
   letter-spacing: -0.02em;
   color: #1a1b1d;
@@ -236,7 +236,7 @@ export const GemInfo = styled.div`
 `;
 
 export const GemName = styled.span`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-weight: 700;
   font-size: 16px;
   letter-spacing: -0.02em;
@@ -245,7 +245,7 @@ export const GemName = styled.span`
 
 export const GemText = styled.span`
   margin-right: 9px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-weight: 400;
   font-size: 12px;
   text-align: center;
@@ -280,7 +280,7 @@ export const CreateWrapper = styled(WriteWrapper)`
 
 export const GemModalText = styled.span`
   margin-bottom: 8px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 14px;
   letter-spacing: -0.02em;
   color: #3c3c3f;
@@ -307,7 +307,7 @@ export const GemModalInput = styled.input`
 export const ErrorMessage = styled.div`
   width: 100%;
   padding: 5px 10px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 0.7vw;
   color: #ff0000;
 `;
@@ -315,7 +315,7 @@ export const ErrorMessage = styled.div`
 export const GemBoxButton = styled.button`
   background-color: #5200ff;
   border-radius: 50px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 18px;
   letter-spacing: -0.02em;
   color: #ffffff;
@@ -359,7 +359,7 @@ export const DeleteWrapper = styled.div`
 `;
 
 export const DeleteTitle = styled.span`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-weight: 700;
   font-size: 32px;
   text-align: center;
@@ -368,7 +368,7 @@ export const DeleteTitle = styled.span`
 `;
 
 export const DeleteText = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 16px;
   line-height: 23px;
   text-align: center;
@@ -396,7 +396,7 @@ export const LinkItem = styled.li`
   display: flex;
   align-items: center;
   padding: 2px 0;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 0.9vw;
   letter-spacing: -0.02em;
   color: #252730;
@@ -443,7 +443,7 @@ export const MemoArea = styled.textarea`
   padding: 20px 16px;
   border: 1px solid #cecece;
   border-radius: 8px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 0.98vw;
   letter-spacing: -0.02em;
   resize: none;
@@ -486,7 +486,7 @@ export const Memobox = styled.div`
 
 export const MemoText = styled.div`
   margin-bottom: 10px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 13px;
   letter-spacing: -0.02em;
   color: #1a1b1d;
@@ -498,7 +498,7 @@ export const MemoText = styled.div`
 `;
 
 export const MemoOption = styled.span`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 12px;
   line-height: 140%;
   letter-spacing: -0.02em;
@@ -545,7 +545,7 @@ export const ChangeItem = styled.li`
   flex-direction: column;
   width: 100%;
   height: 60px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-size: 11px;
   letter-spacing: -0.02em;
   color: #1a1b1d;
@@ -595,7 +595,7 @@ export const RenderBox = styled.div`
 `;
 
 // export const SuccessMessage = styled.div`
-//   font-family: 'Spoqa Han Sans Neo';
+//   font-family: 'Spoqa Han Sans';
 //   font-style: normal;
 //   font-weight: 500;
 //   font-size: 16px;

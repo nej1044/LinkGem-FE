@@ -31,7 +31,7 @@ export const JoinTextInputTextContainer = styled.div`
 
 export const JoinTextInputText = styled.input<IJoinTextInputText>`
   width: 100%;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;

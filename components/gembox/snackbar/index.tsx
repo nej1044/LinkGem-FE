@@ -48,7 +48,7 @@ const LinkCopyContainer = styled.div`
 
 const LinkCopyText = styled.div`
   height: 11px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-weight: 500;
   font-size: 16px;
   color: ${(props: IPropsSnackBarStyles) =>

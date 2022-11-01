@@ -172,7 +172,7 @@ export const LinkSaveButton = styled.button`
   font-size: 14px;
   line-height: 18px;
   /* identical to box height */
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   text-align: center;
 
   /* text/white */

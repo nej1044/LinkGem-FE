@@ -36,7 +36,7 @@ export const LinkText = styled.input`
   top: 10px;
   margin-left: 12px;
   border-style: none;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -57,7 +57,7 @@ export const LinkSaveButton = styled.button`
   background: #5200ff;
   border: 0px;
   border-radius: 4px;
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -102,7 +102,7 @@ export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
 `;
 
 export const SuccessMessage = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -124,7 +124,7 @@ export const SuccessMessage = styled.div`
 `;
 
 export const FailMessage = styled.div`
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
