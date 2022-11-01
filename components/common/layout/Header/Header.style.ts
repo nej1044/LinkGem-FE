@@ -39,6 +39,9 @@ export const HeaderBox = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 1700px) {
+    width: 1080px;
+  }
   @media screen and (max-width: 1180px) {
     width: 800px;
   }
@@ -54,7 +57,7 @@ export const LogoContainer = styled.div`
   justify-content: flex-end;
   color: white;
   padding-left: 50px;
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: 1700px) {
     padding-left: 20px;
   }
 
@@ -291,8 +294,8 @@ export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
       cursor: pointer;
     }
   }
-  @media screen and (max-width: 1400px) {
-    width: 320px;
+  @media screen and (max-width: 1700px) {
+    width: 240px;
   }
   @media screen and (max-width: 1180px) {
     display: none;
@@ -312,6 +315,10 @@ export const LinkText = styled.input`
   letter-spacing: -0.02em;
   &:focus {
     outline: none;
+  }
+
+  @media screen and (max-width: 1700px) {
+    font-size: 14px;
   }
 `;
 
