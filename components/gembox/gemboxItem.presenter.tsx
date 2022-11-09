@@ -2,7 +2,7 @@ import * as S from './gembox.styles';
 import { onError } from 'utils/onError';
 import { getDate } from 'utils/getDate';
 import { EllipsisOutlined, StarOutlined, StarFilled } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { gemboxRefetch } from 'store/store';
 import { useRecoilState } from 'recoil';
 import MemoIcon from './moreIcons/memo';
@@ -19,6 +19,8 @@ const LinkCard = (props: IPropsLinkCard) => {
   const [addOpen, setAddOpen] = useState(false);
   const [gembox, setGembox] = useState('');
   const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
+  console.log('props');
+  console.log(props);
 
   const [isMemoView, setIsMemoView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -29,10 +31,9 @@ const LinkCard = (props: IPropsLinkCard) => {
     setMemoOpen(false);
   };
 
-  // const boxName = useQuery(`gemboxes/${props.el?.gemBoxId || ''}`, {
-  //   id: id,
-  // }).data?.name;
-  // const [boxName, setBoxName] = useState('');
+  const boxName = useQuery(`gemboxes/${props.el?.gemBoxId || ''}`, {
+    id: props.el.gemboxId,
+  }).data?.name;
 
   const [deleteLink] = useMutation('delete');
   const [changeGembox] = useMutation('patch');
@@ -61,8 +62,6 @@ const LinkCard = (props: IPropsLinkCard) => {
     setIsEdit(false);
     setBoxRefetch(true);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -122,7 +121,7 @@ const LinkCard = (props: IPropsLinkCard) => {
                 <S.Changebox>
                   <S.ChangeItem>
                     현재 잼박스
-                    <S.ItemBox type="text" value={'ㅋ' || '기본'} disabled />
+                    <S.ItemBox type="text" value={boxName || '기본'} disabled />
                   </S.ChangeItem>
                   <S.ChangeItem>
                     변경할 잼박스

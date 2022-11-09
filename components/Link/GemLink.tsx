@@ -38,6 +38,8 @@ import {
 } from 'components/gembox/gembox.styles';
 import SelectBoxPage from 'components/atom/selectBox';
 import { useMutation } from 'utils/useMutation';
+import { useRecoilState } from 'recoil';
+import { gemboxRefetch } from 'store/store';
 
 interface GemLinkProps {
   title: string;
@@ -80,16 +82,14 @@ function GemLink({
   const [gembox, setGembox] = useState('');
   const [changeGembox] = useMutation('patch');
   // const [isMore, setIsMore] = useState<boolean>(false);
-  // const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
+  const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
   console.log('gemBoxId');
   console.log(gemBoxId);
-  const boxName = useQuery(`gemboxes/${gemBoxId || ''}`, {
-    id: gemBoxId,
-  }).data?.name;
+  // const boxName = useQuery(`gemboxes/${gemBoxId || ''}`, {
+  //   id: gemBoxId,
+  // }).data?.name;
+  const [boxName, setBoxName] = useState('');
   const { data } = useQuery('gemboxes');
-
-  console.log('boxName');
-  console.log(boxName);
 
   // const { data, refetch } = useQuery('links', params);
 
@@ -104,8 +104,17 @@ function GemLink({
     });
     // setIsMore(false);
     setIsEdit(false);
-    // setBoxRefetch(true);
-    getLink?.();
+    setBoxRefetch(true);
+    const response = await Axios(
+      `https://dev.linkgem.co.kr/api/v1/gemboxes/${gembox}`,
+      {
+        method: 'get',
+        // params: {
+        //   id: gemBoxId,
+        // },
+      }
+    );
+    setBoxName(response?.data?.result.name);
   };
 
   const setClose = () => {
@@ -146,13 +155,18 @@ function GemLink({
   };
 
   const handleGetGemBoxName = async () => {
-    // const response = await Axios({
-    //   url: `/api/v1/gemboxes/${gemBoxId}`,
-    //   method: 'get',
-    //   // params: {
-    //   //   id: id,
-    //   // },
-    // });
+    if (gemBoxId) {
+      const response = await Axios(
+        `https://dev.linkgem.co.kr/api/v1/gemboxes/${gemBoxId}`,
+        {
+          method: 'get',
+          // params: {
+          //   id: gemBoxId,
+          // },
+        }
+      );
+      setBoxName(response?.data?.result.name);
+    }
   };
 
   useEffect(() => {
