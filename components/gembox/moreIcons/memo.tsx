@@ -6,6 +6,8 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { IMemoIconProps } from './gemboxIcon.types';
 
 const MemoIcon = (props: IMemoIconProps) => {
+  console.log('props');
+  console.log(props);
   const [memo, setMemo] = useState('');
   const [isMemoDelete, setIsMemoDelete] = useState(false);
 
@@ -24,7 +26,7 @@ const MemoIcon = (props: IMemoIconProps) => {
     setIsMemoDelete(false);
     props.refetch();
   };
-
+  console.log('야호');
   return (
     <>
       <S.MoreItem onClick={() => props.setOpen(true)}>

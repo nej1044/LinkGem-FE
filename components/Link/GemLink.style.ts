@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LinkContainer = styled.section`
+export const LinkContainer = styled.div`
   position: relative;
   max-width: 320px;
   max-height: 376px;
@@ -17,17 +17,19 @@ export const LinkContainer = styled.section`
   }
 `;
 
-export const ImageContainer = styled.div`
+export const ImageBox = styled.div<{ isEtcCon: boolean }>`
   overflow: hidden;
   border-radius: 16px 16px 0px 0px;
   img {
+    filter: ${(props) => props.isEtcCon && 'brightness(60%)'};
     object-fit: cover;
     width: 100%;
   }
 `;
 
-export const LinkDetailContainer = styled.div`
+export const LinkDetailBox = styled.div<{ isEtcCon: boolean }>`
   padding: 24px;
+  filter: ${(props) => props.isEtcCon && 'brightness(60%)'};
 `;
 
 export const LinkDetailTitle = styled.div`
@@ -90,6 +92,11 @@ export const LinkDetailSetting = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 `;
 export const LinkDetailSettingDate = styled.div`
   font-style: normal;
@@ -125,26 +132,26 @@ export const EtcButton = styled.button`
   }
 `;
 
-export const LinkEtcContainer = styled.div`
-  width: 264px;
-  height: 129px;
+export const LinkEtcBox = styled.div`
+  width: 269px;
+  height: 120px;
   position: absolute;
-  top: 180px;
+  top: 175px;
   display: flex;
   justify-content: space-between;
-  padding: 40px 28px 27px 28px;
+  padding: 70px 25px 7px 25px;
   background-color: white;
-  border-radius: 0px 0px 16px 16px;
-  transition: transform 0.35s;
+  border-radius: 16px;
+  box-shadow: 0px -4px 10px rgba(196, 196, 196, 0.15);
 `;
 
-export const LinkEtcButtonContainer = styled.div`
+export const LinkEtcButtonBox = styled.div`
   display: flex;
-  width: 80px;
+  /* width: 80px; */
   flex-direction: column;
   align-items: center;
   span {
-    margin-top: 10px;
+    margin-top: 8px;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -168,8 +175,8 @@ export const LinkEtcButton = styled.img`
 
 export const LinkEtcXButton = styled.img`
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  top: 20px;
+  right: 24px;
   width: 16px;
   height: 16px;
   &:hover {
@@ -193,4 +200,11 @@ export const GemCrewLink = styled.div`
   /* text/black */
 
   color: #1a1b1d;
+`;
+
+export const MemoImage = styled.img`
+  width: 24px;
+  height: 24px;
+  padding: 7px;
+  cursor: pointer;
 `;

@@ -25,6 +25,7 @@ interface IUserInfo {
   createDate: string;
   favorites: boolean;
   siteName: string;
+  gemBoxId: string;
 }
 
 function RecentSaveLink({
@@ -58,7 +59,7 @@ function RecentSaveLink({
                   key={link?.id}
                   title={link?.title}
                   description={link?.description}
-                  memos={link?.memo}
+                  memo={link?.memo}
                   url={link?.url}
                   imageUrl={link?.imageUrl}
                   createDate={link?.createDate}
@@ -67,6 +68,7 @@ function RecentSaveLink({
                   getLink={getLink}
                   copyToClipboard={copyToClipboard}
                   siteName={link?.siteName}
+                  gemBoxId={link?.gemBoxId}
                 />
               ))}
           {recentLink.length < 1 && (

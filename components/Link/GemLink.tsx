@@ -3,43 +3,64 @@ import React, { memo, useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   LinkContainer,
-  ImageContainer,
-  LinkDetailContainer,
+  ImageBox,
+  LinkDetailBox,
   LinkDetailTitle,
   LinkDetailDescription,
   LinkDetailSetting,
   LinkDetailSettingDate,
   LinkDetailSettingOption,
   EtcButton,
-  LinkEtcContainer,
-  LinkEtcButtonContainer,
+  LinkEtcBox,
+  LinkEtcButtonBox,
   LinkEtcButton,
   LinkEtcXButton,
   GemCrewLink,
+  MemoImage,
 } from './GemLink.style';
 import { getDate } from 'utils/getDate';
+import MemoIcon from 'components/gembox/moreIcons/memo';
+import AddIcon from 'components/gembox/moreIcons/add';
 
 import Axios from 'utils/Axios';
+import { useQuery } from 'utils/useQuery';
+import {
+  Changebox,
+  ChangeIcon,
+  ChangeItem,
+  GemBoxButton,
+  ItemBox,
+  Memobox,
+  MemoClose,
+  MemoOption,
+  MemoText,
+  MoreItem,
+} from 'components/gembox/gembox.styles';
+import SelectBoxPage from 'components/atom/selectBox';
+import { useMutation } from 'utils/useMutation';
+import { useRecoilState } from 'recoil';
+import { gemboxRefetch } from 'store/store';
 
 interface GemLinkProps {
   title: string;
   description: string;
-  memos: string;
+  memo: string;
   url: string;
   imageUrl: string;
   createDate: string;
   isFavorites: boolean;
   id: number;
-  getLink?: () => void;
+  getLink: () => void;
   copyToClipboard: (url: string) => void;
   siteName?: string;
   gemGrewItem?: boolean;
   gemcrew?: string;
+  gemBoxId?: string;
 }
 function GemLink({
   title,
   description,
-  memos,
+  memo,
   url,
   imageUrl = '/images/test.jpeg',
   createDate,
@@ -50,9 +71,56 @@ function GemLink({
   siteName,
   gemGrewItem,
   gemcrew,
+  gemBoxId,
 }: GemLinkProps) {
   const [isBookMark, setIsBookMark] = useState(isFavorites);
   const [isEtcCon, setIsEtcCon] = useState(false);
+  const [memoOpen, setMemoOpen] = useState(false);
+  const [isMemoView, setIsMemoView] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
+  const [gembox, setGembox] = useState('');
+  const [changeGembox] = useMutation('patch');
+  // const [isMore, setIsMore] = useState<boolean>(false);
+  const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
+  console.log('gemBoxId');
+  console.log(gemBoxId);
+  // const boxName = useQuery(`gemboxes/${gemBoxId || ''}`, {
+  //   id: gemBoxId,
+  // }).data?.name;
+  const [boxName, setBoxName] = useState('');
+  const { data } = useQuery('gemboxes');
+
+  // const { data, refetch } = useQuery('links', params);
+
+  const handleChange = (event: { target: { value: string } }) => {
+    setGembox(event.target.value);
+  };
+
+  const onClickChangeGembox = async () => {
+    await changeGembox(`links/${id}`, {
+      id,
+      gemBoxId: gembox,
+    });
+    // setIsMore(false);
+    setIsEdit(false);
+    setBoxRefetch(true);
+    const response = await Axios(
+      `https://dev.linkgem.co.kr/api/v1/gemboxes/${gembox}`,
+      {
+        method: 'get',
+        // params: {
+        //   id: gemBoxId,
+        // },
+      }
+    );
+    setBoxName(response?.data?.result.name);
+  };
+
+  const setClose = () => {
+    setMemoOpen(false);
+  };
+
   const handleFavorite = async () => {
     try {
       await Axios(`/api/v1/links/${id}`, {
@@ -82,13 +150,35 @@ function GemLink({
   };
 
   const handleEtcButton = () => {
+    getLink?.();
     setIsEtcCon(!isEtcCon);
   };
 
+  const handleGetGemBoxName = async () => {
+    if (gemBoxId) {
+      const response = await Axios(
+        `https://dev.linkgem.co.kr/api/v1/gemboxes/${gemBoxId}`,
+        {
+          method: 'get',
+          // params: {
+          //   id: gemBoxId,
+          // },
+        }
+      );
+      setBoxName(response?.data?.result.name);
+    }
+  };
+
+  useEffect(() => {
+    handleGetGemBoxName();
+  }, []);
+
   useEffect(() => {}, [isFavorites]);
+
+  console.log('isEtcCon', isEtcCon);
   return (
     <LinkContainer>
-      <ImageContainer>
+      <ImageBox isEtcCon={isEtcCon}>
         <Link href={url || 'https://devlinkgem.netlify.app/'}>
           <a target="_blank">
             <img
@@ -99,8 +189,8 @@ function GemLink({
             />
           </a>
         </Link>
-      </ImageContainer>
-      <LinkDetailContainer>
+      </ImageBox>
+      <LinkDetailBox isEtcCon={isEtcCon}>
         <LinkDetailTitle>
           <Link href={url || 'https://devlinkgem.netlify.app/'}>
             <a target="_blank">{title || siteName || url}</a>
@@ -112,19 +202,28 @@ function GemLink({
           </Link>
         </LinkDetailDescription>
         <LinkDetailSetting>
-          <LinkDetailSettingDate>
-            {gemGrewItem ? (
-              <GemCrewLink>
-                <img
-                  src="/images/icons/gemcrewpick-icon.svg"
-                  alt="gemcrewpick-icon"
-                />
-                <p>{gemcrew}</p>
-              </GemCrewLink>
-            ) : (
-              getDate(createDate)
+          <div>
+            <LinkDetailSettingDate>
+              {gemGrewItem ? (
+                <GemCrewLink>
+                  <img
+                    src="/images/icons/gemcrewpick-icon.svg"
+                    alt="gemcrewpick-icon"
+                  />
+                  <p>{gemcrew}</p>
+                </GemCrewLink>
+              ) : (
+                getDate(createDate)
+              )}
+            </LinkDetailSettingDate>
+            {memo !== '' && (
+              <MemoImage
+                src="/icons/memoIcon.jpg"
+                onClick={() => setIsMemoView(true)}
+              />
             )}
-          </LinkDetailSettingDate>
+          </div>
+
           <LinkDetailSettingOption>
             <Image
               alt="link-image"
@@ -148,44 +247,124 @@ function GemLink({
             <EtcButton onClick={handleEtcButton}>•••</EtcButton>
           </LinkDetailSettingOption>
         </LinkDetailSetting>
-      </LinkDetailContainer>
+      </LinkDetailBox>
       {isEtcCon && (
-        <LinkEtcContainer>
-          <LinkEtcButtonContainer>
-            <LinkEtcButton
+        <LinkEtcBox>
+          {/* <LinkEtcButton
               src="/images/icons/link-memo-icon.svg"
               alt="memo-img"
             />
-            <span>메모</span>
-          </LinkEtcButtonContainer>
-          <LinkEtcButtonContainer>
+            <span>메모</span> */}
+          <MemoIcon
+            el={{ memo, id }}
+            refetch={getLink}
+            open={memoOpen}
+            setOpen={setMemoOpen}
+            onClose={setClose}
+          />
+          {/* <LinkEtcButtonBox>
             <LinkEtcButton
               src="/images/icons/link-gemboxplus-icon.svg"
               alt="memo-img"
             />
             <span>잼박스 추가</span>
-          </LinkEtcButtonContainer>
-          <LinkEtcButtonContainer>
+          </LinkEtcButtonBox> */}
+          <AddIcon
+            el={{ id, title }}
+            refetch={getLink}
+            open={addOpen}
+            setOpen={setAddOpen}
+            onClose={setClose}
+          />
+          <MoreItem onClick={() => setIsEdit(true)}>
+            <ChangeIcon />
+            잼박스변경
+          </MoreItem>
+          {/* <LinkEtcButtonBox>
             <LinkEtcButton
               src="/images/icons/link-gemboxchange-icon.svg"
               alt="memo-img"
             />
             <span>잼박스 변경</span>
-          </LinkEtcButtonContainer>
-          <LinkEtcButtonContainer>
+          </LinkEtcButtonBox> */}
+          <LinkEtcButtonBox>
             <LinkEtcButton
               src="/images/icons/link-trash-icon.svg"
               alt="memo-img"
               onClick={handleLinkDelete}
             />
             <span>삭제</span>
-          </LinkEtcButtonContainer>
+          </LinkEtcButtonBox>
           <LinkEtcXButton
             src="/images/icons/link-x.svg"
             alt="memo-img"
             onClick={() => setIsEtcCon(false)}
           />
-        </LinkEtcContainer>
+        </LinkEtcBox>
+      )}
+      {isMemoView && (
+        <Memobox>
+          <MemoText>{memo}</MemoText>
+          <MemoOption onClick={() => setMemoOpen(true)}>
+            {memo.length >= 215 ? '전체보기' : '수정'}
+          </MemoOption>
+          <MemoClose onClick={() => setIsMemoView(false)} />
+        </Memobox>
+      )}
+      <div style={{ display: 'none' }}>
+        <MemoIcon
+          el={{ memo, id }}
+          refetch={getLink}
+          open={memoOpen}
+          setOpen={setMemoOpen}
+          onClose={setClose}
+        />
+      </div>
+      {isEdit && (
+        <Changebox>
+          <ChangeItem>
+            현재 잼박스
+            <ItemBox type="text" value={boxName || '기본'} disabled />
+          </ChangeItem>
+          <ChangeItem>
+            변경할 잼박스
+            <SelectBoxPage
+              selectList={data?.contents}
+              gembox={gembox}
+              handleChange={handleChange}
+            />
+          </ChangeItem>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              width: '100%',
+              height: '40px',
+            }}
+          >
+            <GemBoxButton
+              style={{
+                padding: '11px 27px',
+                fontSize: '14px',
+                borderRadius: '8px',
+                background: '#3C3C3F',
+              }}
+              onClick={() => setIsEdit(false)}
+            >
+              취소
+            </GemBoxButton>
+            <GemBoxButton
+              onClick={onClickChangeGembox}
+              style={{
+                padding: '11px 63px',
+                fontSize: '14px',
+                borderRadius: '8px',
+              }}
+            >
+              변경
+            </GemBoxButton>
+          </div>
+        </Changebox>
       )}
     </LinkContainer>
   );

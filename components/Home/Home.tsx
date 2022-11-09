@@ -48,13 +48,14 @@ function Home() {
         method: 'get',
         params: {
           page: 0,
-          // size: 4,
+          size: 4,
         },
       });
 
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
     } catch (error: any) {
+      const originalRequest = error.config;
       if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
         const response = await axios.post(
           '/api/v1/user/oauth/reissue',
@@ -69,7 +70,7 @@ function Home() {
         const accessToken = await response?.data?.result?.accessToken;
         localStorage.setItem('accessToken', accessToken);
         setUser({ ...user, accessToken });
-        // return axios(originalRequest);
+        axios(originalRequest);
       }
       console.error(error);
     }

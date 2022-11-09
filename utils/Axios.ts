@@ -32,6 +32,8 @@ Axios.interceptors.response.use(
     return response;
   },
   async (error) => {
+    console.log('error.response.status');
+    console.log(error.response.status);
     if (
       error.response.status === 401 &&
       error.response.data.code === 'ACCESS_TOKEN_EXPIRED'
@@ -82,7 +84,9 @@ Axios.interceptors.response.use(
       console.log('액세스 토큰이 유효하지 않습니다');
       localStorage.clear();
       window.location.reload();
-    } else {
+    } else if (error.response.status === 404) {
+      console.error('잘못된 요청입니다.');
+    } else if (error.response.status === 500) {
       localStorage.clear();
       // window.location.reload();
     }
