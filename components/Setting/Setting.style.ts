@@ -112,7 +112,7 @@ export const SettingInfo = styled.input`
   /* gray/gray2 */
 
   border: 1px solid #0f0223;
-  border-radius: 16px;
+  border-radius: 8px;
 
   font-style: normal;
   font-weight: 400;
@@ -133,7 +133,7 @@ export const SettingNinkName = styled.input<IErrorMessageProps>`
 
   border: 1px solid;
   border-color: ${(props) => props.isErrorNickName && 'red'};
-  border-radius: 16px;
+  border-radius: 8px;
 
   font-style: normal;
   font-weight: 400;
@@ -156,7 +156,7 @@ export const SettingAuthEmail = styled.input<{ isDisabled: boolean }>`
   background-color: ${(props) => (props.isDisabled ? '#ededed' : '#ffffff')};
   /* gray/gray2 */
   border: 1px solid ${(props) => props.isDisabled && '#cecece'};
-  border-radius: 16px;
+  border-radius: 8px;
 
   font-style: normal;
   font-weight: 400;
@@ -177,7 +177,7 @@ export const SettingDisabledInfo = styled.div<{ type: string }>`
   /* gray/gray2 */
 
   border: 1px solid #cecece;
-  border-radius: 16px;
+  border-radius: 8px;
 
   letter-spacing: -0.02em;
   color: ${(props) => props.type === 'ready' && '#8E8E8E'};

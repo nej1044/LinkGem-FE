@@ -260,7 +260,7 @@ export default function Setting() {
       jobName: auth?.jobName,
       careerYear: auth?.careerYear,
     });
-    if (auth.mailEmail) setIsClickedEmailBtn(true);
+    if (auth?.mailEmail) setIsClickedEmailBtn(true);
     setAuthEmail(auth?.mailEmail);
     setImgUrl(auth?.profileImageUrl);
   }, []);

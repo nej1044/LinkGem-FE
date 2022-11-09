@@ -12,7 +12,7 @@ export const DropDownHeader = styled.div`
   justify-content: space-between;
   /* transition: 0.5ms; */
   border: 1px solid #0f0223;
-  border-radius: 16px;
+  border-radius: 8px;
 
   &:hover {
     transition: 0.5s;
