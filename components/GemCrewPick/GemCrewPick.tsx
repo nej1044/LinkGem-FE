@@ -25,7 +25,7 @@ function GemCrewPick({ copyToClipboard }: IGemCrewPick) {
               key={item.id}
               title={item.title}
               description={item.description}
-              memos={item.memos}
+              memo={item.memos}
               url={item.url}
               imageUrl={item.imageUrl}
               gemcrew={item.gemcrew}
@@ -34,6 +34,7 @@ function GemCrewPick({ copyToClipboard }: IGemCrewPick) {
               copyToClipboard={copyToClipboard}
               gemGrewItem={true}
               createDate="1"
+              getLink={() => {}}
             />
           ))}
         </GemCrewPickOption>
