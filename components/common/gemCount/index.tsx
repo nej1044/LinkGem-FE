@@ -1,34 +1,32 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { userInfo } from 'store/store';
+import { gemboxRefetch } from 'store/store';
+import Axios from 'utils/Axios';
 
 interface IPropsGemCount {
-  id?: number;
+  gemBoxId?: number;
   isFavorites?: boolean;
   hasMemo?: boolean;
 }
 
 const GemCount = (props: IPropsGemCount) => {
-  const accessToken = useRecoilValue(userInfo).accessToken;
   const [count, setCount] = useState<number>(0);
+  const boxRefetch = useRecoilValue(gemboxRefetch);
+
+  const params: IPropsGemCount = {};
+  if (props.isFavorites) params.isFavorites = props.isFavorites;
+  if (props.hasMemo) params.hasMemo = props.hasMemo;
 
   useEffect(() => {
     let unmounted = false;
     const source = axios.CancelToken.source();
 
-    axios
-      .get(`/api/v1/links`, {
-        cancelToken: source.token,
-        headers: {
-          Authorization: accessToken,
-        },
-        params: {
-          gemBoxId: props.id || '',
-          isFavorites: props.isFavorites || false,
-          hasMemo: props.hasMemo || false,
-        },
-      })
+    Axios({
+      url: 'api/v1/links',
+      method: 'get',
+      params,
+    })
       .then((res) => {
         if (!unmounted) {
           setCount(res?.data.result.totalCount);
@@ -41,7 +39,7 @@ const GemCount = (props: IPropsGemCount) => {
       unmounted = true;
       source.cancel('cancle');
     };
-  }, []);
+  }, [boxRefetch]);
 
   return <span>({count})</span>;
 };

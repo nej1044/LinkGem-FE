@@ -36,7 +36,7 @@ import {
   MemoText,
   MoreItem,
 } from 'components/gembox/gembox.styles';
-import SelectBoxPage from 'components/atom/selectBox';
+import SelectBoxPage from '../atom/select';
 import { useMutation } from 'utils/useMutation';
 import { useRecoilState } from 'recoil';
 import { gemboxRefetch } from 'store/store';
@@ -79,12 +79,10 @@ function GemLink({
   const [isMemoView, setIsMemoView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
-  const [gembox, setGembox] = useState('');
+  const [gembox, setGembox] = useState<any>(null);
   const [changeGembox] = useMutation('patch');
   // const [isMore, setIsMore] = useState<boolean>(false);
   const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
-  console.log('gemBoxId');
-  console.log(gemBoxId);
   // const boxName = useQuery(`gemboxes/${gemBoxId || ''}`, {
   //   id: gemBoxId,
   // }).data?.name;
@@ -93,14 +91,15 @@ function GemLink({
 
   // const { data, refetch } = useQuery('links', params);
 
-  const handleChange = (event: { target: { value: string } }) => {
-    setGembox(event.target.value);
+  const handleChange = (el: any) => () => {
+    if (el.name === boxName) return;
+    setGembox(el);
   };
 
   const onClickChangeGembox = async () => {
     await changeGembox(`links/${id}`, {
       id,
-      gemBoxId: gembox,
+      gemBoxId: gembox.id,
     });
     // setIsMore(false);
     setIsEdit(false);
@@ -329,6 +328,7 @@ function GemLink({
           <ChangeItem>
             변경할 잼박스
             <SelectBoxPage
+              boxName={boxName}
               selectList={data?.contents}
               gembox={gembox}
               handleChange={handleChange}

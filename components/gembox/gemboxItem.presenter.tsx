@@ -9,7 +9,7 @@ import MemoIcon from './moreIcons/memo';
 import AddIcon from './moreIcons/add';
 import { useMutation } from 'utils/useMutation';
 import { useQuery } from 'utils/useQuery';
-import SelectBoxPage from '../atom/selectBox';
+import SelectBoxPage from '../atom/select';
 import { IPropsLinkCard } from './gembox.types';
 import LinkOutlined from '../../public/icons/LinkOutlined.svg';
 
@@ -17,10 +17,8 @@ const LinkCard = (props: IPropsLinkCard) => {
   const [isMore, setIsMore] = useState<boolean>(false);
   const [memoOpen, setMemoOpen] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
-  const [gembox, setGembox] = useState('');
+  const [gembox, setGembox] = useState<any>(null);
   const [, setBoxRefetch] = useRecoilState(gemboxRefetch);
-  console.log('props');
-  console.log(props);
 
   const [isMemoView, setIsMemoView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -49,14 +47,15 @@ const LinkCard = (props: IPropsLinkCard) => {
     setBoxRefetch(true);
   };
 
-  const handleChange = (event: { target: { value: string } }) => {
-    setGembox(event.target.value);
+  const handleChange = (el: any) => () => {
+    if (el.name === boxName) return;
+    setGembox(el);
   };
 
   const onClickChangeGembox = async () => {
     await changeGembox(`links/${props.el.id}`, {
       id: props.el.id,
-      gemBoxId: gembox,
+      gemBoxId: gembox.id,
     });
     setIsMore(false);
     setIsEdit(false);
@@ -129,6 +128,7 @@ const LinkCard = (props: IPropsLinkCard) => {
                       selectList={data?.contents}
                       gembox={gembox}
                       handleChange={handleChange}
+                      boxName={boxName}
                     />
                   </S.ChangeItem>
                   <div

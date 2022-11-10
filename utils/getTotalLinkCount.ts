@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { gemboxRefetch, userInfo } from 'store/store';
+import { useRecoilState } from 'recoil';
+import { gemboxRefetch } from 'store/store';
+import Axios from './Axios';
 
 export const getTotalLinkCount = () => {
   const [totalCount, setTotalCount] = useState<number | null>(null);
   const [boxRefetch] = useRecoilState(gemboxRefetch);
-  const accessToken = useRecoilValue(userInfo).accessToken;
   const fetchLinkData = async () => {
     try {
-      const result = await axios.get('/api/v1/links', {
-        headers: {
-          Authorization: accessToken,
-        },
+      const result = await Axios({
+        url: 'api/v1/links',
+        method: 'get',
       });
       setTotalCount(result?.data?.result?.totalCount);
     } catch (error) {

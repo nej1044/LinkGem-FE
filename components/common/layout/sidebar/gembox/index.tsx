@@ -20,19 +20,17 @@ export type IDataType = {
   name: string;
   imageUrl: string;
   title: string;
+  linkCount?: number;
+  isDefault?: boolean;
 };
 
-interface IGemBoxSideBarProps {
-  selectMenu: (menu: string, url?: string | number) => () => void;
-}
-
-const GemboxSidebar = (props: IGemBoxSideBarProps) => {
+const GemboxSidebar = () => {
   const router = useRouter();
   const totalCount = getTotalLinkCount();
-  console.log(router);
 
   const { data, refetch } = useQuery('gemboxes');
 
+  const [, setBoxList] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
@@ -83,6 +81,10 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
   };
 
   useEffect(() => {
+    data && setBoxList([...data?.contents.reverse()]);
+  }, [data]);
+
+  useEffect(() => {
     refetch();
   }, [boxRefetch]);
 
@@ -106,8 +108,8 @@ const GemboxSidebar = (props: IGemBoxSideBarProps) => {
             </S.GemboxTitle>
             {data?.contents?.map((el: IDataType) => (
               <S.GemboxText key={uuidv4()} onClick={selectMenu('gembox', el)}>
-                {el?.name}
-                <GemCount id={el.id} />
+                {`${el?.name}`}
+                <span>{`(${el.linkCount})`}</span>
               </S.GemboxText>
             ))}
             <S.GemboxButton onClick={openCreate}>

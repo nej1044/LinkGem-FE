@@ -1,21 +1,15 @@
-import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { userInfo } from 'store/store';
+import Axios from './Axios';
 
 export const useMutation = (method: string) => {
-  const accessToken = useRecoilValue(userInfo).accessToken;
   const mutation = async (apiName: string, params?: object) => {
     if (method === 'patch') {
       try {
-        const result = await axios.patch(
-          `https://dev.linkgem.co.kr/api/v1/${apiName}`,
-          params,
-          {
-            headers: {
-              Authorization: accessToken,
-            },
-          }
-        );
+        const result = await Axios({
+          url: `api/v1/${apiName}`,
+          method: 'patch',
+          data: params,
+        });
+
         return result;
       } catch (error) {
         console.error(error);
@@ -23,15 +17,11 @@ export const useMutation = (method: string) => {
     }
     if (method === 'post') {
       try {
-        const result = await axios.post(
-          `https://dev.linkgem.co.kr/api/v1/${apiName}`,
-          params,
-          {
-            headers: {
-              Authorization: accessToken,
-            },
-          }
-        );
+        const result = await Axios({
+          url: `api/v1/${apiName}`,
+          method: 'post',
+          data: params,
+        });
         return result;
       } catch (error) {
         console.error(error);
@@ -39,15 +29,11 @@ export const useMutation = (method: string) => {
     }
     if (method === 'delete') {
       try {
-        const result = await axios.delete(
-          `https://dev.linkgem.co.kr/api/v1/${apiName}`,
-          {
-            headers: {
-              Authorization: accessToken,
-            },
-            data: params,
-          }
-        );
+        const result = await Axios({
+          url: `api/v1/${apiName}`,
+          method: 'delete',
+          data: params,
+        });
         return result;
       } catch (error) {
         console.log(error);

@@ -7,5 +7,5 @@ export const onError = (event: SyntheticEvent<HTMLImageElement>) => {
 
 export const onErrorGembox = (event: SyntheticEvent<HTMLImageElement>) => {
   if (event.target instanceof HTMLImageElement)
-    event.target.src = '/images/default-gembox.webp';
+    event.target.src = '/images/default-gembox.jpg';
 };

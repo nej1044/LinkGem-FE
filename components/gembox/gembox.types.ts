@@ -5,6 +5,7 @@ export type IDataType = {
   name: string;
   imageUrl: string;
   title: string;
+  isDefault?: boolean;
 };
 
 export type ILinkDataType = {

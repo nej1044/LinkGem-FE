@@ -8,13 +8,13 @@ import { Select } from 'antd';
 
 export const Wrapper = styled.div`
   box-sizing: border-box;
-  width: 80vw;
-  padding: 80px;
+  width: 1220px;
+  padding: 80px 0;
   min-height: 76vh;
 `;
 
 export const GemboxSection = styled.div`
-  width: 60vw;
+  width: 100%;
 `;
 
 export const GexboxSectionTitle = styled.h1`
@@ -39,22 +39,21 @@ export const LinkBoxWrapper = styled.div`
 
 export const LinkBox = styled.article`
   position: relative;
-  width: 13.6vw;
-  min-width: 280px;
-  height: 32.5vh;
-  min-height: 320px;
+  width: 280px;
+  height: 320px;
   margin-right: 24px;
   margin-top: 32px;
   border-radius: 16px;
   background-color: ${(props: IPropsGemboxStyles) =>
     props.isMore ? '#a0a0a0' : 'white'};
-  overflow: hidden;
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
 `;
 
 export const LinkBoxImg = styled.img`
   width: 100%;
   height: 50%;
+  border-radius: 16px 16px 0px 0px;
+  object-fit: cover;
   filter: ${(props: IPropsGemboxStyles) =>
     props.isMore ? 'brightness(60%)' : 'brightness(100%)'};
 `;
@@ -68,10 +67,9 @@ export const LinkBoxContents = styled.div`
   width: 100%;
   height: 50%;
   padding: ${(props: IPropsGemboxStyles) => (props.isMore ? '12px' : '24px')};
-  border-radius: 16px;
   background-color: white;
   border-radius: ${(props: IPropsGemboxStyles) =>
-    props.isMore ? '16px' : '0px'};
+    props.isMore ? '16px' : '0px 0px 16px 16px'};
 `;
 
 export const MoreItems = styled.div`
@@ -87,7 +85,7 @@ export const MoreItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 20%;
+  width: 22%;
   height: 40%;
   min-height: 55px;
   font-family: 'Spoqa Han Sans';
@@ -201,6 +199,7 @@ export const GemboxWrapper = styled.div`
 export const ModalTitle = styled.div`
   margin-bottom: 40px;
   font-family: 'Poppins';
+  font-style: normal;
   font-weight: 600;
   font-size: 32px;
   text-align: center;
@@ -225,6 +224,7 @@ export const GemCard = styled.div`
 export const GemImg = styled.img`
   width: 100%;
   height: 120px;
+  object-fit: cover;
   border-radius: 8px;
 `;
 
@@ -232,7 +232,7 @@ export const GemInfo = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 50px;
-  padding-top: 9px;
+  padding-top: 8px;
 `;
 
 export const GemName = styled.span`
@@ -240,6 +240,7 @@ export const GemName = styled.span`
   font-weight: 700;
   font-size: 16px;
   letter-spacing: -0.02em;
+  margin-bottom: 4px;
   color: #000000;
 `;
 

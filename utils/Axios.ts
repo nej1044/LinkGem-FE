@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 const Axios = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: 'https://dev.linkgem.co.kr/',
   timeout: 300000,
 });
 declare module 'axios' {

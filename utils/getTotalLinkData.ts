@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { userInfo } from 'store/store';
+import Axios from './Axios';
 
 export const getTotalLinkData = () => {
-  const accessToken = useRecoilValue(userInfo).accessToken;
   const [totalData, setTotalData] = useState([]);
   const fetchLinkData = async () => {
     try {
-      const result = await axios.get('/api/v1/links', {
-        headers: {
-          Authorization: accessToken,
-        },
-        params: {
-          hasGembox: false,
-        },
+      const result = await Axios({
+        url: 'api/v1/links',
+        method: 'get',
       });
       setTotalData(result?.data?.result?.contents);
     } catch (error) {

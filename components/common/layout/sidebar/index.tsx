@@ -20,7 +20,7 @@ const Sidebar = () => {
   return (
     <>
       {isGembox ? (
-        <GemboxSidebar selectMenu={selectMenu} />
+        <GemboxSidebar />
       ) : (
         <S.Sidebar>
           <S.ItemWrapper>

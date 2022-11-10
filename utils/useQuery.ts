@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { userInfo } from 'store/store';
+import Axios from './Axios';
 
 export const useQuery = (apiName: string, params?: object) => {
-  const accessToken = useRecoilValue(userInfo).accessToken;
   const [state, setState] = useState<any>({
     data: null,
   });
@@ -21,14 +19,12 @@ export const useQuery = (apiName: string, params?: object) => {
     let unmounted = false;
     const source = axios.CancelToken.source();
 
-    axios
-      .get(`https://dev.linkgem.co.kr/api/v1/${apiName || ''}`, {
-        cancelToken: source.token,
-        headers: {
-          Authorization: accessToken,
-        },
-        params,
-      })
+    Axios({
+      cancelToken: source.token,
+      url: `/api/v1/${apiName || ''}`,
+      method: 'get',
+      params,
+    })
       .then((res) => {
         if (!unmounted) {
           setState({ ...state, data: res.data.result });
@@ -37,6 +33,7 @@ export const useQuery = (apiName: string, params?: object) => {
       .catch(() => {
         console.warn = console.log = () => {};
       });
+
     return () => {
       unmounted = true;
       source.cancel('cancle');
