@@ -23,7 +23,7 @@ const SelectBoxPage = (props: {
 
   return (
     <SelectWrapper onClick={() => setOpen((prev) => !prev)}>
-      {props.gembox.name || '잼박스 선택'}{' '}
+      {props.gembox?.name || '잼박스 선택'}{' '}
       <img src={`/icons/${open ? 'up' : 'down'}-arrow.png`} />
       {open && (
         <ListWrapper>
