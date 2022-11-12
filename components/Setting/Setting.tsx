@@ -31,17 +31,28 @@ import useLogin from 'utils/useLogin';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { joinState, userInfo } from 'store/store';
 import Modal from 'components/common/Modal/SettingModal';
+import { FormType, UserInfoType } from './setting.type';
 
 export default function Setting() {
   const router = useRouter();
 
   // const isLogin = useLogin();
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormType>({
     nickName: '',
     jobName: '',
-    careerYear: '',
+    careerYear: 0,
     email: '',
     name: '',
+  });
+  const [user, setUser] = useState<UserInfoType>({
+    careerYear: 0,
+    job: '',
+    loginEmail: '',
+    mailEmail: '',
+    name: '',
+    nickname: '',
+    profileImageUrl: '',
+    userId: 0,
   });
   const [authEmail, setAuthEmail] = useState('');
   const [file, setFile] = useState<File>();
@@ -202,6 +213,7 @@ export default function Setting() {
         message: '',
       });
       setIsAuthEmailModal((prev) => !prev);
+      // setIsClickedEmailBtn(true);
     }
     try {
       await Axios(`/api/v1/auth/mail/send?emailAddress=${authEmail}`, {
@@ -231,6 +243,13 @@ export default function Setting() {
       const result = await response?.data?.result;
       if (result.auth === true) {
         console.log('인증이 완료 되었습니다');
+        const response = await Axios(`/api/v1/user/info`, {
+          method: 'get',
+        });
+        const result = await response?.data?.result;
+        setUser(result);
+        setIsAuthEmailModal((prev) => !prev);
+        setAuthEmail(result.mailEmail);
         return;
       }
       if (result.auth === false) {
@@ -250,19 +269,34 @@ export default function Setting() {
   console.log('authEmailMessage');
   console.log(authEmailMessage);
 
+  const getUserInfo = async () => {
+    const response = await Axios(`/api/v1/user/info`, {
+      method: 'get',
+    });
+    const result = await response?.data?.result;
+    setUser(result);
+  };
+
   useEffect(() => {
+    setForm({
+      name: user?.name,
+      nickName: user?.nickname,
+      email: user?.loginEmail,
+      jobName: user?.job,
+      careerYear: user?.careerYear,
+    });
+
+    setAuthEmail(user?.mailEmail);
+    setImgUrl(user?.profileImageUrl);
+    if (user?.mailEmail) setIsClickedEmailBtn(true);
+  }, [user]);
+  console.log('user', user);
+  useEffect(() => {
+    getUserInfo();
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     // if (!isLogin) router.push('/');
-    setForm({
-      name: auth?.name,
-      nickName: auth?.nickname,
-      email: auth?.loginEmail,
-      jobName: auth?.jobName,
-      careerYear: auth?.careerYear,
-    });
-    if (auth?.mailEmail) setIsClickedEmailBtn(true);
-    setAuthEmail(auth?.mailEmail);
-    setImgUrl(auth?.profileImageUrl);
+    console.log('!!!!!!');
+    console.log(auth?.careerYear);
   }, []);
 
   return (
@@ -371,7 +405,7 @@ export default function Setting() {
                   }}
                   width="120px"
                 >
-                  {authEmail ? '재인증' : '인증'}
+                  {user.mailEmail ? '재인증' : '인증'}
                 </SettingButton>
               ) : (
                 <SettingButton
@@ -496,15 +530,33 @@ export default function Setting() {
           }}
         >
           <>
-            <h2>이메일 인증</h2>
+            <h2>{user?.mailEmail ? '새로운 이메일로 인증' : '이메일 인증'}</h2>
             <LinkTextContainer>
-              <p>적어주신 이메일로 인증 메일을 전송하였습니다.</p>
-              <p>
-                <span className="violet">이메일 인증 완료 후 </span>
-                <span className="bold">
-                  아래 이메일 인증완료 버튼을 눌러주세요.
-                </span>
-              </p>
+              {user?.mailEmail ? (
+                <>
+                  <p>적어주신 새로운 이메일로 인증 메일을 전송하였습니다.</p>
+                  <p>
+                    새로운 이메일로 인증하지 않았을 시 기존 이메일 주소가
+                    유지됩니다.
+                  </p>
+                  <p>
+                    <span className="violet">이메일 인증 완료 후 </span>
+                    <span className="bold">
+                      아래 이메일 인증완료 버튼을 눌러주세요.
+                    </span>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p>적어주신 이메일로 인증 메일을 전송하였습니다.</p>
+                  <p>
+                    <span className="violet">이메일 인증 완료 후 </span>
+                    <span className="bold">
+                      아래 이메일 인증완료 버튼을 눌러주세요.
+                    </span>
+                  </p>
+                </>
+              )}
             </LinkTextContainer>
             <ButtonBox>
               <LinkSaveButton bgColor="#5200FF" onClick={handleAuthEmailModal}>
