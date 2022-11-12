@@ -1,3 +1,4 @@
+import { FormType } from 'components/Setting/setting.type';
 import React, {
   useState,
   MouseEvent,
@@ -20,21 +21,13 @@ type settingDropdownProps = {
   dropDownList: any;
   isModal: boolean;
   handleModal: () => void;
-  setForm: Dispatch<
-    SetStateAction<{
-      nickName: string;
-      jobName: string;
-      careerYear: string;
-      email: string;
-      name: string;
-    }>
-  >;
+  setForm: Dispatch<SetStateAction<FormType>>;
   info: string | number;
   type: string;
   form: {
     nickName: string;
     jobName: string;
-    careerYear: string;
+    careerYear: string | number;
     email: string;
     name: string;
   };
