@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import LinkSave from 'components/LinkSave';
 import RecentSaveLink from 'components/RecentSaveLink';
 import GemCrewPick from 'components/GemCrewPick';
 import { useRecoilState } from 'recoil';
-import { recentLinkState, userInfo } from 'store/store';
+import { recentLinkState } from 'store/store';
 import Axios from 'utils/Axios';
 import LinkCopy from 'components/LinkCopy';
 import Modal from 'components/common/Modal/HomeModal';
 import styled from 'styled-components';
 
 function Home() {
-  const [user, setUser] = useRecoilState(userInfo);
   const [recentLink, setRecentLink] = useRecoilState(recentLinkState);
   const [isCopy, setIsCopy] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -55,23 +53,23 @@ function Home() {
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
     } catch (error: any) {
-      const originalRequest = error.config;
-      if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
-        const response = await axios.post(
-          '/api/v1/user/oauth/reissue',
-          {},
-          {
-            headers: {
-              'ACCESS-TOKEN': user.accessToken,
-              'REFRESH-TOKEN': user.refreshToken,
-            },
-          }
-        );
-        const accessToken = await response?.data?.result?.accessToken;
-        localStorage.setItem('accessToken', accessToken);
-        setUser({ ...user, accessToken });
-        axios(originalRequest);
-      }
+      // const originalRequest = error.config;
+      // if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
+      //   const response = await axios.post(
+      //     '/api/v1/user/oauth/reissue',
+      //     {},
+      //     {
+      //       headers: {
+      //         'ACCESS-TOKEN': user.accessToken,
+      //         'REFRESH-TOKEN': user.refreshToken,
+      //       },
+      //     }
+      //   );
+      //   const accessToken = await response?.data?.result?.accessToken;
+      //   localStorage.setItem('accessToken', accessToken);
+      //   setUser({ ...user, accessToken });
+      //   axios(originalRequest);
+      // }
       console.error(error);
     }
   };
