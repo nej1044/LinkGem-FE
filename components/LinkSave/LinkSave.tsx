@@ -45,7 +45,8 @@ function Link({ getLink, recentLink }: ILinkSaveProps) {
       setLinkSaveBar({ isVisible: true, isSuccess: true });
       setUrlText('');
     } catch (error) {
-      console.error(error);
+      // TODO Content-Type: "application/x-www-form-urlencoded" 처리문제
+      console.error('onClickLinkSaveButton', error);
       setLinkSaveBar({ isVisible: true, isSuccess: false });
       // setIsSuccessLink(false);
     }

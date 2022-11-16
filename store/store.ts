@@ -27,6 +27,11 @@ const copyState = atom({
   default: true,
 });
 
+export const accessToken = atom({
+  key: 'accessToken',
+  default: '',
+});
+
 export default copyState;
 
 const userInfo = atom({

@@ -174,7 +174,6 @@ function GemLink({
 
   useEffect(() => {}, [isFavorites]);
 
-  console.log('isEtcCon', isEtcCon);
   return (
     <LinkContainer>
       <ImageBox isEtcCon={isEtcCon}>

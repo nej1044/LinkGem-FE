@@ -28,9 +28,7 @@ import {
   AlarmImage,
   Initial,
   LogoImage,
-  // UrlCategory,
   SpaceCell,
-  // UrlCategoryItem,
   HeaderLinkSave,
   LinkText,
   MenuContainer,
@@ -49,12 +47,10 @@ import { useRouter } from 'next/router';
 import Axios from 'utils/Axios';
 import { headerFormData } from './form';
 import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
 
 function Header() {
   const router = useRouter();
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [user, setUser] = useRecoilState(userInfo);
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState);
   const joinUserInfo = useRecoilValue(joinState);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
@@ -145,23 +141,6 @@ function Header() {
       const contents = await response?.data?.result?.contents;
       setRecentLink(contents);
     } catch (error: any) {
-      const originalRequest = error.config;
-      if (error.response?.data?.code === 'ACCESS_TOKEN_EXPIRED') {
-        const response = await axios.post(
-          '/api/v1/user/oauth/reissue',
-          {},
-          {
-            headers: {
-              'ACCESS-TOKEN': user.accessToken,
-              'REFRESH-TOKEN': user.refreshToken,
-            },
-          }
-        );
-        const accessToken = await response?.data?.result?.accessToken;
-        localStorage.setItem('accessToken', accessToken);
-        setUser({ ...user, accessToken });
-        axios(originalRequest);
-      }
       console.error(error);
     }
   };
@@ -177,7 +156,6 @@ function Header() {
     const auth = JSON.parse(localStorage.getItem('auth') as string);
     setUserInfoState({ ...auth });
     if (auth?.userPhase === 'READY') setIsOpenModal(true);
-    console.log(auth);
   }, [joinUserInfo.accessToken, isLogin]);
 
   useEffect(() => {}, [userInfoState]);
