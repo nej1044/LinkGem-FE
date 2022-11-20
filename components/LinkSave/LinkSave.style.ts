@@ -19,7 +19,7 @@ export const LinkSaveContainer = styled.section`
 
 export const LinkTextContainer = styled.div`
   max-width: 680px;
-  height: 20px;
+  height: 100%;
   display: flex;
   align-items: center;
   border: 1px solid #0f0223;

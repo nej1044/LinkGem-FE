@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 export const RecentSaveLinkContainer = styled.section`
   width: 100%;
@@ -6,13 +7,7 @@ export const RecentSaveLinkContainer = styled.section`
   /* display: flex;
   flex-direction: column; */
 
-  @media screen and (max-width: 1700px) {
-    width: 1080px;
-  }
-  @media screen and (max-width: 1180px) {
-    width: 700px;
-  }
-  @media screen and (max-width: 760px) {
+  @media screen and (min-width: ${size.desktop}) {
     width: 100%;
   }
 `;
@@ -21,16 +16,7 @@ export const RecentSaveLinkTitleOption = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
-  width: 1350px;
-  @media screen and (max-width: 1700px) {
-    width: 1000px;
-  }
-  @media screen and (max-width: 1180px) {
-    width: 650px !important;
-  }
-  @media screen and (max-width: 760px) {
-    width: 300px !important;
-  }
+  width: 100%;
 `;
 
 export const RecentSaveLinkTitle = styled.div`
@@ -72,23 +58,23 @@ export const RecentSaveLinkWholeSeries = styled.p`
 `;
 
 export const RecentSaveLinkOption = styled.div`
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(23%, auto));
+
   gap: 24px;
 
-  section {
-    margin-bottom: 24px;
+  @media screen and (max-width: ${size.tabletL}) {
+    gap: 16px;
   }
-  @media screen and (max-width: 1700px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media screen and (max-width: 1180px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media screen and (max-width: 760px) {
-    grid-template-columns: repeat(1, 1fr);
 
-    padding: 0px;
+  @media screen and (max-width: ${size.tabletS}) {
+    grid-template-columns: repeat(auto-fill, minmax(48%, auto));
+    row-gap: 20px;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    column-gap: 8px;
   }
 `;
 
@@ -96,6 +82,7 @@ export const RecentLinkBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   @media screen and (max-width: 760px) {
     align-items: center;
   }

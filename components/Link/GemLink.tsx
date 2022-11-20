@@ -53,7 +53,7 @@ interface GemLinkProps {
   getLink: () => void;
   copyToClipboard: (url: string) => void;
   siteName?: string;
-  gemGrewItem?: boolean;
+  gemGrewItem?: boolean | any;
   gemcrew?: string;
   gemBoxId?: string;
 }
@@ -182,8 +182,6 @@ function GemLink({
             <img
               alt="link-image"
               src={imageUrl || 'images/home-link-default.svg'}
-              width={320}
-              height={180}
             />
           </a>
         </Link>
@@ -199,7 +197,7 @@ function GemLink({
             <a target="_blank">{description}</a>
           </Link>
         </LinkDetailDescription>
-        <LinkDetailSetting>
+        <LinkDetailSetting gemGrewItem={gemGrewItem}>
           <div>
             <LinkDetailSettingDate>
               {gemGrewItem ? (
@@ -214,7 +212,7 @@ function GemLink({
                 getDate(createDate)
               )}
             </LinkDetailSettingDate>
-            {memo !== '' && (
+            {!gemGrewItem && memo !== '' && (
               <MemoImage
                 src="/icons/memoIcon.jpg"
                 onClick={() => setIsMemoView(true)}
@@ -223,26 +221,47 @@ function GemLink({
           </div>
 
           <LinkDetailSettingOption>
-            <Image
-              alt="link-image"
-              src={
-                isBookMark
-                  ? '/images/icons/link-star-black.svg'
-                  : '/images/icons/link-star.svg'
-              }
-              width={17}
-              height={16}
-              defaultValue={url}
-              onClick={handleFavorite}
-            />
-            <Image
-              alt="link-image"
-              src="/images/icons/link-sharing.svg"
-              width={15.79}
-              height={15.82}
-              onClick={() => copyToClipboard(url)}
-            />
-            <EtcButton onClick={handleEtcButton}>•••</EtcButton>
+            {!gemGrewItem ? (
+              <>
+                <Image
+                  alt="link-image"
+                  src={
+                    isBookMark
+                      ? '/images/icons/link-star-black.svg'
+                      : '/images/icons/link-star.svg'
+                  }
+                  width={17}
+                  height={16}
+                  defaultValue={url}
+                  onClick={handleFavorite}
+                />
+                <Image
+                  alt="link-image"
+                  src="/images/icons/link-sharing.svg"
+                  width={15.79}
+                  height={15.82}
+                  onClick={() => copyToClipboard(url)}
+                />
+                <EtcButton onClick={handleEtcButton}>•••</EtcButton>
+              </>
+            ) : (
+              <>
+                <svg
+                  width="18"
+                  height="19"
+                  viewBox="0 0 18 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.90001 11.172L9.90001 11.4135L10.0707 11.2427L16.071 5.24143L17.3436 6.514L9 14.8586L0.656401 6.51498L1.92903 5.24144L7.9293 11.2407L8.10001 11.4114L8.10001 11.17L8.10001 0.100001L9.90001 0.100001L9.90001 11.172ZM0.1 17.1L17.9 17.1L17.9 18.9L0.1 18.9L0.1 17.1Z"
+                    fill="black"
+                    stroke="white"
+                    strokeWidth="0.2"
+                  />
+                </svg>
+              </>
+            )}
           </LinkDetailSettingOption>
         </LinkDetailSetting>
       </LinkDetailBox>

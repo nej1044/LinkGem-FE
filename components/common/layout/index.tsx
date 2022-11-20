@@ -4,6 +4,7 @@ import Sidebar from './sidebar';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { ReactChild } from 'react';
+import { size } from 'styles/variable';
 
 const HIDE_SIDEBAR = ['/'];
 
@@ -27,7 +28,17 @@ const BodyWrapper = styled.div<{ pathname: string }>`
 `;
 
 const Body = styled.section`
+  width: 100%;
   padding-top: 8vh;
+  @media screen and (max-width: ${size.tabletL}) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 const Layout = (props: IPropsLayout) => {

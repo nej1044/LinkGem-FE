@@ -8,6 +8,7 @@ import Axios from 'utils/Axios';
 import LinkCopy from 'components/LinkCopy';
 import Modal from 'components/common/Modal/HomeModal';
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 function Home() {
   const [recentLink, setRecentLink] = useRecoilState(recentLinkState);
@@ -103,12 +104,20 @@ function Home() {
 export default Home;
 
 const HomeContainer = styled.div`
-  width: 80vw;
-  max-width: 1400px;
+  max-width: 1200px;
+  margin: 0 auto;
   padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (min-width: ${size.desktop}) {
+  }
+
+  @media screen and (max-width: ${size.tabletL}) {
+    max-width: 100%;
+    width: 100%;
+  }
 
   @media screen and (max-width: 760px) {
     padding-top: 0px;
