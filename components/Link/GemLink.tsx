@@ -248,11 +248,6 @@ function GemLink({
       </LinkDetailBox>
       {isEtcCon && (
         <LinkEtcBox>
-          {/* <LinkEtcButton
-              src="/images/icons/link-memo-icon.svg"
-              alt="memo-img"
-            />
-            <span>메모</span> */}
           <MemoIcon
             el={{ memo, id }}
             refetch={getLink}
@@ -260,13 +255,6 @@ function GemLink({
             setOpen={setMemoOpen}
             onClose={setClose}
           />
-          {/* <LinkEtcButtonBox>
-            <LinkEtcButton
-              src="/images/icons/link-gemboxplus-icon.svg"
-              alt="memo-img"
-            />
-            <span>잼박스 추가</span>
-          </LinkEtcButtonBox> */}
           <AddIcon
             el={{ id, title }}
             refetch={getLink}
@@ -278,13 +266,6 @@ function GemLink({
             <ChangeIcon />
             잼박스변경
           </MoreItem>
-          {/* <LinkEtcButtonBox>
-            <LinkEtcButton
-              src="/images/icons/link-gemboxchange-icon.svg"
-              alt="memo-img"
-            />
-            <span>잼박스 변경</span>
-          </LinkEtcButtonBox> */}
           <LinkEtcButtonBox>
             <LinkEtcButton
               src="/images/icons/link-trash-icon.svg"
