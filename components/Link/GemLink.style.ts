@@ -3,8 +3,9 @@ import { size } from 'styles/variable';
 
 export const LinkContainer = styled.div`
   position: relative;
-  max-width: 280px;
+  /* max-width: 280px; */
   max-height: 320px;
+  width: 18rem;
 
   background: #ffffff;
   overflow: hidden;
@@ -56,8 +57,10 @@ export const LinkDetailBox = styled.div<{ isEtcCon: boolean }>`
   display: ${(props) => props.isEtcCon && 'none'};
 
   @media screen and (max-width: ${size.mobile}) {
+    display: ${(props) => (props.isEtcCon ? 'none' : 'flex')};
+    flex-direction: column;
+    justify-content: space-between;
     height: 60%;
-
     padding: 16px 12px;
   }
 `;
@@ -117,19 +120,30 @@ export const LinkDetailDescription = styled.div`
   a {
     color: #3c3c3f;
     text-decoration: none;
+
+    @media screen and (max-width: ${size.tabletS}) {
+      margin-bottom: 18px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
   }
   a:visited {
     color: #3c3c3f;
   }
 
   @media screen and (max-width: ${size.tabletS}) {
-    height: 60%;
+    height: 50%;
   }
 
   @media screen and (max-width: ${size.mobile}) {
     display: none;
   }
 `;
+
 export const LinkDetailSetting = styled.div<{ gemGrewItem: boolean }>`
   display: flex;
   justify-content: space-between;
@@ -200,7 +214,6 @@ export const LinkEtcBox = styled.div`
   /* top: -5px; */
   display: flex;
   justify-content: space-between;
-  padding: 60px 23px;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0px -4px 10px rgba(196, 196, 196, 0.15);
@@ -208,9 +221,22 @@ export const LinkEtcBox = styled.div`
   div {
     white-space: nowrap;
   }
+
+  @media screen and (max-width: ${size.tabletS}) {
+    /* padding: 0; */
+    align-items: center;
+  }
+
+  .etc-box {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+  }
 `;
 
 export const LinkEtcButtonBox = styled.div`
+  width: 22%;
   display: flex;
   /* width: 80px; */
   flex-direction: column;

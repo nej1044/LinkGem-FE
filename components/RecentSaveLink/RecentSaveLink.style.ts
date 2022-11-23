@@ -10,6 +10,10 @@ export const RecentSaveLinkContainer = styled.section`
   @media screen and (min-width: ${size.desktop}) {
     width: 100%;
   }
+
+  @media screen and (max-width: ${size.tabletS}) {
+    padding-top: 0px;
+  }
 `;
 
 export const RecentSaveLinkTitleOption = styled.div`
@@ -69,6 +73,8 @@ export const RecentSaveLinkOption = styled.div`
   }
 
   @media screen and (max-width: ${size.tabletS}) {
+    width: 100%;
+
     grid-template-columns: repeat(auto-fill, minmax(48%, auto));
     row-gap: 20px;
   }

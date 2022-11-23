@@ -36,8 +36,8 @@ export const Background = styled.div<{ visible: boolean }>`
 `;
 
 export const ModalContainer = styled.div<{ visible: boolean }>`
-  width: 420px;
-  height: 340px;
+  width: 550px;
+  height: 420px;
   position: fixed;
   top: 50%;
   left: 50%;

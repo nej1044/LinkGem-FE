@@ -225,13 +225,7 @@ function Header() {
               </LinkSaveButton>
               <AlarmBox>
                 <AlarmImage onClick={handleAlarmModal}>
-                  <Image
-                    priority
-                    src="/images/icons/alarm-icon.svg"
-                    alt="linkgem-logo"
-                    width={30}
-                    height={30}
-                  />
+                  <img src="/images/icons/alarm-icon.svg" alt="linkgem-logo" />
                 </AlarmImage>
                 {isAlarmModal && (
                   <>

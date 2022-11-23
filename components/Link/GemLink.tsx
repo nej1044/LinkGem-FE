@@ -267,56 +267,39 @@ function GemLink({
       </LinkDetailBox>
       {isEtcCon && (
         <LinkEtcBox>
-          {/* <LinkEtcButton
-              src="/images/icons/link-memo-icon.svg"
-              alt="memo-img"
+          <div className="etc-box">
+            <MemoIcon
+              el={{ memo, id }}
+              refetch={getLink}
+              open={memoOpen}
+              setOpen={setMemoOpen}
+              onClose={setClose}
             />
-            <span>메모</span> */}
-          <MemoIcon
-            el={{ memo, id }}
-            refetch={getLink}
-            open={memoOpen}
-            setOpen={setMemoOpen}
-            onClose={setClose}
-          />
-          {/* <LinkEtcButtonBox>
-            <LinkEtcButton
-              src="/images/icons/link-gemboxplus-icon.svg"
-              alt="memo-img"
+            <AddIcon
+              el={{ id, title }}
+              refetch={getLink}
+              open={addOpen}
+              setOpen={setAddOpen}
+              onClose={setClose}
             />
-            <span>잼박스 추가</span>
-          </LinkEtcButtonBox> */}
-          <AddIcon
-            el={{ id, title }}
-            refetch={getLink}
-            open={addOpen}
-            setOpen={setAddOpen}
-            onClose={setClose}
-          />
-          <MoreItem onClick={() => setIsEdit(true)}>
-            <ChangeIcon />
-            잼박스변경
-          </MoreItem>
-          {/* <LinkEtcButtonBox>
-            <LinkEtcButton
-              src="/images/icons/link-gemboxchange-icon.svg"
+            <MoreItem onClick={() => setIsEdit(true)}>
+              <ChangeIcon />
+              잼박스변경
+            </MoreItem>
+            <LinkEtcButtonBox>
+              <LinkEtcButton
+                src="/images/icons/link-trash-icon.svg"
+                alt="memo-img"
+                onClick={handleLinkDelete}
+              />
+              <span>삭제</span>
+            </LinkEtcButtonBox>
+            <LinkEtcXButton
+              src="/images/icons/link-x.svg"
               alt="memo-img"
+              onClick={() => setIsEtcCon(false)}
             />
-            <span>잼박스 변경</span>
-          </LinkEtcButtonBox> */}
-          <LinkEtcButtonBox>
-            <LinkEtcButton
-              src="/images/icons/link-trash-icon.svg"
-              alt="memo-img"
-              onClick={handleLinkDelete}
-            />
-            <span>삭제</span>
-          </LinkEtcButtonBox>
-          <LinkEtcXButton
-            src="/images/icons/link-x.svg"
-            alt="memo-img"
-            onClick={() => setIsEtcCon(false)}
-          />
+          </div>
         </LinkEtcBox>
       )}
       {isMemoView && (

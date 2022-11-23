@@ -115,12 +115,19 @@ const HomeContainer = styled.div`
   }
 
   @media screen and (max-width: ${size.tabletL}) {
+    padding-left: 24px;
+    padding-right: 24px;
     max-width: 100%;
     width: 100%;
   }
 
-  @media screen and (max-width: 760px) {
-    padding-top: 0px;
+  @media screen and (max-width: ${size.tabletS}) {
+    padding-top: 20px;
     width: auto;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 `;

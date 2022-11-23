@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 export const LinkSaveContainer = styled.section`
   width: 100%;
@@ -6,7 +7,7 @@ export const LinkSaveContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: ${size.tabletS}) {
     display: none !important;
   }
 
