@@ -104,6 +104,7 @@ function Home() {
 export default Home;
 
 const HomeContainer = styled.div`
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 80px;
@@ -123,7 +124,6 @@ const HomeContainer = styled.div`
 
   @media screen and (max-width: ${size.tabletS}) {
     padding-top: 20px;
-    width: auto;
   }
 
   @media screen and (max-width: ${size.mobile}) {

@@ -13,9 +13,9 @@ export const LinkContainer = styled.div`
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
   border-radius: 16px;
   transition: transform 0.35s;
-  &:hover {
+  /* &:hover {
     transform: translateY(-10px);
-  }
+  } */
 
   @media screen and (max-width: ${size.tabletL}) {
     max-width: 100%;
@@ -23,12 +23,13 @@ export const LinkContainer = styled.div`
   }
 
   @media screen and (max-width: ${size.tabletS}) {
-    max-height: 100%;
+    max-height: 420px;
+    height: 420px;
   }
 
   @media screen and (max-width: ${size.mobile}) {
     width: 100%;
-    max-height: 280px;
+    height: 160px;
   }
 `;
 
@@ -38,6 +39,10 @@ export const ImageBox = styled.div<{ isEtcCon: boolean }>`
   height: 50%;
   overflow: hidden;
 
+  a {
+    height: 100%;
+    display: block;
+  }
   img {
     filter: ${(props) => props.isEtcCon && 'brightness(60%)'};
     height: 100%;
@@ -45,6 +50,8 @@ export const ImageBox = styled.div<{ isEtcCon: boolean }>`
   }
 
   @media screen and (max-width: ${size.mobile}) {
+    /* width: 200px;
+    height: 100px; */
     height: 40%;
   }
 `;
@@ -85,6 +92,7 @@ export const LinkDetailTitle = styled.div`
 
   color: #1a1b1d;
   a {
+    width: 100px;
     color: #1a1b1d;
     text-decoration: none;
   }
@@ -161,6 +169,9 @@ export const LinkDetailSetting = styled.div<{ gemGrewItem: boolean }>`
 
     svg {
       cursor: pointer;
+      @media screen and (max-width: ${size.mobile}) {
+        width: 14px;
+      }
     }
   }
 
@@ -169,7 +180,6 @@ export const LinkDetailSetting = styled.div<{ gemGrewItem: boolean }>`
     gap: 8px;
     align-items: flex-start;
     justify-content: start;
-    margin-top: 12px;
   }
 `;
 export const LinkDetailSettingDate = styled.div`
@@ -184,7 +194,12 @@ export const LinkDetailSettingDate = styled.div`
   /* gray/gray3 */
 
   color: #3c3c3f;
+
+  @media screen and (max-width: ${size.mobile}) {
+    font-size: 12px;
+  }
 `;
+
 export const LinkDetailSettingOption = styled.div`
   width: 80px;
   display: flex;
@@ -225,6 +240,10 @@ export const LinkEtcBox = styled.div`
   @media screen and (max-width: ${size.tabletS}) {
     /* padding: 0; */
     align-items: center;
+  }
+
+  @media screen and (max-width: ${size.tabletS}) {
+    height: 60%;
   }
 
   .etc-box {
@@ -274,6 +293,11 @@ export const LinkEtcXButton = styled.img`
   &:hover {
     cursor: pointer;
   }
+
+  @media screen and (max-width: ${size.mobile}) {
+    top: 8px;
+    right: 10px;
+  }
 `;
 
 export const GemCrewLink = styled.div`
@@ -287,6 +311,13 @@ export const GemCrewLink = styled.div`
   line-height: 140%;
   letter-spacing: -0.02em;
   color: #1a1b1d;
+
+  @media screen and (max-width: ${size.mobile}) {
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
 
   p {
     white-space: nowrap;

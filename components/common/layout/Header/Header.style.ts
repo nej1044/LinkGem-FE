@@ -43,11 +43,9 @@ export const HeaderBox = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-
+  padding: 0px 24px;
   @media screen and (max-width: ${size.desktop}) {
     max-width: 100%;
-    width: 100%;
-    padding: 0px 24px;
   }
 `;
 

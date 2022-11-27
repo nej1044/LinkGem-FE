@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 interface IErrorMessageProps {
   isErrorNickName: boolean;
@@ -11,11 +12,9 @@ interface ISettingButton {
 }
 
 export const SettingContainer = styled.main`
-  width: 70vw;
+  width: 100%;
   background-color: #faf5ff;
-  padding-top: 100px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-top: 64px;
   padding-bottom: 160px;
   font-style: normal;
   font-weight: 400;
@@ -24,10 +23,17 @@ export const SettingContainer = styled.main`
   /* or 22px */
 
   letter-spacing: -0.02em;
+
+  padding-left: 24px;
+  padding-right: 24px;
+  @media screen and (max-width: ${size.mobile}) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 export const SettingInfoContainer = styled.main`
-  width: 900px;
+  width: 100%;
 `;
 
 export const SettingTitle = styled.section`
@@ -60,11 +66,11 @@ export const SettingTitle = styled.section`
 `;
 
 export const SettingBasicInfo = styled.section`
-  width: 900px;
+  position: relative;
+
+  width: 100%;
   margin-top: 32px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  padding-left: 40px;
+  padding: 50px 40px;
   display: flex;
   flex-direction: column;
   background: #ffffff;
@@ -85,43 +91,37 @@ export const SettingBasicInfo = styled.section`
   hr {
     margin: 16px 0 0 0;
     border: 0.5px solid #cecece;
-    width: 90%;
+    width: 100%;
     background-color: #cecece;
   }
 `;
 
 export const SettingLineBox = styled.div`
-  position: relative;
   display: flex;
   margin-top: 30px;
   align-items: center;
   gap: 12px;
+
+  @media screen and (max-width: ${size.mobile}) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const SettingCategory = styled.div`
-  width: 150px;
-`;
+  width: 20%;
 
-export const SettingInfo = styled.input`
-  width: 520px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  text-indent: 12px;
-  background-color: #ffffff;
-  /* gray/gray2 */
-
-  border: 1px solid #0f0223;
-  border-radius: 8px;
-
-  font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  /* or 22px */
+  font-size: 18px;
+  line-height: 23px;
+  white-space: nowrap;
 
-  letter-spacing: -0.02em;
+  @media screen and (max-width: ${size.tabletS}) {
+    font-size: 16px;
+    line-height: 20px;
+  }
 `;
+
 export const SettingNinkName = styled.input<IErrorMessageProps>`
   width: 520px;
   height: 56px;
@@ -139,16 +139,22 @@ export const SettingNinkName = styled.input<IErrorMessageProps>`
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  /* or 22px */
-
   letter-spacing: -0.02em;
+
+  @media screen and (max-width: ${size.desktop}) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
   &:focus {
     outline: ${(props) => (props.isErrorNickName ? 'red' : 'black')};
   }
 `;
 
 export const SettingAuthEmail = styled.input<{ isDisabled: boolean }>`
-  width: 520px;
+  width: 100%;
   height: 56px;
   display: flex;
   align-items: center;
@@ -186,9 +192,15 @@ export const SettingDisabledInfo = styled.div<{ type: string }>`
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  /* or 22px */
-
   letter-spacing: -0.02em;
+
+  @media screen and (max-width: ${size.desktop}) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
   img {
     width: 24px;
     height: 24px;
@@ -247,14 +259,16 @@ export const SettingImageHover = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  position: relative;
-  top: 10px;
-  left: 150px;
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  width: 50%;
   color: #8e8e8e;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
+  white-space: nowrap;
   /* identical to box height */
 
   letter-spacing: -0.02em;
@@ -262,7 +276,7 @@ export const InfoBox = styled.div`
 
 export const SettingButtonContontainer = styled.div`
   display: flex;
-  width: 900px;
+  width: 100%;
   justify-content: center;
   gap: 15px;
   margin-top: 80px;
@@ -286,6 +300,11 @@ export const SettingButton = styled.button<ISettingButton>`
   text-align: center;
   letter-spacing: -0.02em;
   opacity: 0.9;
+
+  @media screen and (max-width: ${size.tabletS}) {
+    font-size: 16px;
+    line-height: 20px;
+  }
   &:hover {
     cursor: pointer;
     opacity: 1;
@@ -294,7 +313,7 @@ export const SettingButton = styled.button<ISettingButton>`
 
 export const EtcContainer = styled.div`
   display: flex;
-  width: 900px;
+  width: 100%;
   justify-content: center;
   gap: 20px;
   margin-top: 64px;
@@ -366,6 +385,11 @@ export const LinkSaveButton = styled.button<{ bgColor: string }>`
   line-height: 23px;
   color: white;
   opacity: 0.9;
+
+  @media screen and (max-width: ${size.tabletS}) {
+    font-size: 16px;
+    line-height: 20px;
+  }
   &:hover {
     cursor: pointer;
     opacity: 1;
@@ -379,10 +403,22 @@ export const ButtonBox = styled.div`
 `;
 
 export const EmailAuthBox = styled.div`
+  display: flex;
   position: relative;
+  width: 80%;
+  gap: 12px;
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
   .imageBox {
     position: absolute;
-    top: 20px;
-    right: 18px;
+    top: 15px;
+    right: 15px;
+  }
+
+  .email-box {
+    position: relative;
+    width: 100%;
   }
 `;
