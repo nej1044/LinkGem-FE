@@ -10,11 +10,7 @@ export const BottomBar = () => {
   //   const [isBtnVisible, setIsBtnVisible] = useState(false);
   //   const [lastScrollTop, setLastScrollTop] = useState(0);
 
-  const hasScolledY = () => {
-    // if (typeof window !== undefined) {
-    //   console.log(window.scrollY);
-    // }
-  };
+  const hasScolledY = () => {};
 
   useEffect(() => {
     hasScolledY();
