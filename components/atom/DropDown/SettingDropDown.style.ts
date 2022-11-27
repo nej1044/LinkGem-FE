@@ -1,9 +1,21 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
-export const DropDownContainer = styled.div``;
+export const DropDownContainer = styled.div`
+  position: relative;
+  width: 520px;
+
+  @media screen and (max-width: ${size.desktop}) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
+`;
 
 export const DropDownHeader = styled.div`
-  width: 520px;
+  width: 100%;
   height: 56px;
   background: white;
   color: black;
@@ -21,7 +33,7 @@ export const DropDownHeader = styled.div`
 `;
 
 export const DropDownListContainer = styled.div`
-  width: 520px;
+  width: 100%;
   position: absolute;
   margin-top: 12px;
   overflow: hidden;
@@ -29,6 +41,7 @@ export const DropDownListContainer = styled.div`
 `;
 
 export const DropDownList = styled.ul`
+  width: 100%;
   height: 250px;
   padding-top: 12px;
   background: white;
@@ -47,7 +60,6 @@ export const DropDownList = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  height: 22px;
   padding-top: 12px;
   padding-bottom: 12px;
   list-style: none;
@@ -79,14 +91,16 @@ export const InputText = styled.input`
 `;
 
 export const ImageButton = styled.img`
+  position: absolute;
+  right: 15px;
   width: 15px;
   height: 7.5px;
-  padding-right: 30px;
   &:hover {
     cursor: pointer;
   }
 `;
 export const DropDownHeaderText = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   font-size: 20px;

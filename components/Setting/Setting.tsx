@@ -13,7 +13,6 @@ import {
   SettingImage,
   SettingImageBox,
   SettingImageHover,
-  // SettingInfo,
   SettingInfoContainer,
   SettingLineBox,
   SettingTitle,
@@ -369,56 +368,59 @@ export default function Setting() {
               <SettingCategory>이메일</SettingCategory>
 
               <EmailAuthBox>
-                <SettingAuthEmail
-                  type="text"
-                  value={authEmail || ''}
-                  isDisabled={isClickedEmailBtn}
-                  id="authEmail"
-                  onChange={handleInputChange}
-                  placeholder="이메일 인증을 통해 다양한 혜택을 받아보세요."
-                  disabled={isClickedEmailBtn}
-                />
-                {authEmail
-                  ? isClickedEmailBtn && (
-                      <div className="imageBox">
-                        <img
-                          src="images/icons/email-auth-success-icon.svg"
-                          alt="email-auth-success"
-                        />
-                      </div>
-                    )
-                  : authEmailMessage.isMessage && (
-                      <div className="imageBox">
-                        <img
-                          src="images/icons/email-auth-false-icon.svg"
-                          alt="email-auth-false"
-                        />
-                      </div>
-                    )}
+                <div className="email-box">
+                  <SettingAuthEmail
+                    type="text"
+                    value={authEmail || ''}
+                    isDisabled={isClickedEmailBtn}
+                    id="authEmail"
+                    onChange={handleInputChange}
+                    placeholder="이메일 인증을 통해 다양한 혜택을 받아보세요."
+                    disabled={isClickedEmailBtn}
+                  />
+                  {authEmail
+                    ? isClickedEmailBtn && (
+                        <div className="imageBox">
+                          <img
+                            src="images/icons/email-auth-success-icon.svg"
+                            alt="email-auth-success"
+                          />
+                        </div>
+                      )
+                    : authEmailMessage.isMessage && (
+                        <div className="imageBox">
+                          <img
+                            src="images/icons/email-auth-false-icon.svg"
+                            alt="email-auth-false"
+                          />
+                        </div>
+                      )}
+                </div>
+
+                {!isClickedEmailBtn ? (
+                  <SettingButton
+                    bgColor="#5200FF"
+                    color="#ffffff"
+                    onClick={() => {
+                      handleAuthEmail();
+                    }}
+                    width="120px"
+                  >
+                    {user.mailEmail ? '재인증' : '인증'}
+                  </SettingButton>
+                ) : (
+                  <SettingButton
+                    bgColor="#3C3C3F"
+                    color="#ffffff"
+                    onClick={() => {
+                      setIsClickedEmailBtn((prev) => !prev);
+                    }}
+                    width="172px"
+                  >
+                    이메일 주소 변경
+                  </SettingButton>
+                )}
               </EmailAuthBox>
-              {!isClickedEmailBtn ? (
-                <SettingButton
-                  bgColor="#5200FF"
-                  color="#ffffff"
-                  onClick={() => {
-                    handleAuthEmail();
-                  }}
-                  width="120px"
-                >
-                  {user.mailEmail ? '재인증' : '인증'}
-                </SettingButton>
-              ) : (
-                <SettingButton
-                  bgColor="#3C3C3F"
-                  color="#ffffff"
-                  onClick={() => {
-                    setIsClickedEmailBtn((prev) => !prev);
-                  }}
-                  width="172px"
-                >
-                  이메일 주소 변경
-                </SettingButton>
-              )}
 
               {authEmailMessage.isMessage && (
                 <ErrorMessage isErrorNickName={authEmailMessage.isMessage}>

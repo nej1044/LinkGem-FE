@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 interface IHeaderContainer {
   login: boolean;
@@ -26,27 +27,25 @@ export const HeaderContainer = styled.header<IHeaderContainer>`
   background-color: ${({ login }) => (login ? '#29115B' : '#0f0223')};
   width: 100%;
   height: 11vh;
-  max-height: 84px;
+  height: 84px;
   z-index: 100;
   box-shadow: ${({ scrollPosition }) =>
     scrollPosition > 0 && 'rgba(0, 0, 0, 0.15) 0px 4px 10px'};
   display: flex;
   justify-content: center;
+  @media screen and (max-width: ${size.tabletS}) {
+    height: 64px;
+  }
 `;
 export const HeaderBox = styled.div`
-  max-width: 1440px;
+  max-width: 1200px;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 1700px) {
-    width: 1080px;
-  }
-  @media screen and (max-width: 1180px) {
-    width: 800px;
-  }
-  @media screen and (max-width: 760px) {
-    width: 400px;
+  padding: 0px 24px;
+  @media screen and (max-width: ${size.desktop}) {
+    max-width: 100%;
   }
 `;
 
@@ -56,10 +55,6 @@ export const LogoContainer = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
   color: white;
-  padding-left: 50px;
-  @media screen and (max-width: 1700px) {
-    padding-left: 20px;
-  }
 
   span {
     color: #41fb6a;
@@ -105,10 +100,6 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   color: white;
-  padding-right: 50px;
-  @media screen and (max-width: 760px) {
-    padding-right: 0px;
-  }
 `;
 
 export const JoinButton = styled.button`
@@ -136,7 +127,7 @@ export const JoinButton = styled.button`
 export const LogoImage = styled.img`
   width: 165px;
   height: 27px;
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: ${size.tabletS}) {
     width: 103px;
     height: 16px;
   }
@@ -182,7 +173,7 @@ export const LinkSaveButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-  @media screen and (max-width: 1180px) {
+  @media screen and (max-width: ${size.tabletS}) {
     display: none;
   }
 `;
@@ -193,7 +184,7 @@ export const AlarmImage = styled.div`
   align-items: center;
   justify-content: center;
   width: 26px;
-  height: 26px;
+  height: 28px;
   margin-left: 26px;
   margin-right: 26px;
   display: flex;
@@ -201,9 +192,16 @@ export const AlarmImage = styled.div`
   &:hover {
     cursor: pointer;
   }
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: ${size.tabletS}) {
     width: 19px;
     height: 21px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -294,10 +292,11 @@ export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
       cursor: pointer;
     }
   }
-  @media screen and (max-width: 1700px) {
-    width: 240px;
+
+  @media screen and (max-width: ${size.tabletL}) {
+    width: 60%;
   }
-  @media screen and (max-width: 1180px) {
+  @media screen and (max-width: ${size.tabletS}) {
     display: none;
   }
 `;
@@ -324,7 +323,7 @@ export const LinkText = styled.input`
 
 export const SettingBox = styled.div`
   position: relative;
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: ${size.tabletS}) {
     display: none;
   }
 `;
@@ -336,8 +335,8 @@ export const SettingModal = styled.div<ISettingModal>`
   gap: 5px;
   top: 55px;
   right: 5px;
-  width: 180px;
-  height: 95px;
+  width: 212px;
+  height: 113px;
   padding: 13px 16px 0px 16px;
 
   background: #ffffff;

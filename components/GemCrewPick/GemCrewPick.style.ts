@@ -1,32 +1,26 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 export const GemCrewPickContainer = styled.section`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-top: 80px;
   padding-bottom: 160px;
-  section {
-    margin-bottom: 24px;
-  }
 
-  @media screen and (max-width: 1700px) {
-    width: 1080px;
-  }
-  @media screen and (max-width: 1180px) {
-    width: 700px;
-  }
-  @media screen and (max-width: 760px) {
+  @media screen and (min-width: ${size.desktop}) {
     width: 100%;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${size.mobile}) {
     padding-bottom: 96px;
   }
 `;
 
 export const GemCrewPickTitle = styled.div`
+  width: 100%;
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -34,24 +28,17 @@ export const GemCrewPickTitle = styled.div`
   /* identical to box height, or 34px */
 
   letter-spacing: -0.02em;
-  width: 1350px;
   /* text/black */
 
   color: #1a1b1d;
 
-  @media screen and (max-width: 1700px) {
-    width: 1000px;
-  }
-  @media screen and (max-width: 1180px) {
-    width: 650px !important;
-  }
-  @media screen and (max-width: 760px) {
-    width: 300px !important;
+  @media screen and (max-width: ${size.mobile}) {
     font-size: 18px;
   }
 `;
+
 export const GemCrewPickDescription = styled.p`
-  width: 1350px;
+  width: 100%;
   margin-top: 8px;
   margin-bottom: 24px;
   font-style: normal;
@@ -66,14 +53,6 @@ export const GemCrewPickDescription = styled.p`
 
   color: #8e8e8e;
   @media screen and (max-width: 760px) {
-  }
-  @media screen and (max-width: 1700px) {
-    width: 1000px;
-  }
-  @media screen and (max-width: 1180px) {
-    width: 650px !important;
-  }
-  @media screen and (max-width: 760px) {
     width: 300px !important;
     font-size: 18px;
     font-size: 14px;
@@ -81,27 +60,28 @@ export const GemCrewPickDescription = styled.p`
 `;
 
 export const GemCrewPickOption = styled.div`
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(23%, auto));
+
   gap: 24px;
 
-  section {
-    margin-bottom: 24px;
+  @media screen and (max-width: ${size.tabletL}) {
+    gap: 16px;
   }
-  @media screen and (max-width: 1700px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media screen and (max-width: 1180px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media screen and (max-width: 760px) {
-    grid-template-columns: repeat(1, 1fr);
 
-    padding: 0px;
+  @media screen and (max-width: ${size.tabletS}) {
+    grid-template-columns: repeat(auto-fill, minmax(48%, auto));
+    row-gap: 20px;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    column-gap: 8px;
   }
 `;
 
 export const GemCrewPickBox = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

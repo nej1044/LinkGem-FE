@@ -29,7 +29,7 @@ const MemoIcon = (props: IMemoIconProps) => {
       <S.MoreItem onClick={() => props.setOpen(true)}>
         <S.MemoIcon
           src="/icons/memoIcon.jpg"
-          style={{ width: '34px', height: '34px', padding: 0 }}
+          style={{ width: '32px', height: '32px', padding: 0 }}
         />{' '}
         메모
       </S.MoreItem>

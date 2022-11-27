@@ -5,12 +5,23 @@ import { IPropsGemboxStyles } from './gembox.types';
 import AddOutlined from '../../public/icons/AddOutlined.svg';
 import ChangeOutlined from '../../public/icons/ChangeOutlined.svg';
 import { Select } from 'antd';
+import { size } from 'styles/variable';
 
 export const Wrapper = styled.div`
   box-sizing: border-box;
-  width: 1220px;
-  padding: 80px 0;
+  width: 100%;
+  padding: 64px 0;
   min-height: 76vh;
+
+  padding-right: 24px;
+
+  @media screen and (max-width: ${size.tabletS}) {
+    padding-left: 24px;
+  }
+  @media screen and (max-width: ${size.mobile}) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 export const GemboxSection = styled.div`
@@ -31,17 +42,19 @@ export const GexboxSectionTitle = styled.h1`
 `;
 
 export const LinkBoxWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(31%, auto));
   width: 100%;
+  gap: 24px;
+  @media screen and (max-width: ${size.tabletS}) {
+    grid-template-columns: repeat(auto-fill, minmax(43%, auto));
+  }
 `;
 
 export const LinkBox = styled.article`
   position: relative;
-  width: 280px;
+  /* width: 280px; */
   height: 320px;
-  margin-right: 24px;
   margin-top: 32px;
   border-radius: 16px;
   background-color: ${(props: IPropsGemboxStyles) =>
@@ -92,6 +105,12 @@ export const MoreItem = styled.div`
   font-size: 12px;
   letter-spacing: -0.02em;
   color: #1a1b1d;
+
+  height: 50%;
+
+  @media screen and (max-width: ${size.mobile}) {
+    font-size: 10px;
+  }
 `;
 
 export const MemoIcon = styled.img`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 interface IPropsGemboxStyles {
   isChecked?: boolean;
@@ -7,10 +8,17 @@ interface IPropsGemboxStyles {
 }
 
 export const Sidebar = styled.ul`
-  width: 160px;
-  min-width: 160px;
-  margin-top: 180px;
-  margin-right: 80px;
+  min-width: 184px;
+  margin-top: 64px;
+  margin-right: 72px;
+  padding-left: 24px;
+  @media screen and (max-width: ${size.mobile}) {
+    padding-left: 20px;
+  }
+
+  @media screen and (max-width: ${size.tabletS}) {
+    display: none;
+  }
 `;
 
 export const ItemWrapper = styled.div`

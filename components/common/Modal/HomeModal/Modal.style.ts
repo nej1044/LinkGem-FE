@@ -31,7 +31,7 @@ export const Background = styled.div<{ visible: boolean }>`
   bottom: 0;
   left: 0;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.3);
   ${(props) => modalSettings(props.visible)}
 `;
 

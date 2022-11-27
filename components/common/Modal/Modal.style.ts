@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
+import { size } from 'styles/variable';
 
 const fadeIn = keyframes`
   0% {
@@ -31,13 +32,13 @@ export const Background = styled.div<{ visible: boolean }>`
   bottom: 0;
   left: 0;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.3);
   ${(props) => modalSettings(props.visible)}
 `;
 
 export const ModalContainer = styled.div<{ visible: boolean }>`
-  width: 420px;
-  height: 340px;
+  width: 550px;
+  height: 420px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -51,7 +52,7 @@ export const ModalContainer = styled.div<{ visible: boolean }>`
   -moz-transition: opacity 0.1s 0, visibility 0 0.1s;
   transition: opacity 0.1s 0, visibility 0 0.1s;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: ${size.mobile}) {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -62,14 +63,14 @@ export const Title = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: ${size.mobile}) {
     margin-top: 34px;
     margin-right: 34px;
   }
 `;
 
 export const Content = styled.div`
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: ${size.mobile}) {
     margin-top: 106px;
   }
 `;
