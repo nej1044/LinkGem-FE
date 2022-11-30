@@ -6,6 +6,10 @@ import { useRouter } from 'next/router';
 import { ReactChild } from 'react';
 import { size } from 'styles/variable';
 import { BottomBar } from 'components/common/bottomBar';
+import MobileModal from 'components/common/Modal/MobileModal/MobileModal';
+import { useRecoilState } from 'recoil';
+import { isMmVisible } from 'store/store';
+import LinkSave from 'components/mobile/linksave';
 
 const HIDE_SIDEBAR = ['/'];
 
@@ -48,8 +52,8 @@ const Layout = (props: IPropsLayout) => {
   const router = useRouter();
   const isHideSidebar = HIDE_SIDEBAR.includes(router.asPath);
   const pathname = router.pathname.split('/')[1];
-  console.log('pathname');
-  console.log(pathname);
+  const [isMdVisible, setIsMdVisible] = useRecoilState(isMmVisible);
+
   return (
     <Wrapper>
       <Header />
@@ -61,6 +65,16 @@ const Layout = (props: IPropsLayout) => {
       </BodyWrapper>
       <BottomBar />
       <Footer />
+      {isMdVisible && (
+        <MobileModal
+          visible={isMdVisible}
+          handleModal={() => setIsMdVisible((prev) => !prev)}
+          setIsOpenModal={setIsMdVisible}
+          isCloseButton={false}
+        >
+          <LinkSave />
+        </MobileModal>
+      )}
     </Wrapper>
   );
 };

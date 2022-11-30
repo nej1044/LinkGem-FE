@@ -1,17 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { isMmVisible } from 'store/store';
 import styled from 'styled-components';
 import { size } from 'styles/variable';
 import useLogin from 'utils/useLogin';
 
 export const BottomBar = () => {
   const { pathname } = useRouter();
-  //   const [isBtnVisible, setIsBtnVisible] = useState(false);
-  //   const [lastScrollTop, setLastScrollTop] = useState(0);
-
+  const setIsMmVisible = useSetRecoilState(isMmVisible);
   const hasScolledY = () => {};
-
   useEffect(() => {
     hasScolledY();
   }, []);
@@ -21,7 +20,13 @@ export const BottomBar = () => {
       {useLogin() ? (
         <BotoomBarContainer>
           <div className="bottom-link">
-            <div className="link-add">
+            <div
+              className="link-add"
+              onClick={() => {
+                console.log('여기여기');
+                setIsMmVisible(true);
+              }}
+            >
               <svg
                 width="21"
                 height="21"
@@ -165,6 +170,7 @@ const BotoomBarContainer = styled.div`
     bottom: 80px;
     right: 24px;
     z-index: 100;
+
     .link-add {
       display: flex;
       align-items: center;

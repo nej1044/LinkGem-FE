@@ -72,6 +72,10 @@ const linkSaveState = atom({
     isVisible: false,
   },
 });
+export const isMmVisible = atom({
+  key: 'isMmVisible',
+  default: false,
+});
 
 export {
   loginState,
