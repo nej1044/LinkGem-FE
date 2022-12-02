@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 export const NaverLoginButton = styled.button`
   width: 240px;
@@ -12,7 +13,7 @@ export const NaverLoginButton = styled.button`
   background-color: #48484b;
   color: white;
   border: 0px;
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: ${size.mobile}) {
     width: 312px;
   }
   p {
