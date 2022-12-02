@@ -1,12 +1,18 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 export const DropDownContainer = styled.div`
   padding-top: 20px;
   padding-bottom: 40px;
   margin: 0 auto;
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
 `;
 
 export const DropDownHeader = styled.div`
+  position: relative;
   width: 400px;
   height: 56px;
   background: white;
@@ -17,6 +23,10 @@ export const DropDownHeader = styled.div`
   justify-content: space-between;
   /* transition: 0.5ms; */
   border-radius: 8px;
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
   &:hover {
     transition: 0.5s;
     cursor: pointer;
@@ -28,6 +38,10 @@ export const DropDownListContainer = styled.div`
   position: absolute;
   margin-top: 12px;
   overflow: hidden;
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
 `;
 
 export const DropDownList = styled.ul`
@@ -45,13 +59,16 @@ export const DropDownList = styled.ul`
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
 export const ListItem = styled.li`
-  height: 22px;
   padding-top: 12px;
   padding-bottom: 12px;
   list-style: none;
@@ -60,6 +77,10 @@ export const ListItem = styled.li`
   font-weight: 500;
   text-align: left;
   text-indent: 20px;
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
+  }
   &:hover {
     color: #5200ff;
     background-color: #f3edff;
@@ -83,9 +104,10 @@ export const InputText = styled.input`
 `;
 
 export const ImageButton = styled.img`
+  position: absolute;
+  right: 15px;
   width: 15px;
-  height: 7.5px;
-  padding-right: 30px;
+  height: 15px;
   &:hover {
     cursor: pointer;
   }

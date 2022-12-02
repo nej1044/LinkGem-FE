@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
-export const SocialJoinContainer = styled.section`
+export const SocialJoinContainer = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +24,7 @@ export const Title = styled.div`
     text-align: center;
     letter-spacing: -0.02em;
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: ${size.mobile}) {
       font-size: 24px;
     }
   }
@@ -34,6 +37,10 @@ export const Title = styled.div`
     white-space: nowrap;
     text-align: center;
     letter-spacing: -0.02em;
+
+    @media screen and (max-width: ${size.mobile}) {
+      white-space: normal;
+    }
   }
 `;
 
@@ -43,6 +50,7 @@ export const SocialContainer = styled.div`
 `;
 
 export const Info = styled.div`
+  width: 100%;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -52,7 +60,7 @@ export const Info = styled.div`
   text-align: center;
   letter-spacing: -0.02em;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: ${size.tabletS}) {
     font-size: 11px;
   }
 

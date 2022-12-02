@@ -62,11 +62,6 @@ export const ModalContainer = styled.div<{ visible: boolean }>`
 export const Title = styled.div`
   display: flex;
   justify-content: flex-end;
-
-  @media screen and (max-width: ${size.mobile}) {
-    margin-top: 34px;
-    margin-right: 34px;
-  }
 `;
 
 export const Content = styled.div`
