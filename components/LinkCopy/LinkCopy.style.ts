@@ -10,8 +10,8 @@ export const LinkCopyContainer = styled.div`
   z-index: 100;
 
   position: fixed;
-  width: 200px;
-  height: 24px;
+  width: 247px;
+  height: 56px;
   margin: 0 auto;
   left: 0;
   right: 0;

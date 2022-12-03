@@ -4,11 +4,11 @@ import { size } from 'styles/variable';
 export const LinkContainer = styled.div`
   position: relative;
   /* max-width: 280px; */
-  max-height: 320px;
+  /* max-height: 320px; */
   width: 18rem;
 
   background: #ffffff;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
   border-radius: 16px;
@@ -18,19 +18,17 @@ export const LinkContainer = styled.div`
   } */
 
   @media screen and (max-width: ${size.tabletL}) {
-    max-width: 100%;
     width: 100%;
   }
 
   @media screen and (max-width: ${size.tabletS}) {
-    max-height: 420px;
-    height: 420px;
+    /* max-height: 600px; */
   }
 
-  @media screen and (max-width: ${size.mobile}) {
+  /* @media screen and (max-width: ${size.mobile}) {
     width: 100%;
     height: 160px;
-  }
+  } */
 `;
 
 export const ImageBox = styled.div<{ isEtcCon: boolean }>`
@@ -47,6 +45,7 @@ export const ImageBox = styled.div<{ isEtcCon: boolean }>`
     filter: ${(props) => props.isEtcCon && 'brightness(60%)'};
     height: 100%;
     width: 100%;
+    object-fit: cover;
   }
 
   @media screen and (max-width: ${size.mobile}) {
@@ -92,6 +91,7 @@ export const LinkDetailTitle = styled.div`
 
   color: #1a1b1d;
   a {
+    white-space: nowrap;
     width: 100px;
     color: #1a1b1d;
     text-decoration: none;
@@ -102,6 +102,10 @@ export const LinkDetailTitle = styled.div`
 
   @media screen and (max-width: ${size.mobile}) {
     font-size: 14px;
+    overflow: visible;
+    a {
+      white-space: normal;
+    }
   }
 `;
 export const LinkDetailDescription = styled.div`
@@ -153,6 +157,12 @@ export const LinkDetailDescription = styled.div`
 `;
 
 export const LinkDetailSetting = styled.div<{ gemGrewItem: boolean }>`
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -242,7 +252,7 @@ export const LinkEtcBox = styled.div`
     align-items: center;
   }
 
-  @media screen and (max-width: ${size.tabletS}) {
+  @media screen and (max-width: ${size.mobile}) {
     height: 60%;
   }
 

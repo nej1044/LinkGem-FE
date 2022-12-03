@@ -2,15 +2,11 @@ import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import {
   Background,
   ModalContainer,
-  Title,
-  CloseButton,
-  ImageButton,
   LinkTextContainer,
   LinkText,
   LinkSaveButton,
   Content,
 } from './Modal.style';
-import Image from 'next/image';
 import Axios from 'utils/Axios';
 
 interface ModalProps {
@@ -82,20 +78,15 @@ export default function Modal({
     <>
       <Background visible={visible} onClick={() => setIsOpenModal(false)} />
       <ModalContainer visible={visible}>
-        <Title>
-          <CloseButton type="button" onClick={() => handleModal()}>
-            <ImageButton src="/icons/Home-X-black.svg" alt="close" />
-          </CloseButton>
-        </Title>
         <Content>
-          <h2>첫 링크 저장 최고! 😎</h2>
+          <h2>첫 링크를 저장해주세요.</h2>
           <LinkTextContainer>
-            <Image
+            {/* <Image
               src="/images/icons/plus-icon.svg"
               alt="plus-icon"
               width={15}
               height={16}
-            />
+            /> */}
             <LinkText
               placeholder="https://..."
               onChange={handleInputUrl}
@@ -103,9 +94,23 @@ export default function Modal({
               onKeyPress={handleKeyPress}
             />
           </LinkTextContainer>
-          <LinkSaveButton onClick={() => onClickLinkSaveButton()}>
-            링크 저장
-          </LinkSaveButton>
+          <div className="btn-group">
+            <LinkSaveButton
+              onClick={() => setIsOpenModal(false)}
+              bgColor="#FFFFFF"
+              color="#CECECE"
+              dif={'1'}
+            >
+              취소
+            </LinkSaveButton>
+            <LinkSaveButton
+              onClick={() => onClickLinkSaveButton()}
+              bgColor="#5200FF"
+              color="#ffffff"
+            >
+              저장
+            </LinkSaveButton>
+          </div>
         </Content>
       </ModalContainer>
     </>

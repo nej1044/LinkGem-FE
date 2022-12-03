@@ -50,7 +50,7 @@ interface GemLinkProps {
   createDate: string;
   isFavorites: boolean;
   id: number;
-  getLink: () => void;
+  getLink?: () => void;
   copyToClipboard: (url: string) => void;
   siteName?: string;
   gemGrewItem?: boolean | any;
@@ -168,6 +168,24 @@ function GemLink({
     }
   };
 
+  const handleLinkSave = async () => {
+    console.log('여기여기222');
+    try {
+      await Axios('/api/v1/links', {
+        method: 'post',
+        data: {
+          url,
+        },
+      });
+      console.log(getLink);
+      getLink();
+      console.log('123');
+      //   setBoxRefetch((prev) => !prev);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     handleGetGemBoxName();
   }, []);
@@ -247,6 +265,7 @@ function GemLink({
             ) : (
               <>
                 <svg
+                  onClick={() => handleLinkSave()}
                   width="18"
                   height="18"
                   viewBox="0 0 18 19"

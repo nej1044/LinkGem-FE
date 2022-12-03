@@ -92,8 +92,8 @@ export const LinkSaveSuccessBar = styled.div<LinkSaveSuccessBarProps>`
   gap: 24px;
   position: absolute;
   width: ${(props) =>
-    props.isSuccessLink ? '130px !important;' : '330px !important;'};
-  height: 24px !important;
+    props.isSuccessLink ? '197px !important;' : '354px !important;'};
+  height: 56px !important;
   /* sub/purple */
   background-color: ${(props) => (props.isSuccessLink ? '#F3EDFF' : '#FFF1F1')};
   border-radius: 16px;

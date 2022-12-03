@@ -36,16 +36,14 @@ export const Background = styled.div<{ visible: boolean }>`
 `;
 
 export const ModalContainer = styled.div<{ visible: boolean }>`
-  width: 400px;
-  height: 280px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #ffffff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 24px;
-  padding: 30px;
+  border-radius: 8px;
+  padding: 32px 40px;
   ${(props) => modalSettings(props.visible)}
   -webkit-transition: opacity 0.1s 0, visibility 0 0.1s;
   -moz-transition: opacity 0.1s 0, visibility 0 0.1s;
@@ -71,19 +69,20 @@ export const ImageButton = styled.img`
 
 export const LinkTextContainer = styled.div`
   width: 360px;
-  height: 20px;
+  height: 48px;
+  margin-top: 24px;
+  margin-bottom: 32px;
   display: flex;
   align-items: center;
-  border: 1px solid #000000;
+  border: 1px solid #616163;
   border-radius: 8px;
-  padding: 17px 20px 17px 20px;
+  padding: 14px 16px;
 `;
 
 export const LinkText = styled.input`
   width: 100%;
   height: 22px;
   top: 10px;
-  margin-left: 12px;
   border-style: none;
   font-style: normal;
   font-weight: 400;
@@ -97,44 +96,42 @@ export const LinkText = styled.input`
   }
 `;
 
-export const LinkSaveButton = styled.button`
-  width: 120px;
-  height: 56px;
+export const LinkSaveButton = styled.button<{
+  bgColor: string;
+  color: string;
+  dif?: string;
+}>`
+  width: 66px;
+  height: 34px;
   margin-left: 8px;
-  padding: 0px;
-  background-color: #5200ff;
-  border: 0px;
-  border-radius: 8px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 23px;
-  /* identical to box height */
+  background-color: ${(props) => props.bgColor};
+  color: ${(props) => props.color};
 
+  padding: 0px;
+  border: ${(props) => (props.dif === '1' ? '1px solid #CECECE' : 'none')};
+  border-radius: 4px;
+
+  font-style: normal;
+  font-weight: ${(props) => (props.dif === '1' ? '400' : '500')};
+  font-size: 14px;
+  line-height: 18px;
   text-align: center;
   letter-spacing: -0.02em;
-
-  /* text/white */
-
-  color: #ffffff;
-
   &:hover {
-    background: #29115b;
+    opacity: 0.9;
     cursor: pointer;
   }
 `;
 
 export const Content = styled.div`
   display: flex;
-  padding-top: 20px;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
 
   h2 {
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 140%;
     /* identical to box height, or 34px */
 

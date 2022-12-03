@@ -41,6 +41,7 @@ function Home() {
     }, 3000);
   };
   const getLink: () => void = async () => {
+    console.log('중요');
     try {
       const response = await Axios({
         url: '/api/v1/links',
@@ -87,7 +88,7 @@ function Home() {
         copyToClipboard={copyToClipboard}
         handleModal={handleModal}
       />
-      <GemCrewPick copyToClipboard={copyToClipboard} />
+      <GemCrewPick copyToClipboard={copyToClipboard} getLink={getLink} />
 
       {isCopy && <LinkCopy setIsCopy={setIsCopy} />}
       {isOpenModal && (

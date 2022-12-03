@@ -97,6 +97,7 @@ export const SettingBasicInfo = styled.section`
 `;
 
 export const SettingLineBox = styled.div`
+  position: relative;
   display: flex;
   margin-top: 30px;
   align-items: center;
@@ -340,23 +341,23 @@ export const EtcContainer = styled.div`
 export const ErrorMessage = styled.span<IErrorMessageProps>`
   /* display: ${(props) => (props.isErrorNickName ? 'block' : 'none')}; */
   position: absolute;
-  top: 65px;
-  left: 160px;
+  bottom: -25px;
+  font-weight: 400;
   font-size: 14px;
+  line-height: 140%;
   color: red;
 `;
 
 export const LinkTextContainer = styled.div`
-  width: 360px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 17px 20px 17px 20px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
   p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 17px 20px 17px 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
     white-space: nowrap;
   }
   /* or 24px */
@@ -372,19 +373,25 @@ export const LinkTextContainer = styled.div`
   }
 `;
 
-export const LinkSaveButton = styled.button<{ bgColor: string }>`
+export const LinkSaveButton = styled.button<{
+  bgColor: string;
+  color: string;
+  width: string;
+  height: string;
+  dif?: string;
+}>`
   margin-left: 8px;
   background-color: ${(props) => props.bgColor};
-  width: 140px;
-  height: 56px;
-  border: 0px;
-  border-radius: 8px;
+  border: ${(props) => (props.dif === '1' ? '1px solid #CECECE' : 'none')};
+  font-weight: ${(props) => (props.dif === '1' ? '400' : '500')};
+  color: ${(props) => props.color};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  border-radius: 4px;
   font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 23px;
-  color: white;
-  opacity: 0.9;
+  font-size: 14px;
+  line-height: 18px;
+  opacity: 1;
 
   @media screen and (max-width: ${size.tabletS}) {
     font-size: 16px;
@@ -392,12 +399,13 @@ export const LinkSaveButton = styled.button<{ bgColor: string }>`
   }
   &:hover {
     cursor: pointer;
-    opacity: 1;
+    opacity: 0.9;
   }
 `;
 
 export const ButtonBox = styled.div`
   display: flex;
+  flex-direction: row;
   gap: 8px;
   justify-content: center;
 `;

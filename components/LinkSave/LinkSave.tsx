@@ -108,7 +108,7 @@ function Link({ getLink, recentLink }: ILinkSaveProps) {
           ) : (
             <>
               <FailMessage>
-                링크 저장 실패. 링크를 다시 한번 확인해 주세요
+                링크 저장 실패. 다시 한번 시도해 주세요.
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <XIconImage onClick={onCloseMessage}>
                   <Image
