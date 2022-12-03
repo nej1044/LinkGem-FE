@@ -278,7 +278,7 @@ export const UrlCategoryItem = styled.div<IUrlCategoryItem>`
 export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
   visibility: ${({ isLinkSave }) => (isLinkSave ? 'visible' : 'hidden')};
   width: 420px;
-  height: 32px;
+  height: 100%;
   display: flex;
   align-items: center;
   border-radius: 4px;
@@ -294,7 +294,7 @@ export const HeaderLinkSave = styled.div<IHeaderLinkSave>`
   }
 
   @media screen and (max-width: ${size.tabletL}) {
-    width: 60%;
+    width: 350px;
   }
   @media screen and (max-width: ${size.tabletS}) {
     display: none;
@@ -310,14 +310,14 @@ export const LinkText = styled.input`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  /* or 22px */
+  line-height: 140%;
   letter-spacing: -0.02em;
   &:focus {
     outline: none;
   }
 
-  @media screen and (max-width: 1700px) {
-    font-size: 14px;
+  ::placeholder {
+    color: #8e8e8e;
   }
 `;
 

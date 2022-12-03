@@ -64,9 +64,10 @@ export const RecentSaveLinkWholeSeries = styled.p`
 export const RecentSaveLinkOption = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(23%, auto));
+  grid-template-columns: repeat(4, minmax(23%, 25%));
+  grid-auto-rows: minmax(200px, 320px);
 
-  gap: 24px;
+  grid-gap: 24px;
 
   @media screen and (max-width: ${size.tabletL}) {
     gap: 16px;
@@ -74,6 +75,7 @@ export const RecentSaveLinkOption = styled.div`
 
   @media screen and (max-width: ${size.tabletS}) {
     width: 100%;
+    grid-auto-rows: minmax(200px, auto);
 
     grid-template-columns: repeat(auto-fill, minmax(48%, auto));
     row-gap: 20px;

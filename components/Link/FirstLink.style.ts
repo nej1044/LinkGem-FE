@@ -1,26 +1,57 @@
 import styled from 'styled-components';
+import { size } from 'styles/variable';
 
 export const LinkContainer = styled.section`
-  width: 320px;
-  height: 376px;
+  position: relative;
+  /* max-width: 280px; */
+  /* max-height: 320px; */
+  width: 18rem;
+
   background: #ffffff;
-  /* shadow */
+  overflow: hidden;
 
   box-shadow: 0px 4px 10px rgba(78, 78, 78, 0.15);
   border-radius: 16px;
-  transition: transform 0.45s;
-  &:hover {
+  transition: transform 0.35s;
+  /* &:hover {
     transform: translateY(-10px);
+  } */
+
+  @media screen and (max-width: ${size.tabletL}) {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  @media screen and (max-width: ${size.tabletS}) {
+    max-height: 420px;
+    height: 420px;
+  }
+
+  @media screen and (max-width: ${size.mobile}) {
+    width: 100%;
   }
 `;
 
 export const ImageContainer = styled.div`
+  height: 50%;
   overflow: hidden;
   border-radius: 16px 16px 0px 0px;
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 `;
 
 export const LinkDetailContainer = styled.div`
+  position: relative;
   padding: 24px;
+  height: 50%;
   a:link {
     color: black;
     text-decoration: none;
@@ -35,7 +66,7 @@ export const LinkDetailContainer = styled.div`
 `;
 
 export const LinkDetailTitle = styled.div`
-  width: 272px;
+  width: 100%;
   height: 24px;
 
   overflow: hidden;
@@ -55,10 +86,9 @@ export const LinkDetailTitle = styled.div`
   color: #1a1b1d;
 `;
 export const LinkDetailDescription = styled.div`
-  width: 272px;
-  height: 60px;
+  width: 100%;
   margin-top: 12px;
-  margin-bottom: 26px;
+  padding-bottom: 46px;
   overflow: hidden;
   text-overflow: ellipsis;
   ::-webkit-scrollbar {
@@ -71,12 +101,14 @@ export const LinkDetailDescription = styled.div`
   /* or 20px */
 
   letter-spacing: -0.02em;
-
-  /* gray/gray3 */
-
-  color: #3c3c3f;
+  color: #616163;
 `;
 export const LinkDetailSetting = styled.div`
+  position: absolute;
+  padding: 0px 20px;
+  width: 100%;
+  left: 0px;
+  bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -108,7 +140,7 @@ export const EtcButton = styled.button`
 `;
 
 export const FirstLinkTitle = styled.div`
-  width: 342px;
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 97px;

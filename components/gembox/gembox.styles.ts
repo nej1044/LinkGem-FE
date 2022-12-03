@@ -116,7 +116,7 @@ export const MoreItem = styled.div`
 export const MemoIcon = styled.img`
   width: 24px;
   height: 24px;
-  padding: 7px;
+  /* padding: 7px; */
   cursor: pointer;
 `;
 

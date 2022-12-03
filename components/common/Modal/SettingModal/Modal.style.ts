@@ -36,16 +36,16 @@ export const Background = styled.div<{ visible: boolean }>`
 `;
 
 export const ModalContainer = styled.div<{ visible: boolean }>`
-  width: 400px;
-  height: 280px;
+  width: 450px;
+  /* height: 250px; */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #ffffff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 24px;
-  padding: 30px;
+  border-radius: 8px;
+  padding: 32px 40px;
   ${(props) => modalSettings(props.visible)}
   -webkit-transition: opacity 0.1s 0, visibility 0 0.1s;
   -moz-transition: opacity 0.1s 0, visibility 0 0.1s;
@@ -71,15 +71,17 @@ export const ImageButton = styled.img`
 
 export const Content = styled.div`
   display: flex;
-  padding-top: 20px;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+
+  svg {
+    margin-bottom: 16px;
+  }
 
   h2 {
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 140%;
     /* identical to box height, or 34px */
 
@@ -89,5 +91,45 @@ export const Content = styled.div`
     /* text/black */
 
     color: #1a1b1d;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 32px;
+  }
+
+  p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    /* or 21px */
+
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    /* gray/gray3 */
+
+    color: #616163;
+  }
+  /* or 24px */
+
+  text-align: center;
+  letter-spacing: -0.02em;
+  .violet {
+    color: #5200ff;
+    font-weight: 500;
+  }
+  .bold {
+    font-weight: 500;
   }
 `;

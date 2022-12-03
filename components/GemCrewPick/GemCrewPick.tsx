@@ -10,8 +10,9 @@ import {
 
 interface IGemCrewPick {
   copyToClipboard: (url: string) => void;
+  getLink: () => void;
 }
-function GemCrewPick({ copyToClipboard }: IGemCrewPick) {
+function GemCrewPick({ copyToClipboard, getLink }: IGemCrewPick) {
   return (
     <GemCrewPickContainer>
       <GemCrewPickTitle>잼크루 PICK</GemCrewPickTitle>
@@ -34,7 +35,7 @@ function GemCrewPick({ copyToClipboard }: IGemCrewPick) {
               copyToClipboard={copyToClipboard}
               gemGrewItem={true}
               createDate="1"
-              getLink={() => {}}
+              getLink={getLink}
             />
           ))}
         </GemCrewPickOption>

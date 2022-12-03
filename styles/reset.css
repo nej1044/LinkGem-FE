@@ -141,6 +141,7 @@ table {
 * {
   box-sizing: border-box;
 }
-button {
+button,
+svg {
   cursor: pointer;
 }

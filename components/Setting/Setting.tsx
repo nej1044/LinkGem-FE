@@ -19,7 +19,6 @@ import {
   ErrorMessage,
   SettingNinkName,
   SettingAuthEmail,
-  LinkTextContainer,
   ButtonBox,
   LinkSaveButton,
   EmailAuthBox,
@@ -420,13 +419,12 @@ export default function Setting() {
                     이메일 주소 변경
                   </SettingButton>
                 )}
+                {authEmailMessage.isMessage && (
+                  <ErrorMessage isErrorNickName={authEmailMessage.isMessage}>
+                    {authEmailMessage.message}
+                  </ErrorMessage>
+                )}
               </EmailAuthBox>
-
-              {authEmailMessage.isMessage && (
-                <ErrorMessage isErrorNickName={authEmailMessage.isMessage}>
-                  {authEmailMessage.message}
-                </ErrorMessage>
-              )}
             </SettingLineBox>
           </SettingBasicInfo>
           <SettingBasicInfo>
@@ -499,16 +497,38 @@ export default function Setting() {
         {dialogContext.isOpen && <MuiDialog dialogContext={dialogContext} />}
       </SettingContainer>
       {isWithdrawalModal && (
-        <Modal visible={isWithdrawalModal} handleModal={handleWithdrawalModal}>
+        <Modal
+          visible={isWithdrawalModal}
+          handleModal={handleWithdrawalModal}
+          isType
+        >
           <>
-            <h2>키퍼님, 정말 탈퇴하시겠어요?</h2>
-            <LinkTextContainer>
-              탈퇴하시면 회원님의 모든 정보와 활동기록이 삭제됩니다.
-              <br />
-              삭제된 정보는 복구할 수 없으니 신중히 생각해주세요.
-            </LinkTextContainer>
+            <div className="description">
+              <h2>정말 탈퇴하시겠어요?</h2>
+              <p>
+                탈퇴하시면 회원님의 모든 정보와 활동기록이 삭제돼요.
+                <br />
+                삭제된 정보는 복구할 수 없어요.
+              </p>
+            </div>
+
             <ButtonBox>
-              <LinkSaveButton bgColor="#252730">
+              <LinkSaveButton
+                color="#616163"
+                bgColor="#FFFFFF"
+                onClick={handleWithdrawalModal}
+                dif={'1'}
+                width="122px"
+                height="42px"
+              >
+                다시 생각할게요
+              </LinkSaveButton>
+              <LinkSaveButton
+                bgColor="#5200FF"
+                color="#FFFFFF"
+                width="122px"
+                height="42px"
+              >
                 <a
                   href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=GaA68400epOsIRyJ4C3r&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}oauth/naver/withdrawal`}
                   rel="noreferrer"
@@ -516,9 +536,6 @@ export default function Setting() {
                 >
                   네, 탈퇴할게요
                 </a>
-              </LinkSaveButton>
-              <LinkSaveButton bgColor="#5200FF" onClick={handleWithdrawalModal}>
-                다시 생각할게요
               </LinkSaveButton>
             </ButtonBox>
           </>
@@ -530,10 +547,43 @@ export default function Setting() {
           handleModal={() => {
             setIsAuthEmailModal((prev) => !prev);
           }}
+          isType={false}
         >
           <>
-            <h2>{user?.mailEmail ? '새로운 이메일로 인증' : '이메일 인증'}</h2>
-            <LinkTextContainer>
+            <div className="description">
+              <h2>
+                {user?.mailEmail ? '새로운 이메일로 인증' : '이메일 인증'}
+              </h2>
+              <p>
+                {user?.mailEmail ? (
+                  <>
+                    <p>적어주신 새로운 이메일로 인증 메일을 전송하였습니다.</p>
+                    <p>
+                      새로운 이메일로 인증하지 않았을 시 기존 이메일 주소가
+                      유지됩니다.
+                    </p>
+                    <p>
+                      <span className="bold">
+                        <span className="violet">이메일 인증 완료 후 </span>아래
+                        이메일 인증완료 버튼을 눌러주세요.
+                      </span>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>적어주신 이메일로 인증 메일을 전송하였습니다.</p>
+                    <p>
+                      <span className="bold">
+                        <span className="violet">이메일 인증 완료 후 </span>아래
+                        이메일 인증완료 버튼을 눌러주세요.
+                      </span>
+                    </p>
+                  </>
+                )}
+              </p>
+            </div>
+            {/* <h2>{user?.mailEmail ? '새로운 이메일로 인증' : '이메일 인증'}</h2> */}
+            {/* <LinkTextContainer>
               {user?.mailEmail ? (
                 <>
                   <p>적어주신 새로운 이메일로 인증 메일을 전송하였습니다.</p>
@@ -559,9 +609,25 @@ export default function Setting() {
                   </p>
                 </>
               )}
-            </LinkTextContainer>
+            </LinkTextContainer> */}
             <ButtonBox>
-              <LinkSaveButton bgColor="#5200FF" onClick={handleAuthEmailModal}>
+              <LinkSaveButton
+                color="#616163"
+                bgColor="#FFFFFF"
+                onClick={() => setIsAuthEmailModal(false)}
+                dif={'1'}
+                width="91px"
+                height="42px"
+              >
+                취소
+              </LinkSaveButton>
+              <LinkSaveButton
+                width="91px"
+                height="42px"
+                bgColor="#5200FF"
+                color="#FFFFFF"
+                onClick={handleAuthEmailModal}
+              >
                 인증완료
               </LinkSaveButton>
             </ButtonBox>

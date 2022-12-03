@@ -62,9 +62,9 @@ export const GemCrewPickDescription = styled.p`
 export const GemCrewPickOption = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(23%, auto));
-
-  gap: 24px;
+  grid-template-columns: repeat(4, minmax(23%, 25%));
+  grid-auto-rows: minmax(200px, 320px);
+  grid-gap: 24px;
 
   @media screen and (max-width: ${size.tabletL}) {
     gap: 16px;
@@ -72,6 +72,8 @@ export const GemCrewPickOption = styled.div`
 
   @media screen and (max-width: ${size.tabletS}) {
     grid-template-columns: repeat(auto-fill, minmax(48%, auto));
+    grid-auto-rows: minmax(200px, auto);
+
     row-gap: 20px;
   }
 
