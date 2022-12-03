@@ -50,7 +50,7 @@ interface GemLinkProps {
   createDate: string;
   isFavorites: boolean;
   id: number;
-  getLink?: () => void;
+  getLink: () => void;
   copyToClipboard: (url: string) => void;
   siteName?: string;
   gemGrewItem?: boolean | any;
@@ -178,7 +178,7 @@ function GemLink({
         },
       });
       console.log(getLink);
-      getLink();
+      getLink?.();
       console.log('123');
       //   setBoxRefetch((prev) => !prev);
     } catch (error) {
