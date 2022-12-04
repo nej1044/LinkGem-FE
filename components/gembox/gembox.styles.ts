@@ -34,6 +34,7 @@ export const GexboxSectionTitle = styled.h1`
   font-size: 20px;
   letter-spacing: -0.02em;
   color: #1a1b1d;
+  margin-bottom: 20px;
   span {
     margin-left: 2px;
     font-weight: 400;
@@ -58,8 +59,9 @@ export const LinkBoxWrapper = styled.div`
 export const LinkBox = styled.article`
   position: relative;
   /* width: 280px; */
-  height: 320px;
-  margin-top: 32px;
+  /* height: 320px; */
+  height: 100%;
+  /* margin-top: 32px; */
   border-radius: 16px;
   background-color: ${(props: IPropsGemboxStyles) =>
     props.isMore ? '#a0a0a0' : 'white'};
@@ -83,10 +85,15 @@ export const LinkBoxContents = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 50%;
-  padding: ${(props: IPropsGemboxStyles) => (props.isMore ? '12px' : '24px')};
+  padding: ${(props: IPropsGemboxStyles) => (props.isMore ? '12px' : '20px')};
   background-color: white;
   border-radius: ${(props: IPropsGemboxStyles) =>
     props.isMore ? '16px' : '0px 0px 16px 16px'};
+
+  @media screen and (max-width: ${size.tabletS}) {
+    padding: ${(props: IPropsGemboxStyles) =>
+      props.isMore ? '12px' : '16px 12px'};
+  }
 `;
 
 export const MoreItems = styled.div`
@@ -179,6 +186,9 @@ export const LinkBoxRemark = styled.span`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  @media screen and (max-width: ${size.tabletS}) {
+    display: none;
+  }
 `;
 
 export const LinkSubInfo = styled.div`
@@ -186,6 +196,9 @@ export const LinkSubInfo = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 20px;
+  white-space: nowrap;
+  .etc-info {
+  }
 `;
 
 export const LinkDate = styled.span`
@@ -520,7 +533,7 @@ export const LeftSubInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 85px;
+  /* width: 85px; */
 `;
 
 export const Memobox = styled.div`

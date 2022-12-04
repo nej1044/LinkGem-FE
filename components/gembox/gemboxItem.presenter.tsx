@@ -185,12 +185,12 @@ const LinkCard = (props: IPropsLinkCard) => {
                     />
                   )}
                 </S.LeftSubInfo>
-                <div>
+                <div className="etc-info">
                   {props.el?.favorites ? (
                     <StarFilled
                       style={{
                         fontSize: '17px',
-                        marginRight: '12px',
+                        marginRight: '10px',
                         cursor: 'pointer',
                       }}
                       color="#0F0223"
@@ -200,7 +200,7 @@ const LinkCard = (props: IPropsLinkCard) => {
                     <StarOutlined
                       style={{
                         fontSize: '17px',
-                        marginRight: '12px',
+                        marginRight: '10px',
                         cursor: 'pointer',
                       }}
                       color="#0F0223"
@@ -210,7 +210,7 @@ const LinkCard = (props: IPropsLinkCard) => {
 
                   <LinkOutlined
                     style={{
-                      marginRight: '12px',
+                      marginRight: '10px',
                       cursor: 'pointer',
                     }}
                     color="#0F0223"
