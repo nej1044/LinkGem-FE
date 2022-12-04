@@ -100,12 +100,23 @@ export const GemboxTitle = styled.li`
 `;
 
 export const GemboxText = styled.li`
+  display: flex;
+  align-items: center;
   cursor: pointer;
   padding-bottom: 16px;
   font-size: 16px;
   span {
     font-size: 12px;
     margin-left: 2px;
+  }
+
+  .side-filter {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .current {
+    color: #5200ff;
   }
 `;
 
@@ -135,9 +146,11 @@ export const GemWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 390px;
-  padding-left: 15px;
+  /* height: 390px; */
+  /* padding-left: 15px; */
   margin-bottom: 10px;
+  max-height: 700px;
+  overflow-y: scroll;
 `;
 
 export const ModalButton = styled.button`
@@ -165,7 +178,7 @@ export const WriteWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 4vh 4vw;
+  /* padding: 4vh 4vw; */
 `;
 
 export const WriteList = styled.div`

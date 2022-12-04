@@ -31,8 +31,8 @@ const LinkCopyContainer = styled.div`
   padding: 16px 24px;
 
   position: fixed;
-  width: 200px;
-  height: 24px;
+  width: 240px;
+  height: 56px;
   margin: 0 auto;
   left: 0;
   right: 0;
@@ -47,7 +47,7 @@ const LinkCopyContainer = styled.div`
 `;
 
 const LinkCopyText = styled.div`
-  height: 11px;
+  text-align: center;
   font-family: 'Spoqa Han Sans';
   font-weight: 500;
   font-size: 16px;
@@ -56,8 +56,6 @@ const LinkCopyText = styled.div`
 `;
 
 export const XIconImage = styled(CloseOutlined)`
-  width: 11px;
-  height: 11px;
   color: ${(props: IPropsSnackBarStyles) =>
     props.isLinkCopy ? '#ffffff' : '#000000'};
   &:hover {
@@ -66,6 +64,8 @@ export const XIconImage = styled(CloseOutlined)`
 `;
 
 const Snackbar = (props: IPropsSnackBar) => {
+  console.log(props);
+  console.log('props');
   return (
     <LinkCopyContainer isLinkCopy={props.isLinkCopy || props.isDelete}>
       <LinkCopyText isLinkCopy={props.isLinkCopy || props.isDelete}>

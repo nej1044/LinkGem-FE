@@ -2,7 +2,7 @@ import * as S from '../gembox.styles';
 import GemboxModal from '../modal';
 import { useMutation } from 'utils/useMutation';
 import { ChangeEvent, useState } from 'react';
-import { DeleteOutlined } from '@ant-design/icons';
+// import { DeleteOutlined } from '@ant-design/icons';
 import { IMemoIconProps } from './gemboxIcon.types';
 
 const MemoIcon = (props: IMemoIconProps) => {
@@ -16,6 +16,8 @@ const MemoIcon = (props: IMemoIconProps) => {
   };
 
   const onClickMemo = async () => {
+    console.log('memo');
+    console.log(memo);
     await updateMemo(`links/${props.el.id}`, {
       id: props.el.id,
       memo: memo || '',
@@ -24,6 +26,8 @@ const MemoIcon = (props: IMemoIconProps) => {
     setIsMemoDelete(false);
     props.refetch();
   };
+  console.log('memo');
+  console.log(memo);
   return (
     <>
       <S.MoreItem onClick={() => props.setOpen(true)}>
@@ -68,20 +72,28 @@ const MemoIcon = (props: IMemoIconProps) => {
               <S.MemoArea
                 onChange={onChangeMemo}
                 defaultValue={props.el?.memo !== '' ? props.el.memo : ''}
-                placeholder="이 링크와 관련된 내용이나 나만의 아이디어를 기록해 보세요
-분명 소중히 쓰일 순간이 생길거에요"
+                placeholder="링크와 관련된 메모를 입력해 보세요."
               ></S.MemoArea>
               <S.MemoFooter>
-                <DeleteOutlined
+                {/* <DeleteOutlined
                   style={{ fontSize: '36px' }}
                   onClick={() => setIsMemoDelete(true)}
-                />
-                <S.GemBoxButton
+                /> */}
+                <S.GemButton
+                  color="#616163"
+                  bgColor="#FFFFFF"
+                  dif={'1'}
+                  onClick={() => setIsMemoDelete(true)}
+                >
+                  취소
+                </S.GemButton>
+                <S.GemButton
+                  bgColor="#5200FF"
+                  color="#FFFFFF"
                   onClick={onClickMemo}
-                  style={{ fontSize: '18px', padding: '18px 32px' }}
                 >
                   저장
-                </S.GemBoxButton>
+                </S.GemButton>
               </S.MemoFooter>
             </S.MemoWrapper>
           )

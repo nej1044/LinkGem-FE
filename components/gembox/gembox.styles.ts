@@ -199,29 +199,29 @@ export const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '720px',
-  height: '588px',
+  // width: '450px',
+  // height: '588px',
   bgcolor: 'background.paper',
   borderRadius: '24px',
   boxShadow: 24,
   overflow: 'hidden',
   boxSizing: 'border-box',
+  padding: '32px 40px',
 };
 
 export const GemboxWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding-top: 50px;
 `;
 
 export const ModalTitle = styled.div`
-  margin-bottom: 40px;
-  font-family: 'Poppins';
+  margin-bottom: 20px;
+  font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
-  font-weight: 600;
-  font-size: 32px;
-  text-align: center;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
   color: #1a1b1d;
 `;
 
@@ -285,7 +285,7 @@ export const WriteWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 360px;
-  padding: 60px 80px 0px 80px;
+  /* padding: 60px 80px 0px 80px; */
 `;
 
 export const WriteList = styled.div`
@@ -295,7 +295,7 @@ export const WriteList = styled.div`
 `;
 
 export const CreateWrapper = styled(WriteWrapper)`
-  padding: 20px 100px 0px 100px;
+  /* padding: 20px 100px 0px 100px; */
 `;
 
 export const GemModalText = styled.span`
@@ -308,10 +308,10 @@ export const GemModalText = styled.span`
 
 export const GemModalInput = styled.input`
   box-sizing: border-box;
-  width: 100%;
-  height: 56px;
+  width: 350px;
+  height: 40px;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   outline: none;
   border: ${(props: IPropsGemboxStyles) =>
     props.error ? '1px solid #FF0000' : '1px solid #cecece'};
@@ -334,13 +334,43 @@ export const ErrorMessage = styled.div`
 
 export const GemBoxButton = styled.button`
   background-color: #5200ff;
-  border-radius: 50px;
+  border-radius: 4px;
   font-family: 'Spoqa Han Sans';
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: -0.02em;
+  font-weight: 500;
+
   color: #ffffff;
   border: none;
   cursor: pointer;
+`;
+
+export const GemButton = styled.button<{
+  bgColor: string;
+  color: string;
+  dif?: string;
+}>`
+  margin-left: 8px;
+  background-color: ${(props) => props.bgColor};
+  border: ${(props) => (props.dif === '1' ? '1px solid #CECECE' : 'none')};
+  font-weight: ${(props) => (props.dif === '1' ? '400' : '500')};
+  color: ${(props) => props.color};
+  width: 66px;
+  height: 36px;
+  border-radius: 4px;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  opacity: 1;
+
+  @media screen and (max-width: ${size.tabletS}) {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
 `;
 
 export const ModalButton = styled.button`
@@ -407,7 +437,7 @@ export const GemLinkWrapper = styled.ul`
   width: 100%;
   height: 13.5vh;
   border: 1px solid #cecece;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: auto;
   padding: 1vh 0.6vw;
 `;
@@ -445,7 +475,6 @@ export const MemoWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 0px 30px 60px 30px;
 `;
 
 export const MemoDeleteWrapper = styled(MemoWrapper)`
@@ -453,13 +482,13 @@ export const MemoDeleteWrapper = styled(MemoWrapper)`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 18% 20px;
+  padding: 0 20px;
 `;
 
 export const MemoArea = styled.textarea`
   box-sizing: border-box;
-  width: 100%;
-  height: 80%;
+  width: 380px;
+  height: 250px;
   padding: 20px 16px;
   border: 1px solid #cecece;
   border-radius: 8px;
@@ -474,13 +503,14 @@ export const MemoArea = styled.textarea`
 `;
 
 export const MemoFooter = styled.div`
+  margin-top: 20px;
   box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
+  justify-content: center;
   align-items: flex-end;
   width: 100%;
   height: 20%;
-  padding: 0px 20px;
 `;
 
 export const LeftSubInfo = styled.div`
@@ -611,7 +641,6 @@ export const ItemSelect = styled(Select)`
 
 export const RenderBox = styled.div`
   width: 100%;
-  height: 470px;
 `;
 
 // export const SuccessMessage = styled.div`
