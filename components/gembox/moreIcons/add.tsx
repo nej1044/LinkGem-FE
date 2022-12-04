@@ -42,6 +42,8 @@ const AddIcon = (props: IAddIconProps) => {
   const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
 
   const onClickSubmit = async () => {
+    console.log('linkIds');
+    console.log(linkIds);
     if (name.length <= 0) {
       setError('잼박스 이름을 설정해주세요.');
       return;
@@ -88,7 +90,7 @@ const AddIcon = (props: IAddIconProps) => {
                 <S.GemModalText>잼박스 이름</S.GemModalText>
                 <S.GemModalInput
                   type="text"
-                  placeholder="링크를 찾기 쉽도록 관련 카테고리로 이름을 지어주세요"
+                  placeholder="링크와 관련된 이름을 지어주세요."
                   onChange={onChangeName}
                   error={error}
                   style={
@@ -124,12 +126,29 @@ const AddIcon = (props: IAddIconProps) => {
                     ))}
                 </S.GemLinkWrapper>
               </S.WriteList>
-              <S.GemBoxButton
-                style={{ padding: '18px 32px' }}
-                onClick={onClickSubmit}
-              >
-                저장
-              </S.GemBoxButton>
+              <S.MemoFooter>
+                {/* <S.GemBoxButton
+                  style={{ padding: '18px 32px' }}
+                  onClick={onClickSubmit}
+                >
+                  저장
+                </S.GemBoxButton> */}
+                <S.GemButton
+                  color="#616163"
+                  bgColor="#FFFFFF"
+                  dif={'1'}
+                  onClick={() => props.setOpen(false)}
+                >
+                  취소
+                </S.GemButton>
+                <S.GemButton
+                  bgColor="#5200FF"
+                  color="#FFFFFF"
+                  onClick={onClickSubmit}
+                >
+                  저장
+                </S.GemButton>
+              </S.MemoFooter>
             </S.CreateWrapper>
           </form>
         }
