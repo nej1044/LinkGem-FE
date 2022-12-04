@@ -72,7 +72,7 @@ export const GemCrewPickOption = styled.div`
 
   @media screen and (max-width: ${size.tabletS}) {
     grid-template-columns: repeat(auto-fill, minmax(48%, auto));
-    grid-auto-rows: minmax(200px, auto);
+    grid-auto-rows: 50vw;
 
     row-gap: 20px;
   }

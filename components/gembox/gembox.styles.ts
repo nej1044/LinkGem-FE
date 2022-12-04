@@ -45,9 +45,13 @@ export const LinkBoxWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(31%, auto));
   width: 100%;
-  gap: 24px;
+  grid-auto-rows: minmax(200px, 320px);
+
+  grid-gap: 24px;
   @media screen and (max-width: ${size.tabletS}) {
     grid-template-columns: repeat(auto-fill, minmax(43%, auto));
+    /* grid-auto-rows: minmax(200px, auto); */
+    grid-auto-rows: 50vw;
   }
 `;
 
@@ -457,8 +461,8 @@ export const CheckBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.3vw;
-  height: 2.7vh;
+  width: 20px;
+  height: 20px;
   margin-right: 5px;
   background-color: ${(props: IPropsGemboxStyles) =>
     props.isChecked ? '#5200ff' : '#cecece'};
@@ -466,8 +470,6 @@ export const CheckBox = styled.div`
 `;
 
 export const CheckIcon = styled(CheckOutlined)`
-  font-size: 0.8vw;
-  font-weight: 900;
   color: white;
 `;
 
@@ -493,7 +495,8 @@ export const MemoArea = styled.textarea`
   border: 1px solid #cecece;
   border-radius: 8px;
   font-family: 'Spoqa Han Sans';
-  font-size: 0.98vw;
+  font-size: 16px;
+  line-height: 140%;
   letter-spacing: -0.02em;
   resize: none;
   :focus {
@@ -615,6 +618,13 @@ export const DataTitle = styled.span`
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  /* or 20px */
+
+  letter-spacing: -0.02em;
 `;
 
 export const ItemBox = styled.input`

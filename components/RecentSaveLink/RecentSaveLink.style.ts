@@ -75,7 +75,7 @@ export const RecentSaveLinkOption = styled.div`
 
   @media screen and (max-width: ${size.tabletS}) {
     width: 100%;
-    grid-auto-rows: minmax(200px, auto);
+    grid-auto-rows: 50vw;
 
     grid-template-columns: repeat(auto-fill, minmax(48%, auto));
     row-gap: 20px;

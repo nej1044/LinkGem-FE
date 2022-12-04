@@ -151,6 +151,11 @@ export const GemWrapper = styled.div`
   margin-bottom: 10px;
   max-height: 700px;
   overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ModalButton = styled.button`
